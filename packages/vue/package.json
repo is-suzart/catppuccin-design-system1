@@ -1,0 +1,9 @@
+{
+  "name": "@catppuccin-ds/vue",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}

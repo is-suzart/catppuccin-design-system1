@@ -1,0 +1,89 @@
+/* Segmented Control / ButtonGroup stylesheet */
+
+.ctp-btn-group {
+  --pill-left: 0px;
+  --pill-top: 0px;
+  --pill-width: 0px;
+  --pill-height: 0px;
+  
+  display: inline-flex;
+  position: relative;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.ctp-btn-group--horizontal {
+  flex-direction: row;
+}
+
+.ctp-btn-group--vertical {
+  flex-direction: column;
+}
+
+/* Sliding Pill active indicator */
+.ctp-btn-group__pill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--pill-width);
+  height: var(--pill-height);
+  background-color: var(--ctp-mauve);
+  border-radius: inherit;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Segmented Control specific styles */
+.ctp-btn-group--segmented {
+  background-color: var(--ctp-surface0) !important;
+  padding: 4px !important;
+  border-radius: 9999px !important;
+  gap: 4px !important;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.ctp-btn-group--segmented.ctp-btn-group--vertical {
+  flex-direction: column !important;
+  border-radius: 20px !important; /* Fallback for vertical track */
+}
+
+.ctp-btn-group--segmented .ctp-btn {
+  position: relative;
+  z-index: 2;
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--ctp-subtext0) !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  border-radius: 9999px !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+}
+
+.ctp-btn-group--segmented .ctp-btn:hover:not(:disabled):not(.ctp-btn--active) {
+  color: var(--ctp-text) !important;
+  background-color: color-mix(in srgb, var(--ctp-text) 8%, transparent) !important;
+}
+
+/* Active Segmented Item state */
+.ctp-btn-group--segmented .ctp-btn.ctp-btn--active {
+  background-color: var(--ctp-btn-color-token, var(--ctp-mauve)) !important;
+  color: var(--ctp-crust) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 9999px !important;
+}
+
+/* Disabled items */
+.ctp-btn-group--segmented .ctp-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Hide sliding pill indicator visually */
+.ctp-btn-group__pill {
+  display: none !important;
+}

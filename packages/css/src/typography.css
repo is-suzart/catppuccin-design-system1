@@ -1,0 +1,138 @@
+/* Typography Helper Stylesheet */
+
+/* --- Base Heading Helper --- */
+.ctp-title {
+  margin: 0 0 0.5em 0;
+  font-family: var(--ctp-font-family);
+  color: var(--ctp-text);
+  line-height: 1.25;
+  box-sizing: border-box;
+}
+
+/* Heading Sizes Modifiers */
+.ctp-title--h1 {
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.ctp-title--h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ctp-title--h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.ctp-title--h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.ctp-title--h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ctp-title--h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Base Text Helper --- */
+.ctp-text {
+  margin: 0 0 1em 0;
+  font-family: var(--ctp-font-family);
+  color: var(--ctp-subtext1);
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+/* Text Sizes Modifiers */
+.ctp-text--lead {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.ctp-text--body {
+  font-size: 1rem;
+}
+
+.ctp-text--sm {
+  font-size: 0.875rem;
+}
+
+.ctp-text--xs {
+  font-size: 0.75rem;
+}
+
+/* Text Weight Modifiers */
+.ctp-text--light { font-weight: 300; }
+.ctp-text--regular { font-weight: 400; }
+.ctp-text--medium { font-weight: 500; }
+.ctp-text--semibold { font-weight: 600; }
+.ctp-text--bold { font-weight: 700; }
+
+/* Text Color Modifiers */
+.ctp-text--rosewater { color: var(--ctp-rosewater); }
+.ctp-text--flamingo  { color: var(--ctp-flamingo); }
+.ctp-text--pink      { color: var(--ctp-pink); }
+.ctp-text--mauve     { color: var(--ctp-mauve); }
+.ctp-text--red       { color: var(--ctp-red); }
+.ctp-text--maroon    { color: var(--ctp-maroon); }
+.ctp-text--peach     { color: var(--ctp-peach); }
+.ctp-text--yellow    { color: var(--ctp-yellow); }
+.ctp-text--green     { color: var(--ctp-green); }
+.ctp-text--teal      { color: var(--ctp-teal); }
+.ctp-text--sky       { color: var(--ctp-sky); }
+.ctp-text--sapphire  { color: var(--ctp-sapphire); }
+.ctp-text--blue      { color: var(--ctp-blue); }
+.ctp-text--lavender  { color: var(--ctp-lavender); }
+.ctp-text--text      { color: var(--ctp-text); }
+.ctp-text--subtext1  { color: var(--ctp-subtext1); }
+.ctp-text--subtext0  { color: var(--ctp-subtext0); }
+.ctp-text--overlay2  { color: var(--ctp-overlay2); }
+
+/* --- Gradient Headings --- */
+[class*="ctp-title--gradient-"] {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  width: fit-content;
+}
+
+.ctp-title--gradient-mauve-blue {
+  background-image: linear-gradient(135deg, var(--ctp-mauve), var(--ctp-blue));
+}
+
+.ctp-title--gradient-peach-red {
+  background-image: linear-gradient(135deg, var(--ctp-peach), var(--ctp-red));
+}
+
+.ctp-title--gradient-green-teal {
+  background-image: linear-gradient(135deg, var(--ctp-green), var(--ctp-teal));
+}
+
+.ctp-title--gradient-lavender-pink {
+  background-image: linear-gradient(135deg, var(--ctp-lavender), var(--ctp-pink));
+}
+
+.ctp-title--gradient-yellow-peach {
+  background-image: linear-gradient(135deg, var(--ctp-yellow), var(--ctp-peach));
+}
+
+.ctp-title--gradient-rosewater-flamingo {
+  background-image: linear-gradient(135deg, var(--ctp-rosewater), var(--ctp-flamingo));
+}
+
+.ctp-title--gradient-sky-blue {
+  background-image: linear-gradient(135deg, var(--ctp-sky), var(--ctp-blue));
+}

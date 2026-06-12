@@ -1,0 +1,264 @@
+/* Core Button Stylesheet */
+
+.ctp-btn {
+  /* Default variables */
+  --ctp-btn-color-token: var(--ctp-mauve); /* default color */
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ctp-font-family);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  transition: var(--ctp-transition);
+  outline: none;
+}
+
+/* Accent Color Mappings */
+.ctp-btn--rosewater { --ctp-btn-color-token: var(--ctp-rosewater); }
+.ctp-btn--flamingo  { --ctp-btn-color-token: var(--ctp-flamingo); }
+.ctp-btn--pink      { --ctp-btn-color-token: var(--ctp-pink); }
+.ctp-btn--mauve     { --ctp-btn-color-token: var(--ctp-mauve); }
+.ctp-btn--red       { --ctp-btn-color-token: var(--ctp-red); }
+.ctp-btn--maroon    { --ctp-btn-color-token: var(--ctp-maroon); }
+.ctp-btn--peach     { --ctp-btn-color-token: var(--ctp-peach); }
+.ctp-btn--yellow    { --ctp-btn-color-token: var(--ctp-yellow); }
+.ctp-btn--green     { --ctp-btn-color-token: var(--ctp-green); }
+.ctp-btn--teal      { --ctp-btn-color-token: var(--ctp-teal); }
+.ctp-btn--sky       { --ctp-btn-color-token: var(--ctp-sky); }
+.ctp-btn--sapphire  { --ctp-btn-color-token: var(--ctp-sapphire); }
+.ctp-btn--blue      { --ctp-btn-color-token: var(--ctp-blue); }
+.ctp-btn--lavender  { --ctp-btn-color-token: var(--ctp-lavender); }
+
+/* Sizes */
+.ctp-btn--sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  gap: 6px;
+}
+
+.ctp-btn--md {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  gap: 8px;
+}
+
+.ctp-btn--lg {
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  gap: 10px;
+}
+
+/* Shapes */
+.ctp-btn--square {
+  border-radius: var(--ctp-radius-square);
+}
+
+.ctp-btn--rounded {
+  border-radius: var(--ctp-radius-rounded);
+}
+
+.ctp-btn--pill {
+  border-radius: var(--ctp-radius-pill);
+}
+
+/* Variants */
+
+/* 1. Filled Variant */
+.ctp-btn--filled {
+  background-color: var(--ctp-btn-color-token);
+  color: var(--ctp-base);
+  box-shadow: var(--ctp-shadow-sm);
+}
+.ctp-btn--filled:hover:not(:disabled) {
+  filter: brightness(1.08);
+  box-shadow: var(--ctp-shadow-md);
+}
+.ctp-btn--filled:active:not(:disabled) {
+  transform: scale(0.97);
+  filter: brightness(0.95);
+}
+
+/* 2. Tonal Variant */
+.ctp-btn--tonal {
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 15%, transparent);
+  color: var(--ctp-btn-color-token);
+}
+.ctp-btn--tonal:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 25%, transparent);
+}
+.ctp-btn--tonal:active:not(:disabled) {
+  transform: scale(0.97);
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 35%, transparent);
+}
+
+/* 3. Outline Variant */
+.ctp-btn--outline {
+  background-color: transparent;
+  border-color: color-mix(in srgb, var(--ctp-btn-color-token) 50%, transparent);
+  color: var(--ctp-btn-color-token);
+}
+.ctp-btn--outline:hover:not(:disabled) {
+  border-color: var(--ctp-btn-color-token);
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 8%, transparent);
+}
+.ctp-btn--outline:active:not(:disabled) {
+  transform: scale(0.97);
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 16%, transparent);
+}
+
+/* 4. Ghost Variant */
+.ctp-btn--ghost {
+  background-color: transparent;
+  color: var(--ctp-btn-color-token);
+}
+.ctp-btn--ghost:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 8%, transparent);
+}
+.ctp-btn--ghost:active:not(:disabled) {
+  transform: scale(0.97);
+  background-color: color-mix(in srgb, var(--ctp-btn-color-token) 16%, transparent);
+}
+
+/* Disabled State */
+.ctp-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: grayscale(0.4);
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Keyboard Focus States */
+.ctp-btn:focus-visible {
+  outline: 2px solid var(--ctp-btn-color-token);
+  outline-offset: 2px;
+}
+
+/* Loading States & Spinner */
+.ctp-btn--loading {
+  cursor: wait;
+}
+
+.ctp-btn__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: ctp-btn-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+.ctp-btn__content {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.ctp-btn--loading .ctp-btn__content {
+  opacity: 0.7;
+}
+
+@keyframes ctp-btn-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Button Group Layout --- */
+
+.ctp-btn-group {
+  display: inline-flex;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.ctp-btn-group,
+.ctp-btn-group * {
+  box-sizing: border-box;
+}
+
+.ctp-btn-group--horizontal {
+  flex-direction: row;
+}
+
+.ctp-btn-group--vertical {
+  flex-direction: column;
+}
+
+/* Ensure active/hover button borders paint on top of neighbors */
+.ctp-btn-group > .ctp-btn {
+  position: relative;
+}
+
+.ctp-btn-group > .ctp-btn:hover,
+.ctp-btn-group > .ctp-btn:focus-visible,
+.ctp-btn-group > .ctp-btn:active {
+  z-index: 2;
+}
+
+/* --- Horizontal Border & Radius Merging --- */
+
+.ctp-btn-group--horizontal > .ctp-btn:not(:first-child) {
+  margin-left: -1.5px;
+}
+
+/* Middle buttons: reset all corners */
+.ctp-btn-group--horizontal > .ctp-btn:not(:first-child):not(:last-child) {
+  border-radius: 0 !important;
+}
+
+/* First button: reset right corners */
+.ctp-btn-group--horizontal > .ctp-btn:first-child:not(:last-child) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Last button: reset left corners */
+.ctp-btn-group--horizontal > .ctp-btn:last-child:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+/* --- Vertical Border & Radius Merging --- */
+
+.ctp-btn-group--vertical > .ctp-btn:not(:first-child) {
+  margin-top: -1.5px;
+}
+
+/* Middle buttons: reset all corners */
+.ctp-btn-group--vertical > .ctp-btn:not(:first-child):not(:last-child) {
+  border-radius: 0 !important;
+}
+
+/* First button: reset bottom corners */
+.ctp-btn-group--vertical > .ctp-btn:first-child:not(:last-child) {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Last button: reset top corners */
+.ctp-btn-group--vertical > .ctp-btn:last-child:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* Active / Selected Button state inside a button group */
+.ctp-btn.ctp-btn--active {
+  background-color: var(--ctp-btn-color-token) !important;
+  color: var(--ctp-base) !important;
+  border-color: var(--ctp-btn-color-token) !important;
+}
+

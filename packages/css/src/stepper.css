@@ -1,0 +1,281 @@
+/* Stepper Component Core Stylesheet */
+
+.ctp-stepper-wrapper {
+  --ctp-btn-color-token: var(--ctp-mauve); /* default color */
+  --ctp-node-size: 36px;
+  position: relative;
+  width: 100%;
+}
+
+.ctp-stepper-wrapper,
+.ctp-stepper-wrapper * {
+  box-sizing: border-box;
+}
+
+/* Color mappings for Stepper active states */
+.ctp-stepper--rosewater { --ctp-btn-color-token: var(--ctp-rosewater); }
+.ctp-stepper--flamingo  { --ctp-btn-color-token: var(--ctp-flamingo); }
+.ctp-stepper--pink      { --ctp-btn-color-token: var(--ctp-pink); }
+.ctp-stepper--mauve     { --ctp-btn-color-token: var(--ctp-mauve); }
+.ctp-stepper--red       { --ctp-btn-color-token: var(--ctp-red); }
+.ctp-stepper--maroon    { --ctp-btn-color-token: var(--ctp-maroon); }
+.ctp-stepper--peach     { --ctp-btn-color-token: var(--ctp-peach); }
+.ctp-stepper--yellow    { --ctp-btn-color-token: var(--ctp-yellow); }
+.ctp-stepper--green     { --ctp-btn-color-token: var(--ctp-green); }
+.ctp-stepper--teal      { --ctp-btn-color-token: var(--ctp-teal); }
+.ctp-stepper--sky       { --ctp-btn-color-token: var(--ctp-sky); }
+.ctp-stepper--sapphire  { --ctp-btn-color-token: var(--ctp-sapphire); }
+.ctp-stepper--blue      { --ctp-btn-color-token: var(--ctp-blue); }
+.ctp-stepper--lavender  { --ctp-btn-color-token: var(--ctp-lavender); }
+
+/* --- 1. Horizontal Layout --- */
+.ctp-stepper--horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+/* Background Track Line */
+.ctp-stepper--horizontal .ctp-stepper__track {
+  position: absolute;
+  top: calc(var(--ctp-node-size) / 2 - 2px);
+  left: calc(100% / (var(--ctp-total-steps) * 2));
+  right: calc(100% / (var(--ctp-total-steps) * 2));
+  height: 4px;
+  background-color: var(--ctp-surface0);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+/* Active Fill Line */
+.ctp-stepper--horizontal .ctp-stepper__track-active {
+  height: 100%;
+  width: var(--ctp-stepper-progress, 0%);
+  background-color: var(--ctp-btn-color-token);
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ctp-stepper--horizontal .ctp-stepper__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.ctp-stepper--horizontal .ctp-stepper__label-group {
+  margin-top: 10px;
+  padding: 0 8px;
+}
+
+/* --- 2. Vertical Layout --- */
+.ctp-stepper--vertical {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  --ctp-stepper-vertical-gap: 2.6rem;
+  gap: var(--ctp-stepper-vertical-gap);
+}
+
+.ctp-stepper--vertical .ctp-stepper__step {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Vertical Track Line */
+.ctp-stepper--vertical .ctp-stepper__track {
+  position: absolute;
+  top: calc(var(--ctp-node-size) / 2);
+  bottom: calc(-1 * var(--ctp-stepper-vertical-gap));
+  left: calc(var(--ctp-node-size) / 2 - 2px);
+  width: 4px;
+  background-color: var(--ctp-surface0);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+/* Hide track for the last step in vertical layout */
+.ctp-stepper--vertical .ctp-stepper__step:last-child .ctp-stepper__track {
+  display: none;
+}
+
+.ctp-stepper--vertical .ctp-stepper__track-active {
+  width: 100%;
+  height: var(--ctp-stepper-progress, 0%);
+  background-color: var(--ctp-btn-color-token);
+  border-radius: 2px;
+  transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ctp-stepper--vertical .ctp-stepper__label-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: var(--ctp-node-size);
+}
+
+/* --- 3. Dots Variant --- */
+.ctp-stepper--dots {
+  --ctp-node-size: 14px;
+}
+
+.ctp-stepper--dots.ctp-stepper--horizontal .ctp-stepper__track {
+  top: calc(var(--ctp-node-size) / 2 - 1px);
+  height: 2px;
+}
+
+.ctp-stepper--dots.ctp-stepper--vertical .ctp-stepper__track {
+  left: calc(var(--ctp-node-size) / 2 - 1px);
+  width: 2px;
+  top: calc(var(--ctp-node-size) / 2);
+  bottom: calc(-1 * var(--ctp-stepper-vertical-gap, 2.6rem));
+}
+
+/* --- 4. Node Indicators --- */
+.ctp-stepper__node {
+  width: var(--ctp-node-size);
+  height: var(--ctp-node-size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ctp-font-family);
+  font-weight: 700;
+  font-size: 0.9rem;
+  background-color: var(--ctp-surface0);
+  border: 2px solid var(--ctp-surface1);
+  color: var(--ctp-subtext0);
+  transition: var(--ctp-transition);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Inactive/upcoming status */
+.ctp-stepper__step--upcoming .ctp-stepper__node {
+  background-color: var(--ctp-mantle);
+  border-color: var(--ctp-surface0);
+  color: var(--ctp-overlay1);
+}
+
+/* Active Status style */
+.ctp-stepper__step--active .ctp-stepper__node {
+  background-color: var(--ctp-btn-color-token);
+  border-color: var(--ctp-btn-color-token);
+  color: var(--ctp-base);
+  transform: scale(1.08);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ctp-btn-color-token) 45%, transparent);
+}
+
+/* Completed Status style */
+.ctp-stepper__step--completed .ctp-stepper__node {
+  background-color: var(--ctp-green);
+  border-color: var(--ctp-green);
+  color: var(--ctp-base);
+}
+
+.ctp-stepper__step--completed .ctp-stepper__node svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+}
+
+/* Dot Variant specifics */
+.ctp-stepper--dots .ctp-stepper__node {
+  border: none;
+}
+.ctp-stepper--dots .ctp-stepper__step--upcoming .ctp-stepper__node {
+  background-color: var(--ctp-surface1);
+}
+.ctp-stepper--dots .ctp-stepper__step--active .ctp-stepper__node {
+  background-color: var(--ctp-btn-color-token);
+  transform: scale(1.3);
+}
+.ctp-stepper--dots .ctp-stepper__step--completed .ctp-stepper__node {
+  background-color: var(--ctp-green);
+}
+
+/* --- 5. Labels & Descriptions --- */
+.ctp-stepper__title {
+  font-family: var(--ctp-font-family);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ctp-subtext1);
+  transition: var(--ctp-transition);
+  margin: 0;
+}
+
+.ctp-stepper__step--active .ctp-stepper__title {
+  color: var(--ctp-btn-color-token);
+}
+
+.ctp-stepper__step--completed .ctp-stepper__title {
+  color: var(--ctp-text);
+}
+
+.ctp-stepper__description {
+  font-family: var(--ctp-font-family);
+  font-size: 0.78rem;
+  color: var(--ctp-subtext0);
+  margin: 3px 0 0 0;
+  transition: var(--ctp-transition);
+}
+
+/* --- 6. Content Panels Slide Animations --- */
+.ctp-stepper-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.ctp-stepper-panel {
+  display: none;
+  width: 100%;
+}
+
+.ctp-stepper-panel--active {
+  display: block;
+}
+
+/* Slide in from right (next step) */
+.ctp-stepper-panel--slide-in-right {
+  display: block;
+  animation: ctp-stepper-slide-right 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Slide in from left (previous step) */
+.ctp-stepper-panel--slide-in-left {
+  display: block;
+  animation: ctp-stepper-slide-left 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes ctp-stepper-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ctp-stepper-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

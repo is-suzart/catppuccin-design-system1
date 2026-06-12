@@ -1,0 +1,239 @@
+import React, { createContext, useContext, useState } from 'react';
+
+export type AccordionVariant = 'default' | 'split';
+export type AccordionAccentColor =
+  | 'rosewater'
+  | 'flamingo'
+  | 'pink'
+  | 'mauve'
+  | 'red'
+  | 'maroon'
+  | 'peach'
+  | 'yellow'
+  | 'green'
+  | 'teal'
+  | 'sky'
+  | 'sapphire'
+  | 'blue'
+  | 'lavender';
+
+export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: AccordionVariant;
+  accentColor?: AccordionAccentColor;
+  allowMultiple?: boolean;
+  defaultValue?: string | string[];
+  value?: string | string[];
+  onValueChange?: (value: any) => void;
+}
+
+interface AccordionContextType {
+  openValues: string[];
+  toggleValue: (value: string) => void;
+  variant: AccordionVariant;
+  accentColor?: AccordionAccentColor;
+}
+
+const AccordionContext = createContext<AccordionContextType | null>(null);
+
+export const useAccordion = () => {
+  const context = useContext(AccordionContext);
+  if (!context) {
+    throw new Error('Accordion subcomponents must be rendered within an Accordion component');
+  }
+  return context;
+};
+
+export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: string;
+  disabled?: boolean;
+}
+
+interface AccordionItemContextType {
+  value: string;
+  disabled?: boolean;
+  isOpen: boolean;
+}
+
+const AccordionItemContext = createContext<AccordionItemContextType | null>(null);
+
+export const useAccordionItem = () => {
+  const context = useContext(AccordionItemContext);
+  if (!context) {
+    throw new Error('AccordionItem subcomponents must be rendered within an AccordionItem component');
+  }
+  return context;
+};
+
+export const AccordionItem: React.FC<AccordionItemProps> = ({
+  value,
+  disabled = false,
+  className = '',
+  children,
+  ...props
+}) => {
+  const { openValues } = useAccordion();
+  const isOpen = openValues.includes(value);
+
+  const classNames = [
+    'ctp-accordion__item',
+    isOpen ? 'ctp-accordion__item--open' : '',
+    disabled ? 'ctp-accordion__item--disabled' : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <AccordionItemContext.Provider value={{ value, disabled, isOpen }}>
+      <div className={classNames} {...props}>
+        {children}
+      </div>
+    </AccordionItemContext.Provider>
+  );
+};
+
+export interface AccordionHeaderProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  showChevron?: boolean;
+}
+
+export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
+  showChevron = true,
+  className = '',
+  children,
+  ...props
+}) => {
+  const { toggleValue } = useAccordion();
+  const { value, disabled, isOpen } = useAccordionItem();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (disabled) return;
+    toggleValue(value);
+    if (props.onClick) {
+      props.onClick(e);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      className={`ctp-accordion__header ${className}`}
+      disabled={disabled}
+      aria-expanded={isOpen}
+      onClick={handleClick}
+      {...props}
+    >
+      <span className="ctp-accordion__title">{children}</span>
+      {showChevron && (
+        <svg
+          className="ctp-accordion__chevron"
+          viewBox="0 0 24 24"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      )}
+    </button>
+  );
+};
+
+export interface AccordionBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const AccordionBody: React.FC<AccordionBodyProps> = ({
+  className = '',
+  children,
+  ...props
+}) => {
+  const { isOpen } = useAccordionItem();
+
+  return (
+    <div
+      className="ctp-accordion__collapse"
+      aria-hidden={!isOpen}
+    >
+      <div className="ctp-accordion__content">
+        <div className={`ctp-accordion__body ${className}`} {...props}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const Accordion: React.FC<AccordionProps> & {
+  Item: React.FC<AccordionItemProps>;
+  Header: React.FC<AccordionHeaderProps>;
+  Body: React.FC<AccordionBodyProps>;
+} = ({
+  variant = 'default',
+  accentColor,
+  allowMultiple = false,
+  defaultValue,
+  value,
+  onValueChange,
+  className = '',
+  children,
+  ...props
+}) => {
+  const [localOpenValues, setLocalOpenValues] = useState<string[]>(() => {
+    if (defaultValue !== undefined) {
+      return Array.isArray(defaultValue) ? defaultValue : [defaultValue];
+    }
+    return [];
+  });
+
+  const isOpenControlled = value !== undefined;
+  const currentOpenValues = isOpenControlled
+    ? (Array.isArray(value) ? value : [value])
+    : localOpenValues;
+
+  const toggleValue = (itemValue: string) => {
+    let nextValues: string[];
+    if (allowMultiple) {
+      nextValues = currentOpenValues.includes(itemValue)
+        ? currentOpenValues.filter((v) => v !== itemValue)
+        : [...currentOpenValues, itemValue];
+    } else {
+      nextValues = currentOpenValues.includes(itemValue) ? [] : [itemValue];
+    }
+
+    if (!isOpenControlled) {
+      setLocalOpenValues(nextValues);
+    }
+
+    if (onValueChange) {
+      onValueChange(allowMultiple ? nextValues : (nextValues[0] || ''));
+    }
+  };
+
+  const classNames = [
+    'ctp-accordion',
+    `ctp-accordion--${variant}`,
+    accentColor ? `ctp-accordion--${accentColor}` : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <AccordionContext.Provider
+      value={{
+        openValues: currentOpenValues,
+        toggleValue,
+        variant,
+        accentColor,
+      }}
+    >
+      <div className={classNames} {...props}>
+        {children}
+      </div>
+    </AccordionContext.Provider>
+  );
+};
+
+Accordion.Item = AccordionItem;
+Accordion.Header = AccordionHeader;
+Accordion.Body = AccordionBody;
+
+Accordion.displayName = 'Accordion';
+AccordionItem.displayName = 'Accordion.Item';
+AccordionHeader.displayName = 'Accordion.Header';
+AccordionBody.displayName = 'Accordion.Body';

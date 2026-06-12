@@ -1,0 +1,345 @@
+/* Catppuccin Advanced Dropdown Selects Stylesheet */
+
+/* Default Accent is Mauve */
+:root {
+  --ctp-select-accent: var(--ctp-mauve);
+}
+
+/* Color mappings */
+.ctp-select--rosewater { --ctp-select-accent: var(--ctp-rosewater); }
+.ctp-select--flamingo  { --ctp-select-accent: var(--ctp-flamingo); }
+.ctp-select--pink      { --ctp-select-accent: var(--ctp-pink); }
+.ctp-select--mauve     { --ctp-select-accent: var(--ctp-mauve); }
+.ctp-select--red       { --ctp-select-accent: var(--ctp-red); }
+.ctp-select--maroon    { --ctp-select-accent: var(--ctp-maroon); }
+.ctp-select--peach     { --ctp-select-accent: var(--ctp-peach); }
+.ctp-select--yellow    { --ctp-select-accent: var(--ctp-yellow); }
+.ctp-select--green     { --ctp-select-accent: var(--ctp-green); }
+.ctp-select--teal      { --ctp-select-accent: var(--ctp-teal); }
+.ctp-select--sky       { --ctp-select-accent: var(--ctp-sky); }
+.ctp-select--sapphire  { --ctp-select-accent: var(--ctp-sapphire); }
+.ctp-select--blue      { --ctp-select-accent: var(--ctp-blue); }
+.ctp-select--lavender  { --ctp-select-accent: var(--ctp-lavender); }
+
+/* Main Select Frame Anchor */
+.ctp-advanced-select {
+  position: relative;
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: var(--ctp-font-family);
+  box-sizing: border-box;
+}
+
+/* Trigger Button representing select status input field */
+.ctp-select-trigger {
+  font-family: var(--ctp-font-family);
+  font-size: 0.95rem;
+  color: var(--ctp-text);
+  background-color: var(--ctp-surface0);
+  border: 1.5px solid var(--ctp-surface2);
+  min-height: 42px;
+  padding: 6px 36px 6px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  transition: var(--ctp-transition);
+  box-sizing: border-box;
+  width: 100%;
+  user-select: none;
+}
+
+.ctp-select-trigger:hover:not(.ctp-select-trigger--disabled) {
+  border-color: var(--ctp-overlay1);
+}
+
+.ctp-select-trigger--active {
+  border-color: var(--ctp-select-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-select-accent) 20%, transparent);
+  background-color: var(--ctp-surface1);
+}
+
+.ctp-select-trigger--disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  background-color: var(--ctp-crust);
+}
+
+.ctp-select-trigger--error {
+  border-color: var(--ctp-red) !important;
+}
+.ctp-select-trigger--error.ctp-select-trigger--active {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-red) 20%, transparent) !important;
+}
+
+/* Shapes config on Select Trigger */
+.ctp-select-trigger--square  { border-radius: var(--ctp-radius-square); }
+.ctp-select-trigger--rounded { border-radius: var(--ctp-radius-rounded); }
+.ctp-select-trigger--pill    { border-radius: var(--ctp-radius-pill); }
+
+/* Sizes config on Select Trigger */
+.ctp-select-trigger--sm {
+  min-height: 34px;
+  padding: 4px 30px 4px 10px;
+  font-size: 0.85rem;
+}
+.ctp-select-trigger--md {
+  min-height: 42px;
+  padding: 6px 36px 6px 12px;
+  font-size: 0.95rem;
+}
+.ctp-select-trigger--lg {
+  min-height: 50px;
+  padding: 8px 42px 8px 16px;
+  font-size: 1.05rem;
+}
+
+/* Right side chevron indicator */
+.ctp-select-trigger__chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ctp-subtext0);
+  transition: transform 0.2s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.ctp-select-trigger--active .ctp-select-trigger__chevron {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--ctp-select-accent);
+}
+
+/* Selected Chip item styled for MultiSelect options */
+.ctp-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: color-mix(in srgb, var(--ctp-select-accent) 14%, transparent);
+  color: var(--ctp-select-accent);
+  border: 1px solid color-mix(in srgb, var(--ctp-select-accent) 22%, transparent);
+  animation: ctp-tag-pop 0.15s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  user-select: none;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ctp-select-trigger--sm .ctp-tag-chip {
+  padding: 1px 6px;
+  font-size: 0.75rem;
+}
+
+.ctp-select-trigger--lg .ctp-tag-chip {
+  padding: 4px 10px;
+  font-size: 0.88rem;
+}
+
+.ctp-tag-chip__remove {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  font-weight: bold;
+  margin-left: 2px;
+  outline: none;
+}
+
+.ctp-tag-chip__remove:hover {
+  filter: brightness(1.2);
+}
+
+.ctp-select-placeholder {
+  color: var(--ctp-overlay1);
+}
+
+/* Floating Dropdown Options Panel */
+.ctp-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background-color: var(--ctp-mantle);
+  border: 1px solid var(--ctp-surface1);
+  border-radius: var(--ctp-radius-rounded);
+  box-shadow: var(--ctp-shadow-lg);
+  z-index: 100;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: ctp-dropdown-slide-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes ctp-dropdown-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search input container sticky at top */
+.ctp-dropdown-search {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ctp-surface0);
+  position: sticky;
+  top: 0;
+  background-color: var(--ctp-mantle);
+  z-index: 2;
+  display: flex;
+}
+
+.ctp-dropdown-search__input {
+  width: 100%;
+  border: 1.5px solid var(--ctp-surface2);
+  background-color: var(--ctp-surface0);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: var(--ctp-text);
+  outline: none;
+  font-family: var(--ctp-font-family);
+  transition: border-color var(--ctp-transition-duration);
+  box-sizing: border-box;
+}
+
+.ctp-dropdown-search__input:focus {
+  border-color: var(--ctp-select-accent);
+}
+
+/* Options Scroll list area */
+.ctp-dropdown-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ctp-dropdown-no-results {
+  padding: 16px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--ctp-overlay1);
+  font-style: italic;
+}
+
+/* Options Items styling */
+.ctp-dropdown-item {
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--ctp-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--ctp-transition);
+  user-select: none;
+  gap: 8px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.ctp-dropdown-item:hover:not(.ctp-dropdown-item--disabled) {
+  background-color: color-mix(in srgb, var(--ctp-select-accent) 8%, transparent);
+}
+
+.ctp-dropdown-item--selected {
+  background-color: color-mix(in srgb, var(--ctp-select-accent) 12%, transparent);
+  color: var(--ctp-select-accent);
+  font-weight: 600;
+}
+
+.ctp-dropdown-item--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background-color: transparent !important;
+  color: var(--ctp-subtext0) !important;
+}
+
+.ctp-dropdown-item__check {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ctp-select-accent);
+}
+
+/* MultiSelect custom Checkboxes in Option list */
+.ctp-dropdown-item__checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--ctp-surface2);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ctp-surface0);
+  transition: var(--ctp-transition);
+  flex-shrink: 0;
+}
+
+.ctp-dropdown-item--selected .ctp-dropdown-item__checkbox {
+  background-color: var(--ctp-select-accent);
+  border-color: var(--ctp-select-accent);
+  color: var(--ctp-base);
+}
+[data-theme="latte"] .ctp-dropdown-item--selected .ctp-dropdown-item__checkbox {
+  color: var(--ctp-contrast-light);
+}
+
+.ctp-dropdown-item__checkbox svg {
+  width: 10px;
+  height: 10px;
+  stroke-width: 4;
+}
+
+/* TreeSelect hierarchy layouts styling */
+.ctp-tree-node-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  color: var(--ctp-subtext0);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.ctp-tree-node-arrow:hover {
+  background-color: var(--ctp-surface1);
+  color: var(--ctp-text);
+}
+
+.ctp-tree-node-arrow--expanded {
+  transform: rotate(90deg);
+}
+
+.ctp-dropdown-item--depth-0 { padding-left: 12px; }
+.ctp-dropdown-item--depth-1 { padding-left: 28px; }
+.ctp-dropdown-item--depth-2 { padding-left: 46px; }
+.ctp-dropdown-item--depth-3 { padding-left: 64px; }
+.ctp-dropdown-item--depth-4 { padding-left: 82px; }
+
+/* Dynamic Animations keyframe pops */
+@keyframes ctp-tag-pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

@@ -1,0 +1,443 @@
+/* Catppuccin Design System - Table Component CSS */
+
+.ctp-table-container {
+  --ctp-table-accent: var(--ctp-mauve);
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--ctp-font-family);
+  color: var(--ctp-text);
+  box-sizing: border-box;
+  padding: 2px 4px 6px 4px;
+}
+
+/* Sizing Modifiers */
+.ctp-table--sm {
+  --ctp-cell-padding: 8px 12px;
+  font-size: 0.85rem;
+}
+.ctp-table--md {
+  --ctp-cell-padding: 12px 16px;
+  font-size: 0.95rem;
+}
+.ctp-table--lg {
+  --ctp-cell-padding: 16px 20px;
+  font-size: 1.05rem;
+}
+
+/* Color Modifier mappings */
+.ctp-table--rosewater { --ctp-table-accent: var(--ctp-rosewater); }
+.ctp-table--flamingo  { --ctp-table-accent: var(--ctp-flamingo); }
+.ctp-table--pink      { --ctp-table-accent: var(--ctp-pink); }
+.ctp-table--mauve     { --ctp-table-accent: var(--ctp-mauve); }
+.ctp-table--red       { --ctp-table-accent: var(--ctp-red); }
+.ctp-table--maroon    { --ctp-table-accent: var(--ctp-maroon); }
+.ctp-table--peach     { --ctp-table-accent: var(--ctp-peach); }
+.ctp-table--yellow    { --ctp-table-accent: var(--ctp-yellow); }
+.ctp-table--green     { --ctp-table-accent: var(--ctp-green); }
+.ctp-table--teal      { --ctp-table-accent: var(--ctp-teal); }
+.ctp-table--sky       { --ctp-table-accent: var(--ctp-sky); }
+.ctp-table--sapphire  { --ctp-table-accent: var(--ctp-sapphire); }
+.ctp-table--blue      { --ctp-table-accent: var(--ctp-blue); }
+.ctp-table--lavender  { --ctp-table-accent: var(--ctp-lavender); }
+
+/* The Table Element */
+.ctp-table {
+  width: 100%;
+  border-collapse: separate;
+  text-align: left;
+  border-spacing: 0;
+}
+
+/* Spacer Row between Header Card and Body Panel */
+.ctp-table-header-spacer td {
+  height: 12px;
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.ctp-table-header-spacer-inner {
+  height: 12px;
+  display: block;
+}
+
+/* Table Header (Card Style) */
+.ctp-table thead tr {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+
+[data-theme="latte"] .ctp-table thead tr {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+
+.ctp-table thead tr th {
+  padding: var(--ctp-cell-padding, 12px 16px);
+  background-color: var(--ctp-mantle);
+  color: var(--ctp-subtext0);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-top: 1px solid var(--ctp-surface1);
+  border-bottom: 1px solid var(--ctp-surface1);
+  user-select: none;
+  white-space: nowrap;
+  transition: var(--ctp-transition);
+}
+
+.ctp-table thead tr th:first-child {
+  border-left: 1px solid var(--ctp-surface1);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.ctp-table thead tr th:last-child {
+  border-right: 1px solid var(--ctp-surface1);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Sortable Headers */
+.ctp-table thead tr th.ctp-table-th--sortable {
+  cursor: pointer;
+}
+
+.ctp-table thead tr th.ctp-table-th--sortable:hover {
+  color: var(--ctp-text);
+}
+
+/* Active Sorted Header (Tab-style indicator inside card) */
+.ctp-table thead tr th.ctp-table-th--active {
+  color: var(--ctp-table-accent);
+  box-shadow: inset 0 -2px 0 var(--ctp-table-accent);
+}
+
+.ctp-table-th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ctp-table-sort-icon {
+  display: inline-flex;
+  color: var(--ctp-overlay1);
+  transition: var(--ctp-transition);
+}
+
+.ctp-table-sort-icon--active {
+  color: var(--ctp-table-accent);
+}
+
+/* Table Cells and Rows */
+.ctp-table tbody tr td {
+  padding: var(--ctp-cell-padding, 14px 18px);
+  background-color: var(--ctp-base);
+  border-bottom: 1px solid var(--ctp-surface0);
+  color: var(--ctp-text);
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: var(--ctp-transition);
+}
+
+/* Borders and rounded corners to form unified body panel */
+.ctp-table tbody tr td:first-child {
+  border-left: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table tbody tr td:last-child {
+  border-right: 1px solid var(--ctp-surface1);
+}
+
+/* First actual row of the body panel */
+.ctp-table tbody tr.ctp-table-tr--first td {
+  border-top: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table tbody tr.ctp-table-tr--first td:first-child {
+  border-top-left-radius: 10px;
+}
+
+.ctp-table tbody tr.ctp-table-tr--first td:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Last row of the body panel */
+.ctp-table tbody tr.ctp-table-tr--last td {
+  border-bottom: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table tbody tr.ctp-table-tr--last td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.ctp-table tbody tr.ctp-table-tr--last td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+/* Row Hover */
+.ctp-table tbody tr:hover td {
+  background-color: var(--ctp-surface0);
+}
+
+/* Selected row highlight styling */
+.ctp-table tbody tr.ctp-table-tr--selected td {
+  background-color: color-mix(in srgb, var(--ctp-table-accent) 8%, var(--ctp-base));
+  border-bottom-color: color-mix(in srgb, var(--ctp-table-accent) 20%, var(--ctp-surface1));
+}
+
+.ctp-table tbody tr.ctp-table-tr--selected:hover td {
+  background-color: color-mix(in srgb, var(--ctp-table-accent) 12%, var(--ctp-base));
+}
+
+/* Alignments */
+.ctp-table-cell--align-left { text-align: left; }
+.ctp-table-cell--align-center { text-align: center; }
+.ctp-table-cell--align-right { text-align: right; }
+
+/* Status Badges */
+.ctp-table-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: var(--ctp-radius-pill);
+}
+
+.ctp-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  display: inline-block;
+}
+
+.ctp-table-badge--active {
+  background-color: color-mix(in srgb, var(--ctp-green) 10%, transparent);
+  color: var(--ctp-green);
+  border: 1px solid color-mix(in srgb, var(--ctp-green) 20%, transparent);
+}
+
+.ctp-table-badge--inactive {
+  background-color: color-mix(in srgb, var(--ctp-red) 10%, transparent);
+  color: var(--ctp-red);
+  border: 1px solid color-mix(in srgb, var(--ctp-red) 20%, transparent);
+}
+
+.ctp-table-badge--pending {
+  background-color: color-mix(in srgb, var(--ctp-yellow) 10%, transparent);
+  color: var(--ctp-yellow);
+  border: 1px solid color-mix(in srgb, var(--ctp-yellow) 20%, transparent);
+}
+
+/* Custom Premium Checkbox (Dribbble-inspired) */
+.ctp-table-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--ctp-surface2);
+  border-radius: 5px;
+  background-color: var(--ctp-crust);
+  cursor: pointer;
+  transition: var(--ctp-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.ctp-table-checkbox:hover {
+  border-color: var(--ctp-table-accent);
+  background-color: var(--ctp-surface0);
+}
+
+.ctp-table-checkbox:checked {
+  background-color: var(--ctp-table-accent);
+  border-color: var(--ctp-table-accent);
+}
+
+.ctp-table-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  border: solid var(--ctp-base);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  top: 2px;
+  left: 5px;
+}
+
+.ctp-table-checkbox:indeterminate {
+  background-color: var(--ctp-table-accent);
+  border-color: var(--ctp-table-accent);
+}
+
+.ctp-table-checkbox:indeterminate::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background-color: var(--ctp-base);
+  top: 7px;
+  left: 4px;
+}
+
+/* Table Action Buttons */
+.ctp-table-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--ctp-subtext1);
+  cursor: pointer;
+  transition: var(--ctp-transition);
+}
+
+.ctp-table-action-btn:hover {
+  background-color: var(--ctp-surface0);
+  color: var(--ctp-text);
+}
+
+.ctp-table-action-btn--danger:hover {
+  background-color: color-mix(in srgb, var(--ctp-red) 12%, transparent);
+  color: var(--ctp-red);
+}
+
+/* Inline Cell Editing Input */
+.ctp-table-inline-edit {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1.5px solid var(--ctp-table-accent);
+  background-color: var(--ctp-crust);
+  color: var(--ctp-text);
+  border-radius: var(--ctp-radius-rounded);
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-table-accent) 20%, transparent);
+  box-sizing: border-box;
+}
+
+/* Skeleton animation for loading states */
+.ctp-table-skeleton-row td {
+  padding: var(--ctp-cell-padding, 14px 18px);
+  background-color: var(--ctp-base);
+  border-bottom: 1px solid var(--ctp-surface0);
+}
+
+.ctp-table-skeleton-row td:first-child {
+  border-left: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table-skeleton-row td:last-child {
+  border-right: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table-skeleton-row.ctp-table-tr--first td {
+  border-top: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table-skeleton-row.ctp-table-tr--first td:first-child {
+  border-top-left-radius: 10px;
+}
+
+.ctp-table-skeleton-row.ctp-table-tr--first td:last-child {
+  border-top-right-radius: 10px;
+}
+
+.ctp-table-skeleton-row.ctp-table-tr--last td {
+  border-bottom: 1px solid var(--ctp-surface1);
+}
+
+.ctp-table-skeleton-row.ctp-table-tr--last td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.ctp-table-skeleton-row.ctp-table-tr--last td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.ctp-table-skeleton-bar {
+  display: block;
+  height: 16px;
+  background-color: var(--ctp-surface1);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctp-table-skeleton-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent 100%
+  );
+  animation: ctp-shimmer 1.5s infinite;
+}
+
+@keyframes ctp-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Column Specific Styles for Hierarchy (Dribbble-inspired) */
+.ctp-table-cell--key-id {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ctp-mauve);
+}
+
+.ctp-table-cell--key-name {
+  font-weight: 600;
+  color: var(--ctp-text);
+  font-size: 0.95rem;
+}
+
+.ctp-table-cell--key-email {
+  color: var(--ctp-subtext0);
+  font-size: 0.85rem;
+}
+
+.ctp-table-cell--key-role {
+  font-weight: 500;
+  color: var(--ctp-text);
+}
+
+.ctp-table-cell--key-department {
+  color: var(--ctp-subtext1);
+}
+
+.ctp-table-cell--key-salary {
+  font-weight: 600;
+  color: var(--ctp-text);
+}
+
+.ctp-table-cell--key-joinedDate {
+  color: var(--ctp-subtext0);
+  font-size: 0.85rem;
+}

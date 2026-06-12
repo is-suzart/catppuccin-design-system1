@@ -1,0 +1,9 @@
+{
+  "name": "@catppuccin-ds/angular",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "peerDependencies": {
+    "@angular/core": "^17.0.0 || ^18.0.0"
+  }
+}

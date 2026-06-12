@@ -1,0 +1,241 @@
+/* Catppuccin Tabs Stylesheet */
+
+/* Default Focus Accent is Mauve */
+:root {
+  --ctp-tabs-accent: var(--ctp-mauve);
+}
+
+/* Color mappings */
+.ctp-tabs--rosewater { --ctp-tabs-accent: var(--ctp-rosewater); }
+.ctp-tabs--flamingo  { --ctp-tabs-accent: var(--ctp-flamingo); }
+.ctp-tabs--pink      { --ctp-tabs-accent: var(--ctp-pink); }
+.ctp-tabs--mauve     { --ctp-tabs-accent: var(--ctp-mauve); }
+.ctp-tabs--red       { --ctp-tabs-accent: var(--ctp-red); }
+.ctp-tabs--maroon    { --ctp-tabs-accent: var(--ctp-maroon); }
+.ctp-tabs--peach     { --ctp-tabs-accent: var(--ctp-peach); }
+.ctp-tabs--yellow    { --ctp-tabs-accent: var(--ctp-yellow); }
+.ctp-tabs--green     { --ctp-tabs-accent: var(--ctp-green); }
+.ctp-tabs--teal      { --ctp-tabs-accent: var(--ctp-teal); }
+.ctp-tabs--sky       { --ctp-tabs-accent: var(--ctp-sky); }
+.ctp-tabs--sapphire  { --ctp-tabs-accent: var(--ctp-sapphire); }
+.ctp-tabs--blue      { --ctp-tabs-accent: var(--ctp-blue); }
+.ctp-tabs--lavender  { --ctp-tabs-accent: var(--ctp-lavender); }
+
+/* Core Layout styles */
+.ctp-tabs {
+  font-family: var(--ctp-font-family);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ctp-tabs--vertical {
+  flex-direction: row;
+  gap: 24px;
+}
+
+/* Trigger list container */
+.ctp-tabs-list {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  flex-wrap: wrap;
+}
+
+.ctp-tabs--vertical .ctp-tabs-list {
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+/* Base trigger button styles */
+.ctp-tabs-trigger {
+  font-family: var(--ctp-font-family);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--ctp-subtext0);
+  transition: var(--ctp-transition);
+  outline: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.ctp-tabs-trigger:hover:not(:disabled) {
+  color: var(--ctp-text);
+}
+
+.ctp-tabs-trigger:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ctp-tabs-trigger:focus-visible {
+  outline: 2px solid var(--ctp-tabs-accent);
+  outline-offset: 2px;
+  z-index: 2;
+}
+
+/* Sizing configurations */
+.ctp-tabs-trigger--sm {
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  gap: 6px;
+}
+.ctp-tabs-trigger--md {
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  gap: 8px;
+}
+.ctp-tabs-trigger--lg {
+  font-size: 1.05rem;
+  padding: 12px 26px;
+  gap: 10px;
+}
+
+/* 1. Default (Rounded Card Tabs) */
+.ctp-tabs-list--default {
+  border-bottom: 2px solid var(--ctp-surface0);
+}
+
+.ctp-tabs--vertical .ctp-tabs-list--default {
+  border-bottom: none;
+  border-right: 2px solid var(--ctp-surface0);
+}
+
+.ctp-tabs-trigger--default {
+  border-radius: var(--ctp-radius-rounded) var(--ctp-radius-rounded) 0 0;
+  border: 1.5px solid transparent;
+  border-bottom: none;
+  margin-bottom: -2px;
+}
+
+.ctp-tabs--vertical .ctp-tabs-trigger--default {
+  border-radius: var(--ctp-radius-rounded) 0 0 var(--ctp-radius-rounded);
+  border-bottom: 1.5px solid transparent;
+  border-right: none;
+  margin-bottom: 0;
+  margin-right: -2px;
+}
+
+.ctp-tabs-trigger--default:hover:not(:disabled):not([aria-selected="true"]) {
+  background-color: color-mix(in srgb, var(--ctp-tabs-accent) 8%, transparent);
+}
+
+.ctp-tabs-trigger--default[aria-selected="true"] {
+  background-color: var(--ctp-surface0);
+  border-color: var(--ctp-surface0);
+  color: var(--ctp-tabs-accent);
+}
+
+/* 2. Underline tabs variant */
+.ctp-tabs-list--underline {
+  border-bottom: 1.5px solid var(--ctp-surface1);
+}
+
+.ctp-tabs--vertical .ctp-tabs-list--underline {
+  border-bottom: none;
+  border-right: 1.5px solid var(--ctp-surface1);
+}
+
+.ctp-tabs-trigger--underline {
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -1.5px;
+}
+
+.ctp-tabs--vertical .ctp-tabs-trigger--underline {
+  border-bottom: none;
+  border-right: 2.5px solid transparent;
+  margin-bottom: 0;
+  margin-right: -1.5px;
+}
+
+.ctp-tabs-trigger--underline[aria-selected="true"] {
+  color: var(--ctp-tabs-accent);
+  border-bottom-color: var(--ctp-tabs-accent);
+}
+
+.ctp-tabs--vertical .ctp-tabs-trigger--underline[aria-selected="true"] {
+  border-right-color: var(--ctp-tabs-accent);
+}
+
+/* 3. Pills tabs variant */
+.ctp-tabs-list--pills {
+  gap: 8px;
+}
+
+.ctp-tabs-trigger--pills {
+  border-radius: var(--ctp-radius-pill);
+}
+
+.ctp-tabs-trigger--pills:hover:not(:disabled):not([aria-selected="true"]) {
+  background-color: color-mix(in srgb, var(--ctp-tabs-accent) 8%, transparent);
+}
+
+.ctp-tabs-trigger--pills[aria-selected="true"] {
+  background-color: var(--ctp-tabs-accent);
+  color: var(--ctp-base);
+  box-shadow: var(--ctp-shadow-sm);
+}
+
+/* High contrast text adjustment for latte (light mode) pills active state */
+[data-theme="latte"] .ctp-tabs-trigger--pills[aria-selected="true"] {
+  color: var(--ctp-contrast-light);
+}
+
+/* 4. Segmented Block tabs variant */
+.ctp-tabs-list--segmented {
+  background-color: var(--ctp-crust);
+  border-radius: var(--ctp-radius-rounded);
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--ctp-text) 5%, transparent);
+  display: inline-flex;
+}
+
+.ctp-tabs--vertical .ctp-tabs-list--segmented {
+  display: flex;
+}
+
+.ctp-tabs-trigger--segmented {
+  border-radius: calc(var(--ctp-radius-rounded) - 2px);
+  flex: 1;
+}
+
+.ctp-tabs-trigger--segmented[aria-selected="true"] {
+  background-color: var(--ctp-surface0);
+  color: var(--ctp-tabs-accent);
+  box-shadow: var(--ctp-shadow-sm);
+}
+
+/* Tab Panels / Content styling */
+.ctp-tabs-content {
+  display: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--ctp-text);
+  line-height: 1.5;
+}
+
+.ctp-tabs-content--active {
+  display: block;
+  animation: ctp-tab-fade-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ctp-tabs--vertical .ctp-tabs-content {
+  flex: 1;
+}
+
+@keyframes ctp-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

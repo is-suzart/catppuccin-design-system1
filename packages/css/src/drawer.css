@@ -1,0 +1,196 @@
+/* Catppuccin Drawer Stylesheet */
+
+/* Default Accent is Mauve */
+:root {
+  --ctp-drawer-accent: var(--ctp-mauve);
+}
+
+/* Color Mappings */
+.ctp-drawer--rosewater { --ctp-drawer-accent: var(--ctp-rosewater); }
+.ctp-drawer--flamingo  { --ctp-drawer-accent: var(--ctp-flamingo); }
+.ctp-drawer--pink      { --ctp-drawer-accent: var(--ctp-pink); }
+.ctp-drawer--mauve     { --ctp-drawer-accent: var(--ctp-mauve); }
+.ctp-drawer--red       { --ctp-drawer-accent: var(--ctp-red); }
+.ctp-drawer--maroon    { --ctp-drawer-accent: var(--ctp-maroon); }
+.ctp-drawer--peach     { --ctp-drawer-accent: var(--ctp-peach); }
+.ctp-drawer--yellow    { --ctp-drawer-accent: var(--ctp-yellow); }
+.ctp-drawer--green     { --ctp-drawer-accent: var(--ctp-green); }
+.ctp-drawer--teal      { --ctp-drawer-accent: var(--ctp-teal); }
+.ctp-drawer--sky       { --ctp-drawer-accent: var(--ctp-sky); }
+.ctp-drawer--sapphire  { --ctp-drawer-accent: var(--ctp-sapphire); }
+.ctp-drawer--blue      { --ctp-drawer-accent: var(--ctp-blue); }
+.ctp-drawer--lavender  { --ctp-drawer-accent: var(--ctp-lavender); }
+
+/* Overlay Position Helpers for Drawer Alignment */
+.ctp-overlay--drawer-right {
+  justify-content: flex-end !important;
+  align-items: stretch !important;
+}
+
+.ctp-overlay--drawer-left {
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+}
+
+.ctp-overlay--drawer-top {
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+.ctp-overlay--drawer-bottom {
+  justify-content: center !important;
+  align-items: flex-end !important;
+}
+
+/* Main Drawer Container */
+.ctp-drawer {
+  background-color: var(--ctp-mantle);
+  box-shadow: var(--ctp-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transition: transform var(--ctp-transition-duration) var(--ctp-transition-timing);
+  position: relative;
+  outline: none;
+  border: 1px solid color-mix(in srgb, var(--ctp-text) 5%, transparent);
+}
+
+/* 1. Horizontal Drawer Positions (Left / Right) */
+.ctp-drawer--right {
+  height: 100vh;
+  border-left: 3px solid var(--ctp-drawer-accent);
+  transform: translateX(100%);
+}
+
+.ctp-drawer--left {
+  height: 100vh;
+  border-right: 3px solid var(--ctp-drawer-accent);
+  transform: translateX(-100%);
+}
+
+/* Horizontal Drawer Sizing width mappings */
+.ctp-drawer--right.ctp-drawer--sm,
+.ctp-drawer--left.ctp-drawer--sm {
+  width: 320px;
+  max-width: 90vw;
+}
+
+.ctp-drawer--right.ctp-drawer--md,
+.ctp-drawer--left.ctp-drawer--md {
+  width: 480px;
+  max-width: 90vw;
+}
+
+.ctp-drawer--right.ctp-drawer--lg,
+.ctp-drawer--left.ctp-drawer--lg {
+  width: 680px;
+  max-width: 90vw;
+}
+
+.ctp-drawer--right.ctp-drawer--full,
+.ctp-drawer--left.ctp-drawer--full {
+  width: 100vw;
+}
+
+/* 2. Vertical Drawer Positions (Top / Bottom) */
+.ctp-drawer--top {
+  width: 100vw;
+  border-bottom: 3px solid var(--ctp-drawer-accent);
+  transform: translateY(-100%);
+}
+
+.ctp-drawer--bottom {
+  width: 100vw;
+  border-top: 3px solid var(--ctp-drawer-accent);
+  transform: translateY(100%);
+}
+
+/* Vertical Drawer Sizing height mappings */
+.ctp-drawer--top.ctp-drawer--sm,
+.ctp-drawer--bottom.ctp-drawer--sm {
+  height: 260px;
+  max-height: 90vh;
+}
+
+.ctp-drawer--top.ctp-drawer--md,
+.ctp-drawer--bottom.ctp-drawer--md {
+  height: 380px;
+  max-height: 90vh;
+}
+
+.ctp-drawer--top.ctp-drawer--lg,
+.ctp-drawer--bottom.ctp-drawer--lg {
+  height: 520px;
+  max-height: 90vh;
+}
+
+.ctp-drawer--top.ctp-drawer--full,
+.ctp-drawer--bottom.ctp-drawer--full {
+  height: 100vh;
+}
+
+/* Slide in triggers on open */
+.ctp-overlay--open .ctp-drawer {
+  transform: translate(0) !important;
+}
+
+/* Sub components inside Drawer */
+.ctp-drawer__header {
+  padding: 1.2rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px solid var(--ctp-surface0);
+  background-color: color-mix(in srgb, var(--ctp-crust) 30%, transparent);
+}
+
+.ctp-drawer__title {
+  font-family: var(--ctp-font-family);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ctp-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctp-drawer__close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ctp-subtext0);
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--ctp-transition);
+  outline: none;
+}
+
+.ctp-drawer__close-btn:hover {
+  background-color: var(--ctp-surface0);
+  color: var(--ctp-red);
+}
+
+.ctp-drawer__close-btn:focus-visible {
+  outline: 2px solid var(--ctp-drawer-accent);
+}
+
+.ctp-drawer__body {
+  padding: 1.6rem;
+  flex: 1;
+  overflow-y: auto;
+  font-family: var(--ctp-font-family);
+  color: var(--ctp-subtext1);
+  line-height: 1.6;
+}
+
+.ctp-drawer__footer {
+  padding: 1.2rem 1.6rem;
+  border-top: 1.5px solid var(--ctp-surface0);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background-color: var(--ctp-crust);
+}
