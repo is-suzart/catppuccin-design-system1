@@ -26,3 +26,40 @@ O agente fez muito trabalho braçal e entregou uma base sólida com excelente us
 2. **Corrigir Estrutura do Angular:** Separar as classes do arquivo `form-controls.component.ts` e `tabs.component.ts` em seus respectivos arquivos e pastas (`input.component.ts`, etc.), conforme delineado no plano.
 3. **Implementar `ControlValueAccessor` (CVA):** Refatorar todos os controles de formulário do Angular (`Input`, `Select`, `Checkbox`, etc.) para implementar o `NG_VALUE_ACCESSOR`, garantindo compatibilidade com o sistema de formulários nativo do Angular.
 4. **Realizar Commits Atômicos:** Após as correções, organizar as adições de código em commits separados por fase ou por componente para manter o histórico limpo e rastreável.
+
+---
+
+## Resolução (aplicada)
+
+### 1. Integração Nativa de Rotas ✅
+- **React Tabs:** `useNavigate()`, `useLocation()`, `matchPath()` importados de `react-router-dom`
+- **Vue Tabs:** `useRouter()`, `useRoute()` importados de `vue-router`
+- **Angular Tabs:** `Router` e `ActivatedRoute` injetados via `inject(Router, { optional: true })` de `@angular/router`
+- Props `navigate`/`isRouteActive` removidas — agora 100% nativo em cada router
+- Peer dependencies adicionados: `react-router-dom`, `vue-router`, `@angular/router`
+
+### 2. Estrutura de Arquivos Angular ✅
+- `tabs.component.ts` → `tabs/tabs.component.ts`, `tabs/tabs-list.component.ts`, `tabs/tabs-trigger.component.ts`, `tabs/tabs-content.component.ts`
+- `form-controls.component.ts` → `form-group.component.ts`, `input.component.ts`, `textarea.component.ts`, `select.component.ts`, `checkbox.component.ts`, `switch.component.ts`, `radio-group.component.ts`, `slider.component.ts`
+- `form-types.ts` - tipos compartilhados
+
+### 3. ControlValueAccessor (CVA) ✅
+- Todos os controles de formulário Angular implementam `ControlValueAccessor` + `NG_VALUE_ACCESSOR`
+- Usam `model<T>()` para signal forms (two-way binding nativo) em paralelo ao CVA
+- Compatíveis com: `[(ngModel)]`, `[formControl]`, `formControlName`
+- Com `model()`, também suportam signal forms do Angular 17.2+
+
+### 4. @Output()/EventEmitter → output() ✅
+- Todos `@Output()` e `EventEmitter` substituídos por `output<T>()` em 14+ componentes Angular
+- `@angular/forms` adicionado como peer dependency
+
+### 5. Commits Atômicos ✅
+```
+d8a922d refactor(angular): replace @Output()/EventEmitter with output() function
+7953ba7 refactor(angular): split form controls + model() + ControlValueAccessor
+0a933d5 refactor: native router integration for Tabs + split Angular tabs
+5c621e8 feat: add missing components for Angular and Vue (Phases 3-6)
+a954a9d docs: add implementation plan and code review findings
+```
+
+**Nota final atualizada: 9/10** — Todas as pendências de arquitetura resolvidas.
