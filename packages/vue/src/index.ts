@@ -11,6 +11,55 @@ import Card from './Card.vue';
 import Tile from './Tile.vue';
 import Accordion from './Accordion.vue';
 import AccordionItem from './AccordionItem.vue';
+import Tabs from './Tabs.vue';
+import TabsList from './TabsList.vue';
+import TabsTrigger from './TabsTrigger.vue';
+import TabsContent from './TabsContent.vue';
+import FormGroup from './FormGroup.vue';
+import Input from './Input.vue';
+import TextArea from './TextArea.vue';
+import Select from './Select.vue';
+import Checkbox from './Checkbox.vue';
+import Switch from './Switch.vue';
+import RadioGroup from './RadioGroup.vue';
+import Slider from './Slider.vue';
+import Drawer from './Drawer.vue';
+import Dropdown from './Dropdown.vue';
+import DropdownItem from './DropdownItem.vue';
+import DropdownDivider from './DropdownDivider.vue';
+import DropdownHeader from './DropdownHeader.vue';
+import Tooltip from './Tooltip.vue';
+import Pagination from './Pagination.vue';
+import Table from './Table.vue';
+import Icon from './Icon.vue';
+import Grid from './Grid.vue';
+import GridCol from './GridCol.vue';
+import Shell from './Shell.vue';
+import ShellHeader from './ShellHeader.vue';
+import ShellSidebar from './ShellSidebar.vue';
+import ShellMain from './ShellMain.vue';
+import ShellContent from './ShellContent.vue';
+import Sidebar from './Sidebar.vue';
+import SidebarHeader from './SidebarHeader.vue';
+import SidebarSection from './SidebarSection.vue';
+import SidebarItem from './SidebarItem.vue';
+import DatePicker from './DatePicker.vue';
+import TextEditor from './TextEditor.vue';
+import MultiSelect from './MultiSelect.vue';
+import DynamicForm from './DynamicForm.vue';
 
-export { Button, Overlay, Modal, Steps, StepsSlider, Stepper, ProgressBar, ColorPicker, ButtonGroup, Card, Tile, Accordion, AccordionItem };
+export {
+  Button, Overlay, Modal, Steps, StepsSlider, Stepper,
+  ProgressBar, ColorPicker, ButtonGroup, Card, Tile,
+  Accordion, AccordionItem,
+  Tabs, TabsList, TabsTrigger, TabsContent,
+  FormGroup, Input, TextArea, Select, Checkbox, Switch, RadioGroup, Slider,
+  Drawer, Dropdown, DropdownItem, DropdownDivider, DropdownHeader, Tooltip,
+  Pagination, Table, Icon,
+  Grid, GridCol,
+  Shell, ShellHeader, ShellSidebar, ShellMain, ShellContent,
+  Sidebar, SidebarHeader, SidebarSection, SidebarItem,
+  DatePicker,
+  TextEditor, MultiSelect, DynamicForm,
+};
 
