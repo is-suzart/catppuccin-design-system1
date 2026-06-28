@@ -1,4 +1,4 @@
-import { Component, input, Output, EventEmitter, OnDestroy, ElementRef, ViewChild, effect } from '@angular/core';
+import { Component, input, output, OnDestroy, ElementRef, ViewChild, effect } from '@angular/core';
 
 let activeOverlayCount = 0;
 
@@ -24,7 +24,7 @@ export class OverlayComponent implements OnDestroy {
   closeOnOverlayClick = input<boolean>(true);
   closeOnEsc = input<boolean>(true);
 
-  @Output() close = new EventEmitter<void>();
+  close = output<void>();
 
   @ViewChild('overlayElement') overlayElement!: ElementRef;
 

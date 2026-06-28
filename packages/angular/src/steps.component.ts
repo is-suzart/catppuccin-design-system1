@@ -1,4 +1,4 @@
-import { Component, input, Output, EventEmitter, computed } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 
 type StepsVariant = 'timeline' | 'carousel';
 type StepsColor =
@@ -69,7 +69,7 @@ export class StepsComponent {
   color = input<StepsColor>('mauve');
   orientation = input<'horizontal' | 'vertical'>('horizontal');
 
-  @Output() changeStep = new EventEmitter<number>();
+  changeStep = output<number>();
 
   stepIndexes = computed(() => Array.from({ length: this.stepsCount() }, (_, i) => i));
 

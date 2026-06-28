@@ -1,4 +1,4 @@
-import { Component, input, Output, EventEmitter, ElementRef, ViewChild, HostListener, computed, signal, effect } from '@angular/core';
+import { Component, input, output, ElementRef, ViewChild, HostListener, computed, signal, effect } from '@angular/core';
 
 type ColorPickerVariant = 'swatches' | 'custom' | 'both';
 type ColorPickerSize = 'sm' | 'md' | 'lg';
@@ -286,7 +286,7 @@ export class ColorPickerComponent {
   color = input<ColorPickerColor>('mauve');
   showHexInput = input<boolean>(true);
 
-  @Output() change = new EventEmitter<string>();
+  change = output<string>();
 
   @ViewChild('popoverWrapper') popoverWrapper!: ElementRef;
   @ViewChild('pad') pad!: ElementRef;

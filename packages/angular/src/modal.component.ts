@@ -1,4 +1,4 @@
-import { Component, input, Output, EventEmitter } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { OverlayComponent } from './overlay.component';
 
 type ModalSize = 'sm' | 'md' | 'lg';
@@ -73,7 +73,7 @@ export class ModalComponent {
   hasFooter = input<boolean>(true);
   hasCustomHeader = input<boolean>(false);
 
-  @Output() close = new EventEmitter<void>();
+  close = output<void>();
 
   onCloseModal(): void {
     this.close.emit();

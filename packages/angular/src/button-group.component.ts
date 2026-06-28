@@ -2,8 +2,7 @@ import {
   Component,
   input,
   computed,
-  Output,
-  EventEmitter,
+  output,
   model,
   forwardRef,
   ElementRef,
@@ -48,7 +47,7 @@ export class ButtonGroupComponent implements ControlValueAccessor, AfterViewInit
   value = model<any>(null);
   disabled = model<boolean>(false);
   
-  @Output() change = new EventEmitter<any>();
+  change = output<any>();
 
   @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
 

@@ -1,4 +1,4 @@
-import { Component, input, computed, Output, EventEmitter, signal, effect, inject } from '@angular/core';
+import { Component, input, computed, output, signal, effect, inject } from '@angular/core';
 
 export type AccordionVariant = 'default' | 'split';
 export type AccordionAccentColor =
@@ -32,7 +32,7 @@ export class CptAccordionComponent {
   allowMultiple = input<boolean>(false);
   activeValues = input<string | string[]>([]);
 
-  @Output() activeValuesChange = new EventEmitter<string | string[]>();
+  activeValuesChange = output<string | string[]>();
 
   private openValuesSignal = signal<string[]>([]);
   openValues = this.openValuesSignal.asReadonly();
