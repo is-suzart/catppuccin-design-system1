@@ -1,8 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation, matchPath } from 'react-router-dom';
 import { FormControlColor, getFormThemeClass } from './FormControls';
 
 export type TabsVariant = 'default' | 'underline' | 'pills' | 'segmented';
 export type TabsOrientation = 'horizontal' | 'vertical';
+export type TabsMode = 'state' | 'router';
 
 interface TabsContextProps {
   value: string;
@@ -11,6 +13,7 @@ interface TabsContextProps {
   size: 'sm' | 'md' | 'lg';
   color: FormControlColor;
   orientation: TabsOrientation;
+  mode: TabsMode;
 }
 
 const TabsContext = createContext<TabsContextProps | undefined>(undefined);
@@ -32,6 +35,7 @@ export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: 'sm' | 'md' | 'lg';
   color?: FormControlColor;
   orientation?: TabsOrientation;
+  mode?: TabsMode;
 }
 
 export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
@@ -44,6 +48,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
       size = 'md',
       color = 'mauve',
       orientation = 'horizontal',
+      mode = 'state',
       className = '',
       children,
       ...props
@@ -54,19 +59,19 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     const isControlled = controlledValue !== undefined;
     const activeValue = isControlled ? controlledValue : localValue;
 
-    const handleValueChange = (val: string) => {
+    const handleValueChange = useCallback((val: string) => {
       if (!isControlled) {
         setLocalValue(val);
       }
       if (onValueChange) {
         onValueChange(val);
       }
-    };
+    }, [isControlled, onValueChange]);
 
     // Auto-select first trigger's value if no default is provided
+    // (only in state mode; router mode determines active tab from URL)
     useEffect(() => {
-      if (!activeValue && children) {
-        // Simple search inside children to locate the first TabsTrigger value
+      if (mode === 'state' && !activeValue && children) {
         const findFirstValue = (nodeList: React.ReactNode): string | null => {
           let found: string | null = null;
           React.Children.forEach(nodeList, (child) => {
@@ -106,6 +111,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
           size,
           color,
           orientation,
+          mode,
         }}
       >
         <div ref={ref} className={containerClass} {...props}>
@@ -164,7 +170,6 @@ export const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
         const newValue = nextTrigger.getAttribute('data-value');
         const triggerBtn = nextTrigger as HTMLButtonElement;
         
-        // Select tab upon focus
         if (newValue && !triggerBtn.disabled) {
           triggerBtn.click();
         }
@@ -190,12 +195,18 @@ TabsList.displayName = 'TabsList';
 // 3. TabsTrigger Component
 export interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
+  to?: string;
 }
 
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
-  ({ value, className = '', disabled, children, ...props }, ref) => {
-    const { value: activeValue, onValueChange, variant, size } = useTabs();
-    const isSelected = activeValue === value;
+  ({ value, to, className = '', disabled, children, ...props }, ref) => {
+    const { value: activeValue, onValueChange, variant, size, mode } = useTabs();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const isSelected = (mode === 'router' && to)
+      ? matchPath({ path: to, end: true }, location.pathname) !== null
+      : activeValue === value;
 
     const triggerClass = [
       'ctp-tabs-trigger',
@@ -209,7 +220,13 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
-      onValueChange(value);
+
+      if (mode === 'router' && to) {
+        navigate(to);
+      } else {
+        onValueChange(value);
+      }
+
       if (props.onClick) {
         props.onClick(e);
       }
@@ -244,8 +261,12 @@ export interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
   ({ value, className = '', children, ...props }, ref) => {
-    const { value: activeValue } = useTabs();
-    const isActive = activeValue === value;
+    const { value: activeValue, mode } = useTabs();
+    const location = useLocation();
+
+    const isActive = mode === 'router'
+      ? matchPath({ path: value, end: true }, location.pathname) !== null
+      : activeValue === value;
 
     const contentClass = [
       'ctp-tabs-content',
