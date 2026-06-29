@@ -146,7 +146,15 @@ import {
   TextEditorSize,
   Shell,
   ShellLayout,
-  Sidebar
+  Sidebar,
+  Skeleton,
+  Alert,
+  Avatar,
+  AvatarGroup,
+  Breadcrumb,
+  Carousel,
+  Toaster,
+  toast,
 } from '@catppuccin-ds/react';
 
 import {
@@ -496,7 +504,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   
   // Navigation: buttons, buttongroup, stepper, modal, tabs, form, steps, progress, drawer, select, colorpicker, table, card, icons
-  const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar'>('button');
+  const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar' | 'skeleton' | 'alert' | 'avatar' | 'breadcrumb' | 'carousel' | 'toast'>('button');
 
   // --- TEXT EDITOR PLAYGROUND STATES ---
   const [editorColor, setEditorColor] = useState<TextEditorColor>('mauve');
@@ -509,6 +517,12 @@ export default function App() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showColors, setShowColors] = useState(false);
+
+  // --- TOAST PLAYGROUND STATES ---
+  const [toastPosition, setToastPosition] = useState<'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'>('bottom-right');
+  const [toastFilled, setToastFilled] = useState(false);
+  const [toastColor, setToastColor] = useState<string>('');
+  const [toastCustomClass, setToastCustomClass] = useState('');
 
 
 
@@ -2136,6 +2150,42 @@ export default function App() {
             >
               📊 Charts
             </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'skeleton' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('skeleton'); setIsSidebarOpen(false); }}
+            >
+              💀 Skeleton
+            </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'alert' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('alert'); setIsSidebarOpen(false); }}
+            >
+              ⚠️ Alert
+            </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'avatar' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('avatar'); setIsSidebarOpen(false); }}
+            >
+              👤 Avatar
+            </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'breadcrumb' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('breadcrumb'); setIsSidebarOpen(false); }}
+            >
+              🍞 Breadcrumbs
+            </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'carousel' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('carousel'); setIsSidebarOpen(false); }}
+            >
+              🎠 Carousel
+            </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'toast' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('toast'); setIsSidebarOpen(false); }}
+            >
+              🍞 Toast
+            </button>
           </div>
         </div>
       </aside>
@@ -2189,6 +2239,12 @@ export default function App() {
                 {activeComponent === 'sidebar' && '🚪 Rich Sidebar Component'}
                 {activeComponent === 'typography' && '🔤 Typography Helpers'}
                 {activeComponent === 'charts' && '📊 Charts'}
+                {activeComponent === 'skeleton' && '💀 Skeleton'}
+                {activeComponent === 'alert' && '⚠️ Alert'}
+                {activeComponent === 'avatar' && '👤 Avatar'}
+                {activeComponent === 'breadcrumb' && '🍞 Breadcrumbs'}
+                {activeComponent === 'carousel' && '🎠 Carousel'}
+                {activeComponent === 'toast' && '🍞 Toast'}
               </h1>
               <div className="header-subtitle" style={{ fontSize: '0.85rem' }}>
                 {activeComponent === 'button' && 'Configure and preview cozy interactive buttons.'}
@@ -2216,6 +2272,12 @@ export default function App() {
                 {activeComponent === 'sidebar' && 'BEM-styled compound sidebar with fixed/floated modes, collapse state, and expand-on-hover overlay.'}
                 {activeComponent === 'typography' && 'BEM-styled font scales, weights, colors, and beautiful gradient headers.'}
                 {activeComponent === 'charts' && 'Beautiful data visualizations fully themed with the Catppuccin flavor palette.'}
+                {activeComponent === 'skeleton' && 'Animated loading placeholders for improved perceived performance.'}
+                {activeComponent === 'alert' && 'Contextual banner alerts for success, error, warning, and info.'}
+                {activeComponent === 'avatar' && 'User profile images with fallback initials and stacked groups.'}
+                {activeComponent === 'breadcrumb' && 'Structural navigation for deep page hierarchies.'}
+                {activeComponent === 'carousel' && 'Horizontal slider for images, cards, or testimonials.'}
+                {activeComponent === 'toast' && 'Temporary notification popups for feedback and actions.'}
 
               </div>
             </div>
@@ -8508,6 +8570,249 @@ export default function App() {
                 </div>
               </div>
             </div>
+          </section>
+        </>
+      )}
+      {activeComponent === 'skeleton' && (
+        <>
+          <section>
+            <h2 className="section-title"><span>💀</span> Skeleton Playground</h2>
+            <div className="playground-section">
+              <div className="playground-card">
+                <h3>Preview</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', background: 'var(--ctp-mantle)', borderRadius: '12px' }}>
+                  <Skeleton variant="text" size="lg" width="60%" />
+                  <Skeleton variant="text" size="md" width="80%" />
+                  <Skeleton variant="text" size="sm" width="40%" />
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '8px' }}>
+                    <Skeleton variant="circle" size="xl" />
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <Skeleton variant="text" size="md" width="50%" />
+                      <Skeleton variant="text" size="sm" width="70%" />
+                    </div>
+                  </div>
+                  <Skeleton variant="rect" size="xl" />
+                  <Skeleton count={3} gap="8px" variant="text" size="sm" />
+                </div>
+              </div>
+            </div>
+            <div style={{ padding: '16px', background: 'var(--ctp-crust)', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', marginTop: '16px' }}>
+              Variants: <code>text</code>, <code>circle</code>, <code>rect</code>. Sizes: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>. 
+              Use <code>count</code> for repeated skeletons, <code>animated=false</code> to disable shimmer.
+            </div>
+          </section>
+        </>
+      )}
+      {activeComponent === 'alert' && (
+        <>
+          <section>
+            <h2 className="section-title"><span>⚠️</span> Alert Playground</h2>
+            <div className="playground-section">
+              <div className="playground-card">
+                <h3>Variants</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <Alert variant="info" title="Information">This is an informational alert.</Alert>
+                  <Alert variant="success" title="Success">Operation completed successfully.</Alert>
+                  <Alert variant="warning" title="Warning">Please review before proceeding.</Alert>
+                  <Alert variant="error" title="Error">Something went wrong.</Alert>
+                </div>
+              </div>
+              <div className="playground-card" style={{ marginTop: '16px' }}>
+                <h3>Dismissible</h3>
+                <Alert variant="info" title="Dismiss me" dismissible>Click the X to dismiss this alert.</Alert>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+      {activeComponent === 'avatar' && (
+        <>
+          <section>
+            <h2 className="section-title"><span>👤</span> Avatar Playground</h2>
+            <div className="playground-section">
+              <div className="playground-card">
+                <h3>Individual Avatars</h3>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <Avatar src="https://i.pravatar.cc/64?img=1" size="sm" />
+                  <Avatar src="https://i.pravatar.cc/64?img=2" size="md" />
+                  <Avatar src="https://i.pravatar.cc/64?img=3" size="lg" />
+                  <Avatar src="https://i.pravatar.cc/64?img=4" size="xl" />
+                  <Avatar fallback="John Doe" size="md" />
+                  <Avatar fallback="A" size="md" />
+                </div>
+              </div>
+              <div className="playground-card" style={{ marginTop: '16px' }}>
+                <h3>Avatar Group</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+                  <AvatarGroup max={4}>
+                    <Avatar src="https://i.pravatar.cc/64?img=5" />
+                    <Avatar src="https://i.pravatar.cc/64?img=6" />
+                    <Avatar src="https://i.pravatar.cc/64?img=7" />
+                    <Avatar src="https://i.pravatar.cc/64?img=8" />
+                    <Avatar src="https://i.pravatar.cc/64?img=9" />
+                  </AvatarGroup>
+                  <AvatarGroup size="lg" max={3}>
+                    <Avatar fallback="Alice" />
+                    <Avatar fallback="Bob" />
+                    <Avatar fallback="Charlie" />
+                    <Avatar fallback="Diana" />
+                    <Avatar fallback="Eve" />
+                  </AvatarGroup>
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+      {activeComponent === 'breadcrumb' && (
+        <>
+          <section>
+            <h2 className="section-title"><span>🍞</span> Breadcrumb Playground</h2>
+            <div className="playground-section">
+              <div className="playground-card">
+                <h3>Examples</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '20px', background: 'var(--ctp-mantle)', borderRadius: '12px' }}>
+                  <Breadcrumb items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Documentation', href: '/docs' },
+                    { label: 'Components' },
+                  ]} />
+                  <Breadcrumb items={[
+                    { label: '🐱 Catppuccin', href: '/' },
+                    { label: 'Design System', href: '/ds' },
+                    { label: 'React' },
+                  ]} />
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+      {activeComponent === 'carousel' && (
+        <>
+          <section>
+            <h2 className="section-title"><span>🎠</span> Carousel Playground</h2>
+            <div className="playground-section">
+              <div className="playground-card">
+                <h3>Auto-play Carousel</h3>
+                <Carousel autoPlay autoPlayInterval={3000}>
+                  {[
+                    { color: 'var(--ctp-mauve)', label: 'Mauve' },
+                    { color: 'var(--ctp-blue)', label: 'Blue' },
+                    { color: 'var(--ctp-green)', label: 'Green' },
+                    { color: 'var(--ctp-peach)', label: 'Peach' },
+                  ].map((slide, i) => (
+                    <div key={i} style={{
+                      height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      background: slide.color, borderRadius: 12, fontSize: '1.5rem', fontWeight: 700,
+                      color: 'var(--ctp-base)'
+                    }}>
+                      {slide.label}
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
+            </div>
+            <div style={{ padding: '16px', background: 'var(--ctp-crust)', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', marginTop: '16px' }}>
+              Props: <code>showArrows</code>, <code>showDots</code>, <code>autoPlay</code>, <code>autoPlayInterval</code>.
+              Navigation via keyboard, swipe, or dots.
+            </div>
+          </section>
+        </>
+      )}
+      {activeComponent === 'toast' && (
+        <>
+          <section>
+            <h2 className="section-title"><span>🍞</span> Toast / Snackbar Playground</h2>
+            <div className="playground-section">
+              <div className="playground-card">
+                <h3>Position</h3>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {(['top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'] as const).map(p => (
+                    <button key={p} className={`ctp-btn ctp-btn--sm ${toastPosition === p ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastPosition(p)}>
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="playground-card">
+                <h3>Mode</h3>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                  <button className={`ctp-btn ctp-btn--sm ${!toastFilled ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastFilled(false)}>
+                    Accent (borda)
+                  </button>
+                  <button className={`ctp-btn ctp-btn--sm ${toastFilled ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastFilled(true)}>
+                    Filled (fundo)
+                  </button>
+                </div>
+              </div>
+              <div className="playground-card">
+                <h3>Color Override</h3>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+                  <button
+                    className={`ctp-btn ctp-btn--sm ${!toastColor ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`}
+                    onClick={() => setToastColor('')}
+                  >
+                    Default (via variant)
+                  </button>
+                  {colors.map(c => (
+                    <button
+                      key={c.name}
+                      title={c.name}
+                      onClick={() => setToastColor(c.name.toLowerCase())}
+                      style={{
+                        width: 32, height: 32, borderRadius: 8, border: toastColor === c.name.toLowerCase() ? '3px solid var(--ctp-text)' : '2px solid transparent',
+                        background: `var(${c.variable})`, cursor: 'pointer', outline: 'none',
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="playground-card">
+                <h3>Custom CSS Class</h3>
+                <input
+                  type="text"
+                  placeholder="e.g. my-toast-class"
+                  value={toastCustomClass}
+                  onChange={e => setToastCustomClass(e.target.value)}
+                  style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid var(--ctp-surface0)', background: 'var(--ctp-mantle)', color: 'var(--ctp-text)', width: '100%', maxWidth: 300 }}
+                />
+              </div>
+              <div className="playground-card">
+                <h3>Trigger Toasts</h3>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <button className="ctp-btn" onClick={() => toast({
+                    title: 'Saved', description: 'Your changes have been saved.', variant: 'info',
+                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                    className: toastCustomClass || undefined,
+                  })}>
+                    Info Toast
+                  </button>
+                  <button className="ctp-btn" onClick={() => toast({
+                    title: 'Success!', description: 'Operation completed.', variant: 'success',
+                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                    className: toastCustomClass || undefined,
+                  })}>
+                    Success Toast
+                  </button>
+                  <button className="ctp-btn" onClick={() => toast({
+                    title: 'Warning', description: 'Please check your input.', variant: 'warning',
+                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                    className: toastCustomClass || undefined,
+                  })}>
+                    Warning Toast
+                  </button>
+                  <button className="ctp-btn" onClick={() => toast({
+                    title: 'Error', description: 'Something went wrong.', variant: 'error',
+                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                    className: toastCustomClass || undefined,
+                  })}>
+                    Error Toast
+                  </button>
+                </div>
+              </div>
+            </div>
+            <Toaster position={toastPosition} />
           </section>
         </>
       )}

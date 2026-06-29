@@ -1,0 +1,89 @@
+.ctp-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--ctp-surface0);
+  color: var(--ctp-text);
+  font-weight: 600;
+  font-family: var(--ctp-font-family);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.ctp-avatar--sm {
+  width: 28px;
+  height: 28px;
+  font-size: 0.7rem;
+}
+
+.ctp-avatar--md {
+  width: 36px;
+  height: 36px;
+  font-size: 0.85rem;
+}
+
+.ctp-avatar--lg {
+  width: 48px;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+.ctp-avatar--xl {
+  width: 64px;
+  height: 64px;
+  font-size: 1.4rem;
+}
+
+.ctp-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ctp-avatar__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ctp-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ctp-avatar-group .ctp-avatar {
+  border: 2px solid var(--ctp-base);
+}
+
+.ctp-avatar-group .ctp-avatar:not(:first-child) {
+  margin-left: -8px;
+}
+
+.ctp-avatar-group--sm .ctp-avatar:not(:first-child) {
+  margin-left: -6px;
+}
+
+.ctp-avatar-group--lg .ctp-avatar:not(:first-child) {
+  margin-left: -10px;
+}
+
+.ctp-avatar-group__more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--ctp-surface0);
+  color: var(--ctp-subtext0);
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: var(--ctp-font-family);
+  border: 2px solid var(--ctp-base);
+  margin-left: -8px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}

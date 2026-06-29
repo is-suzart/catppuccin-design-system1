@@ -47,6 +47,17 @@ import DatePicker from './DatePicker.vue';
 import TextEditor from './TextEditor.vue';
 import MultiSelect from './MultiSelect.vue';
 import DynamicForm from './DynamicForm.vue';
+import Toast from './Toast.vue';
+import Skeleton from './Skeleton.vue';
+import Alert from './Alert.vue';
+import Avatar from './Avatar.vue';
+import AvatarGroup from './AvatarGroup.vue';
+import Breadcrumb from './Breadcrumb.vue';
+import Popover from './Popover.vue';
+import HoverCard from './HoverCard.vue';
+import Command from './Command.vue';
+import Carousel from './Carousel.vue';
+import ScrollArea from './ScrollArea.vue';
 
 export {
   Button, Overlay, Modal, Steps, StepsSlider, Stepper,
@@ -61,5 +72,12 @@ export {
   Sidebar, SidebarHeader, SidebarSection, SidebarItem,
   DatePicker,
   TextEditor, MultiSelect, DynamicForm,
+  Toast, Skeleton, Alert,
+  Avatar, AvatarGroup, Breadcrumb,
+  Popover, HoverCard,
+  Command, Carousel, ScrollArea,
 };
+
+export { toast } from './toast';
+export type { ToastVariant, ToastPosition, ToastOptions, ToastItem } from './toast';
 
