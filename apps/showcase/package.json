@@ -11,8 +11,10 @@
   "dependencies": {
     "@catppuccin-ds/css": "file:../../packages/css",
     "@catppuccin-ds/react": "file:../../packages/react",
+    "@catppuccin-ds/react-pro": "file:../../packages/react-pro",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.4",
     "recharts": "^3.8.1"
   },
   "devDependencies": {

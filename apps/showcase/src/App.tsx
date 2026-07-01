@@ -158,6 +158,14 @@ import {
 } from '@catppuccin-ds/react';
 
 import {
+  DragDropProvider,
+  ReorderableTabs,
+  ReorderableTable,
+} from '@catppuccin-ds/react-pro';
+import type { ReorderableColumn } from '@catppuccin-ds/react-pro';
+import '@catppuccin-ds/react-pro/src/pro.css';
+
+import {
   Employee,
   fetchDataFromServer,
   addEmployee,
@@ -504,7 +512,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   
   // Navigation: buttons, buttongroup, stepper, modal, tabs, form, steps, progress, drawer, select, colorpicker, table, card, icons
-  const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar' | 'skeleton' | 'alert' | 'avatar' | 'breadcrumb' | 'carousel' | 'toast'>('button');
+  const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar' | 'skeleton' | 'alert' | 'avatar' | 'breadcrumb' | 'carousel' | 'toast' | 'pro'>('button');
 
   // --- TEXT EDITOR PLAYGROUND STATES ---
   const [editorColor, setEditorColor] = useState<TextEditorColor>('mauve');
@@ -584,6 +592,28 @@ export default function App() {
   const [showColumnDropdown, setShowColumnDropdown] = useState(false);
   const [tableColor, setTableColor] = useState<FormControlColor>('mauve');
   const [tableSize, setTableSize] = useState<FormControlSize>('md');
+
+  // Pro table demo state
+  const demoEmployees: Employee[] = [
+    { id: '1', name: 'Alice Silva', email: 'alice@example.com', role: 'Designer', department: 'Design', status: 'Active', salary: 8000, joinedDate: '2023-01-15' },
+    { id: '2', name: 'Bruno Costa', email: 'bruno@example.com', role: 'Developer', department: 'Engineering', status: 'Active', salary: 12000, joinedDate: '2022-06-01' },
+    { id: '3', name: 'Carla Souza', email: 'carla@example.com', role: 'PM', department: 'Product', status: 'Inactive', salary: 15000, joinedDate: '2021-03-10' },
+    { id: '4', name: 'Daniel Oliveira', email: 'daniel@example.com', role: 'Developer', department: 'Engineering', status: 'Pending', salary: 9000, joinedDate: '2024-09-20' },
+    { id: '5', name: 'Eduarda Lima', email: 'eduarda@example.com', role: 'Designer', department: 'Design', status: 'Active', salary: 9500, joinedDate: '2023-11-05' },
+  ];
+  const [proTableData, setProTableData] = useState<Employee[]>(demoEmployees);
+  const [proTableColumns, setProTableColumns] = useState<ReorderableColumn<Employee>[]>([
+    { key: 'name', header: 'Nome', sortable: true },
+    { key: 'email', header: 'E-mail' },
+    { key: 'role', header: 'Cargo', sortable: true },
+    { key: 'department', header: 'Depto' },
+    { key: 'status', header: 'Status', sortable: true },
+    { key: 'salary', header: 'Salário', sortable: true, align: 'right' },
+  ]);
+  const [proTableColumnWidths, setProTableColumnWidths] = useState<Record<string, number>>({});
+  const [proSortField, setProSortField] = useState('');
+  const [proSortOrder, setProSortOrder] = useState<'asc' | 'desc' | ''>('');
+  const [proSelectedIds, setProSelectedIds] = useState<(string | number)[]>([]);
 
   // Add row form states
   const [newEmpName, setNewEmpName] = useState('');
@@ -2188,6 +2218,18 @@ export default function App() {
             </button>
           </div>
         </div>
+
+        <div className="sidebar-nav-group">
+          <div className="sidebar-group-title">Pro Features</div>
+          <div className="sidebar-nav-list">
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'pro' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('pro'); setIsSidebarOpen(false); }}
+            >
+              ⚡ Reorderable Tabs
+            </button>
+          </div>
+        </div>
       </aside>
 
       {/* Main Panel Layout */}
@@ -3280,6 +3322,156 @@ export default function App() {
               <div>
                 <pre className="code-block" style={{ fontSize: '0.8rem' }}>
                   <code>{`// React compound Tabs usage\n<Tabs value="${tabsActiveVal}" variant="${tabsVariant}" color="${tabsColor}" size="${tabsSize}" orientation="${tabsOrientation}">\n  <TabsList>\n    <TabsTrigger value="general">⚙️ General</TabsTrigger>\n    <TabsTrigger value="themes">🎨 Themes</TabsTrigger>\n    <TabsTrigger value="advanced">🚀 Advanced</TabsTrigger>\n  </TabsList>\n  <TabsContent value="general">...</TabsContent>\n</Tabs>`}</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* PRO FEATURES */}
+      {activeComponent === 'pro' && (
+        <section>
+          <h2 className="section-title">
+            <span>⚡</span> Pro: Reorderable Tabs & Table
+          </h2>
+
+          <div className="playground-section">
+            <div className="playground-card playground-card--preview">
+              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>
+                Drag to reorder tabs
+              </h3>
+
+              <div className="preview-canvas" style={{ padding: '2rem', minHeight: '260px', alignItems: 'stretch', justifyContent: 'stretch' }}>
+                <DragDropProvider apiKey="dev">
+                  <ReorderableTabs
+                    defaultValue="projects"
+                    color="mauve"
+                    variant="pills"
+                    onOrderChange={(newOrder) => console.log('New tab order:', newOrder)}
+                  >
+                    <ReorderableTabs.List>
+                      <ReorderableTabs.Trigger value="projects">
+                        📁 Projects
+                      </ReorderableTabs.Trigger>
+                      <ReorderableTabs.Trigger value="settings">
+                        ⚙️ Settings
+                      </ReorderableTabs.Trigger>
+                      <ReorderableTabs.Trigger value="activity">
+                        📊 Activity
+                      </ReorderableTabs.Trigger>
+                      <ReorderableTabs.Trigger value="team">
+                        👥 Team
+                      </ReorderableTabs.Trigger>
+                    </ReorderableTabs.List>
+
+                    <div style={{
+                      padding: '1.2rem',
+                      flexGrow: 1,
+                      backgroundColor: 'var(--ctp-mantle)',
+                      borderRadius: '12px',
+                      border: '1px solid var(--ctp-surface0)',
+                      minHeight: '120px'
+                    }}>
+                      <ReorderableTabs.Content value="projects">
+                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Projects</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Drag the tab handles to reorder your workspace projects.
+                        </p>
+                      </ReorderableTabs.Content>
+                      <ReorderableTabs.Content value="settings">
+                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Settings</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Pro feature: reorder tabs by dragging them.
+                        </p>
+                      </ReorderableTabs.Content>
+                      <ReorderableTabs.Content value="activity">
+                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Activity</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Monitor recent activity across your projects.
+                        </p>
+                      </ReorderableTabs.Content>
+                      <ReorderableTabs.Content value="team">
+                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Team</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Manage team members and permissions.
+                        </p>
+                      </ReorderableTabs.Content>
+                    </div>
+                  </ReorderableTabs>
+                </DragDropProvider>
+              </div>
+
+              <div>
+                <pre className="code-block" style={{ fontSize: '0.8rem' }}>
+                  <code>{`// Pro: draggable reorderable tabs
+import { DragDropProvider, ReorderableTabs } from '@catppuccin-ds/react-pro';
+
+<DragDropProvider apiKey="sk_live_your_key">
+  <ReorderableTabs defaultValue="projects" color="mauve" variant="pills">
+    <ReorderableTabs.List>
+      <ReorderableTabs.Trigger value="projects">📁 Projects</ReorderableTabs.Trigger>
+      <ReorderableTabs.Trigger value="settings">⚙️ Settings</ReorderableTabs.Trigger>
+    </ReorderableTabs.List>
+    <ReorderableTabs.Content value="projects">...</ReorderableTabs.Content>
+    <ReorderableTabs.Content value="settings">...</ReorderableTabs.Content>
+  </ReorderableTabs>
+</DragDropProvider>`}</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <hr style={{ margin: '2.5rem 0', border: 'none', borderTop: '1px solid var(--ctp-surface1)' }} />
+
+          <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>
+            Reorderable Table (column reorder, row reorder, column resize)
+          </h3>
+
+          <div className="playground-section">
+            <div className="playground-card playground-card--preview">
+              <div className="preview-canvas" style={{ padding: '1.5rem', minHeight: '320px', alignItems: 'stretch', justifyContent: 'stretch' }}>
+                <DragDropProvider apiKey="dev">
+                  <ReorderableTable<Employee>
+                    data={proTableData}
+                    columns={proTableColumns}
+                    rowKey={(r) => r.id}
+                    onRowOrderChange={(newData) => setProTableData(newData)}
+                    onColumnOrderChange={(newCols) => setProTableColumns(newCols)}
+                    onColumnResize={(key, w) => setProTableColumnWidths((prev) => ({ ...prev, [key]: w }))}
+                    columnWidths={proTableColumnWidths}
+                    sortField={proSortField}
+                    sortOrder={proSortOrder}
+                    onSort={(field, order) => { setProSortField(field); setProSortOrder(order); }}
+                    selectedRowIds={proSelectedIds}
+                    onSelectionChange={setProSelectedIds}
+                    size="md"
+                    color="mauve"
+                  />
+                </DragDropProvider>
+              </div>
+
+              <div>
+                <pre className="code-block" style={{ fontSize: '0.8rem' }}>
+                  <code>{`// Pro: draggable reorderable table
+import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
+
+<DragDropProvider apiKey="sk_live_your_key">
+  <ReorderableTable
+    data={data}
+    columns={columns}
+    rowKey={(r) => r.id}
+    onRowOrderChange={(newData) => setData(newData)}
+    onColumnOrderChange={(newCols) => setColumns(newCols)}
+    onColumnResize={(key, w) => setWidths(prev => ({...prev, [key]: w}))}
+    columnWidths={widths}
+    sortField={sortField}
+    sortOrder={sortOrder}
+    onSort={(field, order) => setSort(field, order)}
+    selectedRowIds={selectedIds}
+    onSelectionChange={setSelectedIds}
+  />
+</DragDropProvider>`}</code>
                 </pre>
               </div>
             </div>
