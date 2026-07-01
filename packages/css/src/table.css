@@ -48,6 +48,7 @@
 /* The Table Element */
 .ctp-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
   text-align: left;
   border-spacing: 0;
@@ -87,6 +88,7 @@
   border-bottom: 1px solid var(--ctp-surface1);
   user-select: none;
   white-space: nowrap;
+  box-sizing: border-box;
   transition: var(--ctp-transition);
 }
 
@@ -140,7 +142,10 @@
   border-bottom: 1px solid var(--ctp-surface0);
   color: var(--ctp-text);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   vertical-align: middle;
+  box-sizing: border-box;
   transition: var(--ctp-transition);
 }
 
