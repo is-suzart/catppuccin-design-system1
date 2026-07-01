@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FormControlSize, FormControlShape, FormControlColor } from './FormControls';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface Column<T> {
   key: string;
@@ -63,6 +65,7 @@ export function Table<T>({
   emptyState = 'Nenhum registro encontrado.',
   className = '',
 }: TableProps<T>) {
+  const prefix = usePrefix();
   
   // Inline edit state
   const [editingCell, setEditingCell] = useState<EditingCell | null>(null);
@@ -158,9 +161,9 @@ export function Table<T>({
 
   // CSS structure builder
   const containerClasses = [
-    'ctp-table-container',
-    `ctp-table--${size}`,
-    `ctp-table--${color}`,
+    cn(prefix, 'table-container'),
+    `${prefix}-table--${size}`,
+    `${prefix}-table--${color}`,
     className,
   ]
     .filter(Boolean)
@@ -170,14 +173,14 @@ export function Table<T>({
 
   return (
     <div className={containerClasses}>
-      <table className="ctp-table">
+      <table className={cn(prefix, 'table')}>
         <thead>
           <tr>
             {showCheckbox && (
               <th style={{ width: '40px', textAlign: 'center' }}>
                 <input
                   type="checkbox"
-                  className="ctp-table-checkbox"
+                          className={cnEl(prefix, 'table', 'checkbox')}
                   checked={areAllRowsSelected()}
                   ref={el => {
                     if (el) {
@@ -193,10 +196,10 @@ export function Table<T>({
             {columns.map(col => {
               const isSortedThis = sortField === col.key;
               const thClasses = [
-                col.sortable ? 'ctp-table-th--sortable' : '',
-                isSortedThis ? 'ctp-table-th--active' : '',
-                col.align ? `ctp-table-cell--align-${col.align}` : 'ctp-table-cell--align-left',
-                `ctp-table-th--key-${col.key}`
+                col.sortable ? `${prefix}-table-th--sortable` : '',
+                isSortedThis ? `${prefix}-table-th--active` : '',
+                col.align ? `${prefix}-table-cell--align-${col.align}` : `${prefix}-table-cell--align-left`,
+                `${prefix}-table-th--key-${col.key}`
               ]
                 .filter(Boolean)
                 .join(' ');
@@ -208,10 +211,10 @@ export function Table<T>({
                   onClick={() => handleHeaderClick(col)}
                   style={{ cursor: col.sortable ? 'pointer' : 'default' }}
                 >
-                  <div className="ctp-table-th-content">
+                  <div className={cnEl(prefix, 'table', 'th-content')}>
                     {col.header}
                     {col.sortable && (
-                      <span className={`ctp-table-sort-icon ${isSortedThis ? 'ctp-table-sort-icon--active' : ''}`}>
+                      <span className={`${cnEl(prefix, 'table', 'sort-icon')} ${isSortedThis ? `${prefix}-table-sort-icon--active` : ''}`}>
                         {isSortedThis && sortOrder === 'asc' && (
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="18 15 12 9 6 15" />
@@ -240,9 +243,9 @@ export function Table<T>({
             // Skeleton loaders
             Array.from({ length: loadingRowsCount }).map((_, rIdx) => {
               const trClasses = [
-                'ctp-table-skeleton-row',
-                rIdx === 0 ? 'ctp-table-tr--first' : '',
-                rIdx === loadingRowsCount - 1 ? 'ctp-table-tr--last' : '',
+                cnEl(prefix, 'table', 'skeleton-row'),
+                rIdx === 0 ? `${prefix}-table-tr--first` : '',
+                rIdx === loadingRowsCount - 1 ? `${prefix}-table-tr--last` : '',
               ]
                 .filter(Boolean)
                 .join(' ');
@@ -250,21 +253,21 @@ export function Table<T>({
               return (
                 <React.Fragment key={`skeleton-row-${rIdx}`}>
                   {rIdx === 0 && (
-                    <tr className="ctp-table-header-spacer">
+                    <tr className={cnEl(prefix, 'table', 'header-spacer')}>
                       <td colSpan={columns.length + (showCheckbox ? 1 : 0)}>
-                        <div className="ctp-table-header-spacer-inner" />
+                        <div className={cnEl(prefix, 'table', 'header-spacer-inner')} />
                       </td>
                     </tr>
                   )}
                   <tr className={trClasses}>
                     {showCheckbox && (
                       <td style={{ textAlign: 'center' }}>
-                        <div className="ctp-table-skeleton-bar" style={{ width: '16px', margin: '0 auto' }}></div>
+                        <div className={cnEl(prefix, 'table', 'skeleton-bar')} style={{ width: '16px', margin: '0 auto' }}></div>
                       </td>
                     )}
                     {columns.map(col => (
-                      <td key={`skeleton-cell-${col.key}`} className={col.align ? `ctp-table-cell--align-${col.align}` : ''}>
-                        <div className="ctp-table-skeleton-bar" style={{ width: col.align === 'right' ? '70%' : col.align === 'center' ? '50%' : '85%', marginLeft: col.align === 'right' ? 'auto' : col.align === 'center' ? 'auto' : '0', marginRight: col.align === 'center' ? 'auto' : '0' }}></div>
+                      <td key={`skeleton-cell-${col.key}`} className={col.align ? `${prefix}-table-cell--align-${col.align}` : ''}>
+                        <div className={cnEl(prefix, 'table', 'skeleton-bar')} style={{ width: col.align === 'right' ? '70%' : col.align === 'center' ? '50%' : '85%', marginLeft: col.align === 'right' ? 'auto' : col.align === 'center' ? 'auto' : '0', marginRight: col.align === 'center' ? 'auto' : '0' }}></div>
                       </td>
                     ))}
                   </tr>
@@ -274,7 +277,7 @@ export function Table<T>({
           ) : data.length === 0 ? (
             // Empty State
             <tr>
-              <td colSpan={columns.length + (showCheckbox ? 1 : 0)} className="ctp-table-cell--align-center" style={{ padding: '2.5rem 1.5rem', color: 'var(--ctp-overlay1)' }}>
+              <td colSpan={columns.length + (showCheckbox ? 1 : 0)} className={`${prefix}-table-cell--align-center`} style={{ padding: '2.5rem 1.5rem', color: 'var(--ctp-overlay1)' }}>
                 {emptyState}
               </td>
             </tr>
@@ -285,9 +288,9 @@ export function Table<T>({
               const isSelected = isRowSelected(rId);
               
               const trClasses = [
-                isSelected ? 'ctp-table-tr--selected' : '',
-                rowIndex === 0 ? 'ctp-table-tr--first' : '',
-                rowIndex === data.length - 1 ? 'ctp-table-tr--last' : '',
+                isSelected ? `${prefix}-table-tr--selected` : '',
+                rowIndex === 0 ? `${prefix}-table-tr--first` : '',
+                rowIndex === data.length - 1 ? `${prefix}-table-tr--last` : '',
               ]
                 .filter(Boolean)
                 .join(' ');
@@ -295,9 +298,9 @@ export function Table<T>({
               return (
                 <React.Fragment key={rId}>
                   {rowIndex === 0 && (
-                    <tr className="ctp-table-header-spacer">
+                    <tr className={cnEl(prefix, 'table', 'header-spacer')}>
                       <td colSpan={columns.length + (showCheckbox ? 1 : 0)}>
-                        <div className="ctp-table-header-spacer-inner" />
+                        <div className={cnEl(prefix, 'table', 'header-spacer-inner')} />
                       </td>
                     </tr>
                   )}
@@ -306,7 +309,7 @@ export function Table<T>({
                       <td style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
-                          className="ctp-table-checkbox"
+                  className={cnEl(prefix, 'table', 'checkbox')}
                           checked={isSelected}
                           onChange={(e) => handleSelectRow(rId, e.target.checked)}
                           aria-label={`Selecionar linha ${rId}`}
@@ -317,12 +320,12 @@ export function Table<T>({
                       const rawValue = (row as any)[col.key];
                       const isEditingThisCell = editingCell && editingCell.rowId === rId && editingCell.columnKey === col.key;
                       
-                      const cellAlignClass = col.align ? `ctp-table-cell--align-${col.align}` : 'ctp-table-cell--align-left';
+                      const cellAlignClass = col.align ? `${prefix}-table-cell--align-${col.align}` : `${prefix}-table-cell--align-left`;
 
                       return (
                         <td
                           key={col.key}
-                          className={`${cellAlignClass} ctp-table-cell--key-${col.key}`}
+                          className={`${cellAlignClass} ${prefix}-table-cell--key-${col.key}`}
                           onDoubleClick={() => handleCellDoubleClick(rId, col, rawValue)}
                           title={col.editable ? 'Clique duas vezes para editar' : undefined}
                         >
@@ -330,7 +333,7 @@ export function Table<T>({
                             <input
                               ref={editInputRef}
                               type="text"
-                              className="ctp-table-inline-edit"
+                              className={cnEl(prefix, 'table', 'inline-edit')}
                               value={editingCell.value}
                               onChange={(e) => setEditingCell({ ...editingCell, value: e.target.value })}
                               onBlur={handleInlineEditSave}

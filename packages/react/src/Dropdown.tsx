@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, ReactNode, createContext, useContex
 import ReactDOM from 'react-dom';
 import { usePortalPosition, Placement } from './usePortalPosition';
 import { ButtonColor } from './Button';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 interface DropdownContextType {
   isOpen: boolean;
@@ -41,6 +43,7 @@ export const Dropdown: React.FC<DropdownProps> & {
   autoFlip = true,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
   const isControlled = controlledIsOpen !== undefined;
   const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen;
@@ -113,7 +116,7 @@ export const Dropdown: React.FC<DropdownProps> & {
         ReactDOM.createPortal(
           <div
             ref={floatingRef}
-            className={`ctp-dropdown-menu ctp-dropdown-menu--${actualPlacement} ${className}`}
+            className={`${cn(prefix, 'dropdown-menu')} ${prefix}-dropdown-menu--${actualPlacement} ${className}`}
             style={{
               position: 'fixed',
               top: `${top}px`,
@@ -151,6 +154,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
   danger = false,
 }) => {
   const context = useContext(DropdownContext);
+  const prefix = usePrefix();
   const color = context?.color || 'mauve';
 
   const handleClick = (e: React.MouseEvent) => {
@@ -161,14 +165,10 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
     }
   };
 
-  const itemClass = [
-    'ctp-dropdown-item',
-    danger ? 'ctp-dropdown-item--danger' : `ctp-dropdown-item--${color}`,
-    disabled ? 'ctp-dropdown-item--disabled' : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const itemClass = cn(prefix, 'dropdown-item', [
+    danger ? 'danger' : color,
+    disabled ? 'disabled' : undefined,
+  ]) + (className ? ` ${className}` : '');
 
   return (
     <button
@@ -178,8 +178,8 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
       disabled={disabled}
       role="menuitem"
     >
-      {icon && <span className="ctp-dropdown-item__icon">{icon}</span>}
-      <span className="ctp-dropdown-item__content">{children}</span>
+      {icon && <span className={cnEl(prefix, 'dropdown-item', 'icon')}>{icon}</span>}
+      <span className={cnEl(prefix, 'dropdown-item', 'content')}>{children}</span>
     </button>
   );
 };
@@ -192,7 +192,8 @@ export interface DropdownDividerProps {
 }
 
 const DropdownDivider: React.FC<DropdownDividerProps> = ({ className = '' }) => {
-  return <div className={`ctp-dropdown-divider ${className}`} role="separator" />;
+  const prefix = usePrefix();
+  return <div className={`${cnEl(prefix, 'dropdown', 'divider')} ${className}`} role="separator" />;
 };
 
 // ==========================================
@@ -204,7 +205,8 @@ export interface DropdownHeaderProps {
 }
 
 const DropdownHeader: React.FC<DropdownHeaderProps> = ({ children, className = '' }) => {
-  return <div className={`ctp-dropdown-header ${className}`}>{children}</div>;
+  const prefix = usePrefix();
+  return <div className={`${cnEl(prefix, 'dropdown', 'header')} ${className}`}>{children}</div>;
 };
 
 Dropdown.Item = DropdownItem;

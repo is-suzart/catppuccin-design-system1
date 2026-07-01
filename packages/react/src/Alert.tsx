@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'error';
 
@@ -57,6 +59,7 @@ export const Alert: React.FC<AlertProps> = ({
   icon,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) return null;
@@ -66,18 +69,20 @@ export const Alert: React.FC<AlertProps> = ({
     onDismiss?.();
   };
 
+  const alertModifiers = dismissible ? [variant, 'dismissible'] : [variant];
+
   return (
     <div
-      className={`ctp-alert ctp-alert--${variant}${dismissible ? ' ctp-alert--dismissible' : ''} ${className}`}
+      className={`${cn(prefix, 'alert', alertModifiers)} ${className}`}
       role="alert"
     >
-      <div className="ctp-alert__icon">{icon ?? getDefaultIcon(variant)}</div>
-      <div className="ctp-alert__content">
-        {title && <div className="ctp-alert__title">{title}</div>}
-        {children && <div className="ctp-alert__description">{children}</div>}
+      <div className={cnEl(prefix, 'alert', 'icon')}>{icon ?? getDefaultIcon(variant)}</div>
+      <div className={cnEl(prefix, 'alert', 'content')}>
+        {title && <div className={cnEl(prefix, 'alert', 'title')}>{title}</div>}
+        {children && <div className={cnEl(prefix, 'alert', 'description')}>{children}</div>}
       </div>
       {dismissible && (
-        <button className="ctp-alert__close" onClick={handleDismiss} aria-label="Dismiss">
+        <button className={cnEl(prefix, 'alert', 'close')} onClick={handleDismiss} aria-label="Dismiss">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />

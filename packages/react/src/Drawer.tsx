@@ -1,6 +1,8 @@
 import React from 'react';
 import { Overlay } from './Overlay';
 import { FormControlColor } from './FormControls';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
 export type DrawerSize = 'sm' | 'md' | 'lg' | 'full';
@@ -34,17 +36,15 @@ export const Drawer: React.FC<DrawerProps> = ({
   showCloseButton = true,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const hasHeader = title || showCloseButton;
 
   // Alignments on parent portal wrapper
-  const overlayClass = `ctp-overlay--drawer-${position}`;
+  const overlayClass = `${prefix}-overlay--drawer-${position}`;
 
   // Classes on the drawer box itself
   const drawerClasses = [
-    'ctp-drawer',
-    `ctp-drawer--${position}`,
-    `ctp-drawer--${size}`,
-    `ctp-drawer--${color}`,
+    cn(prefix, 'drawer', [position, size, color]),
     className,
   ]
     .filter(Boolean)
@@ -62,16 +62,16 @@ export const Drawer: React.FC<DrawerProps> = ({
         className={drawerClasses}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title && typeof title === 'string' ? 'ctp-drawer-title' : undefined}
+        aria-labelledby={title && typeof title === 'string' ? `${prefix}-drawer-title` : undefined}
       >
         {hasHeader && (
-          <div className="ctp-drawer__header">
-            <div className="ctp-drawer__title" id="ctp-drawer-title">
+          <div className={cnEl(prefix, 'drawer', 'header')}>
+            <div className={cnEl(prefix, 'drawer', 'title')} id={`${prefix}-drawer-title`}>
               {title}
             </div>
             {showCloseButton && (
               <button
-                className="ctp-drawer__close-btn"
+                className={cnEl(prefix, 'drawer', 'close-btn')}
                 onClick={onClose}
                 aria-label="Close drawer"
               >
@@ -92,8 +92,8 @@ export const Drawer: React.FC<DrawerProps> = ({
             )}
           </div>
         )}
-        <div className="ctp-drawer__body">{children}</div>
-        {footer && <div className="ctp-drawer__footer">{footer}</div>}
+        <div className={cnEl(prefix, 'drawer', 'body')}>{children}</div>
+        {footer && <div className={cnEl(prefix, 'drawer', 'footer')}>{footer}</div>}
       </div>
     </Overlay>
   );

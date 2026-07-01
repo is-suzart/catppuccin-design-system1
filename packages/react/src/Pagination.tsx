@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 import { FormControlSize, FormControlShape, FormControlColor } from './FormControls';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 // Ellipsis Dots constant
 export const DOTS = '...';
@@ -102,6 +104,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   className = '',
   ariaLabel = 'Pagination',
 }) => {
+  const prefix = usePrefix();
   const paginationRange = usePaginationRange({
     currentPage,
     totalPages,
@@ -139,10 +142,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   // Build root class list
   const containerClasses = [
-    'ctp-pagination',
-    `ctp-pagination--${size}`,
-    `ctp-pagination--${shape}`,
-    `ctp-pagination--${color}`,
+    cn(prefix, 'pagination'),
+    `${prefix}-pagination--${size}`,
+    `${prefix}-pagination--${shape}`,
+    `${prefix}-pagination--${color}`,
     className,
   ]
     .filter(Boolean)
@@ -154,7 +157,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {showFirstLast && (
         <button
           type="button"
-          className="ctp-pagination-item"
+          className={cnEl(prefix, 'pagination', 'item')}
           onClick={() => handlePageSelect(1)}
           disabled={disabled || isFirst}
           aria-label="Go to first page"
@@ -171,7 +174,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {showPrevNext && (
         <button
           type="button"
-          className="ctp-pagination-item"
+          className={cnEl(prefix, 'pagination', 'item')}
           onClick={() => handlePageSelect(currentPage - 1)}
           disabled={disabled || isFirst}
           aria-label="Go to previous page"
@@ -187,7 +190,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {paginationRange.map((pageNumber, idx) => {
         if (pageNumber === DOTS) {
           return (
-            <span key={`dots-${idx}`} className="ctp-pagination-ellipsis" aria-hidden="true">
+            <span key={`dots-${idx}`} className={cnEl(prefix, 'pagination', 'ellipsis')} aria-hidden="true">
               &#8230;
             </span>
           );
@@ -199,7 +202,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           <button
             key={`page-${pageNumber}`}
             type="button"
-            className={`ctp-pagination-item ${isCurrent ? 'ctp-pagination-item--active' : ''}`}
+            className={`${cnEl(prefix, 'pagination', 'item')} ${isCurrent ? `${prefix}-pagination-item--active` : ''}`}
             onClick={() => handlePageSelect(pageNumber as number)}
             disabled={disabled}
             aria-label={`Go to page ${pageNumber}`}
@@ -212,10 +215,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 
       {/* Manual Page Input field */}
       {showPageInput && (
-        <div className="ctp-pagination-input-container">
+        <div className={cnEl(prefix, 'pagination', 'input-container')}>
           <input
             type="number"
-            className="ctp-pagination-input"
+            className={cnEl(prefix, 'pagination', 'input')}
             min={1}
             max={totalPages}
             value={inputVal}
@@ -233,7 +236,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         isInputActive ? (
           <button
             type="button"
-            className="ctp-pagination-item ctp-pagination-item--confirm"
+            className={`${cnEl(prefix, 'pagination', 'item')} ${prefix}-pagination-item--confirm`}
             onClick={handlePageInputSubmit}
             disabled={disabled || !isValidPage}
             aria-label="Confirm page selection"
@@ -246,7 +249,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         ) : (
           <button
             type="button"
-            className="ctp-pagination-item"
+            className={cnEl(prefix, 'pagination', 'item')}
             onClick={() => handlePageSelect(currentPage + 1)}
             disabled={disabled || isLast}
             aria-label="Go to next page"
@@ -263,7 +266,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {showFirstLast && (
         <button
           type="button"
-          className="ctp-pagination-item"
+          className={cnEl(prefix, 'pagination', 'item')}
           onClick={() => handlePageSelect(totalPages)}
           disabled={disabled || isLast}
           aria-label="Go to last page"
@@ -308,17 +311,18 @@ export const PageSizeSelector: React.FC<PageSizeSelectorProps> = ({
   className = '',
   id,
 }) => {
-  const uniqueId = useMemo(() => id || `ctp-page-size-${Math.random().toString(36).substr(2, 9)}`, [id]);
+  const prefix = usePrefix();
+  const uniqueId = useMemo(() => id || `${prefix}-page-size-${Math.random().toString(36).substr(2, 9)}`, [id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onPageSizeChange(Number(e.target.value));
   };
 
   const containerClasses = [
-    'ctp-page-size-selector',
-    `ctp-page-size-selector--${size}`,
-    `ctp-page-size-selector--${shape}`,
-    `ctp-page-size-selector--${color}`,
+    cn(prefix, 'page-size-selector'),
+    `${prefix}-page-size-selector--${size}`,
+    `${prefix}-page-size-selector--${shape}`,
+    `${prefix}-page-size-selector--${color}`,
     className,
   ]
     .filter(Boolean)
@@ -327,13 +331,13 @@ export const PageSizeSelector: React.FC<PageSizeSelectorProps> = ({
   return (
     <div className={containerClasses}>
       {label && (
-        <label htmlFor={uniqueId} className="ctp-page-size-selector__label">
+        <label htmlFor={uniqueId} className={cnEl(prefix, 'page-size-selector', 'label')}>
           {label}
         </label>
       )}
       <select
         id={uniqueId}
-        className="ctp-page-size-selector__select"
+        className={cnEl(prefix, 'page-size-selector', 'select')}
         value={pageSize}
         onChange={handleChange}
         disabled={disabled}

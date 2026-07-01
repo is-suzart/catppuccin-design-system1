@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { usePortalPosition, type Placement } from './usePortalPosition';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface PopoverProps {
   children: [React.ReactElement, React.ReactElement];
@@ -21,6 +23,7 @@ export const Popover: React.FC<PopoverProps> = ({
   autoFlip = true,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
   const isControlled = controlledOpen !== undefined;
   const isOpen = isControlled ? controlledOpen : uncontrolledOpen;
@@ -97,7 +100,7 @@ export const Popover: React.FC<PopoverProps> = ({
       {isOpen && ReactDOM.createPortal(
         <div
           ref={floatingRef}
-          className={`ctp-popover ctp-popover--placement-${actualPlacement} ${className}`}
+          className={`${cn(prefix, 'popover', [`placement-${actualPlacement}`])} ${className}`}
           style={{
             position: 'fixed',
             top: `${top}px`,
@@ -108,7 +111,7 @@ export const Popover: React.FC<PopoverProps> = ({
           aria-modal="true"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="ctp-popover__arrow" />
+          <div className={cnEl(prefix, 'popover', 'arrow')} />
           {content}
         </div>,
         document.body

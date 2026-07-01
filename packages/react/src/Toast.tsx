@@ -1,4 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 import ReactDOM from 'react-dom';
 
 export type ToastVariant = 'success' | 'error' | 'warning' | 'info';
@@ -92,6 +94,7 @@ function getIcon(variant: ToastVariant): React.ReactNode {
 }
 
 function ToastItem({ data, onRemove }: { data: ToastItem; onRemove: (id: string) => void }) {
+  const prefix = usePrefix();
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const [exiting, setExiting] = useState(false);
 
@@ -107,19 +110,24 @@ function ToastItem({ data, onRemove }: { data: ToastItem; onRemove: (id: string)
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [data.duration, handleClose]);
 
+  const classes = [
+    cn(prefix, 'toast', [data.variant, data.filled ? 'filled' : '', data.color ? `color-${data.color}` : '', exiting ? 'exiting' : '']),
+    data.className,
+  ].filter(Boolean).join(' ');
+
   return (
     <div
-      className={`ctp-toast ctp-toast--${data.variant}${data.filled ? ' ctp-toast--filled' : ''}${data.color ? ` ctp-toast--color-${data.color}` : ''}${exiting ? ' ctp-toast--exiting' : ''}${data.className ? ' ' + data.className : ''}`}
+      className={classes}
       role="alert"
       aria-live="assertive"
       style={data.style && Object.keys(data.style).length > 0 ? data.style : undefined}
     >
-      <div className="ctp-toast__icon">{getIcon(data.variant)}</div>
-      <div className="ctp-toast__content">
-        {data.title && <div className="ctp-toast__title">{data.title}</div>}
-        {data.description && <div className="ctp-toast__description">{data.description}</div>}
+      <div className={cnEl(prefix, 'toast', 'icon')}>{getIcon(data.variant)}</div>
+      <div className={cnEl(prefix, 'toast', 'content')}>
+        {data.title && <div className={cnEl(prefix, 'toast', 'title')}>{data.title}</div>}
+        {data.description && <div className={cnEl(prefix, 'toast', 'description')}>{data.description}</div>}
       </div>
-      <button className="ctp-toast__close" onClick={handleClose} aria-label="Dismiss">
+      <button className={cnEl(prefix, 'toast', 'close')} onClick={handleClose} aria-label="Dismiss">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
@@ -127,7 +135,7 @@ function ToastItem({ data, onRemove }: { data: ToastItem; onRemove: (id: string)
       </button>
       {data.duration > 0 && (
         <div
-          className="ctp-toast__progress"
+          className={cnEl(prefix, 'toast', 'progress')}
           style={{ animationDuration: `${data.duration}ms` }}
         />
       )}
@@ -139,6 +147,7 @@ export const Toaster: React.FC<{
   position?: ToastPosition;
   toastOptions?: Partial<ToastOptions>;
 }> = ({ position: defaultPosition = 'bottom-right', toastOptions: defaultOptions = {} }) => {
+  const prefix = usePrefix();
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [mounted, setMounted] = useState(false);
 
@@ -176,7 +185,7 @@ export const Toaster: React.FC<{
   return ReactDOM.createPortal(
     <>
       {Array.from(grouped.entries()).map(([pos, items]) => (
-        <div key={pos} className={`ctp-toast-container ctp-toast-container--${pos}`}>
+        <div key={pos} className={cn(prefix, 'toast-container', [pos])}>
           {items.map(t => (
             <ToastItem key={t.id} data={t} onRemove={removeToast} />
           ))}

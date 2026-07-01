@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface BreadcrumbItem {
   label: React.ReactNode;
@@ -20,27 +22,28 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   ),
   className = '',
 }) => {
+  const prefix = usePrefix();
   return (
-    <nav className={`ctp-breadcrumb ${className}`} aria-label="Breadcrumb">
+    <nav className={`${cn(prefix, 'breadcrumb')} ${className}`} aria-label="Breadcrumb">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (
           <React.Fragment key={index}>
             {index > 0 && (
-              <span className="ctp-breadcrumb__separator" aria-hidden="true">
+              <span className={cnEl(prefix, 'breadcrumb', 'separator')} aria-hidden="true">
                 {separator}
               </span>
             )}
             {item.href && !isLast ? (
               <a
                 href={item.href}
-                className="ctp-breadcrumb__item"
+                className={cnEl(prefix, 'breadcrumb', 'item')}
               >
                 {item.label}
               </a>
             ) : (
               <span
-                className={`ctp-breadcrumb__item${isLast ? ' ctp-breadcrumb__item--active' : ''}`}
+                className={`${cnEl(prefix, 'breadcrumb', 'item')}${isLast ? ` ${prefix}-breadcrumb__item--active` : ''}`}
                 aria-current={isLast ? 'page' : undefined}
               >
                 {item.label}

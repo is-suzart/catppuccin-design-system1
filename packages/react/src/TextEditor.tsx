@@ -11,6 +11,8 @@ import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
 import CharacterCount from '@tiptap/extension-character-count';
 import TextAlign from '@tiptap/extension-text-align';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 import { Table } from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
@@ -180,18 +182,21 @@ interface ToolbarBtnProps {
   children: React.ReactNode;
 }
 
-const ToolbarBtn: React.FC<ToolbarBtnProps> = ({ onClick, active, disabled, title, children }) => (
-  <button
-    type="button"
-    className={`ctp-editor__toolbar-btn${active ? ' ctp-editor__toolbar-btn--active' : ''}`}
-    onClick={onClick}
-    disabled={disabled}
-    title={title}
-    aria-pressed={active}
-  >
-    {children}
-  </button>
-);
+const ToolbarBtn: React.FC<ToolbarBtnProps> = ({ onClick, active, disabled, title, children }) => {
+  const prefix = usePrefix();
+  return (
+    <button
+      type="button"
+      className={`${cnEl(prefix, 'editor', 'toolbar-btn')}${active ? ` ${prefix}-editor__toolbar-btn--active` : ''}`}
+      onClick={onClick}
+      disabled={disabled}
+      title={title}
+      aria-pressed={active}
+    >
+      {children}
+    </button>
+  );
+};
 
 /* -----------------------------------------------------------------------
    Main component
@@ -209,6 +214,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
   className = '',
   id,
 }) => {
+  const prefix = usePrefix();
   const [viewMode, setViewMode] = useState<'wysiwyg' | 'markdown'>('wysiwyg');
   const [markdownText, setMarkdownText] = useState(defaultValue || value || '');
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -294,13 +300,11 @@ export const TextEditor: React.FC<TextEditorProps> = ({
   const charCount = editor?.storage?.characterCount?.characters?.() ?? markdownText.length;
   const wordCount = editor?.storage?.characterCount?.words?.() ?? markdownText.split(/\s+/).filter(Boolean).length;
 
-  const editorClass = [
-    'ctp-editor',
-    `ctp-editor--${color}`,
-    `ctp-editor--${size}`,
-    isFullscreen ? 'ctp-editor--fullscreen' : '',
-    className,
-  ].filter(Boolean).join(' ');
+  const editorClass = cn(prefix, 'editor', [
+    color,
+    size,
+    isFullscreen ? 'fullscreen' : undefined,
+  ]) + (className ? ` ${className}` : '');
 
   if (!editor) return null;
 
@@ -308,12 +312,12 @@ export const TextEditor: React.FC<TextEditorProps> = ({
     <div className={editorClass} id={id} role="region" aria-label="Rich text editor">
       {/* ---- Toolbar ---- */}
       {!readOnly && (
-        <div className="ctp-editor__toolbar" role="toolbar" aria-label="Formatting toolbar">
+        <div className={cnEl(prefix, 'editor', 'toolbar')} role="toolbar" aria-label="Formatting toolbar">
 
           {/* Heading select */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <select
-              className="ctp-editor__toolbar-select"
+              className={cnEl(prefix, 'editor', 'toolbar-select')}
               value={
                 editor.isActive('heading', { level: 1 }) ? 'h1' :
                 editor.isActive('heading', { level: 2 }) ? 'h2' :
@@ -335,10 +339,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </select>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Text formatting */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn
               onClick={() => editor.chain().focus().toggleBold().run()}
               active={editor.isActive('bold')}
@@ -376,22 +380,22 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </ToolbarBtn>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Text colour */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <input
               type="color"
-              className="ctp-editor__toolbar-color"
+              className={cnEl(prefix, 'editor', 'toolbar-color')}
               title="Text color"
               onChange={(e) => editor.chain().focus().setColor(e.target.value).run()}
             />
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Sub / Superscript */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn
               onClick={() => editor.chain().focus().toggleSubscript().run()}
               active={editor.isActive('subscript')}
@@ -408,10 +412,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </ToolbarBtn>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Alignment */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn
               onClick={() => editor.chain().focus().setTextAlign('left').run()}
               active={editor.isActive({ textAlign: 'left' })}
@@ -435,10 +439,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </ToolbarBtn>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Lists */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               active={editor.isActive('bulletList')}
@@ -455,10 +459,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </ToolbarBtn>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Block elements */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               active={editor.isActive('blockquote')}
@@ -482,10 +486,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
             </ToolbarBtn>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Link */}
-          <div className="ctp-editor__toolbar-group" style={{ position: 'relative' }}>
+          <div className={cnEl(prefix, 'editor', 'toolbar-group')} style={{ position: 'relative' }}>
             <ToolbarBtn
               onClick={() => {
                 const prev = editor.getAttributes('link').href || '';
@@ -498,9 +502,9 @@ export const TextEditor: React.FC<TextEditorProps> = ({
               <Icon d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
             </ToolbarBtn>
             {showLinkInput && (
-              <div className="ctp-editor__link-popup">
+              <div className={cnEl(prefix, 'editor', 'link-popup')}>
                 <input
-                  className="ctp-editor__link-input"
+                  className={cnEl(prefix, 'editor', 'link-input')}
                   type="url"
                   placeholder="https://example.com"
                   value={linkUrl}
@@ -508,7 +512,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
                   onKeyDown={(e) => { if (e.key === 'Enter') setLink(); if (e.key === 'Escape') setShowLinkInput(false); }}
                   autoFocus
                 />
-                <button type="button" className="ctp-editor__toolbar-btn ctp-editor__toolbar-btn--active" onClick={setLink} title="Apply link">
+                <button type="button" className={`${cnEl(prefix, 'editor', 'toolbar-btn')} ${prefix}-editor__toolbar-btn--active`} onClick={setLink} title="Apply link">
                   <Icon d="M20 6 9 17l-5-5" />
                 </button>
               </div>
@@ -516,16 +520,16 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           </div>
 
           {/* Table */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn onClick={insertTable} title="Insert table" active={editor.isActive('table')}>
               <Icon d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18" />
             </ToolbarBtn>
           </div>
 
-          <div className="ctp-editor__toolbar-separator" />
+          <div className={cnEl(prefix, 'editor', 'toolbar-separator')} />
 
           {/* Undo / Redo */}
-          <div className="ctp-editor__toolbar-group">
+            <div className={cnEl(prefix, 'editor', 'toolbar-group')}>
             <ToolbarBtn
               onClick={() => editor.chain().focus().undo().run()}
               disabled={!editor.can().undo()}
@@ -562,12 +566,12 @@ export const TextEditor: React.FC<TextEditorProps> = ({
       )}
 
       {/* ---- Content area ---- */}
-      <div className="ctp-editor__content">
+      <div className={cnEl(prefix, 'editor', 'content')}>
         {viewMode === 'wysiwyg' ? (
           <>
             {/* Bubble menu (appears on text selection) */}
             <BubbleMenu editor={editor}>
-              <div className="ctp-editor__bubble-menu">
+              <div className={cnEl(prefix, 'editor', 'bubble-menu')}>
                 <ToolbarBtn onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold">
                   <Icon d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
                 </ToolbarBtn>
@@ -583,13 +587,13 @@ export const TextEditor: React.FC<TextEditorProps> = ({
               </div>
             </BubbleMenu>
 
-            <div className="ctp-editor__prosemirror-wrapper">
+            <div className={cnEl(prefix, 'editor', 'prosemirror-wrapper')}>
               <EditorContent editor={editor} />
             </div>
           </>
         ) : (
           <textarea
-            className="ctp-editor__markdown"
+            className={cnEl(prefix, 'editor', 'markdown')}
             value={markdownText}
             onChange={handleMarkdownChange}
             readOnly={readOnly}
@@ -601,9 +605,9 @@ export const TextEditor: React.FC<TextEditorProps> = ({
       </div>
 
       {/* ---- Statusbar ---- */}
-      <div className="ctp-editor__statusbar">
-        <div className="ctp-editor__statusbar-left">
-          <span className="ctp-editor__statusbar-badge">
+      <div className={cnEl(prefix, 'editor', 'statusbar')}>
+        <div className={cnEl(prefix, 'editor', 'statusbar-left')}>
+          <span className={cnEl(prefix, 'editor', 'statusbar-badge')}>
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
               <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
             </svg>
@@ -611,10 +615,10 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           </span>
           <span>{charCount}{maxLength > 0 ? ` / ${maxLength}` : ''} chars</span>
         </div>
-        <div className="ctp-editor__statusbar-right">
+        <div className={cnEl(prefix, 'editor', 'statusbar-right')}>
           <button
             type="button"
-            className={`ctp-editor__mode-btn${viewMode === 'wysiwyg' ? ' ctp-editor__mode-btn--active' : ''}`}
+            className={`${cnEl(prefix, 'editor', 'mode-btn')}${viewMode === 'wysiwyg' ? ` ${prefix}-editor__mode-btn--active` : ''}`}
             onClick={() => handleModeSwitch('wysiwyg')}
             title="Rich text mode"
           >
@@ -622,7 +626,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           </button>
           <button
             type="button"
-            className={`ctp-editor__mode-btn${viewMode === 'markdown' ? ' ctp-editor__mode-btn--active' : ''}`}
+            className={`${cnEl(prefix, 'editor', 'mode-btn')}${viewMode === 'markdown' ? ` ${prefix}-editor__mode-btn--active` : ''}`}
             onClick={() => handleModeSwitch('markdown')}
             title="Markdown source mode"
           >

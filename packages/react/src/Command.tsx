@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface CommandItem {
   id: string;
@@ -27,6 +29,7 @@ export const Command: React.FC<CommandProps> = ({
   emptyMessage = 'No results found.',
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
   const isControlled = controlledOpen !== undefined;
   const isOpen = isControlled ? controlledOpen : uncontrolledOpen;
@@ -99,54 +102,54 @@ export const Command: React.FC<CommandProps> = ({
 
   return ReactDOM.createPortal(
     <div
-      className={`ctp-command-overlay ${className}`}
+      className={`${cn(prefix, 'command-overlay')} ${className}`}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
       aria-label="Command palette"
     >
-      <div className="ctp-command">
-        <div className="ctp-command__input-wrapper">
-          <svg className="ctp-command__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <div className={cn(prefix, 'command')}>
+        <div className={cnEl(prefix, 'command', 'input-wrapper')}>
+          <svg className={cnEl(prefix, 'command', 'search-icon')} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
           <input
             ref={inputRef}
-            className="ctp-command__input"
+            className={cnEl(prefix, 'command', 'input')}
             placeholder={placeholder}
             value={query}
             onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
             onKeyDown={handleKeyDown}
             role="combobox"
             aria-expanded={isOpen}
-            aria-activedescendant={flatFiltered[selectedIndex] ? `ctp-cmd-item-${flatFiltered[selectedIndex].id}` : undefined}
-            aria-controls="ctp-command-list"
+            aria-activedescendant={flatFiltered[selectedIndex] ? `${prefix}-cmd-item-${flatFiltered[selectedIndex].id}` : undefined}
+            aria-controls={`${prefix}-command-list`}
             aria-autocomplete="list"
           />
         </div>
-        <div ref={listRef} className="ctp-command__list" id="ctp-command-list" role="listbox">
+        <div ref={listRef} className={cnEl(prefix, 'command', 'list')} id={`${prefix}-command-list`} role="listbox">
           {flatFiltered.length === 0 ? (
-            <div className="ctp-command__empty">{emptyMessage}</div>
+            <div className={cnEl(prefix, 'command', 'empty')}>{emptyMessage}</div>
           ) : (
             Object.entries(grouped).map(([group, groupItems]) => (
               <div key={group}>
-                <div className="ctp-command__group-label">{group}</div>
+                <div className={cnEl(prefix, 'command', 'group-label')}>{group}</div>
                 {groupItems.map((item, i) => {
                   const flatIndex = flatFiltered.indexOf(item);
                   return (
                     <div
                       key={item.id}
-                      id={`ctp-cmd-item-${item.id}`}
+                      id={`${prefix}-cmd-item-${item.id}`}
                       role="option"
                       aria-selected={flatIndex === selectedIndex}
-                      className={`ctp-command__item${flatIndex === selectedIndex ? ' ctp-command__item--selected' : ''}`}
+                      className={`${cnEl(prefix, 'command', 'item')}${flatIndex === selectedIndex ? ` ${prefix}-command__item--selected` : ''}`}
                       onClick={() => { item.onSelect?.(); setOpen(false); }}
                       onMouseEnter={() => setSelectedIndex(flatIndex)}
                     >
-                      {item.icon && <span className="ctp-command__item-icon">{item.icon}</span>}
-                      <span className="ctp-command__item-label">{item.label}</span>
-                      {item.shortcut && <span className="ctp-command__item-shortcut">{item.shortcut}</span>}
+                      {item.icon && <span className={cnEl(prefix, 'command', 'item-icon')}>{item.icon}</span>}
+                      <span className={cnEl(prefix, 'command', 'item-label')}>{item.label}</span>
+                      {item.shortcut && <span className={cnEl(prefix, 'command', 'item-shortcut')}>{item.shortcut}</span>}
                     </div>
                   );
                 })}

@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FormControlColor, FormControlSize, FormControlShape, getFormThemeClass } from './FormControls';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 // 1. Click Outside Utility Hook
 export const useClickOutside = (ref: React.RefObject<HTMLElement | null>, callback: () => void) => {
@@ -51,6 +53,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   error = false,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -99,12 +102,12 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   const selectedOptions = options.filter(opt => value.includes(opt.value));
 
   const triggerClass = [
-    'ctp-select-trigger',
-    `ctp-select-trigger--${size}`,
-    `ctp-select-trigger--${shape}`,
-    isOpen ? 'ctp-select-trigger--active' : '',
-    disabled ? 'ctp-select-trigger--disabled' : '',
-    error ? 'ctp-select-trigger--error' : '',
+    cn(prefix, 'select-trigger'),
+    `${prefix}-select-trigger--${size}`,
+    `${prefix}-select-trigger--${shape}`,
+    isOpen ? `${prefix}-select-trigger--active` : '',
+    disabled ? `${prefix}-select-trigger--disabled` : '',
+    error ? `${prefix}-select-trigger--error` : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -112,7 +115,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`ctp-advanced-select ${getFormThemeClass(color)} ${className}`}
+      className={`${cn(prefix, 'advanced-select')} ${getFormThemeClass(prefix, color)} ${className}`}
     >
       <button
         type="button"
@@ -123,14 +126,14 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         aria-expanded={isOpen}
       >
         {selectedOptions.length === 0 ? (
-          <span className="ctp-select-placeholder">{placeholder}</span>
+          <span className={cnEl(prefix, 'select', 'placeholder')}>{placeholder}</span>
         ) : (
           selectedOptions.map(opt => (
-            <span key={opt.value} className="ctp-tag-chip">
+            <span key={opt.value} className={cnEl(prefix, 'tag', 'chip')}>
               {opt.label}
               <button
                 type="button"
-                className="ctp-tag-chip__remove"
+                className={cnEl(prefix, 'tag-chip', 'remove')}
                 onClick={(e) => handleRemoveValue(e, opt.value)}
                 aria-label={`Remover ${opt.label}`}
               >
@@ -140,7 +143,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
           ))
         )}
 
-        <span className="ctp-select-trigger__chevron">
+        <span className={cnEl(prefix, 'select-trigger', 'chevron')}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
@@ -148,12 +151,12 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       </button>
 
       {isOpen && (
-        <div className="ctp-dropdown-menu">
+        <div className={cn(prefix, 'dropdown-menu')}>
           {searchable && (
-            <div className="ctp-dropdown-search">
+            <div className={cnEl(prefix, 'dropdown', 'search')}>
               <input
                 type="text"
-                className="ctp-dropdown-search__input"
+                className={cnEl(prefix, 'dropdown-search', 'input')}
                 placeholder="Pesquisar..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -162,9 +165,9 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
             </div>
           )}
 
-          <div className="ctp-dropdown-list" role="listbox" aria-multiselectable="true">
+          <div className={cnEl(prefix, 'dropdown', 'list')} role="listbox" aria-multiselectable="true">
             {filteredOptions.length === 0 ? (
-              <div className="ctp-dropdown-no-results">Nenhum resultado encontrado</div>
+              <div className={cnEl(prefix, 'dropdown', 'no-results')}>Nenhum resultado encontrado</div>
             ) : (
               filteredOptions.map(opt => {
                 const isSelected = value.includes(opt.value);
@@ -173,11 +176,11 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                     key={opt.value}
                     role="option"
                     aria-selected={isSelected}
-                    className={`ctp-dropdown-item ${isSelected ? 'ctp-dropdown-item--selected' : ''}`}
+                    className={`${cnEl(prefix, 'dropdown', 'item')} ${isSelected ? `${prefix}-dropdown-item--selected` : ''}`}
                     onClick={() => handleSelectOption(opt.value)}
                   >
                     <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span className="ctp-dropdown-item__checkbox">
+                      <span className={cnEl(prefix, 'dropdown-item', 'checkbox')}>
                         {isSelected && (
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <polyline points="20 6 9 17 4 12"></polyline>
@@ -244,6 +247,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
   error = false,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedKeys, setExpandedKeys] = useState<Record<string, boolean>>({});
   const containerRef = useRef<HTMLDivElement>(null);
@@ -351,12 +355,12 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
   };
 
   const triggerClass = [
-    'ctp-select-trigger',
-    `ctp-select-trigger--${size}`,
-    `ctp-select-trigger--${shape}`,
-    isOpen ? 'ctp-select-trigger--active' : '',
-    disabled ? 'ctp-select-trigger--disabled' : '',
-    error ? 'ctp-select-trigger--error' : '',
+    cn(prefix, 'select-trigger'),
+    `${prefix}-select-trigger--${size}`,
+    `${prefix}-select-trigger--${shape}`,
+    isOpen ? `${prefix}-select-trigger--active` : '',
+    disabled ? `${prefix}-select-trigger--disabled` : '',
+    error ? `${prefix}-select-trigger--error` : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -364,7 +368,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`ctp-advanced-select ${getFormThemeClass(color)} ${className}`}
+      className={`${cn(prefix, 'advanced-select')} ${getFormThemeClass(prefix, color)} ${className}`}
     >
       <button
         type="button"
@@ -376,16 +380,16 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
       >
         {multiple ? (
           multipleValue.length === 0 ? (
-            <span className="ctp-select-placeholder">{placeholder}</span>
+            <span className={cnEl(prefix, 'select', 'placeholder')}>{placeholder}</span>
           ) : (
             multipleValue.map(val => {
               const label = getLabelByValue(data, val) || val;
               return (
-                <span key={val} className="ctp-tag-chip">
+                <span key={val} className={cnEl(prefix, 'tag', 'chip')}>
                   {label}
                   <button
                     type="button"
-                    className="ctp-tag-chip__remove"
+                    className={cnEl(prefix, 'tag-chip', 'remove')}
                     onClick={(e) => handleRemoveTag(e, val)}
                     aria-label={`Remover ${label}`}
                   >
@@ -397,7 +401,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
           )
         ) : (
           !value ? (
-            <span className="ctp-select-placeholder">{placeholder}</span>
+            <span className={cnEl(prefix, 'select', 'placeholder')}>{placeholder}</span>
           ) : (
             <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
               {getLabelByValue(data, value) || value}
@@ -405,7 +409,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
           )
         )}
 
-        <span className="ctp-select-trigger__chevron">
+        <span className={cnEl(prefix, 'select-trigger', 'chevron')}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
@@ -413,10 +417,10 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
       </button>
 
       {isOpen && (
-        <div className="ctp-dropdown-menu">
-          <div className="ctp-dropdown-list" role="tree" aria-multiselectable={multiple}>
+        <div className={cn(prefix, 'dropdown-menu')}>
+          <div className={cnEl(prefix, 'dropdown', 'list')} role="tree" aria-multiselectable={multiple}>
             {visibleNodes.length === 0 ? (
-              <div className="ctp-dropdown-no-results">Nenhum nó disponível</div>
+              <div className={cnEl(prefix, 'dropdown', 'no-results')}>Nenhum nó disponível</div>
             ) : (
               visibleNodes.map(({ node, depth }) => {
                 const isSelected = multiple ? multipleValue.includes(node.value) : value === node.value;
@@ -424,10 +428,10 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
                 const isExpanded = !!expandedKeys[node.value];
 
                 const itemClass = [
-                  'ctp-dropdown-item',
-                  `ctp-dropdown-item--depth-${depth}`,
-                  isSelected ? 'ctp-dropdown-item--selected' : '',
-                  node.disabled ? 'ctp-dropdown-item--disabled' : '',
+                  cnEl(prefix, 'dropdown', 'item'),
+                  `${prefix}-dropdown-item--depth-${depth}`,
+                  isSelected ? `${prefix}-dropdown-item--selected` : '',
+                  node.disabled ? `${prefix}-dropdown-item--disabled` : '',
                 ]
                   .filter(Boolean)
                   .join(' ');
@@ -444,7 +448,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
                     <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {hasChildren ? (
                         <span
-                          className={`ctp-tree-node-arrow ${isExpanded ? 'ctp-tree-node-arrow--expanded' : ''}`}
+                          className={`${cnEl(prefix, 'tree-node', 'arrow')} ${isExpanded ? `${prefix}-tree-node-arrow--expanded` : ''}`}
                           onClick={(e) => handleToggleExpand(e, node.value)}
                         >
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -456,7 +460,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
                       )}
 
                       {multiple && (
-                        <span className="ctp-dropdown-item__checkbox" style={{ marginRight: '4px' }}>
+                        <span className={cnEl(prefix, 'dropdown-item', 'checkbox')} style={{ marginRight: '4px' }}>
                           {isSelected && (
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                               <polyline points="20 6 9 17 4 12"></polyline>

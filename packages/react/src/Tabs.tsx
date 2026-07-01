@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation, matchPath } from 'react-router-dom';
 import { FormControlColor, getFormThemeClass } from './FormControls';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type TabsVariant = 'default' | 'underline' | 'pills' | 'segmented';
 export type TabsOrientation = 'horizontal' | 'vertical';
@@ -55,6 +57,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     },
     ref
   ) => {
+    const prefix = usePrefix();
     const [localValue, setLocalValue] = useState(defaultValue || '');
     const isControlled = controlledValue !== undefined;
     const activeValue = isControlled ? controlledValue : localValue;
@@ -94,9 +97,8 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     }, [children]);
 
     const containerClass = [
-      'ctp-tabs',
-      `ctp-tabs--${orientation}`,
-      getFormThemeClass(color),
+      cn(prefix, 'tabs', [orientation]),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -129,10 +131,10 @@ export interface TabsListProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
   ({ className = '', children, ...props }, ref) => {
     const { variant, orientation } = useTabs();
+    const prefix = usePrefix();
 
     const listClass = [
-      'ctp-tabs-list',
-      `ctp-tabs-list--${variant}`,
+      cn(prefix, 'tabs-list', [variant]),
       className,
     ]
       .filter(Boolean)
@@ -201,6 +203,7 @@ export interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonE
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   ({ value, to, className = '', disabled, children, ...props }, ref) => {
     const { value: activeValue, onValueChange, variant, size, mode } = useTabs();
+    const prefix = usePrefix();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -209,10 +212,7 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
       : activeValue === value;
 
     const triggerClass = [
-      'ctp-tabs-trigger',
-      `ctp-tabs-trigger--${variant}`,
-      `ctp-tabs-trigger--${size}`,
-      isSelected ? 'ctp-tabs-trigger--active' : '',
+      cn(prefix, 'tabs-trigger', [variant, size, isSelected ? 'active' : undefined]),
       className,
     ]
       .filter(Boolean)
@@ -238,8 +238,8 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
         type="button"
         role="tab"
         aria-selected={isSelected}
-        aria-controls={`ctp-tabpanel-${value}`}
-        id={`ctp-tabtrigger-${value}`}
+        aria-controls={`${prefix}-tabpanel-${value}`}
+        id={`${prefix}-tabtrigger-${value}`}
         data-value={value}
         tabIndex={isSelected ? 0 : -1}
         disabled={disabled}
@@ -262,6 +262,7 @@ export interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
 export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
   ({ value, className = '', children, ...props }, ref) => {
     const { value: activeValue, mode } = useTabs();
+    const prefix = usePrefix();
     const location = useLocation();
 
     const isActive = mode === 'router'
@@ -269,8 +270,7 @@ export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
       : activeValue === value;
 
     const contentClass = [
-      'ctp-tabs-content',
-      isActive ? 'ctp-tabs-content--active' : '',
+      cn(prefix, 'tabs-content', [isActive ? 'active' : undefined]),
       className,
     ]
       .filter(Boolean)
@@ -280,8 +280,8 @@ export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
       <div
         ref={ref}
         role="tabpanel"
-        id={`ctp-tabpanel-${value}`}
-        aria-labelledby={`ctp-tabtrigger-${value}`}
+        id={`${prefix}-tabpanel-${value}`}
+        aria-labelledby={`${prefix}-tabtrigger-${value}`}
         tabIndex={0}
         className={contentClass}
         style={!isActive ? { display: 'none' } : undefined}

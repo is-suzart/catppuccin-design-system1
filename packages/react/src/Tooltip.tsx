@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { usePortalPosition, Placement } from './usePortalPosition';
 import { ButtonColor } from './Button';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface TooltipProps {
   content: ReactNode;
@@ -26,6 +28,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   autoFlip = true,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
   const isControlled = controlledIsOpen !== undefined;
   const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen;
@@ -92,8 +95,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
     : children;
 
   const colorClass = color === 'dark' || color === 'light'
-    ? `ctp-tooltip--preset-${color}`
-    : `ctp-tooltip--${color}`;
+    ? `${prefix}-tooltip--preset-${color}`
+    : `${prefix}-tooltip--${color}`;
 
   return (
     <>
@@ -102,7 +105,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
         ReactDOM.createPortal(
           <div
             ref={floatingRef}
-            className={`ctp-tooltip ctp-tooltip--placement-${actualPlacement} ${colorClass} ${className}`}
+            className={`${cn(prefix, 'tooltip')} ${prefix}-tooltip--placement-${actualPlacement} ${colorClass} ${className}`}
             style={{
               position: 'fixed',
               top: `${top}px`,
@@ -111,8 +114,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
             }}
             role="tooltip"
           >
-            <div className="ctp-tooltip__content">{content}</div>
-            <div className="ctp-tooltip__arrow" />
+            <div className={cnEl(prefix, 'tooltip', 'content')}>{content}</div>
+            <div className={cnEl(prefix, 'tooltip', 'arrow')} />
           </div>,
           document.body
         )}

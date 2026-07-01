@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Button, ButtonProps } from './Button';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type ButtonGroupOrientation = 'horizontal' | 'vertical';
 export type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
@@ -37,6 +39,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     },
     ref
   ) => {
+    const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [pillStyle, setPillStyle] = useState<React.CSSProperties>({
       display: 'none',
@@ -142,9 +145,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     };
 
     const classNames = [
-      'ctp-btn-group',
-      `ctp-btn-group--${orientation}`,
-      selectionMode === 'single' ? 'ctp-btn-group--segmented' : '',
+      cn(prefix, 'btn-group', [orientation, selectionMode === 'single' ? 'segmented' : undefined]),
       className,
     ]
       .filter(Boolean)
@@ -177,7 +178,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           {...props}
         >
           {selectionMode === 'single' && (
-            <div className="ctp-btn-group__pill" style={pillStyle} />
+            <div className={cnEl(prefix, 'btn-group', 'pill')} style={pillStyle} />
           )}
           {children}
         </div>
@@ -194,6 +195,7 @@ export interface ButtonGroupItemProps extends ButtonProps {
 
 export const ButtonGroupItem = React.forwardRef<HTMLButtonElement, ButtonGroupItemProps>(
   ({ value: itemValue, className = '', children, disabled, onClick, ...props }, ref) => {
+    const prefix = usePrefix();
     const context = useContext(ButtonGroupContext);
     const itemRef = useRef<HTMLButtonElement | null>(null);
 
@@ -234,7 +236,7 @@ export const ButtonGroupItem = React.forwardRef<HTMLButtonElement, ButtonGroupIt
     const finalDisabled = disabled || isGroupDisabled;
 
     const classNames = [
-      isActive ? 'ctp-btn--active' : '',
+      isActive ? cn(prefix, 'btn', ['active']) : '',
       className,
     ]
       .filter(Boolean)

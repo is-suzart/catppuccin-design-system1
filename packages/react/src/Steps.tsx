@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type StepsVariant = 'timeline' | 'carousel';
 export type StepsColor =
@@ -36,21 +38,22 @@ export const Steps: React.FC<StepsProps> = ({
   onChangeStep,
   orientation = 'horizontal',
 }) => {
+  const prefix = usePrefix();
   const handleStepClick = (index: number) => {
     if (onChangeStep) {
       onChangeStep(index);
     }
   };
 
-  const stepsClass = `ctp-steps--${color}`;
+  const stepsClass = `${prefix}-steps--${color}`;
 
   if (variant === 'carousel') {
     return (
-      <div className={`ctp-steps-carousel ${stepsClass}`}>
+      <div className={`${cn(prefix, 'steps-carousel')} ${stepsClass}`}>
         {Array.from({ length: stepsCount }).map((_, index) => (
           <button
             key={index}
-            className={`ctp-steps-carousel-dot ${index === currentStep ? 'ctp-steps-carousel-dot--active' : ''}`}
+            className={cn(prefix, 'steps-carousel-dot', [index === currentStep ? 'active' : ''].filter(Boolean))}
             onClick={() => handleStepClick(index)}
             aria-label={`Go to step ${index + 1}`}
           />
@@ -67,16 +70,15 @@ export const Steps: React.FC<StepsProps> = ({
     : { width: `${progressWidth}%` };
 
   const timelineClasses = [
-    'ctp-steps-timeline',
-    isVertical ? 'ctp-steps-timeline--vertical' : 'ctp-steps-timeline--horizontal',
+    cn(prefix, 'steps-timeline', [isVertical ? 'vertical' : 'horizontal']),
     stepsClass,
   ].join(' ');
 
   return (
     <div className={timelineClasses}>
-      <div className="ctp-steps-track">
+      <div className={cnEl(prefix, 'steps', 'track')}>
         <div
-          className="ctp-steps-progress"
+          className={cnEl(prefix, 'steps', 'progress')}
           style={progressStyle}
         />
       </div>
@@ -84,13 +86,10 @@ export const Steps: React.FC<StepsProps> = ({
       {Array.from({ length: stepsCount }).map((_, index) => {
         const isActive = index === currentStep;
         const isCompleted = index < currentStep;
-        const itemClass = [
-          'ctp-steps-item',
-          isActive ? 'ctp-steps-item--active' : '',
-          isCompleted ? 'ctp-steps-item--completed' : '',
-        ]
-          .filter(Boolean)
-          .join(' ');
+        const itemClass = cn(prefix, 'steps__item', [
+          isActive ? 'active' : '',
+          isCompleted ? 'completed' : '',
+        ].filter(Boolean));
 
         return (
           <button
@@ -99,8 +98,8 @@ export const Steps: React.FC<StepsProps> = ({
             onClick={() => handleStepClick(index)}
             aria-label={`Step ${index + 1}`}
           >
-            <div className="ctp-steps-dot" />
-            {labels[index] && <span className="ctp-steps-label">{labels[index]}</span>}
+            <div className={cnEl(prefix, 'steps', 'dot')} />
+            {labels[index] && <span className={cnEl(prefix, 'steps', 'label')}>{labels[index]}</span>}
           </button>
         );
       })}

@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type FormControlSize = 'sm' | 'md' | 'lg';
 export type FormControlShape = 'square' | 'rounded' | 'pill';
@@ -19,8 +21,8 @@ export type FormControlColor =
   | 'lavender';
 
 // Helper to determine the theme modifier class on parent container
-export const getFormThemeClass = (color?: FormControlColor) => {
-  return color ? `ctp-form--${color}` : '';
+export const getFormThemeClass = (prefix: string, color?: FormControlColor) => {
+  return color ? `${prefix}-form--${color}` : '';
 };
 
 // 1. Form Group Component (Wrapper)
@@ -45,18 +47,19 @@ export const FormGroup: React.FC<FormGroupProps> = ({
   className = '',
   htmlFor,
 }) => {
+  const prefix = usePrefix();
   // Grid mapping classes
-  let gridColClass = 'ctp-form-col-12';
-  if (width === 50) gridColClass = 'ctp-form-col-6';
-  else if (width === 33) gridColClass = 'ctp-form-col-4';
+  let gridColClass = `${prefix}-form-col-12`;
+  if (width === 50) gridColClass = `${prefix}-form-col-6`;
+  else if (width === 33) gridColClass = `${prefix}-form-col-4`;
 
   return (
-    <div className={`ctp-form-group ${gridColClass} ${className}`}>
+    <div className={`${cn(prefix, 'form-group')} ${gridColClass} ${className}`}>
       {label && (
-        <label htmlFor={htmlFor} className="ctp-form-group__label">
+        <label htmlFor={htmlFor} className={cnEl(prefix, 'form-group', 'label')}>
           {label}
           {required && (
-            <span className="ctp-form-group__required-indicator" aria-hidden="true">
+            <span className={cnEl(prefix, 'form-group', 'required-indicator')} aria-hidden="true">
               *
             </span>
           )}
@@ -64,7 +67,7 @@ export const FormGroup: React.FC<FormGroupProps> = ({
       )}
       {children}
       {error && (
-        <span className="ctp-form-group__error" role="alert">
+        <span className={cnEl(prefix, 'form-group', 'error')} role="alert">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="8" x2="12" y2="12"></line>
@@ -74,7 +77,7 @@ export const FormGroup: React.FC<FormGroupProps> = ({
         </span>
       )}
       {description && !error && (
-        <span className="ctp-form-group__description">{description}</span>
+        <span className={cnEl(prefix, 'form-group', 'description')}>{description}</span>
       )}
     </div>
   );
@@ -90,12 +93,10 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ size = 'md', shape = 'rounded', color = 'mauve', error = false, className = '', ...props }, ref) => {
+    const prefix = usePrefix();
     const classNames = [
-      'ctp-form-control',
-      `ctp-form-control--${size}`,
-      `ctp-form-control--${shape}`,
-      error ? 'ctp-form-control--error' : '',
-      getFormThemeClass(color),
+      cn(prefix, 'form-control', [size, shape, error ? 'error' : undefined]),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -116,12 +117,10 @@ export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ size = 'md', shape = 'rounded', color = 'mauve', error = false, className = '', ...props }, ref) => {
+    const prefix = usePrefix();
     const classNames = [
-      'ctp-form-control',
-      `ctp-form-control--${size}`,
-      `ctp-form-control--${shape}`,
-      error ? 'ctp-form-control--error' : '',
-      getFormThemeClass(color),
+      cn(prefix, 'form-control', [size, shape, error ? 'error' : undefined]),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -143,12 +142,10 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ size = 'md', shape = 'rounded', color = 'mauve', error = false, options = [], children, className = '', ...props }, ref) => {
+    const prefix = usePrefix();
     const classNames = [
-      'ctp-form-control',
-      `ctp-form-control--${size}`,
-      `ctp-form-control--${shape}`,
-      error ? 'ctp-form-control--error' : '',
-      getFormThemeClass(color),
+      cn(prefix, 'form-control', [size, shape, error ? 'error' : undefined]),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -176,10 +173,10 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, color = 'mauve', disabled, className = '', ...props }, ref) => {
+    const prefix = usePrefix();
     const rowClass = [
-      'ctp-checkbox-row',
-      disabled ? 'ctp-checkbox-row--disabled' : '',
-      getFormThemeClass(color),
+      cn(prefix, 'checkbox-row', [disabled ? 'disabled' : undefined]),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -188,7 +185,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <label className={rowClass}>
         <input ref={ref} type="checkbox" disabled={disabled} {...props} />
-        <span className="ctp-checkbox-box">
+        <span className={cnEl(prefix, 'checkbox', 'box')}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
@@ -208,10 +205,10 @@ export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement>
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   ({ label, color = 'mauve', disabled, className = '', ...props }, ref) => {
+    const prefix = usePrefix();
     const rowClass = [
-      'ctp-switch-row',
-      disabled ? 'ctp-switch-row--disabled' : '',
-      getFormThemeClass(color),
+      cn(prefix, 'switch-row', [disabled ? 'disabled' : undefined]),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -220,8 +217,8 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     return (
       <label className={rowClass}>
         <input ref={ref} type="checkbox" disabled={disabled} {...props} />
-        <span className="ctp-switch-track">
-          <span className="ctp-switch-thumb"></span>
+        <span className={cnEl(prefix, 'switch', 'track')}>
+          <span className={cnEl(prefix, 'switch', 'thumb')}></span>
         </span>
         <span>{label}</span>
       </label>
@@ -244,9 +241,9 @@ export interface RadioGroupProps {
 
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   ({ name, options, value, onChange, color = 'mauve', vertical = false, disabled = false, className = '' }, ref) => {
+    const prefix = usePrefix();
     const groupClass = [
-      'ctp-radio-group',
-      vertical ? 'ctp-radio-group--vertical' : '',
+      cn(prefix, 'radio-group', [vertical ? 'vertical' : undefined]),
       className,
     ]
       .filter(Boolean)
@@ -256,9 +253,8 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       <div ref={ref} className={groupClass}>
         {options.map((opt, idx) => {
           const itemClass = [
-            'ctp-radio-item',
-            disabled ? 'ctp-radio-item--disabled' : '',
-            getFormThemeClass(color),
+            cn(prefix, 'radio-item', [disabled ? 'disabled' : undefined]),
+            getFormThemeClass(prefix, color),
           ]
             .filter(Boolean)
             .join(' ');
@@ -275,8 +271,8 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
                 onChange={onChange}
                 disabled={disabled}
               />
-              <span className="ctp-radio-circle">
-                <span className="ctp-radio-dot"></span>
+              <span className={cnEl(prefix, 'radio', 'circle')}>
+                <span className={cnEl(prefix, 'radio', 'dot')}></span>
               </span>
               <span>{opt.label}</span>
             </label>
@@ -300,9 +296,10 @@ export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
 
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
   ({ color = 'mauve', min = 0, max = 100, showValue = true, value = 50, onChange, className = '', disabled, ...props }, ref) => {
+    const prefix = usePrefix();
     const containerClass = [
-      'ctp-slider-container',
-      getFormThemeClass(color),
+      cn(prefix, 'slider-container'),
+      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -324,10 +321,10 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
           value={value}
           onChange={handleChange}
           disabled={disabled}
-          className="ctp-slider"
+          className={cn(prefix, 'slider')}
           {...props}
         />
-        {showValue && <span className="ctp-slider-value">{value}</span>}
+        {showValue && <span className={cnEl(prefix, 'slider', 'value')}>{value}</span>}
       </div>
     );
   }

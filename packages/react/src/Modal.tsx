@@ -1,5 +1,7 @@
 import React from 'react';
 import { Overlay } from './Overlay';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type ModalSize = 'sm' | 'md' | 'lg';
 
@@ -26,6 +28,7 @@ export const Modal: React.FC<ModalProps> = ({
   closeOnEsc = true,
   showCloseButton = true,
 }) => {
+  const prefix = usePrefix();
   const hasHeader = title || showCloseButton;
 
   return (
@@ -36,19 +39,19 @@ export const Modal: React.FC<ModalProps> = ({
       closeOnEsc={closeOnEsc}
     >
       <div
-        className={`ctp-modal ctp-modal--${size}`}
+        className={cn(prefix, 'modal', [size])}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title && typeof title === 'string' ? 'ctp-modal-title' : undefined}
+        aria-labelledby={title && typeof title === 'string' ? `${prefix}-modal-title` : undefined}
       >
         {hasHeader && (
-          <div className="ctp-modal__header">
-            <div className="ctp-modal__title" id="ctp-modal-title">
+          <div className={cnEl(prefix, 'modal', 'header')}>
+            <div className={cnEl(prefix, 'modal', 'title')} id={`${prefix}-modal-title`}>
               {title}
             </div>
             {showCloseButton && (
               <button
-                className="ctp-modal__close-btn"
+                className={cnEl(prefix, 'modal', 'close-btn')}
                 onClick={onClose}
                 aria-label="Close modal"
               >
@@ -69,8 +72,8 @@ export const Modal: React.FC<ModalProps> = ({
             )}
           </div>
         )}
-        <div className="ctp-modal__body">{children}</div>
-        {footer && <div className="ctp-modal__footer">{footer}</div>}
+        <div className={cnEl(prefix, 'modal', 'body')}>{children}</div>
+        {footer && <div className={cnEl(prefix, 'modal', 'footer')}>{footer}</div>}
       </div>
     </Overlay>
   );

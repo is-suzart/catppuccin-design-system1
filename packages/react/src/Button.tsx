@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type ButtonVariant = 'filled' | 'tonal' | 'outline' | 'ghost';
 export type ButtonColor =
@@ -46,13 +48,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const prefix = usePrefix();
     const classNames = [
-      'ctp-btn',
-      `ctp-btn--${variant}`,
-      `ctp-btn--${color}`,
-      `ctp-btn--${size}`,
-      `ctp-btn--${shape}`,
-      isLoading ? 'ctp-btn--loading' : '',
+      cn(prefix, 'btn', [variant, color, size, shape, isLoading ? 'loading' : undefined]),
       className,
     ]
       .filter(Boolean)
@@ -65,11 +63,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         {...props}
       >
-        <span className="ctp-btn__content">
-          {isLoading && <span className="ctp-btn__spinner" aria-hidden="true" />}
-          {!isLoading && leftIcon && <span className="ctp-btn__icon-left" style={{ display: 'inline-flex', alignItems: 'center' }}>{leftIcon}</span>}
+        <span className={cnEl(prefix, 'btn', 'content')}>
+          {isLoading && <span className={cnEl(prefix, 'btn', 'spinner')} aria-hidden="true" />}
+          {!isLoading && leftIcon && <span className={cnEl(prefix, 'btn', 'icon-left')} style={{ display: 'inline-flex', alignItems: 'center' }}>{leftIcon}</span>}
           {children}
-          {!isLoading && rightIcon && <span className="ctp-btn__icon-right" style={{ display: 'inline-flex', alignItems: 'center' }}>{rightIcon}</span>}
+          {!isLoading && rightIcon && <span className={cnEl(prefix, 'btn', 'icon-right')} style={{ display: 'inline-flex', alignItems: 'center' }}>{rightIcon}</span>}
         </span>
       </button>
     );

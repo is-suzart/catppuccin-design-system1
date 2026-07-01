@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type BadgeVariant = 'filled' | 'tonal' | 'outline' | 'flat';
 export type BadgeSize = 'sm' | 'md' | 'lg';
@@ -41,12 +43,9 @@ export const Badge: React.FC<BadgeProps> = ({
   children,
   ...props
 }) => {
+  const prefix = usePrefix();
   const classNames = [
-    'ctp-badge',
-    `ctp-badge--${variant}`,
-    `ctp-badge--${size}`,
-    `ctp-badge--${shape}`,
-    `ctp-badge--${color}`,
+    cn(prefix, 'badge', [variant, size, shape, color]),
     className,
   ]
     .filter(Boolean)
@@ -54,11 +53,11 @@ export const Badge: React.FC<BadgeProps> = ({
 
   return (
     <span className={classNames} {...props}>
-      {icon && <span className="ctp-badge__icon" style={{ display: 'inline-flex', alignItems: 'center' }}>{icon}</span>}
-      <span className="ctp-badge__content">{children}</span>
+      {icon && <span className={cnEl(prefix, 'badge', 'icon')} style={{ display: 'inline-flex', alignItems: 'center' }}>{icon}</span>}
+      <span className={cnEl(prefix, 'badge', 'content')}>{children}</span>
       {isDismissible && (
         <button
-          className="ctp-badge__close-btn"
+          className={cnEl(prefix, 'badge', 'close-btn')}
           onClick={onDismiss}
           aria-label="Dismiss badge"
           style={{ display: 'inline-flex', alignItems: 'center', marginLeft: '4px' }}

@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type SkeletonVariant = 'text' | 'circle' | 'rect';
 export type SkeletonSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -26,12 +28,9 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   gap = '8px',
   children,
 }) => {
+  const prefix = usePrefix();
   const classes = [
-    'ctp-skeleton',
-    `ctp-skeleton--${variant}`,
-    `ctp-skeleton--${size}`,
-    !animated ? 'ctp-skeleton--no-animation' : '',
-    width ? '' : 'ctp-skeleton--full',
+    cn(prefix, 'skeleton', [variant, size, animated ? '' : 'no-animation', width ? '' : 'full']),
     className,
   ]
     .filter(Boolean)

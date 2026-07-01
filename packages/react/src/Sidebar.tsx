@@ -1,4 +1,6 @@
 import React, { useState, ReactNode, createContext, useContext } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Visual variant: inline fixed or modern floating card */
@@ -74,22 +76,19 @@ export const Sidebar: React.FC<SidebarProps> & {
   style,
   ...props
 }) => {
+  const prefix = usePrefix();
   const [localCollapsed, setLocalCollapsed] = useState(defaultCollapsed);
   const isCollapsed = collapsed !== undefined ? collapsed : localCollapsed;
 
   const wrapperClasses = [
-    'ctp-sidebar-wrapper',
-    isCollapsed ? 'ctp-sidebar-wrapper--collapsed' : '',
+    cn(prefix, 'sidebar-wrapper', [isCollapsed ? 'collapsed' : '']),
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
   const sidebarClasses = [
-    'ctp-sidebar',
-    `ctp-sidebar--${variant}`,
-    expandOnHover ? 'ctp-sidebar--expand-on-hover' : '',
-    isCollapsed ? 'ctp-sidebar--collapsed' : '',
+    cn(prefix, 'sidebar', [variant, expandOnHover ? 'expand-on-hover' : '', isCollapsed ? 'collapsed' : '']),
   ]
     .filter(Boolean)
     .join(' ');
@@ -120,8 +119,9 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-sidebar__header ${className}`} {...props}>
+    <div className={`${cnEl(prefix, 'sidebar', 'header')} ${className}`} {...props}>
       {children}
     </div>
   );
@@ -132,8 +132,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-sidebar__section ${className}`} {...props}>
+    <div className={`${cnEl(prefix, 'sidebar', 'section')} ${className}`} {...props}>
       {children}
     </div>
   );
@@ -150,11 +151,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   const Tag = as || (href ? 'a' : 'button');
   
   const classes = [
-    'ctp-sidebar__item',
-    active ? 'ctp-sidebar__item--active' : '',
+    cn(prefix, 'sidebar__item', [active ? 'active' : '']),
     className,
   ]
     .filter(Boolean)
@@ -175,9 +176,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 
   return (
     <Tag {...componentProps}>
-      {icon && <span className="ctp-sidebar__item-icon">{icon}</span>}
+      {icon && <span className={cnEl(prefix, 'sidebar', 'item-icon')}>{icon}</span>}
       {(label || children) && (
-        <span className="ctp-sidebar__label">
+        <span className={cnEl(prefix, 'sidebar', 'label')}>
           {label || children}
         </span>
       )}
@@ -190,8 +191,9 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-sidebar__footer ${className}`} {...props}>
+    <div className={`${cnEl(prefix, 'sidebar', 'footer')} ${className}`} {...props}>
       {children}
     </div>
   );

@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface ScrollAreaProps {
   children: React.ReactNode;
@@ -11,6 +13,7 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
   className = '',
   style,
 }) => {
+  const prefix = usePrefix();
   const viewportRef = useRef<HTMLDivElement>(null);
   const verticalThumbRef = useRef<HTMLDivElement>(null);
   const horizontalThumbRef = useRef<HTMLDivElement>(null);
@@ -88,18 +91,18 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
   }, [isDragging, thumbHeight, thumbWidth]);
 
   return (
-    <div className={`ctp-scroll-area ${className}`} style={style}>
-      <div ref={viewportRef} className="ctp-scroll-area__viewport">
+    <div className={`${cn(prefix, 'scroll-area')} ${className}`} style={style}>
+      <div ref={viewportRef} className={cnEl(prefix, 'scroll-area', 'viewport')}>
         {children}
       </div>
       {showVertical && (
         <div
-          className="ctp-scroll-area__scrollbar ctp-scroll-area__scrollbar--vertical"
+          className={`${cnEl(prefix, 'scroll-area', 'scrollbar')} ${prefix}-scroll-area__scrollbar--vertical`}
           style={{ opacity: isDragging === 'vertical' ? 1 : 0.6 }}
         >
           <div
             ref={verticalThumbRef}
-            className="ctp-scroll-area__thumb"
+            className={cnEl(prefix, 'scroll-area', 'thumb')}
             style={{ height: thumbHeight, transform: `translateY(${thumbTop}px)` }}
             onMouseDown={() => setIsDragging('vertical')}
           />
@@ -107,18 +110,18 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
       )}
       {showHorizontal && (
         <div
-          className="ctp-scroll-area__scrollbar ctp-scroll-area__scrollbar--horizontal"
+          className={`${cnEl(prefix, 'scroll-area', 'scrollbar')} ${prefix}-scroll-area__scrollbar--horizontal`}
           style={{ opacity: isDragging === 'horizontal' ? 1 : 0.6 }}
         >
           <div
             ref={horizontalThumbRef}
-            className="ctp-scroll-area__thumb"
+            className={cnEl(prefix, 'scroll-area', 'thumb')}
             style={{ width: thumbWidth, transform: `translateX(${thumbLeft}px)` }}
             onMouseDown={() => setIsDragging('horizontal')}
           />
         </div>
       )}
-      {showVertical && showHorizontal && <div className="ctp-scroll-area__corner" />}
+      {showVertical && showHorizontal && <div className={cnEl(prefix, 'scroll-area', 'corner')} />}
     </div>
   );
 };

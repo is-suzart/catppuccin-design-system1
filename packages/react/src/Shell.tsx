@@ -1,4 +1,6 @@
 import React, { ReactNode } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type ShellLayout = 'header-first' | 'sidebar-first' | 'simple' | 'custom';
 
@@ -64,13 +66,9 @@ export const Shell: React.FC<ShellProps> & {
   style,
   ...props
 }) => {
+  const prefix = usePrefix();
   const classes = [
-    'ctp-shell',
-    `ctp-shell--${layout}`,
-    fullScreen ? 'ctp-shell--full-screen' : '',
-    sidebarCollapsed ? 'ctp-shell--sidebar-collapsed' : '',
-    sidebarMini && !sidebarCollapsed ? 'ctp-shell--sidebar-mini' : '',
-    sidebarMobileOpen ? 'ctp-shell--sidebar-mobile-open' : '',
+    cn(prefix, 'shell', [layout, fullScreen ? 'full-screen' : '', sidebarCollapsed ? 'sidebar-collapsed' : '', sidebarMini && !sidebarCollapsed ? 'sidebar-mini' : '', sidebarMobileOpen ? 'sidebar-mobile-open' : '']),
     className,
   ]
     .filter(Boolean)
@@ -90,7 +88,7 @@ export const Shell: React.FC<ShellProps> & {
     <div className={classes} style={combinedStyle} {...props}>
       {children}
       {/* Backdrop for mobile overlays */}
-      <div className="ctp-shell__backdrop" onClick={onBackdropClick} />
+      <div className={cnEl(prefix, 'shell', 'backdrop')} onClick={onBackdropClick} />
     </div>
   );
 };
@@ -100,8 +98,9 @@ const ShellHeader: React.FC<ShellHeaderProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <header className={`ctp-shell__header ${className}`} {...props}>
+    <header className={`${cnEl(prefix, 'shell', 'header')} ${className}`} {...props}>
       {children}
     </header>
   );
@@ -112,8 +111,9 @@ const ShellSidebar: React.FC<ShellSidebarProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <aside className={`ctp-shell__sidebar ${className}`} {...props}>
+    <aside className={`${cnEl(prefix, 'shell', 'sidebar')} ${className}`} {...props}>
       {children}
     </aside>
   );
@@ -124,8 +124,9 @@ const ShellMain: React.FC<ShellMainProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <main className={`ctp-shell__main ${className}`} {...props}>
+    <main className={`${cnEl(prefix, 'shell', 'main')} ${className}`} {...props}>
       {children}
     </main>
   );
@@ -137,9 +138,9 @@ const ShellContent: React.FC<ShellContentProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   const classes = [
-    'ctp-shell__content',
-    scrollable ? 'ctp-shell__content--scrollable' : '',
+    cn(prefix, 'shell__content', [scrollable ? 'scrollable' : '']),
     className,
   ]
     .filter(Boolean)

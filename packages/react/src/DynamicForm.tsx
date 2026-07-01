@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 import {
   FormGroup,
   Input,
@@ -103,6 +105,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
   shape = 'rounded',
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [values, setValues] = useState<Record<string, any>>(() => getInitialValues(schema));
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -338,8 +341,8 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`ctp-form ${className}`} noValidate>
-      <div className="ctp-form-grid">
+    <form onSubmit={handleSubmit} className={`${cn(prefix, 'form')} ${className}`} noValidate>
+      <div className={cnEl(prefix, 'form', 'grid')}>
         {schema.map((field) => {
           const isCheckOrSwitch = field.type === 'checkbox' || field.type === 'switch';
           return (
@@ -358,7 +361,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
         })}
 
         {/* Action Buttons Row */}
-        <div className="ctp-form-col-12" style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
+        <div className={`${prefix}-form-col-12`} style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
           <Button
             type="submit"
             color={submitButtonColor}

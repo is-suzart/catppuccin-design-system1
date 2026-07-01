@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { usePrefix } from './PrefixContext';
+import { cn } from './cn';
 
 export interface OverlayProps {
   isOpen: boolean;
@@ -21,6 +23,7 @@ export const Overlay: React.FC<OverlayProps> = ({
   children,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [shouldRender, setShouldRender] = useState(isOpen);
   const [isAnimatedIn, setIsAnimatedIn] = useState(false);
   const [zIndex, setZIndex] = useState(1000);
@@ -116,7 +119,7 @@ export const Overlay: React.FC<OverlayProps> = ({
 
   const overlayElement = (
     <div
-      className={`ctp-overlay ${isAnimatedIn ? 'ctp-overlay--open' : ''} ${className}`}
+      className={`${cn(prefix, 'overlay', [isAnimatedIn ? 'open' : undefined])} ${className}`}
       onClick={handleOverlayClick}
       style={{ zIndex }}
       role="presentation"

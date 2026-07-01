@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type CardVariant = 'filled' | 'elevated' | 'outline' | 'flat' | 'colored';
 export type CardShape = 'square' | 'rounded' | 'pill';
@@ -45,14 +47,16 @@ export const Card: React.FC<CardProps> & {
   children,
   ...props
 }) => {
+  const prefix = usePrefix();
   const classNames = [
-    'ctp-card',
-    `ctp-card--${variant}`,
-    `ctp-card--${shape}`,
-    `ctp-card--padding-${padding}`,
-    accentColor ? `ctp-card--${accentColor}` : '',
-    accentColor && accentPosition !== 'none' ? `ctp-card--accent-${accentPosition}` : '',
-    isInteractive ? 'ctp-card--interactive' : '',
+    cn(prefix, 'card', [
+      variant,
+      shape,
+      `padding-${padding}`,
+      accentColor,
+      accentColor && accentPosition !== 'none' ? `accent-${accentPosition}` : undefined,
+      isInteractive ? 'interactive' : undefined,
+    ]),
     className,
   ]
     .filter(Boolean)
@@ -81,17 +85,18 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
   children,
   ...props
 }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-card__header ${className}`} {...props}>
-      {avatar && <div className="ctp-card__avatar">{avatar}</div>}
+    <div className={`${cnEl(prefix, 'card', 'header')} ${className}`} {...props}>
+      {avatar && <div className={cnEl(prefix, 'card', 'avatar')}>{avatar}</div>}
       {(title || subtitle) && (
-        <div className="ctp-card__header-content">
-          {title && <h3 className="ctp-card__title">{title}</h3>}
-          {subtitle && <p className="ctp-card__subtitle">{subtitle}</p>}
+        <div className={cnEl(prefix, 'card', 'header-content')}>
+          {title && <h3 className={cnEl(prefix, 'card', 'title')}>{title}</h3>}
+          {subtitle && <p className={cnEl(prefix, 'card', 'subtitle')}>{subtitle}</p>}
         </div>
       )}
       {children}
-      {actions && <div className="ctp-card__actions">{actions}</div>}
+      {actions && <div className={cnEl(prefix, 'card', 'actions')}>{actions}</div>}
     </div>
   );
 };
@@ -99,8 +104,9 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
 export interface CardBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const CardBody: React.FC<CardBodyProps> = ({ className = '', children, ...props }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-card__body ${className}`} {...props}>
+    <div className={`${cnEl(prefix, 'card', 'body')} ${className}`} {...props}>
       {children}
     </div>
   );
@@ -109,8 +115,9 @@ export const CardBody: React.FC<CardBodyProps> = ({ className = '', children, ..
 export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const CardFooter: React.FC<CardFooterProps> = ({ className = '', children, ...props }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-card__footer ${className}`} {...props}>
+    <div className={`${cnEl(prefix, 'card', 'footer')} ${className}`} {...props}>
       {children}
     </div>
   );
@@ -122,8 +129,9 @@ export interface CardMediaProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const CardMedia: React.FC<CardMediaProps> = ({ src, alt = '', className = '', children, ...props }) => {
+  const prefix = usePrefix();
   return (
-    <div className={`ctp-card__media ${className}`} {...props}>
+    <div className={`${cnEl(prefix, 'card', 'media')} ${className}`} {...props}>
       {src ? <img src={src} alt={alt} /> : children}
     </div>
   );

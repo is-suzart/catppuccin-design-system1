@@ -7,6 +7,8 @@ import React, {
 } from 'react';
 import ReactDOM from 'react-dom';
 import { usePortalPosition, Placement } from './usePortalPosition';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 import { FormControlColor } from './FormControls';
 
 // ──────────────────────────────────────────────
@@ -119,6 +121,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
   onDayClick,
   onDayHover,
 }) => {
+  const prefix = usePrefix();
   const firstDay = startOfMonth(viewYear, viewMonth);
   const startWeekday = firstDay.getDay(); // 0=Sun
   const daysInMonth = getDaysInMonth(viewYear, viewMonth);
@@ -130,15 +133,15 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
   }
 
   return (
-    <div className="ctp-datepicker__grid">
+    <div className={cnEl(prefix, 'datepicker', 'grid')}>
       {DAYS.map((day) => (
-        <div key={day} className="ctp-datepicker__weekday">
+        <div key={day} className={cnEl(prefix, 'datepicker', 'weekday')}>
           {day}
         </div>
       ))}
       {cells.map((date, idx) => {
         if (!date) {
-          return <div key={`empty-${idx}`} className="ctp-datepicker__cell ctp-datepicker__cell--empty" />;
+          return <div key={`empty-${idx}`} className={`${cnEl(prefix, 'datepicker', 'cell')} ${prefix}-datepicker__cell--empty`} />;
         }
 
         const isDisabled =
@@ -161,15 +164,15 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
         }
 
         const classes = [
-          'ctp-datepicker__cell',
-          isDisabled ? 'ctp-datepicker__cell--disabled' : '',
-          isToday ? 'ctp-datepicker__cell--today' : '',
-          isSelected ? `ctp-datepicker__cell--selected ctp-datepicker__cell--${color}` : '',
-          isRangeStart ? `ctp-datepicker__cell--range-start ctp-datepicker__cell--${color}` : '',
-          isRangeEnd ? `ctp-datepicker__cell--range-end ctp-datepicker__cell--${color}` : '',
-          isInRange ? `ctp-datepicker__cell--in-range ctp-datepicker__cell--in-range-${color}` : '',
+          cnEl(prefix, 'datepicker', 'cell'),
+          isDisabled ? `${prefix}-datepicker__cell--disabled` : '',
+          isToday ? `${prefix}-datepicker__cell--today` : '',
+          isSelected ? `${prefix}-datepicker__cell--selected ${prefix}-datepicker__cell--${color}` : '',
+          isRangeStart ? `${prefix}-datepicker__cell--range-start ${prefix}-datepicker__cell--${color}` : '',
+          isRangeEnd ? `${prefix}-datepicker__cell--range-end ${prefix}-datepicker__cell--${color}` : '',
+          isInRange ? `${prefix}-datepicker__cell--in-range ${prefix}-datepicker__cell--in-range-${color}` : '',
           !isDisabled && !isSelected && !isRangeStart && !isRangeEnd
-            ? `ctp-datepicker__cell--hover-${color}`
+            ? `${prefix}-datepicker__cell--hover-${color}`
             : '',
         ]
           .filter(Boolean)
@@ -231,18 +234,19 @@ const CalendarPopover: React.FC<CalendarPopoverProps> = ({
   color,
   children,
 }) => {
+  const prefix = usePrefix();
   return ReactDOM.createPortal(
     <div
       ref={floatingRef}
-      className={`ctp-datepicker__popover ctp-datepicker__popover--${actualPlacement}`}
+      className={`${cnEl(prefix, 'datepicker', 'popover')} ${prefix}-datepicker__popover--${actualPlacement}`}
       style={{ position: 'fixed', top, left, zIndex: 1200 }}
       onMouseDown={(e) => e.stopPropagation()}
     >
       {/* Header */}
-      <div className="ctp-datepicker__header">
+      <div className={cnEl(prefix, 'datepicker', 'header')}>
         <button
           type="button"
-          className="ctp-datepicker__nav-btn"
+          className={cnEl(prefix, 'datepicker', 'nav-btn')}
           onClick={onPrevYear}
           aria-label="Ano anterior"
         >
@@ -250,21 +254,21 @@ const CalendarPopover: React.FC<CalendarPopoverProps> = ({
         </button>
         <button
           type="button"
-          className="ctp-datepicker__nav-btn"
+          className={cnEl(prefix, 'datepicker', 'nav-btn')}
           onClick={onPrevMonth}
           aria-label="Mês anterior"
         >
           ‹
         </button>
 
-        <div className="ctp-datepicker__header-label">
-          <span className="ctp-datepicker__month-label">{MONTHS[viewMonth]}</span>
-          <span className="ctp-datepicker__year-label">{viewYear}</span>
+        <div className={cnEl(prefix, 'datepicker', 'header-label')}>
+          <span className={cnEl(prefix, 'datepicker', 'month-label')}>{MONTHS[viewMonth]}</span>
+          <span className={cnEl(prefix, 'datepicker', 'year-label')}>{viewYear}</span>
         </div>
 
         <button
           type="button"
-          className="ctp-datepicker__nav-btn"
+          className={cnEl(prefix, 'datepicker', 'nav-btn')}
           onClick={onNextMonth}
           aria-label="Próximo mês"
         >
@@ -272,7 +276,7 @@ const CalendarPopover: React.FC<CalendarPopoverProps> = ({
         </button>
         <button
           type="button"
-          className="ctp-datepicker__nav-btn"
+          className={cnEl(prefix, 'datepicker', 'nav-btn')}
           onClick={onNextYear}
           aria-label="Próximo ano"
         >
@@ -285,10 +289,10 @@ const CalendarPopover: React.FC<CalendarPopoverProps> = ({
 
       {/* Footer */}
       {showToday && (
-        <div className="ctp-datepicker__footer">
+        <div className={cnEl(prefix, 'datepicker', 'footer')}>
           <button
             type="button"
-            className={`ctp-datepicker__today-btn ctp-datepicker__today-btn--${color}`}
+            className={`${cnEl(prefix, 'datepicker', 'today-btn')} ${prefix}-datepicker__today-btn--${color}`}
             onClick={onTodayClick}
           >
             Hoje
@@ -320,6 +324,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   placement = 'bottom-start',
   className = '',
 }) => {
+  const prefix = usePrefix();
   const today = new Date();
   const initialDate = value || (rangeValue?.start) || today;
 
@@ -435,15 +440,15 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     mode === 'single' ? 'Selecionar data...' : 'Selecionar intervalo...';
 
   return (
-    <div className={`ctp-datepicker ${className}`}>
+    <div className={`${cn(prefix, 'datepicker')} ${className}`}>
       <button
         ref={triggerRef as React.RefObject<HTMLButtonElement>}
         type="button"
         className={[
-          'ctp-datepicker__trigger',
-          `ctp-datepicker__trigger--${color}`,
-          disabled ? 'ctp-datepicker__trigger--disabled' : '',
-          isOpen ? 'ctp-datepicker__trigger--open' : '',
+          cnEl(prefix, 'datepicker', 'trigger'),
+          `${prefix}-datepicker__trigger--${color}`,
+          disabled ? `${prefix}-datepicker__trigger--disabled` : '',
+          isOpen ? `${prefix}-datepicker__trigger--open` : '',
         ].filter(Boolean).join(' ')}
         onClick={() => !disabled && setIsOpen(o => !o)}
         disabled={disabled}
@@ -451,7 +456,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         aria-expanded={isOpen}
       >
         <svg
-          className="ctp-datepicker__icon"
+          className={cnEl(prefix, 'datepicker', 'icon')}
           width="16"
           height="16"
           viewBox="0 0 24 24"
@@ -467,11 +472,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           <line x1="8" y1="2" x2="8" y2="6" />
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
-        <span className={displayValue ? 'ctp-datepicker__value' : 'ctp-datepicker__placeholder'}>
+        <span className={displayValue ? `${prefix}-datepicker__value` : `${prefix}-datepicker__placeholder`}>
           {displayValue || (placeholder ?? defaultPlaceholder)}
         </span>
         <svg
-          className={`ctp-datepicker__chevron ${isOpen ? 'ctp-datepicker__chevron--open' : ''}`}
+          className={`${cnEl(prefix, 'datepicker', 'chevron')}${isOpen ? ` ${prefix}-datepicker__chevron--open` : ''}`}
           width="14"
           height="14"
           viewBox="0 0 24 24"

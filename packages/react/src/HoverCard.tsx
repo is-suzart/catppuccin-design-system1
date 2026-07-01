@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { usePortalPosition, type Placement } from './usePortalPosition';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface HoverCardProps {
   children: [React.ReactElement, React.ReactElement];
@@ -21,6 +23,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
   autoFlip = true,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLElement>(null);
   const floatingRef = useRef<HTMLDivElement>(null);
@@ -79,7 +82,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
       {isOpen && ReactDOM.createPortal(
         <div
           ref={floatingRef}
-          className={`ctp-hover-card ctp-hover-card--placement-${actualPlacement} ${className}`}
+          className={`${cn(prefix, 'hover-card', [`placement-${actualPlacement}`])} ${className}`}
           style={{
             position: 'fixed',
             top: `${top}px`,
@@ -89,7 +92,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
           onMouseEnter={() => clearTimeout(timeoutRef.current)}
           onMouseLeave={() => hide()}
         >
-          <div className="ctp-hover-card__arrow" />
+          <div className={cnEl(prefix, 'hover-card', 'arrow')} />
           {content}
         </div>,
         document.body

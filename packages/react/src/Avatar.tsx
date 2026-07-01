@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -26,6 +28,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   size = 'md',
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [imgError, setImgError] = useState(false);
   const showImage = src && !imgError;
 
@@ -34,11 +37,11 @@ export const Avatar: React.FC<AvatarProps> = ({
     : null;
 
   return (
-    <div className={`ctp-avatar ctp-avatar--${size} ${className}`} aria-label={alt || fallback || 'Avatar'}>
+    <div className={`${cn(prefix, 'avatar', [size])} ${className}`} aria-label={alt || fallback || 'Avatar'}>
       {showImage ? (
         <img src={src} alt={alt} onError={() => setImgError(true)} />
       ) : (
-        <span className="ctp-avatar__fallback">{initials || '?'}</span>
+        <span className={cnEl(prefix, 'avatar', 'fallback')}>{initials || '?'}</span>
       )}
     </div>
   );
@@ -61,15 +64,16 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 }) => {
   const items = React.Children.toArray(children).filter(Boolean);
   const visible = max ? items.slice(0, max) : items;
+  const prefix = usePrefix();
   const remaining = max ? Math.max(0, items.length - max) : 0;
 
   return (
-    <div className={`ctp-avatar-group ctp-avatar-group--${size} ${className}`}>
+    <div className={`${cn(prefix, 'avatar-group', [size])} ${className}`}>
       {React.Children.map(visible, (child, i) =>
         React.cloneElement(child as React.ReactElement<{ size?: AvatarSize }>, { size, key: i })
       )}
       {remaining > 0 && (
-        <span className="ctp-avatar-group__more" style={{ width: size === 'sm' ? 28 : size === 'lg' ? 48 : 36, height: size === 'sm' ? 28 : size === 'lg' ? 48 : 36 }}>
+        <span className={cnEl(prefix, 'avatar-group', 'more')} style={{ width: size === 'sm' ? 28 : size === 'lg' ? 48 : 36, height: size === 'sm' ? 28 : size === 'lg' ? 48 : 36 }}>
           +{remaining}
         </span>
       )}

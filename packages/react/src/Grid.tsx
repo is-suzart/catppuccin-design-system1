@@ -1,4 +1,6 @@
 import React, { ReactNode } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type GridGap = 0 | 1 | 2 | 3 | 4 | 5;
 export type GridAlign = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
@@ -39,17 +41,14 @@ export const Grid: React.FC<GridProps> & {
   className = '',
   ...props
 }) => {
-  const classes = [
-    'grid',
-    mobile ? 'grid--mobile' : '',
-    multiline ? 'grid--multiline' : '',
-    `grid--gap-${gap}`,
-    align ? `grid--align-${align}` : '',
-    valign ? `grid--valign-${valign}` : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const prefix = usePrefix();
+  const classes = cn(prefix, 'grid', [
+    mobile ? 'mobile' : undefined,
+    multiline ? 'multiline' : undefined,
+    `gap-${gap}`,
+    align ? `align-${align}` : undefined,
+    valign ? `valign-${valign}` : undefined,
+  ]) + (className ? ` ${className}` : '');
 
   return (
     <div className={classes} {...props}>
@@ -71,20 +70,19 @@ const GridCol: React.FC<GridColProps> = ({
   className = '',
   ...props
 }) => {
+  const prefix = usePrefix();
   const classes = [
-    'grid__col',
-    span ? `grid__col--${span}` : '',
-    sm ? `grid__col--sm-${sm}` : '',
-    md ? `grid__col--md-${md}` : '',
-    lg ? `grid__col--lg-${lg}` : '',
-    offset ? `grid__col--offset-${offset}` : '',
-    smOffset ? `grid__col--sm-offset-${smOffset}` : '',
-    mdOffset ? `grid__col--md-offset-${mdOffset}` : '',
-    lgOffset ? `grid__col--lg-offset-${lgOffset}` : '',
+    `${prefix}-grid__col`,
+    span ? `${prefix}-grid__col--${span}` : '',
+    sm ? `${prefix}-grid__col--sm-${sm}` : '',
+    md ? `${prefix}-grid__col--md-${md}` : '',
+    lg ? `${prefix}-grid__col--lg-${lg}` : '',
+    offset ? `${prefix}-grid__col--offset-${offset}` : '',
+    smOffset ? `${prefix}-grid__col--sm-offset-${smOffset}` : '',
+    mdOffset ? `${prefix}-grid__col--md-offset-${mdOffset}` : '',
+    lgOffset ? `${prefix}-grid__col--lg-offset-${lgOffset}` : '',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  ].filter(Boolean).join(' ');
 
   return (
     <div className={classes} {...props}>

@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type AccordionVariant = 'default' | 'split';
 export type AccordionAccentColor =
@@ -73,11 +75,12 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
   const { openValues } = useAccordion();
   const isOpen = openValues.includes(value);
+  const prefix = usePrefix();
 
   const classNames = [
-    'ctp-accordion__item',
-    isOpen ? 'ctp-accordion__item--open' : '',
-    disabled ? 'ctp-accordion__item--disabled' : '',
+    cnEl(prefix, 'accordion', 'item'),
+    isOpen ? `${prefix}-accordion__item--open` : '',
+    disabled ? `${prefix}-accordion__item--disabled` : '',
     className,
   ]
     .filter(Boolean)
@@ -104,6 +107,7 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
 }) => {
   const { toggleValue } = useAccordion();
   const { value, disabled, isOpen } = useAccordionItem();
+  const prefix = usePrefix();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (disabled) return;
@@ -116,16 +120,16 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   return (
     <button
       type="button"
-      className={`ctp-accordion__header ${className}`}
+      className={`${cnEl(prefix, 'accordion', 'header')} ${className}`}
       disabled={disabled}
       aria-expanded={isOpen}
       onClick={handleClick}
       {...props}
     >
-      <span className="ctp-accordion__title">{children}</span>
+      <span className={cnEl(prefix, 'accordion', 'title')}>{children}</span>
       {showChevron && (
         <svg
-          className="ctp-accordion__chevron"
+          className={cnEl(prefix, 'accordion', 'chevron')}
           viewBox="0 0 24 24"
         >
           <polyline points="6 9 12 15 18 9" />
@@ -143,14 +147,15 @@ export const AccordionBody: React.FC<AccordionBodyProps> = ({
   ...props
 }) => {
   const { isOpen } = useAccordionItem();
+  const prefix = usePrefix();
 
   return (
     <div
-      className="ctp-accordion__collapse"
+      className={cnEl(prefix, 'accordion', 'collapse')}
       aria-hidden={!isOpen}
     >
-      <div className="ctp-accordion__content">
-        <div className={`ctp-accordion__body ${className}`} {...props}>
+      <div className={cnEl(prefix, 'accordion', 'content')}>
+        <div className={`${cnEl(prefix, 'accordion', 'body')} ${className}`} {...props}>
           {children}
         </div>
       </div>
@@ -204,10 +209,10 @@ export const Accordion: React.FC<AccordionProps> & {
     }
   };
 
+  const prefix = usePrefix();
+
   const classNames = [
-    'ctp-accordion',
-    `ctp-accordion--${variant}`,
-    accentColor ? `ctp-accordion--${accentColor}` : '',
+    cn(prefix, 'accordion', [variant, accentColor].filter(Boolean) as string[]),
     className,
   ]
     .filter(Boolean)

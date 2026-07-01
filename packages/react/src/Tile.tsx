@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type TileVariant = 'flat' | 'elevated' | 'outline' | 'tonal' | 'colored';
 export type TileSize = 'sm' | 'md' | 'lg';
@@ -55,17 +57,19 @@ export const Tile: React.FC<TileProps> = ({
   children,
   ...props
 }) => {
+  const prefix = usePrefix();
   const classNames = [
-    'ctp-tile',
-    `ctp-tile--${variant}`,
-    `ctp-tile--${size}`,
-    `ctp-tile--${shape}`,
-    `ctp-tile--${orientation}`,
-    color ? `ctp-tile--${color}` : '',
-    indicator !== 'none' ? `ctp-tile--indicator-${indicator}` : '',
-    isInteractive ? 'ctp-tile--interactive' : '',
-    isSelected ? 'ctp-tile--selected' : '',
-    isDisabled ? 'ctp-tile--disabled' : '',
+    cn(prefix, 'tile', [
+      variant,
+      size,
+      shape,
+      orientation,
+      color,
+      indicator !== 'none' ? `indicator-${indicator}` : undefined,
+      isInteractive ? 'interactive' : undefined,
+      isSelected ? 'selected' : undefined,
+      isDisabled ? 'disabled' : undefined,
+    ]),
     className,
   ]
     .filter(Boolean)
@@ -77,14 +81,14 @@ export const Tile: React.FC<TileProps> = ({
         children
       ) : (
         <>
-          {icon && <div className="ctp-tile__icon">{icon}</div>}
+          {icon && <div className={cnEl(prefix, 'tile', 'icon')}>{icon}</div>}
           {(title || subtitle) && (
-            <div className="ctp-tile__content">
-              {title && <span className="ctp-tile__title">{title}</span>}
-              {subtitle && <span className="ctp-tile__subtitle">{subtitle}</span>}
+            <div className={cnEl(prefix, 'tile', 'content')}>
+              {title && <span className={cnEl(prefix, 'tile', 'title')}>{title}</span>}
+              {subtitle && <span className={cnEl(prefix, 'tile', 'subtitle')}>{subtitle}</span>}
             </div>
           )}
-          {meta && <div className="ctp-tile__meta">{meta}</div>}
+          {meta && <div className={cnEl(prefix, 'tile', 'meta')}>{meta}</div>}
         </>
       )}
     </div>

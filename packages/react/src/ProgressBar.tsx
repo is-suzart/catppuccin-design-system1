@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export type ProgressBarSize = 'sm' | 'md' | 'lg';
 export type ProgressBarColor =
@@ -44,6 +46,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   label,
   className = '',
 }) => {
+  const prefix = usePrefix();
+
   // Clamp value between 0 and max
   const normalizedValue = indeterminate ? 0 : Math.min(max, Math.max(0, value));
   const percent = max > 0 ? (normalizedValue / max) * 100 : 0;
@@ -51,12 +55,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   // Wrapper CSS classes
   const classes = [
-    'ctp-progressbar',
-    `ctp-progressbar--${size}`,
-    `ctp-progressbar--${color}`,
-    striped ? 'ctp-progressbar--striped' : '',
-    animated ? 'ctp-progressbar--animated' : '',
-    indeterminate ? 'ctp-progressbar--indeterminate' : '',
+    cn(prefix, 'progressbar', [
+      size,
+      color,
+      striped ? 'striped' : undefined,
+      animated ? 'animated' : undefined,
+      indeterminate ? 'indeterminate' : undefined,
+    ]),
     className,
   ]
     .filter(Boolean)
@@ -67,10 +72,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     if (!label && !(showValue && valuePosition === 'outside')) return null;
 
     return (
-      <div className="ctp-progressbar-label-group">
-        {label && <span className="ctp-progressbar-label">{label}</span>}
+      <div className={cnEl(prefix, 'progressbar', 'label-group')}>
+        {label && <span className={cnEl(prefix, 'progressbar', 'label')}>{label}</span>}
         {showValue && valuePosition === 'outside' && !indeterminate && (
-          <span className="ctp-progressbar-value-text">{progressPercent}%</span>
+          <span className={cnEl(prefix, 'progressbar', 'value-text')}>{progressPercent}%</span>
         )}
       </div>
     );
@@ -86,13 +91,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       aria-label={label}
     >
       {renderLabelGroup()}
-      <div className="ctp-progressbar-track">
+      <div className={cnEl(prefix, 'progressbar', 'track')}>
         <div
-          className="ctp-progressbar-fill"
+          className={cnEl(prefix, 'progressbar', 'fill')}
           style={indeterminate ? undefined : { width: `${percent}%` }}
         >
           {showValue && valuePosition === 'inside' && size === 'lg' && !indeterminate && (
-            <span className="ctp-progressbar-value-inside">{progressPercent}%</span>
+            <span className={cnEl(prefix, 'progressbar', 'value-inside')}>{progressPercent}%</span>
           )}
         </div>
       </div>

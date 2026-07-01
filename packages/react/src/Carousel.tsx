@@ -1,4 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface CarouselProps {
   children: React.ReactNode;
@@ -17,6 +19,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   autoPlayInterval = 4000,
   className = '',
 }) => {
+  const prefix = usePrefix();
   const [current, setCurrent] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
@@ -41,15 +44,15 @@ export const Carousel: React.FC<CarouselProps> = ({
   if (total === 0) return null;
 
   return (
-    <div className={`ctp-carousel ${className}`} role="region" aria-label="Carousel">
-      <div className="ctp-carousel__viewport">
+    <div className={`${cn(prefix, 'carousel')} ${className}`} role="region" aria-label="Carousel">
+      <div className={cnEl(prefix, 'carousel', 'viewport')}>
         <div
           ref={trackRef}
-          className="ctp-carousel__track"
+          className={cnEl(prefix, 'carousel', 'track')}
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {slides.map((slide, i) => (
-            <div key={i} className="ctp-carousel__slide" role="group" aria-roledescription="slide" aria-label={`Slide ${i + 1} of ${total}`}>
+            <div key={i} className={cnEl(prefix, 'carousel', 'slide')} role="group" aria-roledescription="slide" aria-label={`Slide ${i + 1} of ${total}`}>
               {slide}
             </div>
           ))}
@@ -57,12 +60,12 @@ export const Carousel: React.FC<CarouselProps> = ({
       </div>
       {showArrows && total > 1 && (
         <>
-          <button className="ctp-carousel__btn ctp-carousel__btn--prev" onClick={prev} aria-label="Previous slide" disabled={current === 0}>
+          <button className={`${cnEl(prefix, 'carousel', 'btn')} ${prefix}-carousel__btn--prev`} onClick={prev} aria-label="Previous slide" disabled={current === 0}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
-          <button className="ctp-carousel__btn ctp-carousel__btn--next" onClick={next} aria-label="Next slide" disabled={current === total - 1}>
+          <button className={`${cnEl(prefix, 'carousel', 'btn')} ${prefix}-carousel__btn--next`} onClick={next} aria-label="Next slide" disabled={current === total - 1}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
@@ -70,11 +73,11 @@ export const Carousel: React.FC<CarouselProps> = ({
         </>
       )}
       {showDots && total > 1 && (
-        <div className="ctp-carousel__dots" role="tablist" aria-label="Slides">
+        <div className={cnEl(prefix, 'carousel', 'dots')} role="tablist" aria-label="Slides">
           {slides.map((_, i) => (
             <button
               key={i}
-              className={`ctp-carousel__dot${i === current ? ' ctp-carousel__dot--active' : ''}`}
+              className={`${cnEl(prefix, 'carousel', 'dot')}${i === current ? ` ${prefix}-carousel__dot--active` : ''}`}
               onClick={() => goTo(i)}
               role="tab"
               aria-selected={i === current}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { ButtonColor } from './Button';
+import { usePrefix } from './PrefixContext';
+import { cn, cnEl } from './cn';
 
 export interface StepItem {
   label: string;
@@ -36,12 +38,10 @@ export const Stepper: React.FC<StepperProps> = ({
   const totalSteps = steps.length;
   const segments = Math.max(1, totalSteps - 1);
   const progressPercent = Math.min(100, Math.max(0, (currentStep / segments) * 100));
+  const prefix = usePrefix();
 
   const wrapperClassNames = [
-    'ctp-stepper-wrapper',
-    `ctp-stepper--${orientation}`,
-    `ctp-stepper--${variant}`,
-    `ctp-stepper--${color}`,
+    cn(prefix, 'stepper-wrapper', [orientation, variant, color]),
     className,
   ]
     .filter(Boolean)
@@ -55,8 +55,8 @@ export const Stepper: React.FC<StepperProps> = ({
   return (
     <div className={wrapperClassNames} style={cssStyle}>
       {/* Background line track */}
-      <div className="ctp-stepper__track">
-        <div className="ctp-stepper__track-active" />
+      <div className={cnEl(prefix, 'stepper', 'track')}>
+        <div className={cnEl(prefix, 'stepper', 'track-active')} />
       </div>
 
       {/* Render Steps */}
@@ -66,8 +66,8 @@ export const Stepper: React.FC<StepperProps> = ({
         else if (index === currentStep) status = 'active';
 
         const stepClassNames = [
-          'ctp-stepper__step',
-          `ctp-stepper__step--${status}`,
+          cnEl(prefix, 'stepper', 'step'),
+          `${prefix}-stepper__step--${status}`,
         ].join(' ');
 
         // Compute what to render inside the node circle
@@ -85,15 +85,15 @@ export const Stepper: React.FC<StepperProps> = ({
         return (
           <div key={index} className={stepClassNames}>
             {/* Step node icon / dot / number */}
-            <div className="ctp-stepper__node">
+            <div className={cnEl(prefix, 'stepper', 'node')}>
               {nodeContent}
             </div>
 
             {/* Vertical track segment inside step item for vertical layout styling */}
             {orientation === 'vertical' && index < totalSteps - 1 && (
-              <div className="ctp-stepper__track">
+              <div className={cnEl(prefix, 'stepper', 'track')}>
                 <div 
-                  className="ctp-stepper__track-active" 
+                  className={cnEl(prefix, 'stepper', 'track-active')} 
                   style={{ 
                     height: index < currentStep ? '100%' : index === currentStep ? '50%' : '0%' 
                   }} 
@@ -103,10 +103,10 @@ export const Stepper: React.FC<StepperProps> = ({
 
             {/* Labels (skip rendering labels on horizontal if dot variant is active) */}
             {!(variant === 'dots' && orientation === 'horizontal') && (
-              <div className="ctp-stepper__label-group">
-                <h4 className="ctp-stepper__title">{step.label}</h4>
+              <div className={cnEl(prefix, 'stepper', 'label-group')}>
+                <h4 className={cnEl(prefix, 'stepper', 'title')}>{step.label}</h4>
                 {step.description && (
-                  <p className="ctp-stepper__description">{step.description}</p>
+                  <p className={cnEl(prefix, 'stepper', 'description')}>{step.description}</p>
                 )}
               </div>
             )}
