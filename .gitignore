@@ -83,3 +83,7 @@ out/
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# AI Tools
+.ai
+.ai/

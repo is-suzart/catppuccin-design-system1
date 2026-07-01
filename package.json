@@ -6,7 +6,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=apps/showcase",
-    "build": "npm run build --workspaces --if-present"
+    "dev": "bun --filter catppuccin-showcase dev",
+    "build": "bun --filter \"*\" build"
   }
 }
