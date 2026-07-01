@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="mocha">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catppuccin DS — Standalone Neutral CSS Demo</title>
+  <!-- Load the local compiled prefix-free CSS stylesheet -->
+  <link rel="stylesheet" href="./packages/css/dist/neutral.css">
+  
+  <style>
+    /* Custom Demo-specific Page Layout */
+    body {
+      background-color: var(--ctp-crust);
+      color: var(--ctp-text);
+      margin: 0;
+      padding: 0;
+      font-family: var(--ctp-font-family);
+      min-height: 100vh;
+    }
+
+    .demo-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .demo-subtitle {
+      color: var(--ctp-subtext1);
+      font-size: 1.15rem;
+      margin-top: -0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .demo-section {
+      margin-bottom: 4.5rem;
+      background-color: var(--ctp-base);
+      border: 1.5px solid var(--ctp-surface0);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: var(--ctp-shadow-md);
+    }
+
+    .demo-section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--ctp-surface1);
+      padding-bottom: 0.8rem;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .demo-flex-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .code-tag {
+      background-color: var(--ctp-mantle);
+      color: var(--ctp-rosewater);
+      font-family: monospace;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .theme-switcher {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle Option -->
+  <div class="theme-switcher">
+    <button id="themeToggleBtn" class="btn btn--tonal btn--mauve btn--sm btn--pill">
+      🌙 Alterar Tema
+    </button>
+  </div>
+
+  <div class="demo-container">
+    
+    <!-- Page Header -->
+    <header class="demo-header anim--fade-in">
+      <h1 class="title title--gradient-mauve-blue title--h1" style="font-size: 3rem; margin-bottom: 1rem;">
+        Catppuccin Design System
+      </h1>
+      <p class="demo-subtitle">
+        Demonstração de consumo independente usando classes CSS 100% puras e <strong>sem prefixos</strong> (<code class="code-tag">neutral.css</code>).
+      </p>
+      <div class="demo-flex-wrap" style="justify-content: center;">
+        <span class="badge badge--filled badge--mauve">Standalone CSS</span>
+        <span class="badge badge--filled badge--teal">No Prefix</span>
+        <span class="badge badge--filled badge--sapphire">High Performance</span>
+        <span class="badge badge--filled badge--rosewater">Aesthetics WOW</span>
+      </div>
+    </header>
+
+    <!-- SECTION 1: BUTTONS -->
+    <section class="demo-section anim--fade-up anim--delay-100">
+      <h2 class="demo-section-title text--mauve">🔘 Botões & Cores</h2>
+      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+        Utilizando classes limpas como <code class="code-tag">.btn</code>, variantes de estilo e mapeamento de tokens de cor do Catppuccin.
+      </p>
+      
+      <h4 style="margin: 1.5rem 0 0.8rem 0;">Variantes de Estilo</h4>
+      <div class="demo-flex-wrap">
+        <button class="btn btn--filled btn--mauve btn--md btn--rounded">Filled (Padrão)</button>
+        <button class="btn btn--tonal btn--mauve btn--md btn--rounded">Tonal Variant</button>
+        <button class="btn btn--outline btn--mauve btn--md btn--rounded">Outline Variant</button>
+        <button class="btn btn--ghost btn--mauve btn--md btn--rounded">Ghost Variant</button>
+      </div>
+
+      <h4 style="margin: 2rem 0 0.8rem 0;">Paleta de Cores do DS</h4>
+      <div class="demo-flex-wrap">
+        <button class="btn btn--filled btn--rosewater btn--md btn--rounded">Rosewater</button>
+        <button class="btn btn--filled btn--flamingo btn--md btn--rounded">Flamingo</button>
+        <button class="btn btn--filled btn--pink btn--md btn--rounded">Pink</button>
+        <button class="btn btn--filled btn--red btn--md btn--rounded">Red</button>
+        <button class="btn btn--filled btn--peach btn--md btn--rounded">Peach</button>
+        <button class="btn btn--filled btn--yellow btn--md btn--rounded">Yellow</button>
+        <button class="btn btn--filled btn--green btn--md btn--rounded">Green</button>
+        <button class="btn btn--filled btn--teal btn--md btn--rounded">Teal</button>
+        <button class="btn btn--filled btn--sky btn--md btn--rounded">Sky</button>
+        <button class="btn btn--filled btn--blue btn--md btn--rounded">Blue</button>
+        <button class="btn btn--filled btn--lavender btn--md btn--rounded">Lavender</button>
+      </div>
+
+      <h4 style="margin: 2rem 0 0.8rem 0;">Tamanhos & Formas</h4>
+      <div class="demo-flex-wrap">
+        <button class="btn btn--filled btn--teal btn--sm btn--square">Small Square</button>
+        <button class="btn btn--filled btn--teal btn--md btn--rounded">Medium Rounded</button>
+        <button class="btn btn--filled btn--teal btn--lg btn--pill">Large Pill</button>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CARDS & BADGES -->
+    <section class="demo-section anim--fade-up anim--delay-200">
+      <h2 class="demo-section-title text--pink">📇 Cards & Badges</h2>
+      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+        Exemplo de containers estruturados com <code class="code-tag">.card</code> e pequenas tags indicadoras com <code class="code-tag">.badge</code>.
+      </p>
+
+      <div class="demo-grid">
+        <!-- Card 1 -->
+        <div class="card card--filled card--rounded card--interactive">
+          <div class="card__header">
+            <div class="card__header-content">
+              <h3 class="card__title">Card Interativo</h3>
+              <p class="card__subtitle">Hover para ver efeito premium</p>
+            </div>
+            <span class="badge badge--filled badge--pink badge--sm badge--pill">New</span>
+          </div>
+          <div class="card__body">
+            Este card utiliza <code class="code-tag">.card--interactive</code> para aplicar micro-animações de elevação e brilho de forma sutil no hover.
+          </div>
+          <div class="card__footer">
+            <button class="btn btn--tonal btn--pink btn--sm btn--rounded">Ler Mais</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card card--outline card--rounded">
+          <div class="card__header">
+            <div class="card__header-content">
+              <h3 class="card__title">Card Contornado</h3>
+              <p class="card__subtitle">Estrutural / White-label</p>
+            </div>
+            <span class="badge badge--tonal badge--blue badge--sm badge--rounded">Specs</span>
+          </div>
+          <div class="card__body">
+            Variante <code class="code-tag">.card--outline</code> ideal para interfaces minimalistas que exigem contraste baseado em bordas finas.
+          </div>
+          <div class="card__footer" style="justify-content: flex-end;">
+            <button class="btn btn--ghost btn--blue btn--sm btn--rounded">Cancelar</button>
+            <button class="btn btn--filled btn--blue btn--sm btn--rounded">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ALERTS -->
+    <section class="demo-section anim--fade-up anim--delay-300">
+      <h2 class="demo-section-title text--green">⚠️ Alertas Reativos</h2>
+      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+        Estruturas CSS de notificação baseadas em classes BEM como <code class="code-tag">.alert</code> e manipuladas por JS nativo no cliente.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Success Alert -->
+        <div class="alert alert--success alert--dismissible" id="alertSuccess">
+          <div class="alert__icon">✓</div>
+          <div class="alert__content">
+            <div class="alert__title">Ação Concluída!</div>
+            <div class="alert__description">As classes CSS foram carregadas com sucesso a partir de neutral.css local.</div>
+          </div>
+          <button class="alert__close" onclick="dismissAlert('alertSuccess')" aria-label="Dismiss">✕</button>
+        </div>
+
+        <!-- Error Alert -->
+        <div class="alert alert--error alert--dismissible" id="alertError">
+          <div class="alert__icon">⚠</div>
+          <div class="alert__content">
+            <div class="alert__title">Erro Detectado</div>
+            <div class="alert__description">Esta é uma demonstração de alerta de erro usando puro HTML e CSS BEM.</div>
+          </div>
+          <button class="alert__close" onclick="dismissAlert('alertError')" aria-label="Dismiss">✕</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ANIMATIONS (STAGGER & SCROLL) -->
+    <section class="demo-section anim--fade-up anim--delay-500">
+      <h2 class="demo-section-title text--teal">⚡ Sistema de Animação & Stagger</h2>
+      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+        Utilize a classe <code class="code-tag">.anim-stagger</code> e as classes utilitárias de revelação para animar filhos em cascata de forma automatizada no CSS.
+      </p>
+
+      <button id="triggerStaggerBtn" class="btn btn--filled btn--teal btn--md btn--rounded" style="margin-bottom: 1.5rem;">
+        ⚡ Re-executar Animação Stagger
+      </button>
+
+      <!-- Stagger grid -->
+      <div id="staggerGroup" class="demo-grid anim-stagger">
+        <!-- Element 1 -->
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+          <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📁</div>
+            <strong>Elemento 1</strong>
+            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+          </div>
+        </div>
+        <!-- Element 2 -->
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+          <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚙️</div>
+            <strong>Elemento 2</strong>
+            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+          </div>
+        </div>
+        <!-- Element 3 -->
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+          <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+            <strong>Elemento 3</strong>
+            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+          </div>
+        </div>
+        <!-- Element 4 -->
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+          <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
+            <strong>Elemento 4</strong>
+            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Interactive Client-side Script -->
+  <script>
+    // Theme Toggling Logic
+    const htmlEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      const nextTheme = currentTheme === 'mocha' ? 'latte' : 'mocha';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      themeBtn.innerHTML = nextTheme === 'mocha' ? '🌙 Escuro (Mocha)' : '☀️ Claro (Latte)';
+    });
+
+    // Dismiss Alert Helper
+    function dismissAlert(id) {
+      const alertEl = document.getElementById(id);
+      if (alertEl) {
+        alertEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        alertEl.style.opacity = '0';
+        alertEl.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          alertEl.style.display = 'none';
+        }, 200);
+      }
+    }
+
+    // Trigger/Restart Stagger Animation
+    const staggerBtn = document.getElementById('triggerStaggerBtn');
+    const staggerGroup = document.getElementById('staggerGroup');
+
+    staggerBtn.addEventListener('click', () => {
+      const cards = staggerGroup.querySelectorAll('.card');
+      cards.forEach(card => {
+        // Remove animation class to reset state
+        card.classList.remove('anim--scale-in');
+        // Force reflow
+        void card.offsetWidth;
+        // Re-add animation class
+        card.classList.add('anim--scale-in');
+      });
+    });
+  </script>
+</body>
+</html>
