@@ -48,4 +48,5 @@ export * from './hover-card.component';
 export * from './command.component';
 export * from './carousel.component';
 export * from './scroll-area.component';
+export * from './animate.component';
 

@@ -58,6 +58,7 @@ import HoverCard from './HoverCard.vue';
 import Command from './Command.vue';
 import Carousel from './Carousel.vue';
 import ScrollArea from './ScrollArea.vue';
+import Animate from './Animate.vue';
 
 export {
   Button, Overlay, Modal, Steps, StepsSlider, Stepper,
@@ -75,7 +76,7 @@ export {
   Toast, Skeleton, Alert,
   Avatar, AvatarGroup, Breadcrumb,
   Popover, HoverCard,
-  Command, Carousel, ScrollArea,
+  Command, Carousel, ScrollArea, Animate,
 };
 
 export { toast } from './toast';
