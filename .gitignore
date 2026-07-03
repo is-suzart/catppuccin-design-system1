@@ -87,3 +87,6 @@ Thumbs.db
 # AI Tools
 .ai
 .ai/.yarn/install-state.gz
+
+# Yarn
+.yarn/install-state.gz
