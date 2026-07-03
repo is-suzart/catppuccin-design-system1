@@ -16,7 +16,7 @@ import {
   ButtonGroupItem,
   Accordion,
   ButtonGroupOrientation,
-
+  ButtonGroupVariant,
   ButtonGroupSelectionMode,
   Stepper,
   StepItem,
@@ -209,7 +209,7 @@ const colors: ColorInfo[] = [
 // Simple SVG Icons
 const HeartFillIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ display: 'block' }}>
-    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
   </svg>
 );
 
@@ -510,7 +510,7 @@ const iconList = [
 export default function App() {
   const [theme, setTheme] = useState<'macchiato' | 'mocha' | 'frappe' | 'latte'>('macchiato');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  
+
   // Navigation: buttons, buttongroup, stepper, modal, tabs, form, steps, progress, drawer, select, colorpicker, table, card, icons
   const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar' | 'skeleton' | 'alert' | 'avatar' | 'breadcrumb' | 'carousel' | 'toast' | 'pro'>('button');
 
@@ -536,6 +536,7 @@ export default function App() {
 
   // --- BUTTON GROUP PLAYGROUND STATES ---
   const [groupOrientation, setGroupOrientation] = useState<ButtonGroupOrientation>('horizontal');
+  const [groupLayoutVariant, setGroupLayoutVariant] = useState<ButtonGroupVariant>('filled');
   const [groupVariant, setGroupVariant] = useState<ButtonVariant>('filled');
   const [groupColor, setGroupColor] = useState<ButtonColor>('mauve');
   const [groupShape, setGroupShape] = useState<ButtonShape>('rounded');
@@ -670,13 +671,13 @@ export default function App() {
     if (!drawerShowCloseButton) props.push('showCloseButton={false}');
 
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    
+
     let footerStr = '';
     if (drawerShowFooter) {
       footerStr = `\n  footer={\n    <>\n      <Button variant="ghost" color="red" onClick={() => setIsDrawerOpen(false)}>Cancelar</Button>\n      <Button variant="filled" color="green" onClick={() => setIsDrawerOpen(false)}>Confirmar</Button>\n    </>\n  }`;
     }
 
-    return `<span class="hl-tag">&lt;Drawer</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}${footerStr ? '\n  ' + footerStr.replace(/\n/g, '\n  ') : ''}\n<span class="hl-tag">&gt;</span>\n  <span class="hl-text">&lt;p&gt;Conteúdo do Drawer...&lt;/p&gt;</span>\n<span class="hl-tag">&lt;/Drawer&gt;</span>`;
+    return `<span class="hl-tag">&lt;Drawer</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}${footerStr ? '\n  ' + footerStr.replace(/\n/g, '\n  ') : ''}\n<span class="hl-tag">&gt;</span>\n  <span class="hl-text">&lt;p&gt;Conteúdo do Drawer...&lt;/p&gt;</span>\n<span class="hl-tag">&lt;/Drawer&gt;</span>`;
   };
 
   const getVueDrawerCode = () => {
@@ -690,7 +691,7 @@ export default function App() {
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
     const slotFooter = drawerShowFooter ? `\n  <span class="hl-tag">&lt;template</span> <span class="hl-attr">#footer</span><span class="hl-tag">&gt;</span>\n    <span class="hl-tag">&lt;CtpButton</span> <span class="hl-attr">color</span>=<span class="hl-str">"green"</span><span class="hl-tag">&gt;</span>Confirmar<span class="hl-tag">&lt;/CtpButton&gt;</span>\n  <span class="hl-tag">&lt;/template&gt;</span>` : '';
 
-    return `<span class="hl-tag">&lt;CtpDrawer</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n  <span class="hl-attr">@close</span>=<span class="hl-str">"isDrawerOpen = false"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-text">&lt;p&gt;Conteúdo do Drawer...&lt;/p&gt;</span>${slotFooter}\n<span class="hl-tag">&lt;/CtpDrawer&gt;</span>`;
+    return `<span class="hl-tag">&lt;CtpDrawer</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n  <span class="hl-attr">@close</span>=<span class="hl-str">"isDrawerOpen = false"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-text">&lt;p&gt;Conteúdo do Drawer...&lt;/p&gt;</span>${slotFooter}\n<span class="hl-tag">&lt;/CtpDrawer&gt;</span>`;
   };
 
   const getAngularDrawerCode = () => {
@@ -705,7 +706,7 @@ export default function App() {
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
     const slotFooter = drawerShowFooter ? `\n  <div <span class="hl-attr">footer</span><span class="hl-tag">&gt;</span>\n    <span class="hl-tag">&lt;button</span> <span class="hl-attr">ctp-button</span> <span class="hl-attr">color</span>=<span class="hl-str">"green"</span><span class="hl-tag">&gt;</span>Confirmar<span class="hl-tag">&lt;/button&gt;</span>\n  <span class="hl-tag">&lt;/div&gt;</span>` : '';
 
-    return `<span class="hl-tag">&lt;ctp-drawer</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>\n  <span class="hl-text">&lt;p&gt;Conteúdo do Drawer...&lt;/p&gt;</span>${slotFooter}\n<span class="hl-tag">&lt;/ctp-drawer&gt;</span>`;
+    return `<span class="hl-tag">&lt;ctp-drawer</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>\n  <span class="hl-text">&lt;p&gt;Conteúdo do Drawer...&lt;/p&gt;</span>${slotFooter}\n<span class="hl-tag">&lt;/ctp-drawer&gt;</span>`;
   };
 
   // --- BUTTON PLAYGROUND STATES ---
@@ -780,7 +781,7 @@ export default function App() {
   const [isOpenSm, setIsOpenSm] = useState(false);
   const [isOpenMd, setIsOpenMd] = useState(false);
   const [isOpenLg, setIsOpenLg] = useState(false);
-  
+
   // Nested modal sequence states
   const [isOpenNested1, setIsOpenNested1] = useState(false);
   const [isOpenNested2, setIsOpenNested2] = useState(false);
@@ -876,6 +877,7 @@ export default function App() {
   // --- ACCORDION PLAYGROUND STATES ---
   const [accordionActiveValue, setAccordionActiveValue] = useState<string | string[]>('item-1');
   const [accordionVariant, setAccordionVariant] = useState<'default' | 'split'>('default');
+  const [accordionColorMode, setAccordionColorMode] = useState<'none' | 'colored' | 'tonal'>('none');
   const [accordionAccent, setAccordionAccent] = useState<string>('mauve');
   const [accordionAllowMultiple, setAccordionAllowMultiple] = useState(false);
 
@@ -889,15 +891,15 @@ export default function App() {
   };
 
   const getReactAccordionCode = () => {
-    return `<span class="hl-tag">&lt;Accordion</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${accordionVariant}"</span>\n  <span class="hl-attr">accentColor</span>=<span class="hl-str">"${accordionAccent}"</span>\n  <span class="hl-attr">allowMultiple</span>=<span class="hl-str">{${accordionAllowMultiple}}</span>\n  <span class="hl-attr">value</span>=<span class="hl-str">{activeItems}</span>\n  <span class="hl-attr">onValueChange</span>=<span class="hl-str">{setActiveItems}</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Accordion.Item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-1"</span><span class="hl-tag">&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Header&gt;</span>Primeiro Tópico<span class="hl-tag">&lt;/Accordion.Header&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Body&gt;</span>Conteúdo do primeiro tópico...<span class="hl-tag">&lt;/Accordion.Body&gt;</span>\n  <span class="hl-tag">&lt;/Accordion.Item&gt;</span>\n  <span class="hl-tag">&lt;Accordion.Item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-2"</span><span class="hl-tag">&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Header&gt;</span>Segundo Tópico<span class="hl-tag">&lt;/Accordion.Header&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Body&gt;</span>Conteúdo do segundo tópico...<span class="hl-tag">&lt;/Accordion.Body&gt;</span>\n  <span class="hl-tag">&lt;/Accordion.Item&gt;</span>\n<span class="hl-tag">&lt;/Accordion&gt;</span>`;
+    return `<span class="hl-tag">&lt;Accordion</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${accordionVariant}"</span>${accordionColorMode !== 'none' ? `\n  <span class="hl-attr">colorMode</span>=<span class="hl-str">"${accordionColorMode}"</span>` : ''}\n  <span class="hl-attr">accentColor</span>=<span class="hl-str">"${accordionAccent}"</span>\n  <span class="hl-attr">allowMultiple</span>=<span class="hl-str">{${accordionAllowMultiple}}</span>\n  <span class="hl-attr">value</span>=<span class="hl-str">{activeItems}</span>\n  <span class="hl-attr">onValueChange</span>=<span class="hl-str">{setActiveItems}</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Accordion.Item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-1"</span><span class="hl-tag">&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Header&gt;</span>Primeiro Tópico<span class="hl-tag">&lt;/Accordion.Header&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Body&gt;</span>Conteúdo do primeiro tópico...<span class="hl-tag">&lt;/Accordion.Body&gt;</span>\n  <span class="hl-tag">&lt;/Accordion.Item&gt;</span>\n  <span class="hl-tag">&lt;Accordion.Item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-2"</span><span class="hl-tag">&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Header&gt;</span>Segundo Tópico<span class="hl-tag">&lt;/Accordion.Header&gt;</span>\n    <span class="hl-tag">&lt;Accordion.Body&gt;</span>Conteúdo do segundo tópico...<span class="hl-tag">&lt;/Accordion.Body&gt;</span>\n  <span class="hl-tag">&lt;/Accordion.Item&gt;</span>\n<span class="hl-tag">&lt;/Accordion&gt;</span>`;
   };
 
   const getVueAccordionCode = () => {
-    return `<span class="hl-tag">&lt;Accordion</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${accordionVariant}"</span>\n  <span class="hl-attr">accent-color</span>=<span class="hl-str">"${accordionAccent}"</span>\n  <span class="hl-attr">:allow-multiple</span>=<span class="hl-str">"${accordionAllowMultiple}"</span>\n  <span class="hl-attr">v-model</span>=<span class="hl-str">"activeItems"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;AccordionItem</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-1"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Primeiro Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do primeiro tópico...\n  <span class="hl-tag">&lt;/AccordionItem&gt;</span>\n  <span class="hl-tag">&lt;AccordionItem</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-2"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Segundo Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do segundo tópico...\n  <span class="hl-tag">&lt;/AccordionItem&gt;</span>\n<span class="hl-tag">&lt;/Accordion&gt;</span>`;
+    return `<span class="hl-tag">&lt;Accordion</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${accordionVariant}"</span>${accordionColorMode !== 'none' ? `\n  <span class="hl-attr">color-mode</span>=<span class="hl-str">"${accordionColorMode}"</span>` : ''}\n  <span class="hl-attr">accent-color</span>=<span class="hl-str">"${accordionAccent}"</span>\n  <span class="hl-attr">:allow-multiple</span>=<span class="hl-str">"${accordionAllowMultiple}"</span>\n  <span class="hl-attr">v-model</span>=<span class="hl-str">"activeItems"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;AccordionItem</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-1"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Primeiro Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do primeiro tópico...\n  <span class="hl-tag">&lt;/AccordionItem&gt;</span>\n  <span class="hl-tag">&lt;AccordionItem</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-2"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Segundo Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do segundo tópico...\n  <span class="hl-tag">&lt;/AccordionItem&gt;</span>\n<span class="hl-tag">&lt;/Accordion&gt;</span>`;
   };
 
   const getAngularAccordionCode = () => {
-    return `<span class="hl-tag">&lt;ctp-accordion</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${accordionVariant}"</span>\n  <span class="hl-attr">accentColor</span>=<span class="hl-str">"${accordionAccent}"</span>\n  <span class="hl-attr">[allowMultiple]</span>=<span class="hl-str">"${accordionAllowMultiple}"</span>\n  <span class="hl-attr">[(activeValues)]</span>=<span class="hl-str">"activeItems"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;ctp-accordion-item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-1"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Primeiro Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do primeiro tópico...\n  <span class="hl-tag">&lt;/ctp-accordion-item&gt;</span>\n  <span class="hl-tag">&lt;ctp-accordion-item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-2"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Segundo Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do segundo tópico...\n  <span class="hl-tag">&lt;/ctp-accordion-item&gt;</span>\n<span class="hl-tag">&lt;/ctp-accordion&gt;</span>`;
+    return `<span class="hl-tag">&lt;ctp-accordion</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${accordionVariant}"</span>${accordionColorMode !== 'none' ? `\n  <span class="hl-attr">colorMode</span>=<span class="hl-str">"${accordionColorMode}"</span>` : ''}\n  <span class="hl-attr">accentColor</span>=<span class="hl-str">"${accordionAccent}"</span>\n  <span class="hl-attr">[allowMultiple]</span>=<span class="hl-str">"${accordionAllowMultiple}"</span>\n  <span class="hl-attr">[(activeValues)]</span>=<span class="hl-str">"activeItems"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;ctp-accordion-item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-1"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Primeiro Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do primeiro tópico...\n  <span class="hl-tag">&lt;/ctp-accordion-item&gt;</span>\n  <span class="hl-tag">&lt;ctp-accordion-item</span> <span class="hl-attr">value</span>=<span class="hl-str">"item-2"</span> <span class="hl-attr">title</span>=<span class="hl-str">"Segundo Tópico"</span><span class="hl-tag">&gt;</span>\n    Conteúdo do segundo tópico...\n  <span class="hl-tag">&lt;/ctp-accordion-item&gt;</span>\n<span class="hl-tag">&lt;/ctp-accordion&gt;</span>`;
   };
 
   // --- DROPDOWN PLAYGROUND STATES ---
@@ -995,7 +997,7 @@ export default function App() {
   // Efeito principal de carregamento de dados
   useEffect(() => {
     let active = true;
-    
+
     const fetchWrapper = async () => {
       if (tableMode === 'server') {
         setTableIsLoading(true);
@@ -1010,11 +1012,11 @@ export default function App() {
             limit: tableLimit
           });
           if (!active) return;
-          
+
           setTableData(res.data);
           setTableTotalPages(res.pagination.totalPages);
           setTableTotalItems(res.pagination.total);
-          
+
           // Registrar log da API
           setApiLogs(prev => [
             ...prev,
@@ -1036,21 +1038,21 @@ export default function App() {
         setTimeout(() => {
           if (!active) return;
           const fullData = getFullLocalDatabase();
-          
+
           // Filtragem local
           const filtered = fullData.filter(item => {
-            const matchesSearch = !tableSearch || 
+            const matchesSearch = !tableSearch ||
               item.name.toLowerCase().includes(tableSearch.toLowerCase()) ||
               item.email.toLowerCase().includes(tableSearch.toLowerCase()) ||
               item.role.toLowerCase().includes(tableSearch.toLowerCase()) ||
               item.id.toLowerCase().includes(tableSearch.toLowerCase());
-              
+
             const matchesStatus = tableStatus === 'All' || item.status === tableStatus;
             const matchesRole = tableRole === 'All' || item.role === tableRole;
-            
+
             return matchesSearch && matchesStatus && matchesRole;
           });
-          
+
           // Ordenação local
           if (tableSortField && tableSortOrder) {
             filtered.sort((a: any, b: any) => {
@@ -1065,10 +1067,10 @@ export default function App() {
               return 0;
             });
           }
-          
+
           const total = filtered.length;
           const paginated = filtered.slice((tablePage - 1) * tableLimit, tablePage * tableLimit);
-          
+
           setTableData(paginated);
           setTableTotalPages(Math.ceil(total / tableLimit) || 1);
           setTableTotalItems(total);
@@ -1076,9 +1078,9 @@ export default function App() {
         }, 120);
       }
     };
-    
+
     fetchWrapper();
-    
+
     return () => {
       active = false;
     };
@@ -1140,21 +1142,21 @@ export default function App() {
   const exportTableToCSV = () => {
     const fullData = getFullLocalDatabase();
     const filtered = fullData.filter(item => {
-      const matchesSearch = !tableSearch || 
+      const matchesSearch = !tableSearch ||
         item.name.toLowerCase().includes(tableSearch.toLowerCase()) ||
         item.email.toLowerCase().includes(tableSearch.toLowerCase()) ||
         item.role.toLowerCase().includes(tableSearch.toLowerCase()) ||
         item.id.toLowerCase().includes(tableSearch.toLowerCase());
-        
+
       const matchesStatus = tableStatus === 'All' || item.status === tableStatus;
       const matchesRole = tableRole === 'All' || item.role === tableRole;
-      
+
       return matchesSearch && matchesStatus && matchesRole;
     });
 
     const headers = ['ID', 'Nome', 'Email', 'Cargo', 'Departamento', 'Status', 'Salario', 'Data de Admissao'];
     const csvRows = [headers.join(',')];
-    
+
     filtered.forEach(item => {
       const values = [
         item.id,
@@ -1168,7 +1170,7 @@ export default function App() {
       ];
       csvRows.push(values.join(','));
     });
-    
+
     const csvContent = "data:text/csv;charset=utf-8," + csvRows.join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -1187,7 +1189,7 @@ export default function App() {
 
     const headers = ['ID', 'Nome', 'Email', 'Cargo', 'Departamento', 'Status', 'Salario', 'Data de Admissao'];
     const csvRows = [headers.join(',')];
-    
+
     selectedData.forEach(item => {
       const values = [
         item.id,
@@ -1201,7 +1203,7 @@ export default function App() {
       ];
       csvRows.push(values.join(','));
     });
-    
+
     const csvContent = "data:text/csv;charset=utf-8," + csvRows.join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -1329,7 +1331,7 @@ export default function App() {
     if (btnRightIcon) props.push('rightIcon={<ArrowIcon />}');
 
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;Button</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>\n  ${buttonText}\n<span class="hl-tag">&lt;/Button&gt;</span>`;
+    return `<span class="hl-tag">&lt;Button</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>\n  ${buttonText}\n<span class="hl-tag">&lt;/Button&gt;</span>`;
   };
 
   const getVueBtnCode = () => {
@@ -1348,7 +1350,7 @@ export default function App() {
     const slotsStr = iconTemplates.length > 0 ? `\n${iconTemplates.join('\n')}\n  ` : ` ${buttonText} `;
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
 
-    return `<span class="hl-tag">&lt;CtpButton</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${btnLeftIcon || btnRightIcon ? `\n  ${buttonText}\n` : ''}${slotsStr}<span class="hl-tag">&lt;/CtpButton&gt;</span>`;
+    return `<span class="hl-tag">&lt;CtpButton</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${btnLeftIcon || btnRightIcon ? `\n  ${buttonText}\n` : ''}${slotsStr}<span class="hl-tag">&lt;/CtpButton&gt;</span>`;
   };
 
   const getAngularBtnCode = () => {
@@ -1367,13 +1369,15 @@ export default function App() {
     const contentStr = iconElements.length > 0 ? `\n${iconElements.join('\n')}\n  ${buttonText}\n` : ` ${buttonText} `;
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
 
-    return `<span class="hl-tag">&lt;ctp-button</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${contentStr}<span class="hl-tag">&lt;/ctp-button&gt;</span>`;
+    return `<span class="hl-tag">&lt;ctp-button</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${contentStr}<span class="hl-tag">&lt;/ctp-button&gt;</span>`;
   };
 
   // --- CODE GENERATOR FOR BUTTON GROUPS ---
   const getReactButtonGroupCode = () => {
     const props = [];
     if (groupOrientation !== 'horizontal') props.push(`orientation="${groupOrientation}"`);
+    if (groupLayoutVariant !== 'filled') props.push(`variant="${groupLayoutVariant}"`);
+    if (groupShape !== 'rounded') props.push(`shape="${groupShape}"`);
     if (groupSelectionMode !== 'none') {
       props.push(`selectionMode="${groupSelectionMode}"`);
       if (groupSelectionMode === 'single') {
@@ -1393,16 +1397,18 @@ export default function App() {
     let buttonsMarkup = '';
     for (let i = 1; i <= groupCount; i++) {
       const valStr = groupSelectionMode !== 'none' ? ` value="opt${i}"` : '';
-      buttonsMarkup += `\n  <span class="hl-tag">&lt;Button</span>${valStr}${btnProps.map(p => ` <span class="hl-attr">${p.split('=')[0]}</span>=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>`).join('')}<span class="hl-tag">&gt;</span>Option ${i}<span class="hl-tag">&lt;/Button&gt;</span>`;
+      buttonsMarkup += `\n  <span class="hl-tag">&lt;Button</span>${valStr}${btnProps.map(p => ` <span class="hl-attr">${p.split('=')[0]}</span>=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>`).join('')}<span class="hl-tag">&gt;</span>Option ${i}<span class="hl-tag">&lt;/Button&gt;</span>`;
     }
 
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;ButtonGroup</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/ButtonGroup&gt;</span>`;
+    return `<span class="hl-tag">&lt;ButtonGroup</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/ButtonGroup&gt;</span>`;
   };
 
   const getVueButtonGroupCode = () => {
     const props = [];
     if (groupOrientation !== 'horizontal') props.push(`orientation="${groupOrientation}"`);
+    if (groupLayoutVariant !== 'filled') props.push(`variant="${groupLayoutVariant}"`);
+    if (groupShape !== 'rounded') props.push(`shape="${groupShape}"`);
     if (groupSelectionMode !== 'none') {
       props.push(`selectionMode="${groupSelectionMode}"`);
       props.push(`v-model="value"`);
@@ -1416,16 +1422,18 @@ export default function App() {
     let buttonsMarkup = '';
     for (let i = 1; i <= groupCount; i++) {
       const valStr = groupSelectionMode !== 'none' ? ` value="opt${i}"` : '';
-      buttonsMarkup += `\n  <span class="hl-tag">&lt;CtpButton</span>${valStr}${btnProps.map(p => ` <span class="hl-attr">${p.split('=')[0]}</span>=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>`).join('')}<span class="hl-tag">&gt;</span>Option ${i}<span class="hl-tag">&lt;/CtpButton&gt;</span>`;
+      buttonsMarkup += `\n  <span class="hl-tag">&lt;CtpButton</span>${valStr}${btnProps.map(p => ` <span class="hl-attr">${p.split('=')[0]}</span>=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>`).join('')}<span class="hl-tag">&gt;</span>Option ${i}<span class="hl-tag">&lt;/CtpButton&gt;</span>`;
     }
 
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;CtpButtonGroup</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/CtpButtonGroup&gt;</span>`;
+    return `<span class="hl-tag">&lt;CtpButtonGroup</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/CtpButtonGroup&gt;</span>`;
   };
 
   const getAngularButtonGroupCode = () => {
     const props = [];
     if (groupOrientation !== 'horizontal') props.push(`orientation="${groupOrientation}"`);
+    if (groupLayoutVariant !== 'filled') props.push(`variant="${groupLayoutVariant}"`);
+    if (groupShape !== 'rounded') props.push(`shape="${groupShape}"`);
     if (groupSelectionMode !== 'none') {
       props.push(`selectionMode="${groupSelectionMode}"`);
       props.push(`[(value)]="value"`);
@@ -1439,11 +1447,11 @@ export default function App() {
     let buttonsMarkup = '';
     for (let i = 1; i <= groupCount; i++) {
       const valStr = groupSelectionMode !== 'none' ? ` value="opt${i}"` : '';
-      buttonsMarkup += `\n  <span class="hl-tag">&lt;ctp-button</span>${valStr}${btnProps.map(p => ` <span class="hl-attr">${p.split('=')[0]}</span>=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>`).join('')}<span class="hl-tag">&gt;</span>Option ${i}<span class="hl-tag">&lt;/ctp-button&gt;</span>`;
+      buttonsMarkup += `\n  <span class="hl-tag">&lt;ctp-button</span>${valStr}${btnProps.map(p => ` <span class="hl-attr">${p.split('=')[0]}</span>=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>`).join('')}<span class="hl-tag">&gt;</span>Option ${i}<span class="hl-tag">&lt;/ctp-button&gt;</span>`;
     }
 
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;ctp-button-group</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/ctp-button-group&gt;</span>`;
+    return `<span class="hl-tag">&lt;ctp-button-group</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/ctp-button-group&gt;</span>`;
   };
 
   // --- CODE GENERATOR FOR STEPS ---
@@ -1452,7 +1460,7 @@ export default function App() {
     if (stepsVariant !== 'timeline') props.push(`variant="${stepsVariant}"`);
     if (stepsColor !== 'mauve') props.push(`color="${stepsColor}"`);
     if (stepsOrientation !== 'horizontal') props.push(`orientation="${stepsOrientation}"`);
-    return `<span class="hl-tag">&lt;Steps</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
+    return `<span class="hl-tag">&lt;Steps</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
   };
 
   const getVueStepsCode = () => {
@@ -1460,7 +1468,7 @@ export default function App() {
     if (stepsVariant !== 'timeline') props.push(`variant="${stepsVariant}"`);
     if (stepsColor !== 'mauve') props.push(`color="${stepsColor}"`);
     if (stepsOrientation !== 'horizontal') props.push(`orientation="${stepsOrientation}"`);
-    return `<span class="hl-tag">&lt;CtpSteps</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
+    return `<span class="hl-tag">&lt;CtpSteps</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
   };
 
   const getAngularStepsCode = () => {
@@ -1468,7 +1476,7 @@ export default function App() {
     if (stepsVariant !== 'timeline') props.push(`variant="${stepsVariant}"`);
     if (stepsColor !== 'mauve') props.push(`color="${stepsColor}"`);
     if (stepsOrientation !== 'horizontal') props.push(`orientation="${stepsOrientation}"`);
-    return `<span class="hl-tag">&lt;ctp-steps</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">&gt;&lt;/ctp-steps&gt;</span>`;
+    return `<span class="hl-tag">&lt;ctp-steps</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">&gt;&lt;/ctp-steps&gt;</span>`;
   };
 
   // --- CODE GENERATOR FOR PROGRESS BAR ---
@@ -1483,8 +1491,8 @@ export default function App() {
     if (progressShowValue) props.push('showValue');
     if (progressShowValue && progressValPosition !== 'outside') props.push(`valuePosition="${progressValPosition}"`);
     if (progressLabel) props.push(`label="${progressLabel}"`);
-    
-    return `<span class="hl-tag">&lt;ProgressBar</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
+
+    return `<span class="hl-tag">&lt;ProgressBar</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
   };
 
   const getVueProgressCode = () => {
@@ -1498,8 +1506,8 @@ export default function App() {
     if (progressShowValue) props.push(':show-value="true"');
     if (progressShowValue && progressValPosition !== 'outside') props.push(`value-position="${progressValPosition}"`);
     if (progressLabel) props.push(`label="${progressLabel}"`);
-    
-    return `<span class="hl-tag">&lt;CtpProgressBar</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
+
+    return `<span class="hl-tag">&lt;CtpProgressBar</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">/&gt;</span>`;
   };
 
   const getAngularProgressCode = () => {
@@ -1513,8 +1521,8 @@ export default function App() {
     if (progressShowValue) props.push('[showValue]="true"');
     if (progressShowValue && progressValPosition !== 'outside') props.push(`valuePosition="${progressValPosition}"`);
     if (progressLabel) props.push(`label="${progressLabel}"`);
-    
-    return `<span class="hl-tag">&lt;ctp-progressbar</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">&gt;&lt;/ctp-progressbar&gt;</span>`;
+
+    return `<span class="hl-tag">&lt;ctp-progressbar</span>\n  ${props.map(p => `<span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('\n  ')}\n<span class="hl-tag">&gt;&lt;/ctp-progressbar&gt;</span>`;
   };
 
   // --- CODE GENERATORS FOR COLOR PICKER ---
@@ -1527,7 +1535,7 @@ export default function App() {
     if (colorPickerSize !== 'md') props.push(`size="${colorPickerSize}"`);
     if (!colorPickerShowHexInput) props.push('showHexInput={false}');
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;ColorPicker</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">/&gt;</span>`;
+    return `<span class="hl-tag">&lt;ColorPicker</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">/&gt;</span>`;
   };
 
   const getVueColorPickerCode = () => {
@@ -1538,7 +1546,7 @@ export default function App() {
     if (colorPickerSize !== 'md') props.push(`size="${colorPickerSize}"`);
     if (!colorPickerShowHexInput) props.push(':show-hex-input="false"');
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;CtpColorPicker</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">/&gt;</span>`;
+    return `<span class="hl-tag">&lt;CtpColorPicker</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">/&gt;</span>`;
   };
 
   const getAngularColorPickerCode = () => {
@@ -1550,7 +1558,7 @@ export default function App() {
     if (colorPickerSize !== 'md') props.push(`size="${colorPickerSize}"`);
     if (!colorPickerShowHexInput) props.push('[showHexInput]="false"');
     const propsStr = props.length > 0 ? '\n  ' + props.join('\n  ') : '';
-    return `<span class="hl-tag">&lt;ctp-color-picker</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=')+1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;&lt;/ctp-color-picker&gt;</span>`;
+    return `<span class="hl-tag">&lt;ctp-color-picker</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;&lt;/ctp-color-picker&gt;</span>`;
   };
 
   // --- CODE GENERATORS FOR PAGINATION ---
@@ -1794,8 +1802,8 @@ export default function App() {
   };
 
   // Determine slide direction for active step card animation
-  const slideClass = currentStep >= prevStepRef.current 
-    ? 'ctp-stepper-panel--slide-in-right' 
+  const slideClass = currentStep >= prevStepRef.current
+    ? 'ctp-stepper-panel--slide-in-right'
     : 'ctp-stepper-panel--slide-in-left';
 
   // Compute z-indices currently on stack
@@ -1976,7 +1984,7 @@ export default function App() {
       {toastMessage && <div className="copy-toast">{toastMessage}</div>}
 
       {/* Mobile Sidebar Overlay */}
-      <div 
+      <div
         className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`}
         onClick={() => setIsSidebarOpen(false)}
       />
@@ -2236,7 +2244,7 @@ export default function App() {
       <main className="showcase-main">
         {/* Mobile Header Bar */}
         <header className="mobile-nav-header">
-          <button 
+          <button
             type="button"
             className="mobile-menu-toggle"
             onClick={() => setIsSidebarOpen(true)}
@@ -2361,1050 +2369,1065 @@ export default function App() {
             </div>
           </div>
 
-      {/* BUTTON SHOWCASE TAB */}
-      {activeComponent === 'button' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>⚡</span> Button Playground
-            </h2>
-            <div className="playground-section">
-              {/* Settings Panel */}
-              <div className="playground-card">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Configuration</h3>
-                
-                <div className="control-grid">
-                  <div className="control-group control-group--full">
-                    <label htmlFor="btn-label">Button Label</label>
+          {/* BUTTON SHOWCASE TAB */}
+          {activeComponent === 'button' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>⚡</span> Button Playground
+                </h2>
+                <div className="playground-section">
+                  {/* Settings Panel */}
+                  <div className="playground-card">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Configuration</h3>
+
+                    <div className="control-grid">
+                      <div className="control-group control-group--full">
+                        <label htmlFor="btn-label">Button Label</label>
+                        <input
+                          id="btn-label"
+                          type="text"
+                          value={buttonText}
+                          onChange={(e) => setButtonText(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="btn-variant">Variant</label>
+                        <select
+                          id="btn-variant"
+                          value={btnVariant}
+                          onChange={(e) => setBtnVariant(e.target.value as ButtonVariant)}
+                        >
+                          <option value="filled">Filled</option>
+                          <option value="tonal">Tonal</option>
+                          <option value="outline">Outline</option>
+                          <option value="ghost">Ghost</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="btn-color">Accent Color</label>
+                        <select
+                          id="btn-color"
+                          value={btnColor}
+                          onChange={(e) => setBtnColor(e.target.value as ButtonColor)}
+                        >
+                          {colors.map((c) => (
+                            <option key={c.name} value={c.name.toLowerCase()}>
+                              {c.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="btn-size">Size</label>
+                        <select
+                          id="btn-size"
+                          value={btnSize}
+                          onChange={(e) => setBtnSize(e.target.value as ButtonSize)}
+                        >
+                          <option value="sm">Small (sm)</option>
+                          <option value="md">Medium (md)</option>
+                          <option value="lg">Large (lg)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="btn-shape">Shape</label>
+                        <select
+                          id="btn-shape"
+                          value={btnShape}
+                          onChange={(e) => setBtnShape(e.target.value as ButtonShape)}
+                        >
+                          <option value="square">Square</option>
+                          <option value="rounded">Rounded</option>
+                          <option value="pill">Pill</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <label>States & Accessories</label>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={btnLeftIcon}
+                            onChange={(e) => setBtnLeftIcon(e.target.checked)}
+                          />
+                          Left Icon
+                        </label>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={btnRightIcon}
+                            onChange={(e) => setBtnRightIcon(e.target.checked)}
+                          />
+                          Right Icon
+                        </label>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={btnIsLoading}
+                            onChange={(e) => setBtnIsLoading(e.target.checked)}
+                          />
+                          Loading State
+                        </label>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={btnDisabled}
+                            onChange={(e) => setBtnDisabled(e.target.checked)}
+                          />
+                          Disabled
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Render and Code Panel */}
+                  <div className="playground-card playground-card--preview">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
+
+                    <div className="preview-canvas">
+                      <Button
+                        variant={btnVariant}
+                        color={btnColor}
+                        size={btnSize}
+                        shape={btnShape}
+                        isLoading={btnIsLoading}
+                        disabled={btnDisabled}
+                        leftIcon={btnLeftIcon ? <HeartFillIcon /> : undefined}
+                        rightIcon={btnRightIcon ? <ArrowIcon /> : undefined}
+                      >
+                        {buttonText}
+                      </Button>
+                    </div>
+
+                    <div>
+                      <div className="tabs-header">
+                        {(['react', 'vue', 'angular'] as const).map((tab) => (
+                          <button
+                            key={tab}
+                            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                          >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="code-container">
+                        <button
+                          className="code-copy-btn"
+                          onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
+                        >
+                          Copy Code
+                        </button>
+                        <pre className="code-block">
+                          <code
+                            dangerouslySetInnerHTML={{
+                              __html: activeTab === 'react'
+                                ? getReactBtnCode()
+                                : activeTab === 'vue'
+                                  ? getVueBtnCode()
+                                  : getAngularBtnCode()
+                            }}
+                          />
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Button Gallery */}
+              <section style={{ marginBottom: '3rem' }}>
+                <h2 className="section-title">
+                  <span>📚</span> Preconfigured Gallery
+                </h2>
+                <div className="gallery-grid">
+                  {galleryItems.map((item) => (
+                    <div
+                      key={item.title}
+                      className="gallery-card"
+                      onClick={() => handleGalleryClick(item)}
+                    >
+                      <span className="gallery-card-title">{item.title}</span>
+                      <Button
+                        variant={item.variant}
+                        color={item.color}
+                        size={item.size}
+                        shape={item.shape}
+                        isLoading={item.isLoading}
+                        disabled={item.disabled}
+                        leftIcon={item.leftIcon ? <HeartFillIcon /> : undefined}
+                        rightIcon={item.rightIcon ? <ArrowIcon /> : undefined}
+                      >
+                        {item.text}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
+
+          {/* BUTTON GROUP SHOWCASE TAB */}
+          {activeComponent === 'buttongroup' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>🗂️</span> Button Group Playground
+                </h2>
+                <div className="playground-section">
+                  {/* Settings Panel */}
+                  <div className="playground-card">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Group Configuration</h3>
+
+                    <div className="control-grid">
+                      <div className="control-group">
+                        <label htmlFor="group-orientation">Orientation</label>
+                        <select
+                          id="group-orientation"
+                          value={groupOrientation}
+                          onChange={(e) => setGroupOrientation(e.target.value as ButtonGroupOrientation)}
+                        >
+                          <option value="horizontal">Horizontal</option>
+                          <option value="vertical">Vertical</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="group-count">Number of Buttons</label>
+                        <select
+                          id="group-count"
+                          value={groupCount}
+                          onChange={(e) => setGroupCount(Number(e.target.value))}
+                        >
+                          <option value={2}>2 Buttons</option>
+                          <option value={3}>3 Buttons</option>
+                          <option value={4}>4 Buttons</option>
+                          <option value={5}>5 Buttons</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="group-variant">Buttons Variant</label>
+                        <select
+                          id="group-variant"
+                          value={groupVariant}
+                          onChange={(e) => setGroupVariant(e.target.value as ButtonVariant)}
+                        >
+                          <option value="filled">Filled</option>
+                          <option value="tonal">Tonal</option>
+                          <option value="outline">Outline</option>
+                          <option value="ghost">Ghost</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="group-color">Accent Color</label>
+                        <select
+                          id="group-color"
+                          value={groupColor}
+                          onChange={(e) => setGroupColor(e.target.value as ButtonColor)}
+                        >
+                          {colors.map((c) => (
+                            <option key={c.name} value={c.name.toLowerCase()}>
+                              {c.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="group-shape">Buttons Shape</label>
+                        <select
+                          id="group-shape"
+                          value={groupShape}
+                          onChange={(e) => setGroupShape(e.target.value as ButtonShape)}
+                        >
+                          <option value="square">Square</option>
+                          <option value="rounded">Rounded</option>
+                          <option value="pill">Pill</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="group-layout-variant">Group Style</label>
+                        <select
+                          id="group-layout-variant"
+                          value={groupLayoutVariant}
+                          onChange={(e) => setGroupLayoutVariant(e.target.value as ButtonGroupVariant)}
+                        >
+                          <option value="filled">Filled</option>
+                          <option value="outline">Outline</option>
+                          <option value="ghost">Ghost</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="group-selection-mode">Selection Mode</label>
+                        <select
+                          id="group-selection-mode"
+                          value={groupSelectionMode}
+                          onChange={(e) => setGroupSelectionMode(e.target.value as ButtonGroupSelectionMode)}
+                        >
+                          <option value="none">None (Standard Group)</option>
+                          <option value="single">Single Select (Radio Group)</option>
+                          <option value="multiple">Multiple Select (Checkbox Group)</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Preview and Code Panel */}
+                  <div className="playground-card playground-card--preview">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Group Preview</h3>
+
+                    <div className="preview-canvas" style={{ padding: '2.5rem', minHeight: '220px', flexDirection: 'column', gap: '1.5rem' }}>
+                      <ButtonGroup
+                        variant={groupLayoutVariant}
+                        shape={groupShape}
+                        orientation={groupOrientation}
+                        selectionMode={groupSelectionMode}
+                        value={groupSelectionMode === 'single' ? groupSingleValue : groupMultiValue}
+                        onChange={(val) => {
+                          if (groupSelectionMode === 'single') {
+                            setGroupSingleValue(val);
+                          } else {
+                            setGroupMultiValue(val);
+                          }
+                        }}
+                      >
+                        {Array.from({ length: groupCount }).map((_, index) => (
+                          <ButtonGroupItem
+                            key={index}
+                            value={`opt${index + 1}`}
+                            variant={groupVariant}
+                            color={groupColor}
+                            shape={groupShape}
+                          >
+                            Option {index + 1}
+                          </ButtonGroupItem>
+                        ))}
+                      </ButtonGroup>
+
+                      {groupSelectionMode !== 'none' && (
+                        <div style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)', fontFamily: 'monospace' }}>
+                          Selected Value: {groupSelectionMode === 'single' ? groupSingleValue : JSON.stringify(groupMultiValue)}
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <div className="tabs-header">
+                        {(['react', 'vue', 'angular'] as const).map((tab) => (
+                          <button
+                            key={tab}
+                            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                          >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="code-container">
+                        <button
+                          className="code-copy-btn"
+                          onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
+                        >
+                          Copy Code
+                        </button>
+                        <pre className="code-block">
+                          <code
+                            dangerouslySetInnerHTML={{
+                              __html: activeTab === 'react'
+                                ? getReactButtonGroupCode()
+                                : activeTab === 'vue'
+                                  ? getVueButtonGroupCode()
+                                  : getAngularButtonGroupCode()
+                            }}
+                          />
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {/* STEPPER SHOWCASE TAB */}
+          {activeComponent === 'stepper' && (
+            <section>
+              <h2 className="section-title">
+                <span>🚥</span> Stepper Playground
+              </h2>
+              <div className="playground-section">
+                {/* Stepper Configuration */}
+                {/* Stepper Configuration */}
+                <div className="playground-card" style={{ gap: '1.2rem' }}>
+                  <h3 style={{ margin: '0', fontSize: '1.2rem', color: `var(--ctp-${stepColor})` }}>Stepper Configuration</h3>
+
+                  <div className="control-grid">
+                    <div className="control-group">
+                      <label htmlFor="step-orientation">Orientation</label>
+                      <select
+                        id="step-orientation"
+                        value={stepOrientation}
+                        onChange={(e) => setStepOrientation(e.target.value as StepperOrientation)}
+                      >
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="step-variant">Node Style</label>
+                      <select
+                        id="step-variant"
+                        value={stepVariant}
+                        onChange={(e) => setStepVariant(e.target.value as StepperVariant)}
+                      >
+                        <option value="default">Numeric Numbers</option>
+                        <option value="dots">Minimal Dots</option>
+                        <option value="icon">Node Icons</option>
+                        <option value="labeled-icon">Labeled Icons</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="step-color">Active Accent Color</label>
+                      <select
+                        id="step-color"
+                        value={stepColor}
+                        onChange={(e) => setStepColor(e.target.value as ButtonColor)}
+                      >
+                        {colors.map((c) => (
+                          <option key={c.name} value={c.name.toLowerCase()}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="step-slider">Current Step: {currentStep + 1}</label>
+                      <input
+                        id="step-slider"
+                        type="range"
+                        min="0"
+                        max="3"
+                        value={currentStep}
+                        onChange={(e) => setCurrentStep(Number(e.target.value))}
+                        style={{ cursor: 'pointer', accentColor: `var(--ctp-${stepColor})` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Preview and Code Snippets */}
+                <div className="playground-card playground-card--preview">
+                  <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
+
+                  <div className="preview-canvas" style={{ padding: '2rem', minHeight: '340px', flexDirection: 'column', gap: '1.5rem', justifyContent: 'space-between' }}>
+                    <Stepper
+                      steps={demoSteps}
+                      currentStep={currentStep}
+                      orientation={stepOrientation}
+                      variant={stepVariant}
+                      color={stepColor}
+                    />
+
+                    {/* Animated Simulated Screen Content */}
+                    <div className="ctp-stepper-container" style={{ width: '100%' }}>
+                      <div
+                        key={currentStep}
+                        className={`playground-card ${slideClass}`}
+                        style={{
+                          margin: 0,
+                          minHeight: '120px',
+                          justifyContent: 'center',
+                          backgroundColor: 'var(--ctp-crust)',
+                          borderStyle: 'dashed',
+                          padding: '1.25rem',
+                          width: '100%',
+                          boxSizing: 'border-box'
+                        }}
+                      >
+                        <h4 style={{ margin: '0 0 6px 0', fontSize: '1.05rem', color: `var(--ctp-${stepColor})` }}>
+                          {stepContents[currentStep].title}
+                        </h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
+                          {stepContents[currentStep].details}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Stepper Navigation Buttons */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', width: '100%' }}>
+                      <Button
+                        variant="outline"
+                        color={stepColor}
+                        disabled={currentStep === 0}
+                        onClick={() => setCurrentStep(prev => prev - 1)}
+                        style={{ flex: 1 }}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        variant="filled"
+                        color={stepColor}
+                        disabled={currentStep === 3}
+                        onClick={() => setCurrentStep(prev => prev + 1)}
+                        style={{ flex: 1 }}
+                      >
+                        Next Step
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="tabs-header">
+                      <button className="tab-btn active">React Code</button>
+                    </div>
+
+                    <div className="code-container">
+                      <pre className="code-block">
+                        <code>{`// App.tsx\n<Stepper\n  steps={demoSteps}\n  currentStep={${currentStep}}\n  orientation="${stepOrientation}"\n  variant="${stepVariant}"\n  color="${stepColor}"\n/>`}</code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* MODALS & OVERLAY SHOWCASE TAB */}
+          {activeComponent === 'modal' && (
+            <section>
+              <h2 className="section-title">
+                <span>📦</span> Overlays & Modals Stacking
+              </h2>
+              <div className="playground-section">
+                {/* Modal Activation Dashboard */}
+                <div className="playground-card" style={{ gap: '1.2rem' }}>
+                  <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Overlay Control Board</h3>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                    <Button variant="filled" color="blue" onClick={() => setIsOpenSm(true)}>
+                      Open Small Modal
+                    </Button>
+                    <Button variant="filled" color="mauve" onClick={() => setIsOpenMd(true)}>
+                      Open Medium Modal
+                    </Button>
+                    <Button variant="filled" color="lavender" onClick={() => setIsOpenLg(true)}>
+                      Open Large Modal
+                    </Button>
+                    <Button variant="tonal" color="pink" onClick={() => setCustomOverlayOpen(true)}>
+                      Open Custom Overlay
+                    </Button>
+                  </div>
+
+                  <div style={{ borderTop: '1px solid var(--ctp-surface0)', paddingTop: '1.2rem', marginTop: '0.5rem' }}>
+                    <h4 style={{ margin: '0 0 12px 0' }}>Multi-level Modals Stacking</h4>
+                    <p style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
+                      Open nested overlays to observe z-index stacking. Each subsequent overlay increments its z-index relative to the parent.
+                    </p>
+                    <Button variant="filled" color="red" onClick={() => setIsOpenNested1(true)}>
+                      Launch Nesting Sequence
+                    </Button>
+                  </div>
+
+                  {/* Stacking stack visualizer */}
+                  <div className="stacking-visualizer">
+                    <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.1rem' }}>Active Overlay Stack Visualizer</h3>
+                    {openStack.length === 0 ? (
+                      <p style={{ color: 'var(--ctp-subtext0)', margin: 0, fontSize: '0.9rem', fontStyle: 'italic' }}>
+                        No active overlays open. Click any buttons above to push overlays onto the stack.
+                      </p>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: '8px' }}>
+                        {openStack.map((item, index) => (
+                          <div
+                            key={item.name}
+                            className="stack-item-indicator"
+                            style={{
+                              backgroundColor: 'var(--ctp-surface0)',
+                              borderColor: 'var(--ctp-mauve)',
+                              color: 'var(--ctp-text)',
+                              borderLeftWidth: '4px',
+                              borderLeftStyle: 'solid'
+                            }}
+                          >
+                            <span>{item.name} ({item.size})</span>
+                            <span className="badge-zindex">z-index: {1001 + index}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Modal Options Configuration */}
+                <div className="playground-card" style={{ gap: '1.2rem' }}>
+                  <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Modal Attribute Customizer</h3>
+
+                  <div className="control-group">
+                    <label htmlFor="modal-title-input">Header Title Text</label>
                     <input
-                      id="btn-label"
+                      id="modal-title-input"
                       type="text"
-                      value={buttonText}
-                      onChange={(e) => setButtonText(e.target.value)}
+                      value={modalTitle}
+                      onChange={(e) => setModalTitle(e.target.value)}
                     />
                   </div>
 
-                  <div className="control-group">
-                    <label htmlFor="btn-variant">Variant</label>
-                    <select
-                      id="btn-variant"
-                      value={btnVariant}
-                      onChange={(e) => setBtnVariant(e.target.value as ButtonVariant)}
-                    >
-                      <option value="filled">Filled</option>
-                      <option value="tonal">Tonal</option>
-                      <option value="outline">Outline</option>
-                      <option value="ghost">Ghost</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="btn-color">Accent Color</label>
-                    <select
-                      id="btn-color"
-                      value={btnColor}
-                      onChange={(e) => setBtnColor(e.target.value as ButtonColor)}
-                    >
-                      {colors.map((c) => (
-                        <option key={c.name} value={c.name.toLowerCase()}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="btn-size">Size</label>
-                    <select
-                      id="btn-size"
-                      value={btnSize}
-                      onChange={(e) => setBtnSize(e.target.value as ButtonSize)}
-                    >
-                      <option value="sm">Small (sm)</option>
-                      <option value="md">Medium (md)</option>
-                      <option value="lg">Large (lg)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="btn-shape">Shape</label>
-                    <select
-                      id="btn-shape"
-                      value={btnShape}
-                      onChange={(e) => setBtnShape(e.target.value as ButtonShape)}
-                    >
-                      <option value="square">Square</option>
-                      <option value="rounded">Rounded</option>
-                      <option value="pill">Pill</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <label>States & Accessories</label>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
                     <label className="checkbox-label">
                       <input
                         type="checkbox"
-                        checked={btnLeftIcon}
-                        onChange={(e) => setBtnLeftIcon(e.target.checked)}
+                        checked={modalHasCloseButton}
+                        onChange={(e) => setModalHasCloseButton(e.target.checked)}
                       />
-                      Left Icon
+                      Show Close Button in Header
                     </label>
                     <label className="checkbox-label">
                       <input
                         type="checkbox"
-                        checked={btnRightIcon}
-                        onChange={(e) => setBtnRightIcon(e.target.checked)}
+                        checked={modalCloseOnOverlay}
+                        onChange={(e) => setModalCloseOnOverlay(e.target.checked)}
                       />
-                      Right Icon
+                      Dismiss on Backdrop / Overlay Click
                     </label>
                     <label className="checkbox-label">
                       <input
                         type="checkbox"
-                        checked={btnIsLoading}
-                        onChange={(e) => setBtnIsLoading(e.target.checked)}
+                        checked={modalCloseOnEsc}
+                        onChange={(e) => setModalCloseOnEsc(e.target.checked)}
                       />
-                      Loading State
+                      Dismiss on ESC Key Press
                     </label>
                     <label className="checkbox-label">
                       <input
                         type="checkbox"
-                        checked={btnDisabled}
-                        onChange={(e) => setBtnDisabled(e.target.checked)}
+                        checked={modalHasFooter}
+                        onChange={(e) => setModalHasFooter(e.target.checked)}
                       />
-                      Disabled
+                      Include Standard Action Footer
                     </label>
                   </div>
                 </div>
               </div>
 
-              {/* Render and Code Panel */}
-              <div className="playground-card playground-card--preview">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
-                
-                <div className="preview-canvas">
-                  <Button
-                    variant={btnVariant}
-                    color={btnColor}
-                    size={btnSize}
-                    shape={btnShape}
-                    isLoading={btnIsLoading}
-                    disabled={btnDisabled}
-                    leftIcon={btnLeftIcon ? <HeartFillIcon /> : undefined}
-                    rightIcon={btnRightIcon ? <ArrowIcon /> : undefined}
-                  >
-                    {buttonText}
-                  </Button>
-                </div>
+              {/* RENDER MODAL INSTANCES */}
 
-                <div>
-                  <div className="tabs-header">
-                    {(['react', 'vue', 'angular'] as const).map((tab) => (
-                      <button
-                        key={tab}
-                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
+              {/* 1. Small Modal */}
+              <Modal
+                isOpen={isOpenSm}
+                onClose={() => setIsOpenSm(false)}
+                size="sm"
+                title={modalTitle || undefined}
+                showCloseButton={modalHasCloseButton}
+                closeOnOverlayClick={modalCloseOnOverlay}
+                closeOnEsc={modalCloseOnEsc}
+                footer={modalHasFooter ? (
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setIsOpenSm(false)}>Cancel</Button>
+                    <Button variant="filled" color="mauve" onClick={() => setIsOpenSm(false)}>Save Changes</Button>
                   </div>
-                  
-                  <div className="code-container">
-                    <button
-                      className="code-copy-btn"
-                      onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
-                    >
-                      Copy Code
-                    </button>
-                    <pre className="code-block">
-                      <code
-                        dangerouslySetInnerHTML={{
-                          __html: activeTab === 'react'
-                            ? getReactBtnCode()
-                            : activeTab === 'vue'
-                            ? getVueBtnCode()
-                            : getAngularBtnCode()
-                        }}
-                      />
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Button Gallery */}
-          <section style={{ marginBottom: '3rem' }}>
-            <h2 className="section-title">
-              <span>📚</span> Preconfigured Gallery
-            </h2>
-            <div className="gallery-grid">
-              {galleryItems.map((item) => (
-                <div
-                  key={item.title}
-                  className="gallery-card"
-                  onClick={() => handleGalleryClick(item)}
-                >
-                  <span className="gallery-card-title">{item.title}</span>
-                  <Button
-                    variant={item.variant}
-                    color={item.color}
-                    size={item.size}
-                    shape={item.shape}
-                    isLoading={item.isLoading}
-                    disabled={item.disabled}
-                    leftIcon={item.leftIcon ? <HeartFillIcon /> : undefined}
-                    rightIcon={item.rightIcon ? <ArrowIcon /> : undefined}
-                  >
-                    {item.text}
-                  </Button>
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* BUTTON GROUP SHOWCASE TAB */}
-      {activeComponent === 'buttongroup' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>🗂️</span> Button Group Playground
-            </h2>
-            <div className="playground-section">
-              {/* Settings Panel */}
-              <div className="playground-card">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Group Configuration</h3>
-                
-                <div className="control-grid">
-                  <div className="control-group">
-                    <label htmlFor="group-orientation">Orientation</label>
-                    <select
-                      id="group-orientation"
-                      value={groupOrientation}
-                      onChange={(e) => setGroupOrientation(e.target.value as ButtonGroupOrientation)}
-                    >
-                      <option value="horizontal">Horizontal</option>
-                      <option value="vertical">Vertical</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="group-count">Number of Buttons</label>
-                    <select
-                      id="group-count"
-                      value={groupCount}
-                      onChange={(e) => setGroupCount(Number(e.target.value))}
-                    >
-                      <option value={2}>2 Buttons</option>
-                      <option value={3}>3 Buttons</option>
-                      <option value={4}>4 Buttons</option>
-                      <option value={5}>5 Buttons</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="group-variant">Buttons Variant</label>
-                    <select
-                      id="group-variant"
-                      value={groupVariant}
-                      onChange={(e) => setGroupVariant(e.target.value as ButtonVariant)}
-                    >
-                      <option value="filled">Filled</option>
-                      <option value="tonal">Tonal</option>
-                      <option value="outline">Outline</option>
-                      <option value="ghost">Ghost</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="group-color">Accent Color</label>
-                    <select
-                      id="group-color"
-                      value={groupColor}
-                      onChange={(e) => setGroupColor(e.target.value as ButtonColor)}
-                    >
-                      {colors.map((c) => (
-                        <option key={c.name} value={c.name.toLowerCase()}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="group-shape">Buttons Shape</label>
-                    <select
-                      id="group-shape"
-                      value={groupShape}
-                      onChange={(e) => setGroupShape(e.target.value as ButtonShape)}
-                    >
-                      <option value="square">Square</option>
-                      <option value="rounded">Rounded</option>
-                      <option value="pill">Pill</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="group-selection-mode">Selection Mode</label>
-                    <select
-                      id="group-selection-mode"
-                      value={groupSelectionMode}
-                      onChange={(e) => setGroupSelectionMode(e.target.value as ButtonGroupSelectionMode)}
-                    >
-                      <option value="none">None (Standard Group)</option>
-                      <option value="single">Single Select (Radio Group)</option>
-                      <option value="multiple">Multiple Select (Checkbox Group)</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              {/* Preview and Code Panel */}
-              <div className="playground-card playground-card--preview">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Group Preview</h3>
-                
-                <div className="preview-canvas" style={{ padding: '2.5rem', minHeight: '220px', flexDirection: 'column', gap: '1.5rem' }}>
-                  <ButtonGroup
-                    orientation={groupOrientation}
-                    selectionMode={groupSelectionMode}
-                    value={groupSelectionMode === 'single' ? groupSingleValue : groupMultiValue}
-                    onChange={(val) => {
-                      if (groupSelectionMode === 'single') {
-                        setGroupSingleValue(val);
-                      } else {
-                        setGroupMultiValue(val);
-                      }
-                    }}
-                  >
-                    {Array.from({ length: groupCount }).map((_, index) => (
-                      <ButtonGroupItem
-                        key={index}
-                        value={`opt${index + 1}`}
-                        variant={groupVariant}
-                        color={groupColor}
-                        shape={groupShape}
-                      >
-                        Option {index + 1}
-                      </ButtonGroupItem>
-                    ))}
-                  </ButtonGroup>
-
-                  {groupSelectionMode !== 'none' && (
-                    <div style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)', fontFamily: 'monospace' }}>
-                      Selected Value: {groupSelectionMode === 'single' ? groupSingleValue : JSON.stringify(groupMultiValue)}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <div className="tabs-header">
-                    {(['react', 'vue', 'angular'] as const).map((tab) => (
-                      <button
-                        key={tab}
-                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <div className="code-container">
-                    <button
-                      className="code-copy-btn"
-                      onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
-                    >
-                      Copy Code
-                    </button>
-                    <pre className="code-block">
-                      <code
-                        dangerouslySetInnerHTML={{
-                          __html: activeTab === 'react'
-                            ? getReactButtonGroupCode()
-                            : activeTab === 'vue'
-                            ? getVueButtonGroupCode()
-                            : getAngularButtonGroupCode()
-                        }}
-                      />
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* STEPPER SHOWCASE TAB */}
-      {activeComponent === 'stepper' && (
-        <section>
-          <h2 className="section-title">
-            <span>🚥</span> Stepper Playground
-          </h2>
-          <div className="playground-section">
-            {/* Stepper Configuration */}
-            {/* Stepper Configuration */}
-            <div className="playground-card" style={{ gap: '1.2rem' }}>
-              <h3 style={{ margin: '0', fontSize: '1.2rem', color: `var(--ctp-${stepColor})` }}>Stepper Configuration</h3>
-              
-              <div className="control-grid">
-                <div className="control-group">
-                  <label htmlFor="step-orientation">Orientation</label>
-                  <select
-                    id="step-orientation"
-                    value={stepOrientation}
-                    onChange={(e) => setStepOrientation(e.target.value as StepperOrientation)}
-                  >
-                    <option value="horizontal">Horizontal</option>
-                    <option value="vertical">Vertical</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="step-variant">Node Style</label>
-                  <select
-                    id="step-variant"
-                    value={stepVariant}
-                    onChange={(e) => setStepVariant(e.target.value as StepperVariant)}
-                  >
-                    <option value="default">Numeric Numbers</option>
-                    <option value="dots">Minimal Dots</option>
-                    <option value="icon">Node Icons</option>
-                    <option value="labeled-icon">Labeled Icons</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="step-color">Active Accent Color</label>
-                  <select
-                    id="step-color"
-                    value={stepColor}
-                    onChange={(e) => setStepColor(e.target.value as ButtonColor)}
-                  >
-                    {colors.map((c) => (
-                      <option key={c.name} value={c.name.toLowerCase()}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="step-slider">Current Step: {currentStep + 1}</label>
-                  <input
-                    id="step-slider"
-                    type="range"
-                    min="0"
-                    max="3"
-                    value={currentStep}
-                    onChange={(e) => setCurrentStep(Number(e.target.value))}
-                    style={{ cursor: 'pointer', accentColor: `var(--ctp-${stepColor})` }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Preview and Code Snippets */}
-            <div className="playground-card playground-card--preview">
-              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
-              
-              <div className="preview-canvas" style={{ padding: '2rem', minHeight: '340px', flexDirection: 'column', gap: '1.5rem', justifyContent: 'space-between' }}>
-                <Stepper
-                  steps={demoSteps}
-                  currentStep={currentStep}
-                  orientation={stepOrientation}
-                  variant={stepVariant}
-                  color={stepColor}
-                />
-
-                {/* Animated Simulated Screen Content */}
-                <div className="ctp-stepper-container" style={{ width: '100%' }}>
-                  <div 
-                    key={currentStep}
-                    className={`playground-card ${slideClass}`}
-                    style={{ 
-                      margin: 0, 
-                      minHeight: '120px',
-                      justifyContent: 'center', 
-                      backgroundColor: 'var(--ctp-crust)',
-                      borderStyle: 'dashed',
-                      padding: '1.25rem',
-                      width: '100%',
-                      boxSizing: 'border-box'
-                    }}
-                  >
-                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1.05rem', color: `var(--ctp-${stepColor})` }}>
-                      {stepContents[currentStep].title}
-                    </h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
-                      {stepContents[currentStep].details}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Stepper Navigation Buttons */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', width: '100%' }}>
-                  <Button
-                    variant="outline"
-                    color={stepColor}
-                    disabled={currentStep === 0}
-                    onClick={() => setCurrentStep(prev => prev - 1)}
-                    style={{ flex: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="filled"
-                    color={stepColor}
-                    disabled={currentStep === 3}
-                    onClick={() => setCurrentStep(prev => prev + 1)}
-                    style={{ flex: 1 }}
-                  >
-                    Next Step
-                  </Button>
-                </div>
-              </div>
-
-              <div>
-                <div className="tabs-header">
-                  <button className="tab-btn active">React Code</button>
-                </div>
-                
-                <div className="code-container">
-                  <pre className="code-block">
-                    <code>{`// App.tsx\n<Stepper\n  steps={demoSteps}\n  currentStep={${currentStep}}\n  orientation="${stepOrientation}"\n  variant="${stepVariant}"\n  color="${stepColor}"\n/>`}</code>
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* MODALS & OVERLAY SHOWCASE TAB */}
-      {activeComponent === 'modal' && (
-        <section>
-          <h2 className="section-title">
-            <span>📦</span> Overlays & Modals Stacking
-          </h2>
-          <div className="playground-section">
-            {/* Modal Activation Dashboard */}
-            <div className="playground-card" style={{ gap: '1.2rem' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Overlay Control Board</h3>
-              
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-                <Button variant="filled" color="blue" onClick={() => setIsOpenSm(true)}>
-                  Open Small Modal
-                </Button>
-                <Button variant="filled" color="mauve" onClick={() => setIsOpenMd(true)}>
-                  Open Medium Modal
-                </Button>
-                <Button variant="filled" color="lavender" onClick={() => setIsOpenLg(true)}>
-                  Open Large Modal
-                </Button>
-                <Button variant="tonal" color="pink" onClick={() => setCustomOverlayOpen(true)}>
-                  Open Custom Overlay
-                </Button>
-              </div>
-
-              <div style={{ borderTop: '1px solid var(--ctp-surface0)', paddingTop: '1.2rem', marginTop: '0.5rem' }}>
-                <h4 style={{ margin: '0 0 12px 0' }}>Multi-level Modals Stacking</h4>
-                <p style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
-                  Open nested overlays to observe z-index stacking. Each subsequent overlay increments its z-index relative to the parent.
+                ) : undefined}
+              >
+                <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
+                  This is a <strong>Small (sm)</strong> Catppuccin modal. Small modals are optimized for brief confirmation dialogs, quick warnings, or system notifications.
                 </p>
-                <Button variant="filled" color="red" onClick={() => setIsOpenNested1(true)}>
-                  Launch Nesting Sequence
-                </Button>
-              </div>
+              </Modal>
 
-              {/* Stacking stack visualizer */}
-              <div className="stacking-visualizer">
-                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.1rem' }}>Active Overlay Stack Visualizer</h3>
-                {openStack.length === 0 ? (
-                  <p style={{ color: 'var(--ctp-subtext0)', margin: 0, fontSize: '0.9rem', fontStyle: 'italic' }}>
-                    No active overlays open. Click any buttons above to push overlays onto the stack.
+              {/* 2. Medium Modal */}
+              <Modal
+                isOpen={isOpenMd}
+                onClose={() => setIsOpenMd(false)}
+                size="md"
+                title={modalTitle || undefined}
+                showCloseButton={modalHasCloseButton}
+                closeOnOverlayClick={modalCloseOnOverlay}
+                closeOnEsc={modalCloseOnEsc}
+                footer={modalHasFooter ? (
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setIsOpenMd(false)}>Cancel</Button>
+                    <Button variant="filled" color="mauve" onClick={() => setIsOpenMd(false)}>Proceed</Button>
+                  </div>
+                ) : undefined}
+              >
+                <p style={{ margin: '0 0 10px 0', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                  This is a <strong>Medium (md)</strong> standard modal. Great for configuration dialogs, small forms, or details displays.
+                </p>
+                <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
+                  Supports click overlay and keyboard escape hooks.
+                </p>
+              </Modal>
+
+              {/* 3. Large Modal */}
+              <Modal
+                isOpen={isOpenLg}
+                onClose={() => setIsOpenLg(false)}
+                size="lg"
+                title={modalTitle || undefined}
+                showCloseButton={modalHasCloseButton}
+                closeOnOverlayClick={modalCloseOnOverlay}
+                closeOnEsc={modalCloseOnEsc}
+                footer={modalHasFooter ? (
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setIsOpenLg(false)}>Close</Button>
+                    <Button variant="filled" color="mauve" onClick={() => setIsOpenLg(false)}>Save Changes</Button>
+                  </div>
+                ) : undefined}
+              >
+                <h4 style={{ margin: '0 0 10px 0' }}>Spacious Canvas</h4>
+                <p style={{ margin: '0 0 10px 0', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                  Large (lg) modals offer a wider viewport to present complex structures: charts, table lists, logs, or multi-step wizard layouts.
+                </p>
+                <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
+                  Try opening another overlay without closing this one to test the active layering!
+                </p>
+              </Modal>
+
+              {/* 4. Nesting Sequence Modals */}
+
+              {/* Layer 1: Large Modal */}
+              <Modal
+                isOpen={isOpenNested1}
+                onClose={() => setIsOpenNested1(false)}
+                size="lg"
+                title="Layer 1: Stack Base"
+                footer={
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setIsOpenNested1(false)}>Close</Button>
+                  </div>
+                }
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <p style={{ margin: 0, lineHeight: 1.5 }}>
+                    You have initialized the stacking hierarchy. Current overlay count is <strong>1</strong>.
                   </p>
-                ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: '8px' }}>
-                    {openStack.map((item, index) => (
-                      <div
-                        key={item.name}
-                        className="stack-item-indicator"
-                        style={{
-                          backgroundColor: 'var(--ctp-surface0)',
-                          borderColor: 'var(--ctp-mauve)',
-                          color: 'var(--ctp-text)',
-                          borderLeftWidth: '4px',
-                          borderLeftStyle: 'solid'
-                        }}
-                      >
-                        <span>{item.name} ({item.size})</span>
-                        <span className="badge-zindex">z-index: {1001 + index}</span>
+                  <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--ctp-surface0)' }}>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Active Overlay Stack:</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem' }}>
+                        <span>Layer 1 (This Modal)</span>
+                        <span style={{ fontFamily: 'monospace', color: 'var(--ctp-mauve)' }}>z-index: 1001</span>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Modal Options Configuration */}
-            <div className="playground-card" style={{ gap: '1.2rem' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Modal Attribute Customizer</h3>
-              
-              <div className="control-group">
-                <label htmlFor="modal-title-input">Header Title Text</label>
-                <input
-                  id="modal-title-input"
-                  type="text"
-                  value={modalTitle}
-                  onChange={(e) => setModalTitle(e.target.value)}
-                />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={modalHasCloseButton}
-                    onChange={(e) => setModalHasCloseButton(e.target.checked)}
-                  />
-                  Show Close Button in Header
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={modalCloseOnOverlay}
-                    onChange={(e) => setModalCloseOnOverlay(e.target.checked)}
-                  />
-                  Dismiss on Backdrop / Overlay Click
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={modalCloseOnEsc}
-                    onChange={(e) => setModalCloseOnEsc(e.target.checked)}
-                  />
-                  Dismiss on ESC Key Press
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={modalHasFooter}
-                    onChange={(e) => setModalHasFooter(e.target.checked)}
-                  />
-                  Include Standard Action Footer
-                </label>
-              </div>
-            </div>
-          </div>
-
-          {/* RENDER MODAL INSTANCES */}
-
-          {/* 1. Small Modal */}
-          <Modal
-            isOpen={isOpenSm}
-            onClose={() => setIsOpenSm(false)}
-            size="sm"
-            title={modalTitle || undefined}
-            showCloseButton={modalHasCloseButton}
-            closeOnOverlayClick={modalCloseOnOverlay}
-            closeOnEsc={modalCloseOnEsc}
-            footer={modalHasFooter ? (
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setIsOpenSm(false)}>Cancel</Button>
-                <Button variant="filled" color="mauve" onClick={() => setIsOpenSm(false)}>Save Changes</Button>
-              </div>
-            ) : undefined}
-          >
-            <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
-              This is a <strong>Small (sm)</strong> Catppuccin modal. Small modals are optimized for brief confirmation dialogs, quick warnings, or system notifications.
-            </p>
-          </Modal>
-
-          {/* 2. Medium Modal */}
-          <Modal
-            isOpen={isOpenMd}
-            onClose={() => setIsOpenMd(false)}
-            size="md"
-            title={modalTitle || undefined}
-            showCloseButton={modalHasCloseButton}
-            closeOnOverlayClick={modalCloseOnOverlay}
-            closeOnEsc={modalCloseOnEsc}
-            footer={modalHasFooter ? (
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setIsOpenMd(false)}>Cancel</Button>
-                <Button variant="filled" color="mauve" onClick={() => setIsOpenMd(false)}>Proceed</Button>
-              </div>
-            ) : undefined}
-          >
-            <p style={{ margin: '0 0 10px 0', fontSize: '0.9rem', lineHeight: '1.5' }}>
-              This is a <strong>Medium (md)</strong> standard modal. Great for configuration dialogs, small forms, or details displays.
-            </p>
-            <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
-              Supports click overlay and keyboard escape hooks.
-            </p>
-          </Modal>
-
-          {/* 3. Large Modal */}
-          <Modal
-            isOpen={isOpenLg}
-            onClose={() => setIsOpenLg(false)}
-            size="lg"
-            title={modalTitle || undefined}
-            showCloseButton={modalHasCloseButton}
-            closeOnOverlayClick={modalCloseOnOverlay}
-            closeOnEsc={modalCloseOnEsc}
-            footer={modalHasFooter ? (
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setIsOpenLg(false)}>Close</Button>
-                <Button variant="filled" color="mauve" onClick={() => setIsOpenLg(false)}>Save Changes</Button>
-              </div>
-            ) : undefined}
-          >
-            <h4 style={{ margin: '0 0 10px 0' }}>Spacious Canvas</h4>
-            <p style={{ margin: '0 0 10px 0', fontSize: '0.9rem', lineHeight: '1.5' }}>
-              Large (lg) modals offer a wider viewport to present complex structures: charts, table lists, logs, or multi-step wizard layouts.
-            </p>
-            <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>
-              Try opening another overlay without closing this one to test the active layering!
-            </p>
-          </Modal>
-
-          {/* 4. Nesting Sequence Modals */}
-          
-          {/* Layer 1: Large Modal */}
-          <Modal
-            isOpen={isOpenNested1}
-            onClose={() => setIsOpenNested1(false)}
-            size="lg"
-            title="Layer 1: Stack Base"
-            footer={
-              <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setIsOpenNested1(false)}>Close</Button>
-              </div>
-            }
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <p style={{ margin: 0, lineHeight: 1.5 }}>
-                You have initialized the stacking hierarchy. Current overlay count is <strong>1</strong>.
-              </p>
-              <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--ctp-surface0)' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Active Overlay Stack:</span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem' }}>
-                    <span>Layer 1 (This Modal)</span>
-                    <span style={{ fontFamily: 'monospace', color: 'var(--ctp-mauve)' }}>z-index: 1001</span>
-                  </div>
-                </div>
-              </div>
-              <Button variant="filled" color="mauve" onClick={() => setIsOpenNested2(true)}>
-                Push Layer 2 Modal
-              </Button>
-            </div>
-          </Modal>
-
-          {/* Layer 2: Medium Modal */}
-          <Modal
-            isOpen={isOpenNested2}
-            onClose={() => setIsOpenNested2(false)}
-            size="md"
-            title="Layer 2: Second Story"
-            footer={
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setIsOpenNested2(false)}>Go Back</Button>
-                <Button variant="filled" color="red" onClick={() => { setIsOpenNested2(false); setIsOpenNested1(false); }}>Close All</Button>
-              </div>
-            }
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <p style={{ margin: 0, lineHeight: 1.5 }}>
-                Nice! This overlay rests directly above Layer 1. Note how the z-index auto-stacks.
-              </p>
-              <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--ctp-surface0)' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Active Overlay Stack:</span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem' }}>
-                    <span>Layer 2 (This Modal)</span>
-                    <span style={{ fontFamily: 'monospace', color: 'var(--ctp-mauve)' }}>z-index: 1002</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem', opacity: 0.6 }}>
-                    <span>Layer 1 Modal</span>
-                    <span style={{ fontFamily: 'monospace' }}>z-index: 1001</span>
-                  </div>
-                </div>
-              </div>
-              <Button variant="filled" color="blue" onClick={() => setIsOpenNested3(true)}>
-                Push Layer 3 Modal
-              </Button>
-            </div>
-          </Modal>
-
-          {/* Layer 3: Small Modal */}
-          <Modal
-            isOpen={isOpenNested3}
-            onClose={() => setIsOpenNested3(false)}
-            size="sm"
-            title="Layer 3: Top Pinnacle"
-            footer={
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setIsOpenNested3(false)}>Close Layer 3</Button>
-                <Button variant="filled" color="red" onClick={() => { setIsOpenNested3(false); setIsOpenNested2(false); setIsOpenNested1(false); }}>Close All</Button>
-              </div>
-            }
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <p style={{ margin: 0, lineHeight: 1.5 }}>
-                You have reached the maximum nest level in this demonstration!
-              </p>
-              <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--ctp-surface0)' }}>
-                <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Active Overlay Stack:</span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem' }}>
-                    <span>Layer 3 (This Modal)</span>
-                    <span style={{ fontFamily: 'monospace', color: 'var(--ctp-mauve)' }}>z-index: 1003</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem', opacity: 0.6 }}>
-                    <span>Layer 2 Modal</span>
-                    <span style={{ fontFamily: 'monospace' }}>z-index: 1002</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem', opacity: 0.4 }}>
-                    <span>Layer 1 Modal</span>
-                    <span style={{ fontFamily: 'monospace' }}>z-index: 1001</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Modal>
-
-          {/* 5. Custom Raw Overlay */}
-          <Overlay isOpen={customOverlayOpen} onClose={() => setCustomOverlayOpen(false)}>
-            <div className="custom-overlay-card">
-              <h3 style={{ margin: '0 0 10px 0', color: 'var(--ctp-pink)' }}>✨ Raw Custom Overlay ✨</h3>
-              <p style={{ margin: '0 0 20px 0', fontSize: '0.9rem', lineHeight: '1.6', color: 'var(--ctp-subtext1)' }}>
-                This card is rendered directly within the raw <code>Overlay</code> portal, skipping the preconfigured <code>Modal</code> container entirely.
-              </p>
-              <p style={{ margin: '0 0 24px 0', fontSize: '0.9rem', lineHeight: '1.6', color: 'var(--ctp-subtext1)' }}>
-                Excellent for building non-standard overlay layouts: fullscreen main menus, custom widgets, drawer systems, or dialogs.
-              </p>
-              <Button variant="filled" color="pink" onClick={() => setCustomOverlayOpen(false)}>
-                Dismiss Overlay
-              </Button>
-            </div>
-          </Overlay>
-        </section>
-      )}
-
-      {/* COMPOUND TABS SHOWCASE TAB */}
-      {activeComponent === 'tabs' && (
-        <section>
-          <h2 className="section-title">
-            <span>🗂️</span> Compound Tabs Layouts
-          </h2>
-          
-          <div className="playground-section">
-            {/* Tabs config controls */}
-            <div className="playground-card" style={{ gap: '1.2rem' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Tabs Styling Settings</h3>
-              
-              <div className="control-grid">
-                <div className="control-group">
-                  <label htmlFor="tabs-variant-select">Visual Style</label>
-                  <select
-                    id="tabs-variant-select"
-                    value={tabsVariant}
-                    onChange={(e) => setTabsVariant(e.target.value as TabsVariant)}
-                  >
-                    <option value="default">Default Panel</option>
-                    <option value="underline">Underline Accent</option>
-                    <option value="pills">Pills Box</option>
-                    <option value="segmented">Segmented Block</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="tabs-color-select">Color Accent</label>
-                  <select
-                    id="tabs-color-select"
-                    value={tabsColor}
-                    onChange={(e) => setTabsColor(e.target.value as ButtonColor)}
-                  >
-                    {colors.map((c) => (
-                      <option key={c.name} value={c.name.toLowerCase()}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="tabs-size-select">Component Size</label>
-                  <select
-                    id="tabs-size-select"
-                    value={tabsSize}
-                    onChange={(e) => setTabsSize(e.target.value as any)}
-                  >
-                    <option value="sm">Small (sm)</option>
-                    <option value="md">Medium (md)</option>
-                    <option value="lg">Large (lg)</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="tabs-orient-select">Orientation</label>
-                  <select
-                    id="tabs-orient-select"
-                    value={tabsOrientation}
-                    onChange={(e) => setTabsOrientation(e.target.value as TabsOrientation)}
-                  >
-                    <option value="horizontal">Horizontal</option>
-                    <option value="vertical">Vertical</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Live Tabs Render Preview */}
-            <div className="playground-card playground-card--preview">
-              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
-              
-              <div className="preview-canvas" style={{ padding: '2rem', minHeight: '260px', alignItems: 'stretch', justifyContent: 'stretch' }}>
-                <Tabs
-                  value={tabsActiveVal}
-                  onValueChange={setTabsActiveVal}
-                  variant={tabsVariant}
-                  color={tabsColor}
-                  size={tabsSize}
-                  orientation={tabsOrientation}
-                  style={{ width: '100%', gap: '16px' }}
-                >
-                  <TabsList>
-                    <TabsTrigger value="general">⚙️ General</TabsTrigger>
-                    <TabsTrigger value="themes">🎨 Themes</TabsTrigger>
-                    <TabsTrigger value="advanced">🚀 Advanced</TabsTrigger>
-                  </TabsList>
-                  
-                  <div style={{ 
-                    padding: '1.2rem', 
-                    flexGrow: 1, 
-                    backgroundColor: 'var(--ctp-mantle)', 
-                    borderRadius: '12px', 
-                    border: '1px solid var(--ctp-surface0)',
-                    minHeight: '120px'
-                  }}>
-                    <TabsContent value="general">
-                      <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${tabsColor})` }}>General Settings</h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
-                        Configure default behaviors, workspace paths, and automatic backup routines. Optimization triggers run periodically.
-                      </p>
-                    </TabsContent>
-                    
-                    <TabsContent value="themes">
-                      <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${tabsColor})` }}>Theme Selector</h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
-                        Swap active palettes between light and dark variants. Choose dynamic HSL variables matching Catppuccin flavors.
-                      </p>
-                    </TabsContent>
-                    
-                    <TabsContent value="advanced">
-                      <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${tabsColor})` }}>Advanced Options</h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
-                        Inspect background worker threads, allocate memory sizes, and enable experimental hardware CSS transitions.
-                      </p>
-                    </TabsContent>
-                  </div>
-                </Tabs>
-              </div>
-
-              <div>
-                <pre className="code-block" style={{ fontSize: '0.8rem' }}>
-                  <code>{`// React compound Tabs usage\n<Tabs value="${tabsActiveVal}" variant="${tabsVariant}" color="${tabsColor}" size="${tabsSize}" orientation="${tabsOrientation}">\n  <TabsList>\n    <TabsTrigger value="general">⚙️ General</TabsTrigger>\n    <TabsTrigger value="themes">🎨 Themes</TabsTrigger>\n    <TabsTrigger value="advanced">🚀 Advanced</TabsTrigger>\n  </TabsList>\n  <TabsContent value="general">...</TabsContent>\n</Tabs>`}</code>
-                </pre>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* PRO FEATURES */}
-      {activeComponent === 'pro' && (
-        <section>
-          <h2 className="section-title">
-            <span>⚡</span> Pro: Reorderable Tabs & Table
-          </h2>
-
-          <div className="playground-section">
-            <div className="playground-card playground-card--preview">
-              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>
-                Drag to reorder tabs
-              </h3>
-
-              <div className="preview-canvas" style={{ padding: '2rem', minHeight: '260px', alignItems: 'stretch', justifyContent: 'stretch' }}>
-                <DragDropProvider apiKey="dev">
-                  <ReorderableTabs
-                    defaultValue="projects"
-                    color="mauve"
-                    variant="pills"
-                    onOrderChange={(newOrder) => console.log('New tab order:', newOrder)}
-                  >
-                    <ReorderableTabs.List>
-                      <ReorderableTabs.Trigger value="projects">
-                        📁 Projects
-                      </ReorderableTabs.Trigger>
-                      <ReorderableTabs.Trigger value="settings">
-                        ⚙️ Settings
-                      </ReorderableTabs.Trigger>
-                      <ReorderableTabs.Trigger value="activity">
-                        📊 Activity
-                      </ReorderableTabs.Trigger>
-                      <ReorderableTabs.Trigger value="team">
-                        👥 Team
-                      </ReorderableTabs.Trigger>
-                    </ReorderableTabs.List>
-
-                    <div style={{
-                      padding: '1.2rem',
-                      flexGrow: 1,
-                      backgroundColor: 'var(--ctp-mantle)',
-                      borderRadius: '12px',
-                      border: '1px solid var(--ctp-surface0)',
-                      minHeight: '120px'
-                    }}>
-                      <ReorderableTabs.Content value="projects">
-                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Projects</h4>
-                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                          Drag the tab handles to reorder your workspace projects.
-                        </p>
-                      </ReorderableTabs.Content>
-                      <ReorderableTabs.Content value="settings">
-                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Settings</h4>
-                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                          Pro feature: reorder tabs by dragging them.
-                        </p>
-                      </ReorderableTabs.Content>
-                      <ReorderableTabs.Content value="activity">
-                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Activity</h4>
-                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                          Monitor recent activity across your projects.
-                        </p>
-                      </ReorderableTabs.Content>
-                      <ReorderableTabs.Content value="team">
-                        <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Team</h4>
-                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                          Manage team members and permissions.
-                        </p>
-                      </ReorderableTabs.Content>
                     </div>
-                  </ReorderableTabs>
-                </DragDropProvider>
-              </div>
+                  </div>
+                  <Button variant="filled" color="mauve" onClick={() => setIsOpenNested2(true)}>
+                    Push Layer 2 Modal
+                  </Button>
+                </div>
+              </Modal>
 
-              <div>
-                <pre className="code-block" style={{ fontSize: '0.8rem' }}>
-                  <code>{`// Pro: draggable reorderable tabs
+              {/* Layer 2: Medium Modal */}
+              <Modal
+                isOpen={isOpenNested2}
+                onClose={() => setIsOpenNested2(false)}
+                size="md"
+                title="Layer 2: Second Story"
+                footer={
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setIsOpenNested2(false)}>Go Back</Button>
+                    <Button variant="filled" color="red" onClick={() => { setIsOpenNested2(false); setIsOpenNested1(false); }}>Close All</Button>
+                  </div>
+                }
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <p style={{ margin: 0, lineHeight: 1.5 }}>
+                    Nice! This overlay rests directly above Layer 1. Note how the z-index auto-stacks.
+                  </p>
+                  <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--ctp-surface0)' }}>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Active Overlay Stack:</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem' }}>
+                        <span>Layer 2 (This Modal)</span>
+                        <span style={{ fontFamily: 'monospace', color: 'var(--ctp-mauve)' }}>z-index: 1002</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem', opacity: 0.6 }}>
+                        <span>Layer 1 Modal</span>
+                        <span style={{ fontFamily: 'monospace' }}>z-index: 1001</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Button variant="filled" color="blue" onClick={() => setIsOpenNested3(true)}>
+                    Push Layer 3 Modal
+                  </Button>
+                </div>
+              </Modal>
+
+              {/* Layer 3: Small Modal */}
+              <Modal
+                isOpen={isOpenNested3}
+                onClose={() => setIsOpenNested3(false)}
+                size="sm"
+                title="Layer 3: Top Pinnacle"
+                footer={
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setIsOpenNested3(false)}>Close Layer 3</Button>
+                    <Button variant="filled" color="red" onClick={() => { setIsOpenNested3(false); setIsOpenNested2(false); setIsOpenNested1(false); }}>Close All</Button>
+                  </div>
+                }
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <p style={{ margin: 0, lineHeight: 1.5 }}>
+                    You have reached the maximum nest level in this demonstration!
+                  </p>
+                  <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--ctp-surface0)' }}>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Active Overlay Stack:</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem' }}>
+                        <span>Layer 3 (This Modal)</span>
+                        <span style={{ fontFamily: 'monospace', color: 'var(--ctp-mauve)' }}>z-index: 1003</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem', opacity: 0.6 }}>
+                        <span>Layer 2 Modal</span>
+                        <span style={{ fontFamily: 'monospace' }}>z-index: 1002</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 10px', backgroundColor: 'var(--ctp-surface0)', borderRadius: '4px', fontSize: '0.82rem', opacity: 0.4 }}>
+                        <span>Layer 1 Modal</span>
+                        <span style={{ fontFamily: 'monospace' }}>z-index: 1001</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+
+              {/* 5. Custom Raw Overlay */}
+              <Overlay isOpen={customOverlayOpen} onClose={() => setCustomOverlayOpen(false)}>
+                <div className="custom-overlay-card">
+                  <h3 style={{ margin: '0 0 10px 0', color: 'var(--ctp-pink)' }}>✨ Raw Custom Overlay ✨</h3>
+                  <p style={{ margin: '0 0 20px 0', fontSize: '0.9rem', lineHeight: '1.6', color: 'var(--ctp-subtext1)' }}>
+                    This card is rendered directly within the raw <code>Overlay</code> portal, skipping the preconfigured <code>Modal</code> container entirely.
+                  </p>
+                  <p style={{ margin: '0 0 24px 0', fontSize: '0.9rem', lineHeight: '1.6', color: 'var(--ctp-subtext1)' }}>
+                    Excellent for building non-standard overlay layouts: fullscreen main menus, custom widgets, drawer systems, or dialogs.
+                  </p>
+                  <Button variant="filled" color="pink" onClick={() => setCustomOverlayOpen(false)}>
+                    Dismiss Overlay
+                  </Button>
+                </div>
+              </Overlay>
+            </section>
+          )}
+
+          {/* COMPOUND TABS SHOWCASE TAB */}
+          {activeComponent === 'tabs' && (
+            <section>
+              <h2 className="section-title">
+                <span>🗂️</span> Compound Tabs Layouts
+              </h2>
+
+              <div className="playground-section">
+                {/* Tabs config controls */}
+                <div className="playground-card" style={{ gap: '1.2rem' }}>
+                  <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Tabs Styling Settings</h3>
+
+                  <div className="control-grid">
+                    <div className="control-group">
+                      <label htmlFor="tabs-variant-select">Visual Style</label>
+                      <select
+                        id="tabs-variant-select"
+                        value={tabsVariant}
+                        onChange={(e) => setTabsVariant(e.target.value as TabsVariant)}
+                      >
+                        <option value="default">Default Panel</option>
+                        <option value="underline">Underline Accent</option>
+                        <option value="pills">Pills Box</option>
+                        <option value="segmented">Segmented Block</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="tabs-color-select">Color Accent</label>
+                      <select
+                        id="tabs-color-select"
+                        value={tabsColor}
+                        onChange={(e) => setTabsColor(e.target.value as ButtonColor)}
+                      >
+                        {colors.map((c) => (
+                          <option key={c.name} value={c.name.toLowerCase()}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="tabs-size-select">Component Size</label>
+                      <select
+                        id="tabs-size-select"
+                        value={tabsSize}
+                        onChange={(e) => setTabsSize(e.target.value as any)}
+                      >
+                        <option value="sm">Small (sm)</option>
+                        <option value="md">Medium (md)</option>
+                        <option value="lg">Large (lg)</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="tabs-orient-select">Orientation</label>
+                      <select
+                        id="tabs-orient-select"
+                        value={tabsOrientation}
+                        onChange={(e) => setTabsOrientation(e.target.value as TabsOrientation)}
+                      >
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Live Tabs Render Preview */}
+                <div className="playground-card playground-card--preview">
+                  <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
+
+                  <div className="preview-canvas" style={{ padding: '2rem', minHeight: '260px', alignItems: 'stretch', justifyContent: 'stretch' }}>
+                    <Tabs
+                      value={tabsActiveVal}
+                      onValueChange={setTabsActiveVal}
+                      variant={tabsVariant}
+                      color={tabsColor}
+                      size={tabsSize}
+                      orientation={tabsOrientation}
+                      style={{ width: '100%', gap: '16px' }}
+                    >
+                      <TabsList>
+                        <TabsTrigger value="general">⚙️ General</TabsTrigger>
+                        <TabsTrigger value="themes">🎨 Themes</TabsTrigger>
+                        <TabsTrigger value="advanced">🚀 Advanced</TabsTrigger>
+                      </TabsList>
+
+                      <div style={{
+                        padding: '1.2rem',
+                        flexGrow: 1,
+                        backgroundColor: 'var(--ctp-mantle)',
+                        borderRadius: '12px',
+                        border: '1px solid var(--ctp-surface0)',
+                        minHeight: '120px'
+                      }}>
+                        <TabsContent value="general">
+                          <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${tabsColor})` }}>General Settings</h4>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
+                            Configure default behaviors, workspace paths, and automatic backup routines. Optimization triggers run periodically.
+                          </p>
+                        </TabsContent>
+
+                        <TabsContent value="themes">
+                          <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${tabsColor})` }}>Theme Selector</h4>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
+                            Swap active palettes between light and dark variants. Choose dynamic HSL variables matching Catppuccin flavors.
+                          </p>
+                        </TabsContent>
+
+                        <TabsContent value="advanced">
+                          <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${tabsColor})` }}>Advanced Options</h4>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: '1.4' }}>
+                            Inspect background worker threads, allocate memory sizes, and enable experimental hardware CSS transitions.
+                          </p>
+                        </TabsContent>
+                      </div>
+                    </Tabs>
+                  </div>
+
+                  <div>
+                    <pre className="code-block" style={{ fontSize: '0.8rem' }}>
+                      <code>{`// React compound Tabs usage\n<Tabs value="${tabsActiveVal}" variant="${tabsVariant}" color="${tabsColor}" size="${tabsSize}" orientation="${tabsOrientation}">\n  <TabsList>\n    <TabsTrigger value="general">⚙️ General</TabsTrigger>\n    <TabsTrigger value="themes">🎨 Themes</TabsTrigger>\n    <TabsTrigger value="advanced">🚀 Advanced</TabsTrigger>\n  </TabsList>\n  <TabsContent value="general">...</TabsContent>\n</Tabs>`}</code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* PRO FEATURES */}
+          {activeComponent === 'pro' && (
+            <section>
+              <h2 className="section-title">
+                <span>⚡</span> Pro: Reorderable Tabs & Table
+              </h2>
+
+              <div className="playground-section">
+                <div className="playground-card playground-card--preview">
+                  <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>
+                    Drag to reorder tabs
+                  </h3>
+
+                  <div className="preview-canvas" style={{ padding: '2rem', minHeight: '260px', alignItems: 'stretch', justifyContent: 'stretch' }}>
+                    <DragDropProvider apiKey="dev">
+                      <ReorderableTabs
+                        defaultValue="projects"
+                        color="mauve"
+                        variant="pills"
+                        onOrderChange={(newOrder) => console.log('New tab order:', newOrder)}
+                      >
+                        <ReorderableTabs.List>
+                          <ReorderableTabs.Trigger value="projects">
+                            📁 Projects
+                          </ReorderableTabs.Trigger>
+                          <ReorderableTabs.Trigger value="settings">
+                            ⚙️ Settings
+                          </ReorderableTabs.Trigger>
+                          <ReorderableTabs.Trigger value="activity">
+                            📊 Activity
+                          </ReorderableTabs.Trigger>
+                          <ReorderableTabs.Trigger value="team">
+                            👥 Team
+                          </ReorderableTabs.Trigger>
+                        </ReorderableTabs.List>
+
+                        <div style={{
+                          padding: '1.2rem',
+                          flexGrow: 1,
+                          backgroundColor: 'var(--ctp-mantle)',
+                          borderRadius: '12px',
+                          border: '1px solid var(--ctp-surface0)',
+                          minHeight: '120px'
+                        }}>
+                          <ReorderableTabs.Content value="projects">
+                            <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Projects</h4>
+                            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                              Drag the tab handles to reorder your workspace projects.
+                            </p>
+                          </ReorderableTabs.Content>
+                          <ReorderableTabs.Content value="settings">
+                            <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Settings</h4>
+                            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                              Pro feature: reorder tabs by dragging them.
+                            </p>
+                          </ReorderableTabs.Content>
+                          <ReorderableTabs.Content value="activity">
+                            <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Activity</h4>
+                            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                              Monitor recent activity across your projects.
+                            </p>
+                          </ReorderableTabs.Content>
+                          <ReorderableTabs.Content value="team">
+                            <h4 style={{ margin: '0 0 8px 0', color: 'var(--ctp-mauve)' }}>Team</h4>
+                            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                              Manage team members and permissions.
+                            </p>
+                          </ReorderableTabs.Content>
+                        </div>
+                      </ReorderableTabs>
+                    </DragDropProvider>
+                  </div>
+
+                  <div>
+                    <pre className="code-block" style={{ fontSize: '0.8rem' }}>
+                      <code>{`// Pro: draggable reorderable tabs
 import { DragDropProvider, ReorderableTabs } from '@catppuccin-ds/react-pro';
 
 <DragDropProvider apiKey="sk_live_your_key">
@@ -3417,43 +3440,43 @@ import { DragDropProvider, ReorderableTabs } from '@catppuccin-ds/react-pro';
     <ReorderableTabs.Content value="settings">...</ReorderableTabs.Content>
   </ReorderableTabs>
 </DragDropProvider>`}</code>
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <hr style={{ margin: '2.5rem 0', border: 'none', borderTop: '1px solid var(--ctp-surface1)' }} />
-
-          <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>
-            Reorderable Table (column reorder, row reorder, column resize)
-          </h3>
-
-          <div className="playground-section">
-            <div className="playground-card playground-card--preview">
-              <div className="preview-canvas" style={{ padding: '1.5rem', minHeight: '320px', alignItems: 'stretch', justifyContent: 'stretch' }}>
-                <DragDropProvider apiKey="dev">
-                  <ReorderableTable<Employee>
-                    data={proTableData}
-                    columns={proTableColumns}
-                    rowKey={(r) => r.id}
-                    onRowOrderChange={(newData) => setProTableData(newData)}
-                    onColumnOrderChange={(newCols) => setProTableColumns(newCols)}
-                    onColumnResize={(key, w) => setProTableColumnWidths((prev) => ({ ...prev, [key]: w }))}
-                    columnWidths={proTableColumnWidths}
-                    sortField={proSortField}
-                    sortOrder={proSortOrder}
-                    onSort={(field, order) => { setProSortField(field); setProSortOrder(order); }}
-                    selectedRowIds={proSelectedIds}
-                    onSelectionChange={setProSelectedIds}
-                    size="md"
-                    color="mauve"
-                  />
-                </DragDropProvider>
+                    </pre>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <pre className="code-block" style={{ fontSize: '0.8rem' }}>
-                  <code>{`// Pro: draggable reorderable table
+              <hr style={{ margin: '2.5rem 0', border: 'none', borderTop: '1px solid var(--ctp-surface1)' }} />
+
+              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>
+                Reorderable Table (column reorder, row reorder, column resize)
+              </h3>
+
+              <div className="playground-section">
+                <div className="playground-card playground-card--preview">
+                  <div className="preview-canvas" style={{ padding: '1.5rem', minHeight: '320px', alignItems: 'stretch', justifyContent: 'stretch' }}>
+                    <DragDropProvider apiKey="dev">
+                      <ReorderableTable<Employee>
+                        data={proTableData}
+                        columns={proTableColumns}
+                        rowKey={(r) => r.id}
+                        onRowOrderChange={(newData) => setProTableData(newData)}
+                        onColumnOrderChange={(newCols) => setProTableColumns(newCols)}
+                        onColumnResize={(key, w) => setProTableColumnWidths((prev) => ({ ...prev, [key]: w }))}
+                        columnWidths={proTableColumnWidths}
+                        sortField={proSortField}
+                        sortOrder={proSortOrder}
+                        onSort={(field, order) => { setProSortField(field); setProSortOrder(order); }}
+                        selectedRowIds={proSelectedIds}
+                        onSelectionChange={setProSelectedIds}
+                        size="md"
+                        color="mauve"
+                      />
+                    </DragDropProvider>
+                  </div>
+
+                  <div>
+                    <pre className="code-block" style={{ fontSize: '0.8rem' }}>
+                      <code>{`// Pro: draggable reorderable table
 import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
 
 <DragDropProvider apiKey="sk_live_your_key">
@@ -3472,5542 +3495,5592 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
     onSelectionChange={setSelectedIds}
   />
 </DragDropProvider>`}</code>
-                </pre>
+                    </pre>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
-      )}
+            </section>
+          )}
 
-      {/* DYNAMIC FORMS SHOWCASE TAB */}
-      {activeComponent === 'form' && (
-        <section>
-          <h2 className="section-title">
-            <span>⚡</span> Dynamic Form Builder & Renderer
-          </h2>
+          {/* DYNAMIC FORMS SHOWCASE TAB */}
+          {activeComponent === 'form' && (
+            <section>
+              <h2 className="section-title">
+                <span>⚡</span> Dynamic Form Builder & Renderer
+              </h2>
 
-          <div className="forms-playground-grid">
-            {/* Left Column: Schema Builder & JSON Editor */}
-            <div className="playground-card" style={{ gap: '1rem' }}>
-              <div className="builder-tabs">
-                <button
-                  className={`builder-tab-btn ${formBuilderTab === 'builder' ? 'active' : ''}`}
-                  onClick={() => setFormBuilderTab('builder')}
-                >
-                  🛠️ Schema Field Builder
-                </button>
-                <button
-                  className={`builder-tab-btn ${formBuilderTab === 'json' ? 'active' : ''}`}
-                  onClick={() => setFormBuilderTab('json')}
-                >
-                  📄 Edit Schema JSON
-                </button>
-              </div>
+              <div className="forms-playground-grid">
+                {/* Left Column: Schema Builder & JSON Editor */}
+                <div className="playground-card" style={{ gap: '1rem' }}>
+                  <div className="builder-tabs">
+                    <button
+                      className={`builder-tab-btn ${formBuilderTab === 'builder' ? 'active' : ''}`}
+                      onClick={() => setFormBuilderTab('builder')}
+                    >
+                      🛠️ Schema Field Builder
+                    </button>
+                    <button
+                      className={`builder-tab-btn ${formBuilderTab === 'json' ? 'active' : ''}`}
+                      onClick={() => setFormBuilderTab('json')}
+                    >
+                      📄 Edit Schema JSON
+                    </button>
+                  </div>
 
-              {formBuilderTab === 'builder' ? (
-                <div>
-                  <h4 style={{ margin: '0 0 10px 0' }}>Fields List</h4>
-                  <div style={{ maxHeight: '200px', overflowY: 'auto', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '6px', paddingRight: '4px' }}>
-                    {formSchema.map((field) => (
-                      <div key={field.id} className="field-list-item">
-                        <div className="field-list-details">
-                          <span className="field-list-name">{field.label} ({field.id})</span>
-                          <span className="field-list-meta">
-                            Type: {field.type} • Width: {field.width}% {field.required ? '• Required' : ''}
-                          </span>
+                  {formBuilderTab === 'builder' ? (
+                    <div>
+                      <h4 style={{ margin: '0 0 10px 0' }}>Fields List</h4>
+                      <div style={{ maxHeight: '200px', overflowY: 'auto', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '6px', paddingRight: '4px' }}>
+                        {formSchema.map((field) => (
+                          <div key={field.id} className="field-list-item">
+                            <div className="field-list-details">
+                              <span className="field-list-name">{field.label} ({field.id})</span>
+                              <span className="field-list-meta">
+                                Type: {field.type} • Width: {field.width}% {field.required ? '• Required' : ''}
+                              </span>
+                            </div>
+                            <button
+                              style={{ background: 'none', border: 'none', color: 'var(--ctp-red)', cursor: 'pointer', fontSize: '1.1rem' }}
+                              onClick={() => handleRemoveField(field.id)}
+                              title="Remove field"
+                            >
+                              🗑️
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Add New Field interactive form */}
+                      <form onSubmit={handleAddNewField} className="builder-card-action">
+                        <h4 style={{ margin: '0 0 12px 0', fontSize: '0.95rem' }}>Add New Schema Field</h4>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>Unique ID</label>
+                            <input
+                              type="text"
+                              value={newFieldId}
+                              onChange={(e) => setNewFieldId(e.target.value.replace(/\s+/g, ''))}
+                              placeholder="e.g. userAge"
+                              required
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            />
+                          </div>
+
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>Label Text</label>
+                            <input
+                              type="text"
+                              value={newFieldLabel}
+                              onChange={(e) => setNewFieldLabel(e.target.value)}
+                              placeholder="e.g. Enter your age"
+                              required
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            />
+                          </div>
+
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>Control Type</label>
+                            <select
+                              value={newFieldType}
+                              onChange={(e) => setNewFieldType(e.target.value as any)}
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            >
+                              <option value="text">Text Input</option>
+                              <option value="number">Number Input</option>
+                              <option value="email">Email Input</option>
+                              <option value="select">Dropdown Select</option>
+                              <option value="radio">Radio Options</option>
+                              <option value="checkbox">Single Checkbox</option>
+                              <option value="switch">Switch Toggle</option>
+                              <option value="slider">Range Slider</option>
+                              <option value="textarea">Textarea Box</option>
+                            </select>
+                          </div>
+
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>Column Width</label>
+                            <select
+                              value={newFieldWidth}
+                              onChange={(e) => setNewFieldWidth(Number(e.target.value) as any)}
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            >
+                              <option value="100">Full (100%)</option>
+                              <option value="50">Half (50%)</option>
+                              <option value="33">Third (33%)</option>
+                            </select>
+                          </div>
+
+                          <div className="control-group" style={{ gridColumn: 'span 2' }}>
+                            <label style={{ fontSize: '0.78rem' }}>Placeholder / Helper Description</label>
+                            <input
+                              type="text"
+                              value={newFieldPlaceholder}
+                              onChange={(e) => setNewFieldPlaceholder(e.target.value)}
+                              placeholder="e.g. Minimum 18 years old"
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            />
+                          </div>
+
+                          {['select', 'radio'].includes(newFieldType) && (
+                            <div className="control-group" style={{ gridColumn: 'span 2' }}>
+                              <label style={{ fontSize: '0.78rem' }}>Options (Comma-separated name:value)</label>
+                              <input
+                                type="text"
+                                value={newFieldOptionsString}
+                                onChange={(e) => setNewFieldOptionsString(e.target.value)}
+                                placeholder="e.g. Yes:yes, No:no, Maybe:maybe"
+                                required
+                                style={{ padding: '8px', fontSize: '0.85rem' }}
+                              />
+                            </div>
+                          )}
                         </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <label className="checkbox-label" style={{ fontSize: '0.8rem' }}>
+                            <input
+                              type="checkbox"
+                              checked={newFieldRequired}
+                              onChange={(e) => setNewFieldRequired(e.target.checked)}
+                            />
+                            Mark Required
+                          </label>
+
+                          <Button type="submit" variant="tonal" color="mauve" size="sm">
+                            ➕ Add Field
+                          </Button>
+                        </div>
+                      </form>
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label htmlFor="schema-json-editor">FieldSchema Schema Configuration Array</label>
+                      <textarea
+                        id="schema-json-editor"
+                        className="schema-json-textarea"
+                        value={jsonText}
+                        onChange={(e) => handleJsonTextChange(e.target.value)}
+                      />
+                      {jsonError && <div className="schema-error-banner">⚠️ JSON Parse Error: {jsonError}</div>}
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Column: Live Form Renderer Preview & Submission Values */}
+                <div className="playground-card" style={{ gap: '1.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ctp-surface0)', paddingBottom: '12px' }}>
+                    <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Renderer Canvas</h3>
+
+                    {/* Visual Customizer */}
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <select
+                        value={formConfigSize}
+                        onChange={(e) => setFormConfigSize(e.target.value as any)}
+                        style={{ padding: '6px 8px', borderRadius: '6px', fontSize: '0.75rem' }}
+                        title="Form Fields Size"
+                      >
+                        <option value="sm">Small</option>
+                        <option value="md">Medium</option>
+                        <option value="lg">Large</option>
+                      </select>
+
+                      <select
+                        value={formConfigShape}
+                        onChange={(e) => setFormConfigShape(e.target.value as any)}
+                        style={{ padding: '6px 8px', borderRadius: '6px', fontSize: '0.75rem' }}
+                        title="Form Fields Shape"
+                      >
+                        <option value="square">Square</option>
+                        <option value="rounded">Rounded</option>
+                        <option value="pill">Pill</option>
+                      </select>
+
+                      <select
+                        value={formConfigColor}
+                        onChange={(e) => setFormConfigColor(e.target.value as any)}
+                        style={{ padding: '6px 8px', borderRadius: '6px', fontSize: '0.75rem' }}
+                        title="Form Color Accent"
+                      >
+                        {colors.map(c => (
+                          <option key={c.name} value={c.name.toLowerCase()}>{c.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* RENDER ACTIVE DYNAMIC FORM */}
+                  <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--ctp-surface0)' }}>
+                    {formSchema.length === 0 ? (
+                      <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--ctp-subtext0)', fontSize: '0.9rem', textAlign: 'center' }}>
+                        Form is empty. Add fields to schema to start.
+                      </p>
+                    ) : (
+                      <DynamicForm
+                        schema={formSchema}
+                        onSubmit={handleFormSubmit}
+                        submitButtonText="Register Cozy Account"
+                        submitButtonColor={formConfigColor}
+                        submitButtonSize={formConfigSize}
+                        submitButtonShape={formConfigShape}
+                        size={formConfigSize}
+                        shape={formConfigShape}
+                        color={formConfigColor}
+                      />
+                    )}
+                  </div>
+
+                  {/* Success submission values */}
+                  {lastSubmitPayload && (
+                    <div className="payload-canvas">
+                      <h4 style={{ margin: '0 0 10px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>✅ Last Submission Received</span>
                         <button
-                          style={{ background: 'none', border: 'none', color: 'var(--ctp-red)', cursor: 'pointer', fontSize: '1.1rem' }}
-                          onClick={() => handleRemoveField(field.id)}
-                          title="Remove field"
+                          style={{ background: 'none', border: 'none', color: 'var(--ctp-subtext0)', cursor: 'pointer', fontSize: '0.8rem' }}
+                          onClick={() => setLastSubmitPayload(null)}
                         >
-                          🗑️
+                          Clear
                         </button>
-                      </div>
-                    ))}
-                  </div>
+                      </h4>
+                      <pre className="code-block" style={{ fontSize: '0.8rem', color: 'var(--ctp-green)' }}>
+                        <code>{JSON.stringify(lastSubmitPayload, null, 2)}</code>
+                      </pre>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
 
-                  {/* Add New Field interactive form */}
-                  <form onSubmit={handleAddNewField} className="builder-card-action">
-                    <h4 style={{ margin: '0 0 12px 0', fontSize: '0.95rem' }}>Add New Schema Field</h4>
-                    
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>Unique ID</label>
-                        <input
-                          type="text"
-                          value={newFieldId}
-                          onChange={(e) => setNewFieldId(e.target.value.replace(/\s+/g, ''))}
-                          placeholder="e.g. userAge"
-                          required
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        />
-                      </div>
+          {/* STEPS & SLIDER TRANSITION SHOWCASE TAB */}
+          {activeComponent === 'steps' && (
+            <section>
+              <h2 className="section-title">
+                <span>📈</span> Steps Stepper & Slider Layouts
+              </h2>
 
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>Label Text</label>
-                        <input
-                          type="text"
-                          value={newFieldLabel}
-                          onChange={(e) => setNewFieldLabel(e.target.value)}
-                          placeholder="e.g. Enter your age"
-                          required
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        />
-                      </div>
+              <div className="playground-section">
+                {/* Steps configuration */}
+                <div className="playground-card" style={{ gap: '1.2rem' }}>
+                  <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Steps Configuration</h3>
 
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>Control Type</label>
-                        <select
-                          value={newFieldType}
-                          onChange={(e) => setNewFieldType(e.target.value as any)}
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        >
-                          <option value="text">Text Input</option>
-                          <option value="number">Number Input</option>
-                          <option value="email">Email Input</option>
-                          <option value="select">Dropdown Select</option>
-                          <option value="radio">Radio Options</option>
-                          <option value="checkbox">Single Checkbox</option>
-                          <option value="switch">Switch Toggle</option>
-                          <option value="slider">Range Slider</option>
-                          <option value="textarea">Textarea Box</option>
-                        </select>
-                      </div>
-
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>Column Width</label>
-                        <select
-                          value={newFieldWidth}
-                          onChange={(e) => setNewFieldWidth(Number(e.target.value) as any)}
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        >
-                          <option value="100">Full (100%)</option>
-                          <option value="50">Half (50%)</option>
-                          <option value="33">Third (33%)</option>
-                        </select>
-                      </div>
-
-                      <div className="control-group" style={{ gridColumn: 'span 2' }}>
-                        <label style={{ fontSize: '0.78rem' }}>Placeholder / Helper Description</label>
-                        <input
-                          type="text"
-                          value={newFieldPlaceholder}
-                          onChange={(e) => setNewFieldPlaceholder(e.target.value)}
-                          placeholder="e.g. Minimum 18 years old"
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        />
-                      </div>
-
-                      {['select', 'radio'].includes(newFieldType) && (
-                        <div className="control-group" style={{ gridColumn: 'span 2' }}>
-                          <label style={{ fontSize: '0.78rem' }}>Options (Comma-separated name:value)</label>
-                          <input
-                            type="text"
-                            value={newFieldOptionsString}
-                            onChange={(e) => setNewFieldOptionsString(e.target.value)}
-                            placeholder="e.g. Yes:yes, No:no, Maybe:maybe"
-                            required
-                            style={{ padding: '8px', fontSize: '0.85rem' }}
-                          />
-                        </div>
-                      )}
+                  <div className="control-grid">
+                    <div className="control-group">
+                      <label htmlFor="steps-variant-select">Visual Theme</label>
+                      <select
+                        id="steps-variant-select"
+                        value={stepsVariant}
+                        onChange={(e) => setStepsVariant(e.target.value as StepsVariant)}
+                      >
+                        <option value="timeline">Timeline Track Connector</option>
+                        <option value="carousel">Carousel Pill Expansion</option>
+                      </select>
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <label className="checkbox-label" style={{ fontSize: '0.8rem' }}>
-                        <input
-                          type="checkbox"
-                          checked={newFieldRequired}
-                          onChange={(e) => setNewFieldRequired(e.target.checked)}
-                        />
-                        Mark Required
-                      </label>
-
-                      <Button type="submit" variant="tonal" color="mauve" size="sm">
-                        ➕ Add Field
-                      </Button>
+                    <div className="control-group">
+                      <label htmlFor="steps-orient-select">Orientation</label>
+                      <select
+                        id="steps-orient-select"
+                        value={stepsOrientation}
+                        onChange={(e) => setStepsOrientation(e.target.value as any)}
+                        disabled={stepsVariant === 'carousel'}
+                      >
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                      </select>
                     </div>
-                  </form>
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label htmlFor="schema-json-editor">FieldSchema Schema Configuration Array</label>
-                  <textarea
-                    id="schema-json-editor"
-                    className="schema-json-textarea"
-                    value={jsonText}
-                    onChange={(e) => handleJsonTextChange(e.target.value)}
-                  />
-                  {jsonError && <div className="schema-error-banner">⚠️ JSON Parse Error: {jsonError}</div>}
-                </div>
-              )}
-            </div>
 
-            {/* Right Column: Live Form Renderer Preview & Submission Values */}
-            <div className="playground-card" style={{ gap: '1.5rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ctp-surface0)', paddingBottom: '12px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Renderer Canvas</h3>
-                
-                {/* Visual Customizer */}
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <select
-                    value={formConfigSize}
-                    onChange={(e) => setFormConfigSize(e.target.value as any)}
-                    style={{ padding: '6px 8px', borderRadius: '6px', fontSize: '0.75rem' }}
-                    title="Form Fields Size"
-                  >
-                    <option value="sm">Small</option>
-                    <option value="md">Medium</option>
-                    <option value="lg">Large</option>
-                  </select>
-
-                  <select
-                    value={formConfigShape}
-                    onChange={(e) => setFormConfigShape(e.target.value as any)}
-                    style={{ padding: '6px 8px', borderRadius: '6px', fontSize: '0.75rem' }}
-                    title="Form Fields Shape"
-                  >
-                    <option value="square">Square</option>
-                    <option value="rounded">Rounded</option>
-                    <option value="pill">Pill</option>
-                  </select>
-
-                  <select
-                    value={formConfigColor}
-                    onChange={(e) => setFormConfigColor(e.target.value as any)}
-                    style={{ padding: '6px 8px', borderRadius: '6px', fontSize: '0.75rem' }}
-                    title="Form Color Accent"
-                  >
-                    {colors.map(c => (
-                      <option key={c.name} value={c.name.toLowerCase()}>{c.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* RENDER ACTIVE DYNAMIC FORM */}
-              <div style={{ backgroundColor: 'var(--ctp-crust)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--ctp-surface0)' }}>
-                {formSchema.length === 0 ? (
-                  <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--ctp-subtext0)', fontSize: '0.9rem', textAlign: 'center' }}>
-                    Form is empty. Add fields to schema to start.
-                  </p>
-                ) : (
-                  <DynamicForm
-                    schema={formSchema}
-                    onSubmit={handleFormSubmit}
-                    submitButtonText="Register Cozy Account"
-                    submitButtonColor={formConfigColor}
-                    submitButtonSize={formConfigSize}
-                    submitButtonShape={formConfigShape}
-                    size={formConfigSize}
-                    shape={formConfigShape}
-                    color={formConfigColor}
-                  />
-                )}
-              </div>
-
-              {/* Success submission values */}
-              {lastSubmitPayload && (
-                <div className="payload-canvas">
-                  <h4 style={{ margin: '0 0 10px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span>✅ Last Submission Received</span>
-                    <button
-                      style={{ background: 'none', border: 'none', color: 'var(--ctp-subtext0)', cursor: 'pointer', fontSize: '0.8rem' }}
-                      onClick={() => setLastSubmitPayload(null)}
-                    >
-                      Clear
-                    </button>
-                  </h4>
-                  <pre className="code-block" style={{ fontSize: '0.8rem', color: 'var(--ctp-green)' }}>
-                    <code>{JSON.stringify(lastSubmitPayload, null, 2)}</code>
-                  </pre>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* STEPS & SLIDER TRANSITION SHOWCASE TAB */}
-      {activeComponent === 'steps' && (
-        <section>
-          <h2 className="section-title">
-            <span>📈</span> Steps Stepper & Slider Layouts
-          </h2>
-
-          <div className="playground-section">
-            {/* Steps configuration */}
-            <div className="playground-card" style={{ gap: '1.2rem' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Steps Configuration</h3>
-              
-              <div className="control-grid">
-                <div className="control-group">
-                  <label htmlFor="steps-variant-select">Visual Theme</label>
-                  <select
-                    id="steps-variant-select"
-                    value={stepsVariant}
-                    onChange={(e) => setStepsVariant(e.target.value as StepsVariant)}
-                  >
-                    <option value="timeline">Timeline Track Connector</option>
-                    <option value="carousel">Carousel Pill Expansion</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="steps-orient-select">Orientation</label>
-                  <select
-                    id="steps-orient-select"
-                    value={stepsOrientation}
-                    onChange={(e) => setStepsOrientation(e.target.value as any)}
-                    disabled={stepsVariant === 'carousel'}
-                  >
-                    <option value="horizontal">Horizontal</option>
-                    <option value="vertical">Vertical</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="steps-color-select">Color Accent</label>
-                  <select
-                    id="steps-color-select"
-                    value={stepsColor}
-                    onChange={(e) => setStepsColor(e.target.value as StepsColor)}
-                  >
-                    {colors.map((c) => (
-                      <option key={c.name} value={c.name.toLowerCase()}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label>Step Count</label>
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        setStepsCount(c => {
-                          const next = Math.max(3, c - 1);
-                          setStepsCurrent(s => Math.min(next - 1, s));
-                          return next;
-                        });
-                      }}
-                    >
-                      -
-                    </Button>
-                    <div style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontWeight: 'bold' }}>
-                      {stepsCount}
+                    <div className="control-group">
+                      <label htmlFor="steps-color-select">Color Accent</label>
+                      <select
+                        id="steps-color-select"
+                        value={stepsColor}
+                        onChange={(e) => setStepsColor(e.target.value as StepsColor)}
+                      >
+                        {colors.map((c) => (
+                          <option key={c.name} value={c.name.toLowerCase()}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setStepsCount(c => Math.min(8, c + 1))}
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
 
-                <div className="control-group">
-                  <label htmlFor="steps-slider-selector">Current step index</label>
-                  <input
-                    id="steps-slider-selector"
-                    type="range"
-                    min="0"
-                    max={stepsCount - 1}
-                    value={stepsCurrent}
-                    onChange={(e) => setStepsCurrent(Number(e.target.value))}
-                    style={{ cursor: 'pointer', accentColor: `var(--ctp-${stepsColor})` }}
-                  />
-                </div>
-              </div>
-
-              {/* Standard display indicator component */}
-              <div style={{ background: 'var(--ctp-crust)', borderRadius: '12px', border: '1px dashed var(--ctp-surface1)', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 600 }}>Standard Stepper Indicator (Linked Callback):</span>
-                <Steps
-                  currentStep={stepsCurrent}
-                  stepsCount={stepsCount}
-                  variant={stepsVariant}
-                  color={stepsColor}
-                  orientation={stepsOrientation}
-                  labels={stepsVariant === 'timeline' ? Array.from({ length: stepsCount }).map((_, i) => `Node ${i + 1}`) : undefined}
-                  onChangeStep={setStepsCurrent}
-                />
-              </div>
-
-              {/* Steps control buttons */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
-                <Button
-                  variant="outline"
-                  color={stepsColor}
-                  disabled={stepsCurrent === 0}
-                  onClick={() => setStepsCurrent(s => Math.max(0, s - 1))}
-                  style={{ flex: 1 }}
-                >
-                  Previous Dot
-                </Button>
-                <Button
-                  variant="filled"
-                  color={stepsColor}
-                  disabled={stepsCurrent === stepsCount - 1}
-                  onClick={() => setStepsCurrent(s => Math.min(stepsCount - 1, s + 1))}
-                  style={{ flex: 1 }}
-                >
-                  Next Dot
-                </Button>
-              </div>
-            </div>
-
-            {/* Preview and Code Snippets */}
-            <div className="playground-card playground-card--preview">
-              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
-              
-              <div className="preview-canvas" style={{ padding: '1.5rem', minHeight: '180px', flexDirection: 'column' }}>
-                <Steps
-                  currentStep={stepsCurrent}
-                  stepsCount={stepsCount}
-                  variant={stepsVariant}
-                  color={stepsColor}
-                  orientation={stepsOrientation}
-                  labels={stepsVariant === 'timeline' ? Array.from({ length: stepsCount }).map((_, i) => `Step ${i + 1}`) : undefined}
-                  onChangeStep={setStepsCurrent}
-                />
-              </div>
-
-              <div>
-                <div className="tabs-header">
-                  {(['react', 'vue', 'angular'] as const).map((tab) => (
-                    <button
-                      key={tab}
-                      className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                      onClick={() => setActiveTab(tab)}
-                    >
-                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                    </button>
-                  ))}
-                </div>
-                
-                <div className="code-container">
-                  <button
-                    className="code-copy-btn"
-                    onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
-                  >
-                    Copy Code
-                  </button>
-                  <pre className="code-block">
-                    <code
-                      dangerouslySetInnerHTML={{
-                        __html: activeTab === 'react'
-                          ? getReactStepsCode()
-                          : activeTab === 'vue'
-                          ? getVueStepsCode()
-                          : getAngularStepsCode()
-                      }}
-                    />
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* HIGH FIDELITY WIZARD INTEGRATION FLOW */}
-          <div style={{ marginTop: '2.5rem' }}>
-            <h3 style={{ margin: '0 0 1.2rem 0' }}>✨ High-Fidelity Checkout Wizard & Slide Transition Showcase ✨</h3>
-            
-            <div style={{
-              background: 'var(--ctp-mantle)',
-              borderRadius: '16px',
-              border: '1px solid color-mix(in srgb, var(--ctp-text) 8%, transparent)',
-              maxWidth: '620px',
-              margin: '0 auto',
-              overflow: 'hidden',
-              boxShadow: 'var(--ctp-shadow-lg)'
-            }}>
-              
-              {/* Wizard progress stepper header */}
-              <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--ctp-surface0)', backgroundColor: 'var(--ctp-crust)' }}>
-                <Steps
-                  currentStep={wizardStep}
-                  stepsCount={3}
-                  variant="timeline"
-                  color={stepsColor}
-                  labels={wizardLabels}
-                  onChangeStep={setWizardStep}
-                />
-              </div>
-
-              {/* Slider wrapper container */}
-              <div style={{ padding: '2rem', minHeight: '260px' }}>
-                <StepsSlider currentStep={wizardStep}>
-                  
-                  {/* Step 1: Selection */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <h4 style={{ margin: 0 }}>Step 1: Choose Your Flavor</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                      Select which cozy Catppuccin flavor theme is deployed onto your dashboard framework.
-                    </p>
-                    
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '8px' }}>
-                      {(['mocha', 'macchiato', 'frappe', 'latte'] as const).map(fl => (
-                        <div
-                          key={fl}
-                          onClick={() => setWizardFlavor(fl)}
-                          style={{
-                            padding: '12px',
-                            borderRadius: '8px',
-                            backgroundColor: 'var(--ctp-crust)',
-                            border: `2px solid ${wizardFlavor === fl ? `var(--ctp-${stepsColor})` : 'transparent'}`,
-                            cursor: 'pointer',
-                            textAlign: 'center',
-                            fontWeight: 'bold',
-                            transition: 'var(--ctp-transition)'
+                    <div className="control-group">
+                      <label>Step Count</label>
+                      <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setStepsCount(c => {
+                              const next = Math.max(3, c - 1);
+                              setStepsCurrent(s => Math.min(next - 1, s));
+                              return next;
+                            });
                           }}
                         >
-                          {fl.charAt(0).toUpperCase() + fl.slice(1)}
+                          -
+                        </Button>
+                        <div style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontWeight: 'bold' }}>
+                          {stepsCount}
                         </div>
-                      ))}
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setStepsCount(c => Math.min(8, c + 1))}
+                        >
+                          +
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="steps-slider-selector">Current step index</label>
+                      <input
+                        id="steps-slider-selector"
+                        type="range"
+                        min="0"
+                        max={stepsCount - 1}
+                        value={stepsCurrent}
+                        onChange={(e) => setStepsCurrent(Number(e.target.value))}
+                        style={{ cursor: 'pointer', accentColor: `var(--ctp-${stepsColor})` }}
+                      />
                     </div>
                   </div>
 
-                  {/* Step 2: Shipping */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    <h4 style={{ margin: 0 }}>Step 2: Shipping & Delivery Destinations</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                      Fill in shipping address attributes to complete standard order transmission.
-                    </p>
-                    
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '6px' }}>
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>Recipient Name</label>
-                        <input
-                          type="text"
-                          value={wizardShippingName}
-                          onChange={(e) => setWizardShippingName(e.target.value)}
-                          placeholder="e.g. John Doe"
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        />
-                      </div>
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>Street Address</label>
-                        <input
-                          type="text"
-                          value={wizardShippingAddress}
-                          onChange={(e) => setWizardShippingAddress(e.target.value)}
-                          placeholder="e.g. 123 Cozy Avenue"
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        />
-                      </div>
-                      <div className="control-group">
-                        <label style={{ fontSize: '0.78rem' }}>City / Region</label>
-                        <input
-                          type="text"
-                          value={wizardShippingCity}
-                          onChange={(e) => setWizardShippingCity(e.target.value)}
-                          placeholder="e.g. San Francisco"
-                          style={{ padding: '8px', fontSize: '0.85rem' }}
-                        />
-                      </div>
-                    </div>
+                  {/* Standard display indicator component */}
+                  <div style={{ background: 'var(--ctp-crust)', borderRadius: '12px', border: '1px dashed var(--ctp-surface1)', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 600 }}>Standard Stepper Indicator (Linked Callback):</span>
+                    <Steps
+                      currentStep={stepsCurrent}
+                      stepsCount={stepsCount}
+                      variant={stepsVariant}
+                      color={stepsColor}
+                      orientation={stepsOrientation}
+                      labels={stepsVariant === 'timeline' ? Array.from({ length: stepsCount }).map((_, i) => `Node ${i + 1}`) : undefined}
+                      onChangeStep={setStepsCurrent}
+                    />
                   </div>
 
-                  {/* Step 3: Success Confirmation */}
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', textAlign: 'center' }}>
-                    <div style={{
-                      width: '64px',
-                      height: '64px',
-                      borderRadius: '50%',
-                      backgroundColor: 'color-mix(in srgb, var(--ctp-green) 12%, transparent)',
-                      color: 'var(--ctp-green)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '2rem'
-                    }}>
-                      ✓
-                    </div>
-                    <h4 style={{ margin: 0, color: 'var(--ctp-green)' }}>Order Transmitted Successfully!</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: 1.5 }}>
-                      Thank you for choosing Catppuccin! Your theme setup files have been packaged and prepared for shipping.
-                    </p>
-                    <div style={{
-                      backgroundColor: 'var(--ctp-crust)',
-                      width: '100%',
-                      borderRadius: '8px',
-                      padding: '12px',
-                      border: '1px solid var(--ctp-surface0)',
-                      fontSize: '0.82rem',
-                      textAlign: 'left',
-                      marginTop: '8px'
-                    }}>
-                      <div><strong>Flavor selected:</strong> {wizardFlavor}</div>
-                      <div><strong>Deliver to:</strong> {wizardShippingName}</div>
-                      <div><strong>Address:</strong> {wizardShippingAddress}, {wizardShippingCity}</div>
-                    </div>
-                  </div>
-
-                </StepsSlider>
-              </div>
-
-              {/* Wizard Control footer action buttons */}
-              <div style={{
-                padding: '1.2rem 1.5rem',
-                borderTop: '1px solid var(--ctp-surface0)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                backgroundColor: 'var(--ctp-crust)',
-                gap: '12px'
-              }}>
-                {wizardStep < 2 ? (
-                  <>
+                  {/* Steps control buttons */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
                     <Button
                       variant="outline"
-                      disabled={wizardStep === 0}
-                      onClick={() => setWizardStep(s => Math.max(0, s - 1))}
+                      color={stepsColor}
+                      disabled={stepsCurrent === 0}
+                      onClick={() => setStepsCurrent(s => Math.max(0, s - 1))}
+                      style={{ flex: 1 }}
                     >
-                      Back
+                      Previous Dot
                     </Button>
                     <Button
                       variant="filled"
                       color={stepsColor}
-                      disabled={isWizardNextDisabled()}
-                      onClick={() => setWizardStep(s => Math.min(2, s + 1))}
+                      disabled={stepsCurrent === stepsCount - 1}
+                      onClick={() => setStepsCurrent(s => Math.min(stepsCount - 1, s + 1))}
+                      style={{ flex: 1 }}
                     >
-                      {wizardStep === 1 ? 'Place Order' : 'Next Step'}
+                      Next Dot
                     </Button>
-                  </>
-                ) : (
-                  <Button
-                    variant="tonal"
-                    color={stepsColor}
-                    onClick={resetWizard}
-                    style={{ width: '100%' }}
-                  >
-                    Restart Checkout Wizard
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* PROGRESS BAR & SCROLLBAR TAB */}
-      {activeComponent === 'progress' && (
-        <section>
-          <h2 className="section-title">
-            <span>📈</span> Progress Bar & Scrollbar Utilities
-          </h2>
-          
-          <div className="playground-section">
-            {/* Progress Config */}
-            <div className="playground-card" style={{ gap: '1.2rem' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Progress Bar Configuration</h3>
-              
-              <div className="control-grid">
-                <div className="control-group control-group--full">
-                  <label htmlFor="progress-label-input">Label Text</label>
-                  <input
-                    id="progress-label-input"
-                    type="text"
-                    value={progressLabel}
-                    onChange={(e) => setProgressLabel(e.target.value)}
-                  />
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="progress-color-select">Color Accent</label>
-                  <select
-                    id="progress-color-select"
-                    value={progressColor}
-                    onChange={(e) => setProgressColor(e.target.value as ProgressBarColor)}
-                  >
-                    {colors.map((c) => (
-                      <option key={c.name} value={c.name.toLowerCase()}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="progress-size-select">Size Height</label>
-                  <select
-                    id="progress-size-select"
-                    value={progressSize}
-                    onChange={(e) => setProgressSize(e.target.value as ProgressBarSize)}
-                  >
-                    <option value="sm">Small (sm, 6px)</option>
-                    <option value="md">Medium (md, 10px)</option>
-                    <option value="lg">Large (lg, 16px)</option>
-                  </select>
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="progress-val-input">Progress Value: {progressVal}%</label>
-                  <input
-                    id="progress-val-input"
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={progressVal}
-                    onChange={(e) => setProgressVal(Number(e.target.value))}
-                    disabled={progressIndeterminate}
-                    style={{ cursor: 'pointer', accentColor: `var(--ctp-${progressColor})` }}
-                  />
-                </div>
-
-                <div className="control-group">
-                  <label htmlFor="progress-position-select">Value Position</label>
-                  <select
-                    id="progress-position-select"
-                    value={progressValPosition}
-                    onChange={(e) => setProgressValPosition(e.target.value as any)}
-                    disabled={!progressShowValue || progressSize !== 'lg'}
-                  >
-                    <option value="outside">Outside (above bar)</option>
-                    <option value="inside">Inside (centered, LG height only)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '4px' }}>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={progressIndeterminate}
-                    onChange={(e) => setProgressIndeterminate(e.target.checked)}
-                  />
-                  Indeterminate Loop Loading
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={progressStriped}
-                    onChange={(e) => setProgressStriped(e.target.checked)}
-                  />
-                  Striped Diagonal Texture
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={progressAnimated}
-                    onChange={(e) => setProgressAnimated(e.target.checked)}
-                    disabled={!progressStriped}
-                  />
-                  Animate Stripe Movement
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={progressShowValue}
-                    onChange={(e) => setProgressShowValue(e.target.checked)}
-                    disabled={progressIndeterminate}
-                  />
-                  Show Value Percentage Text
-                </label>
-              </div>
-            </div>
-
-            {/* Progress Preview Canvas */}
-            <div className="playground-card playground-card--preview">
-              <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
-              
-              <div className="preview-canvas" style={{ padding: '2rem', minHeight: '160px' }}>
-                <ProgressBar
-                  value={progressVal}
-                  size={progressSize}
-                  color={progressColor}
-                  striped={progressStriped}
-                  animated={progressAnimated}
-                  indeterminate={progressIndeterminate}
-                  showValue={progressShowValue}
-                  valuePosition={progressValPosition}
-                  label={progressLabel || undefined}
-                  style={{ width: '100%' }}
-                />
-              </div>
-
-              <div>
-                <div className="tabs-header">
-                  {(['react', 'vue', 'angular'] as const).map((tab) => (
-                    <button
-                      key={tab}
-                      className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                      onClick={() => setActiveTab(tab)}
-                    >
-                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                    </button>
-                  ))}
-                </div>
-                
-                <div className="code-container">
-                  <button
-                    className="code-copy-btn"
-                    onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
-                  >
-                    Copy Code
-                  </button>
-                  <pre className="code-block">
-                    <code
-                      dangerouslySetInnerHTML={{
-                        __html: activeTab === 'react'
-                          ? getReactProgressCode()
-                          : activeTab === 'vue'
-                          ? getVueProgressCode()
-                          : getAngularProgressCode()
-                      }}
-                    />
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* SCROLLBAR COMPARISON SHOWCASE */}
-          <div style={{ marginTop: '2.5rem', marginBottom: '3rem' }}>
-            <h3 style={{ margin: '0 0 0.8rem 0' }}>✨ Custom Scrollbar Utility vs Browser Default Scrollbar ✨</h3>
-            <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.9rem', color: 'var(--ctp-subtext0)' }}>
-              Compare standard browser scrollbars with the customized, premium, color-mix hoverable <code>.ctp-scrollbar</code> utility.
-            </p>
-
-            {/* Scroll color selector */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--ctp-mantle)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', marginBottom: '1.5rem' }}>
-              <span style={{ fontWeight: 'bold', fontSize: '0.88rem' }}>Scroll Thumb Hover Accent:</span>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                {colors.map((c) => (
-                  <button
-                    key={c.name}
-                    onClick={() => setScrollAccent(c.name.toLowerCase() as any)}
-                    style={{
-                      background: `var(${c.variable})`,
-                      border: `2px solid ${scrollAccent === c.name.toLowerCase() ? 'var(--ctp-text)' : 'transparent'}`,
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      cursor: 'pointer',
-                      boxShadow: 'var(--ctp-shadow-sm)',
-                      transition: 'transform 0.15s ease'
-                    }}
-                    title={`Highlight in ${c.name} on hover`}
-                  />
-                ))}
-              </div>
-              <span style={{ textTransform: 'capitalize', fontSize: '0.85rem', fontWeight: 'bold', color: `var(--ctp-${scrollAccent})` }}>
-                {scrollAccent}
-              </span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-              
-              {/* Box 1: Browser Default */}
-              <div className="playground-card" style={{ gap: '1rem', padding: '1.5rem' }}>
-                <h4 style={{ margin: 0, color: 'var(--ctp-subtext1)' }}>🚫 Default Browser Scrollbar</h4>
-                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>
-                  Stiff edges, default system colors, lacks design system coordination.
-                </p>
-                <div style={{
-                  height: '240px',
-                  overflowY: 'scroll',
-                  backgroundColor: 'var(--ctp-crust)',
-                  borderRadius: '8px',
-                  padding: '12px',
-                  border: '1px solid var(--ctp-surface0)',
-                  lineHeight: '1.6',
-                  fontSize: '0.85rem',
-                  fontFamily: 'monospace',
-                  whiteSpace: 'pre'
-                }}>
-                  {Array.from({ length: 25 }).map((_, i) => `[SYS_DEFAULT_LOG_LINE_${i + 1}]: Loading asset catalog... done!\n[SYS_DEFAULT_LOG_LINE_${i + 1}]: Allocating buffer page cache...\n[SYS_DEFAULT_LOG_LINE_${i + 1}]: Initializing theme variables... done!\n`).join('')}
-                </div>
-              </div>
-
-              {/* Box 2: Custom Catppuccin Scroll */}
-              <div className="playground-card" style={{ gap: '1rem', padding: '1.5rem' }}>
-                <h4 style={{ margin: 0, color: `var(--ctp-${scrollAccent})` }}>✨ Catppuccin Scrollbar (<code>.ctp-scrollbar</code>)</h4>
-                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>
-                  Rounded shape, thin width, mantle background integration, hover highlights.
-                </p>
-                <div className={`ctp-scrollbar ctp-scrollbar--${scrollAccent}`} style={{
-                  height: '240px',
-                  overflowY: 'scroll',
-                  backgroundColor: 'var(--ctp-crust)',
-                  borderRadius: '8px',
-                  padding: '12px',
-                  border: '1px solid var(--ctp-surface0)',
-                  lineHeight: '1.6',
-                  fontSize: '0.85rem',
-                  fontFamily: 'monospace',
-                  whiteSpace: 'pre'
-                }}>
-                  {Array.from({ length: 25 }).map((_, i) => {
-                    const lineStr = `[CTP_ACCENT_LOG_LINE_${i + 1}]: Loading asset catalog... done!\n[CTP_ACCENT_LOG_LINE_${i + 1}]: Allocating buffer page cache...\n[CTP_ACCENT_LOG_LINE_${i + 1}]: Initializing theme variables... done!\n`;
-                    return lineStr;
-                  }).join('')}
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-      )}
-
-      {activeComponent === 'drawer' && (
-        <>
-          {/* Drawer Component Showcase */}
-          <section>
-            <h2 className="section-title">
-              <span>🚪</span> Retractable Drawer Panel Showcase
-            </h2>
-            <div className="playground-section">
-              {/* Settings Panel */}
-              <div className="playground-card" style={{ height: 'fit-content' }}>
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>Drawer Configuration</h3>
-                
-                <div className="control-grid">
-                  <div className="control-group">
-                    <label htmlFor="drawer-position-select">Slide Position</label>
-                    <select
-                      id="drawer-position-select"
-                      value={drawerPosition}
-                      onChange={(e) => setDrawerPosition(e.target.value as DrawerPosition)}
-                    >
-                      <option value="right">Right (Direita)</option>
-                      <option value="left">Left (Esquerda)</option>
-                      <option value="top">Top (Topo)</option>
-                      <option value="bottom">Bottom (Base)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="drawer-size-select">Drawer Size</label>
-                    <select
-                      id="drawer-size-select"
-                      value={drawerSize}
-                      onChange={(e) => setDrawerSize(e.target.value as DrawerSize)}
-                    >
-                      <option value="sm">Small (sm)</option>
-                      <option value="md">Medium (md)</option>
-                      <option value="lg">Large (lg)</option>
-                      <option value="full">Full Screen (full)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="drawer-accent-select">Accent Color</label>
-                    <select
-                      id="drawer-accent-select"
-                      value={drawerAccent}
-                      onChange={(e) => setDrawerAccent(e.target.value as FormControlColor)}
-                    >
-                      {colors.map((c) => (
-                        <option key={c.name} value={c.name.toLowerCase()}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="drawer-title-input">Header Title</label>
-                    <input
-                      id="drawer-title-input"
-                      type="text"
-                      value={drawerTitle}
-                      onChange={(e) => setDrawerTitle(e.target.value)}
-                    />
                   </div>
                 </div>
 
-                <div style={{ marginTop: '12px', borderTop: '1px solid var(--ctp-surface0)', paddingTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label>Toggles & Overlay Behaviors</label>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={drawerCloseOnOverlayClick}
-                        onChange={(e) => setDrawerCloseOnOverlayClick(e.target.checked)}
-                      />
-                      Close on backdrop click
-                    </label>
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={drawerCloseOnEsc}
-                        onChange={(e) => setDrawerCloseOnEsc(e.target.checked)}
-                      />
-                      Close on ESC key press
-                    </label>
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={drawerShowCloseButton}
-                        onChange={(e) => setDrawerShowCloseButton(e.target.checked)}
-                      />
-                      Show close cross button
-                    </label>
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={drawerShowFooter}
-                        onChange={(e) => setDrawerShowFooter(e.target.checked)}
-                      />
-                      Show footer actions
-                    </label>
-                  </div>
-                </div>
-              </div>
+                {/* Preview and Code Snippets */}
+                <div className="playground-card playground-card--preview">
+                  <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
 
-              {/* Action Preview and Snippet area */}
-              <div className="playground-card playground-card--preview">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Trigger Preview</h3>
-                
-                <div className="preview-canvas" style={{ minHeight: '180px', flexDirection: 'column', gap: '12px' }}>
-                  <span style={{ fontSize: '0.9rem', color: 'var(--ctp-subtext0)', textAlign: 'center' }}>
-                    Clique no botão abaixo para abrir o Drawer com as configurações atuais.
-                  </span>
-                  <Button
-                    variant="filled"
-                    color={drawerAccent}
-                    onClick={() => setIsDrawerOpen(true)}
-                  >
-                    Abrir Painel Lateral (Drawer)
-                  </Button>
-                </div>
-
-                <div>
-                  <div className="tabs-header">
-                    {(['react', 'vue', 'angular'] as const).map((tab) => (
-                      <button
-                        key={tab}
-                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <div className="code-container">
-                    <button
-                      className="code-copy-btn"
-                      onClick={() => {
-                        const code = activeTab === 'react' ? getReactDrawerCode() : activeTab === 'vue' ? getVueDrawerCode() : getAngularDrawerCode();
-                        const plainText = code.replace(/<[^>]*>/g, '');
-                        copyToClipboard(plainText, `${activeTab} drawer snippet`);
-                      }}
-                    >
-                      Copy Code
-                    </button>
-                    <pre className="code-block">
-                      <code
-                        dangerouslySetInnerHTML={{
-                          __html: activeTab === 'react'
-                            ? getReactDrawerCode()
-                            : activeTab === 'vue'
-                            ? getVueDrawerCode()
-                            : getAngularDrawerCode()
-                        }}
-                      />
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Live Drawer Instance Component */}
-            <Drawer
-              isOpen={isDrawerOpen}
-              onClose={() => setIsDrawerOpen(false)}
-              title={
-                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  🚪 {drawerTitle}
-                </span>
-              }
-              position={drawerPosition}
-              size={drawerSize}
-              color={drawerAccent}
-              closeOnOverlayClick={drawerCloseOnOverlayClick}
-              closeOnEsc={drawerCloseOnEsc}
-              showCloseButton={drawerShowCloseButton}
-              footer={
-                drawerShowFooter ? (
-                  <>
-                    <Button variant="ghost" color="red" onClick={() => setIsDrawerOpen(false)}>
-                      Cancelar
-                    </Button>
-                    <Button variant="filled" color="green" onClick={() => setIsDrawerOpen(false)}>
-                      Salvar Ajustes
-                    </Button>
-                  </>
-                ) : undefined
-              }
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                <p style={{ margin: 0 }}>
-                  Este é o painel lateral deslizante do sistema de design Catppuccin, posicionado no lado <strong>{drawerPosition}</strong>.
-                </p>
-                <div style={{ padding: '12px', borderRadius: '8px', backgroundColor: 'var(--ctp-crust)', border: '1px solid var(--ctp-surface0)' }}>
-                  <h4 style={{ margin: '0 0 6px 0', fontSize: '0.9rem', color: `var(--ctp-${drawerAccent})` }}>Guia de Customização</h4>
-                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.85rem', lineHeight: '1.5' }}>
-                    <li>Experimente mudar o slide para Top ou Bottom.</li>
-                    <li>O corpo principal aceita scroll vertical caso a capacidade estoure.</li>
-                    <li>Utiliza foco travado por acessibilidade.</li>
-                  </ul>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label htmlFor="drawer-demo-name" style={{ fontSize: '0.8rem' }}>Nome de Usuário</label>
-                  <input
-                    id="drawer-demo-name"
-                    type="text"
-                    defaultValue="Miau da Silva"
-                    style={{ backgroundColor: 'var(--ctp-base)', border: '1px solid var(--ctp-surface1)' }}
-                  />
-                </div>
-              </div>
-            </Drawer>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'select' && (
-        <>
-          {/* Advanced Selects Showcase */}
-          <section>
-            <h2 className="section-title">
-              <span>🔍</span> Advanced Select Components
-            </h2>
-            <div className="playground-section">
-              {/* Settings Panel */}
-              <div className="playground-card" style={{ height: 'fit-content' }}>
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>Select Configuration</h3>
-                
-                <div className="control-grid">
-                  <div className="control-group">
-                    <label htmlFor="select-accent-picker">Accent Flavor</label>
-                    <select
-                      id="select-accent-picker"
-                      value={selectAccent}
-                      onChange={(e) => setSelectAccent(e.target.value as FormControlColor)}
-                    >
-                      {colors.map((c) => (
-                        <option key={c.name} value={c.name.toLowerCase()}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="select-size-picker">Controls Size</label>
-                    <select
-                      id="select-size-picker"
-                      value={selectSize}
-                      onChange={(e) => setSelectSize(e.target.value as FormControlSize)}
-                    >
-                      <option value="sm">Small (sm)</option>
-                      <option value="md">Medium (md)</option>
-                      <option value="lg">Large (lg)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="select-shape-picker">Controls Shape</label>
-                    <select
-                      id="select-shape-picker"
-                      value={selectShape}
-                      onChange={(e) => setSelectShape(e.target.value as FormControlShape)}
-                    >
-                      <option value="square">Square</option>
-                      <option value="rounded">Rounded</option>
-                      <option value="pill">Pill</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label className="checkbox-label" style={{ marginTop: '22px' }}>
-                      <input
-                        type="checkbox"
-                        checked={selectSearchable}
-                        onChange={(e) => setSelectSearchable(e.target.checked)}
-                      />
-                      Enable MultiSelect Search
-                    </label>
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '12px', borderTop: '1px solid var(--ctp-surface0)', paddingTop: '12px' }}>
-                  <label>TreeSelect Behaviors</label>
-                  <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={selectMultipleTree}
-                        onChange={(e) => {
-                          setSelectMultipleTree(e.target.checked);
-                          setSelectValueTreeSingle('');
-                          setSelectValueTreeMulti(['showcase']);
-                        }}
-                      />
-                      Enable Tree Multiple Selection
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {/* Previews and Code snippets */}
-              <div className="playground-card playground-card--preview">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Canvas Previews</h3>
-                
-                <div className="preview-canvas" style={{ minHeight: '260px', flexDirection: 'column', gap: '20px', padding: '1.5rem', justifyContent: 'flex-start', alignItems: 'stretch' }}>
-                  
-                  {/* 1. MultiSelect Canvas */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--ctp-subtext0)', fontWeight: 600 }}>MultiSelect Dropdown (Tags + Filtro):</span>
-                    <MultiSelect
-                      options={selectTechOptions}
-                      value={selectValueMulti}
-                      onChange={setSelectValueMulti}
-                      color={selectAccent}
-                      size={selectSize}
-                      shape={selectShape}
-                      searchable={selectSearchable}
-                      placeholder="Escolha tecnologias..."
+                  <div className="preview-canvas" style={{ padding: '1.5rem', minHeight: '180px', flexDirection: 'column' }}>
+                    <Steps
+                      currentStep={stepsCurrent}
+                      stepsCount={stepsCount}
+                      variant={stepsVariant}
+                      color={stepsColor}
+                      orientation={stepsOrientation}
+                      labels={stepsVariant === 'timeline' ? Array.from({ length: stepsCount }).map((_, i) => `Step ${i + 1}`) : undefined}
+                      onChangeStep={setStepsCurrent}
                     />
                   </div>
 
-                  {/* 2. TreeSelect Canvas */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--ctp-subtext0)', fontWeight: 600 }}>TreeSelect Dropdown (Pastas Colapsáveis):</span>
-                    <TreeSelect
-                      data={selectTreeData}
-                      multiple={selectMultipleTree}
-                      value={selectValueTreeSingle}
-                      onChange={setSelectValueTreeSingle}
-                      multipleValue={selectValueTreeMulti}
-                      onChangeMultiple={setSelectValueTreeMulti}
-                      color={selectAccent}
-                      size={selectSize}
-                      shape={selectShape}
-                      placeholder="Escolha arquivos..."
-                    />
-                  </div>
-
-                </div>
-
-                <div>
-                  <div className="tabs-header">
-                    {(['react', 'vue', 'angular'] as const).map((tab) => (
-                      <button
-                        key={tab}
-                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <div className="code-container">
-                    <button
-                      className="code-copy-btn"
-                      onClick={() => {
-                        const code = activeTab === 'react' ? getReactSelectCode() : activeTab === 'vue' ? getVueSelectCode() : getAngularSelectCode();
-                        const plainText = code.replace(/<[^>]*>/g, '');
-                        copyToClipboard(plainText, `${activeTab} select snippet`);
-                      }}
-                    >
-                      Copy Code
-                    </button>
-                    <pre className="code-block">
-                      <code
-                        dangerouslySetInnerHTML={{
-                          __html: activeTab === 'react'
-                            ? getReactSelectCode()
-                            : activeTab === 'vue'
-                            ? getVueSelectCode()
-                            : getAngularSelectCode()
-                        }}
-                      />
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Selection data logs */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '2rem' }}>
-              <div className="payload-canvas">
-                <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${selectAccent})` }}>MultiSelect Selected Keys</h4>
-                <pre className="code-block" style={{ margin: 0, padding: '10px' }}>
-                  <code style={{ color: 'var(--ctp-green)' }}>{JSON.stringify(selectValueMulti, null, 2)}</code>
-                </pre>
-              </div>
-
-              <div className="payload-canvas">
-                <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${selectAccent})` }}>TreeSelect Selected Keys</h4>
-                <pre className="code-block" style={{ margin: 0, padding: '10px' }}>
-                  <code style={{ color: 'var(--ctp-green)' }}>
-                    {selectMultipleTree ? JSON.stringify(selectValueTreeMulti, null, 2) : JSON.stringify(selectValueTreeSingle, null, 2)}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'colorpicker' && (
-        <>
-          {/* Color Picker Showcase */}
-          <section>
-            <h2 className="section-title">
-              <span>🎨</span> Color Picker Component
-            </h2>
-            <div className="playground-section">
-              {/* Settings Panel */}
-              <div className="playground-card" style={{ height: 'fit-content' }}>
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>ColorPicker Settings</h3>
-                
-                <div className="control-grid">
-                  <div className="control-group">
-                    <label htmlFor="cp-variant-select">Picker Variant</label>
-                    <select
-                      id="cp-variant-select"
-                      value={colorPickerVariant}
-                      onChange={(e) => setColorPickerVariant(e.target.value as ColorPickerVariant)}
-                    >
-                      <option value="both">Both (Swatches + Custom)</option>
-                      <option value="swatches">Swatches Only</option>
-                      <option value="custom">Custom Spectrum Only</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="cp-size-select">Component Size</label>
-                    <select
-                      id="cp-size-select"
-                      value={colorPickerSize}
-                      onChange={(e) => setColorPickerSize(e.target.value as ColorPickerSize)}
-                    >
-                      <option value="sm">Small (sm)</option>
-                      <option value="md">Medium (md)</option>
-                      <option value="lg">Large (lg)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="cp-flavor-select">Accent Palette Flavor</label>
-                    <select
-                      id="cp-flavor-select"
-                      value={colorPickerFlavor}
-                      onChange={(e) => setColorPickerFlavor(e.target.value as any)}
-                    >
-                      <option value="latte">Latte (Light)</option>
-                      <option value="frappe">Frappé (Low Contrast Dark)</option>
-                      <option value="macchiato">Macchiato (Cozy Dark)</option>
-                      <option value="mocha">Mocha (Classic Dark)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                    <label className="checkbox-label" style={{ marginTop: '22px' }}>
-                      <input
-                        type="checkbox"
-                        checked={colorPickerShowHexInput}
-                        onChange={(e) => setColorPickerShowHexInput(e.target.checked)}
-                      />
-                      Show HEX text input
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {/* Canvas & Live Code */}
-              <div className="playground-card playground-card--preview">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Interactive Canvas</h3>
-                
-                <div className="preview-canvas" style={{ minHeight: '160px', flexDirection: 'column', gap: '20px', padding: '2rem' }}>
-                  <ColorPicker
-                    value={colorPickerVal}
-                    onChange={setColorPickerVal}
-                    flavor={colorPickerFlavor}
-                    variant={colorPickerVariant}
-                    size={colorPickerSize}
-                    showHexInput={colorPickerShowHexInput}
-                  />
-                  
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Current Selected Value:</span>
-                    <strong style={{ fontFamily: 'monospace', color: colorPickerVal, textShadow: '0 0 8px rgba(0,0,0,0.2)' }}>
-                      {colorPickerVal.toUpperCase()}
-                    </strong>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="tabs-header">
-                    {(['react', 'vue', 'angular'] as const).map((tab) => (
-                      <button
-                        key={tab}
-                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <div className="code-container">
-                    <button
-                      className="code-copy-btn"
-                      onClick={() => {
-                        const code = activeTab === 'react' ? getReactColorPickerCode() : activeTab === 'vue' ? getVueColorPickerCode() : getAngularColorPickerCode();
-                        const plainText = code.replace(/<[^>]*>/g, '');
-                        copyToClipboard(plainText, `${activeTab} colorpicker snippet`);
-                      }}
-                    >
-                      Copy Code
-                    </button>
-                    <pre className="code-block">
-                      <code
-                        dangerouslySetInnerHTML={{
-                          __html: activeTab === 'react'
-                            ? getReactColorPickerCode()
-                            : activeTab === 'vue'
-                            ? getVueColorPickerCode()
-                            : getAngularColorPickerCode()
-                        }}
-                      />
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Dynamic Theme customizer demonstration card */}
-            <div style={{ marginTop: '2rem' }}>
-              <h3 className="section-subtitle" style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--ctp-text)' }}>
-                🎨 Dynamic Card Customization Demo
-              </h3>
-              
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '2rem'
-              }}>
-                <div style={{
-                  padding: '2rem',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--ctp-mantle)',
-                  border: `2px solid ${colorPickerVal}`,
-                  boxShadow: `0 8px 32px -4px ${colorPickerVal}15, 0 0 16px ${colorPickerVal}10`,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1.2rem',
-                  transition: 'all 0.3s ease'
-                }}>
-                  <h4 style={{ margin: 0, fontSize: '1.25rem', color: colorPickerVal }}>
-                    Live Customized Preview
-                  </h4>
-                  <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                    Selecting a color in the picker above automatically injects the hex code into this card's styling. The border color, shadows, heading, and button below are all reactive to your choice.
-                  </p>
-                  
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
-                      backgroundColor: colorPickerVal,
-                      border: '2px solid var(--ctp-crust)',
-                      boxShadow: 'var(--ctp-shadow-sm)'
-                    }} />
-                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)', fontFamily: 'monospace' }}>
-                      Accent color: {colorPickerVal.toUpperCase()}
-                    </span>
-                  </div>
-
-                  <div style={{ marginTop: '0.5rem' }}>
-                    <button
-                      type="button"
-                      style={{
-                        padding: '10px 20px',
-                        borderRadius: '6px',
-                        border: 'none',
-                        backgroundColor: colorPickerVal,
-                        color: 'var(--ctp-base)',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                        transition: 'transform 0.2s ease, opacity 0.2s ease',
-                        boxShadow: `0 4px 12px ${colorPickerVal}30`
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                      onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                      onClick={() => showToast(`Clicked button with accent color: ${colorPickerVal}`)}
-                    >
-                      Accent Primary Button
-                    </button>
-                  </div>
-                </div>
-
-                <div style={{
-                  padding: '2rem',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--ctp-mantle)',
-                  border: '1px solid var(--ctp-surface0)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}>
                   <div>
-                    <h4 style={{ margin: '0 0 0.8rem 0', fontSize: '1.1rem', color: 'var(--ctp-text)' }}>
-                      How it works
-                    </h4>
-                    <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                      In React, you bind state to the value and handle updates with onChange:
-                    </p>
-                    <pre className="code-block" style={{ marginTop: '0.8rem', padding: '10px', fontSize: '0.8rem' }}>
-                      <code style={{ color: 'var(--ctp-mauve)' }}>
-{`const [color, setColor] = useState("#cba6f7");\n\nreturn (\n  <ColorPicker\n    value={color}\n    onChange={setColor}\n  />\n);`}
-                      </code>
-                    </pre>
-                  </div>
-                  
-                  <div style={{ borderTop: '1px solid var(--ctp-surface0)', paddingTop: '1rem', marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext1)' }}>Need custom palettes?</span>
-                    <a href="https://github.com/catppuccin/catppuccin" target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', color: 'var(--ctp-blue)', textDecoration: 'none', fontWeight: 600 }}>Catppuccin GitHub →</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'pagination' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>📄</span> Pagination & Page Size Selector
-            </h2>
-            <div className="playground-section">
-              {/* Settings Panel */}
-              <div className="playground-card" style={{ height: 'fit-content' }}>
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>Pagination Settings</h3>
-                
-                <div className="control-grid">
-                  <div className="control-group">
-                    <label htmlFor="pag-color-select">Accent Color Accent</label>
-                    <select
-                      id="pag-color-select"
-                      value={paginationColor}
-                      onChange={(e) => setPaginationColor(e.target.value as FormControlColor)}
-                    >
-                      <option value="mauve">Mauve</option>
-                      <option value="rosewater">Rosewater</option>
-                      <option value="flamingo">Flamingo</option>
-                      <option value="pink">Pink</option>
-                      <option value="red">Red</option>
-                      <option value="maroon">Maroon</option>
-                      <option value="peach">Peach</option>
-                      <option value="yellow">Yellow</option>
-                      <option value="green">Green</option>
-                      <option value="teal">Teal</option>
-                      <option value="sky">Sky</option>
-                      <option value="sapphire">Sapphire</option>
-                      <option value="blue">Blue</option>
-                      <option value="lavender">Lavender</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="pag-size-select">Component Size</label>
-                    <select
-                      id="pag-size-select"
-                      value={paginationSize}
-                      onChange={(e) => setPaginationSize(e.target.value as FormControlSize)}
-                    >
-                      <option value="sm">Small (sm)</option>
-                      <option value="md">Medium (md)</option>
-                      <option value="lg">Large (lg)</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="pag-shape-select">Button Shape</label>
-                    <select
-                      id="pag-shape-select"
-                      value={paginationShape}
-                      onChange={(e) => setPaginationShape(e.target.value as FormControlShape)}
-                    >
-                      <option value="square">Square</option>
-                      <option value="rounded">Rounded</option>
-                      <option value="pill">Pill</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group">
-                    <label htmlFor="pag-sibling-select">Sibling Pages Count</label>
-                    <select
-                      id="pag-sibling-select"
-                      value={paginationSiblingCount}
-                      onChange={(e) => setPaginationSiblingCount(Number(e.target.value))}
-                    >
-                      <option value="1">1 page sibling</option>
-                      <option value="2">2 page siblings</option>
-                      <option value="3">3 page siblings</option>
-                    </select>
-                  </div>
-
-                  <div className="control-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                      <input
-                        type="checkbox"
-                        checked={paginationShowFirstLast}
-                        onChange={(e) => setPaginationShowFirstLast(e.target.checked)}
-                      />
-                      Show First/Last buttons
-                    </label>
-                    <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                      <input
-                        type="checkbox"
-                        checked={paginationShowPrevNext}
-                        onChange={(e) => setPaginationShowPrevNext(e.target.checked)}
-                      />
-                      Show Prev/Next buttons
-                    </label>
-                    <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                      <input
-                        type="checkbox"
-                        checked={paginationShowPageInput}
-                        onChange={(e) => setPaginationShowPageInput(e.target.checked)}
-                      />
-                      Show manual page input
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {/* Canvas & Live Code */}
-              <div className="playground-card playground-card--preview">
-                <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Interactive Demo</h3>
-                
-                <div className="preview-canvas" style={{ minHeight: '380px', flexDirection: 'column', gap: '20px', padding: '1.5rem', justifyContent: 'space-between', backgroundColor: 'var(--ctp-crust)', borderRadius: '8px' }}>
-                  
-                  {/* paginated items display */}
-                  <div style={{ width: '100%' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '0.5rem' }}>
-                      <h4 style={{ margin: 0, color: `var(--ctp-${paginationColor})` }}>Catppuccin Ecosystem Ports</h4>
-                      <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                        Mostrando {Math.min((paginationPage - 1) * paginationLimit + 1, mockPorts.length)} - {Math.min(paginationPage * paginationLimit, mockPorts.length)} de {mockPorts.length}
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'grid', gap: '10px' }}>
-                      {mockPorts.slice((paginationPage - 1) * paginationLimit, paginationPage * paginationLimit).map((port, idx) => (
-                        <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: '6px', backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)' }}>
-                          <div>
-                            <div style={{ fontWeight: 600, color: 'var(--ctp-text)' }}>{port.name}</div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--ctp-overlay1)' }}>Developer: {port.developer}</div>
-                          </div>
-                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.8rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: `var(--ctp-${paginationColor})` }}>{port.category}</span>
-                            <span style={{ fontSize: '0.8rem', color: 'var(--ctp-yellow)' }}>⭐ {port.stars}</span>
-                          </div>
-                        </div>
+                    <div className="tabs-header">
+                      {(['react', 'vue', 'angular'] as const).map((tab) => (
+                        <button
+                          key={tab}
+                          className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                          onClick={() => setActiveTab(tab)}
+                        >
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
                       ))}
                     </div>
-                  </div>
 
-                  {/* Sliced pagination controls */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', width: '100%', borderTop: '1px solid var(--ctp-surface1)', paddingTop: '1rem' }}>
-                    <PageSizeSelector
-                      pageSize={paginationLimit}
-                      onPageSizeChange={setPaginationLimit}
-                      size={paginationSize}
-                      shape={paginationShape}
-                      color={paginationColor}
-                    />
-
-                    <Pagination
-                      currentPage={paginationPage}
-                      totalPages={Math.ceil(mockPorts.length / paginationLimit)}
-                      onPageChange={setPaginationPage}
-                      siblingCount={paginationSiblingCount}
-                      size={paginationSize}
-                      shape={paginationShape}
-                      color={paginationColor}
-                      showFirstLast={paginationShowFirstLast}
-                      showPrevNext={paginationShowPrevNext}
-                      showPageInput={paginationShowPageInput}
-                    />
-                  </div>
-                </div>
-
-                {/* Code snippets block */}
-                <div style={{ marginTop: '1.5rem' }}>
-                  <div className="tabs-header">
-                    {(['react', 'vue', 'angular'] as const).map((tab) => (
+                    <div className="code-container">
                       <button
-                        key={tab}
-                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(tab)}
+                        className="code-copy-btn"
+                        onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
                       >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        Copy Code
                       </button>
-                    ))}
-                  </div>
-                  
-                  <div className="code-container">
-                    <button
-                      className="code-copy-btn"
-                      onClick={() => {
-                        const code = activeTab === 'react' ? getReactPaginationCode() : activeTab === 'vue' ? getVuePaginationCode() : getAngularPaginationCode();
-                        const plainText = code.replace(/<[^>]*>/g, '');
-                        copyToClipboard(plainText, `${activeTab} pagination snippet`);
-                      }}
-                    >
-                      Copy Code
-                    </button>
-                    <pre className="code-block">
-                      <code
-                        dangerouslySetInnerHTML={{
-                          __html: activeTab === 'react'
-                            ? getReactPaginationCode()
-                            : activeTab === 'vue'
-                            ? getVuePaginationCode()
-                            : getAngularPaginationCode()
-                        }}
-                      />
-                    </pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Split layout usage guide */}
-            <div style={{ marginTop: '2rem' }}>
-              <h3 className="section-subtitle" style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--ctp-text)' }}>
-                📖 Modular Split Usage Layout
-              </h3>
-              
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '2rem'
-              }}>
-                <div style={{
-                  padding: '1.5rem',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--ctp-mantle)',
-                  border: '1px solid var(--ctp-surface0)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem'
-                }}>
-                  <h4 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--ctp-teal)' }}>
-                    Why modular separate components?
-                  </h4>
-                  <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                    Rather than forcing developers into a single monolithic block, keeping <code>Pagination</code> and <code>PageSizeSelector</code> separate guarantees ultimate layout control.
-                  </p>
-                  <ul style={{ margin: 0, paddingLeft: '20px', color: 'var(--ctp-subtext1)', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                    <li>Position rows selector in the top-right and numbers on the bottom-right</li>
-                    <li>Align them side-by-side or stack them vertically on mobile</li>
-                    <li>Omit the selector entirely for static infinite-scroll or fixed layouts</li>
-                    <li>Customize labels, icons, borders, shapes, sizes, and accent colors independently</li>
-                  </ul>
-                </div>
-
-                <div style={{
-                  padding: '1.5rem',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--ctp-mantle)',
-                  border: '1px solid var(--ctp-surface0)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem',
-                  justifyContent: 'space-between'
-                }}>
-                  <div>
-                    <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', color: 'var(--ctp-text)' }}>
-                      Ellipsis Boundary Folding Algorithm
-                    </h4>
-                    <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                      The pagination component includes smart collapsing logic. On larger datasets, the hook truncates intermediate elements, ensuring rendering stays compact and does not wrap or look messy:
-                    </p>
-                    <div style={{ marginTop: '10px', display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>1</span>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-overlay1)' }}>...</span>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>4</span>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: `var(--ctp-${paginationColor})`, color: 'var(--ctp-base)', fontWeight: 600 }}>5</span>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>6</span>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-overlay1)' }}>...</span>
-                      <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>12</span>
-                    </div>
-                  </div>
-                  
-                  <div style={{ borderTop: '1px solid var(--ctp-surface0)', paddingTop: '0.8rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext1)' }}>Keyboard friendly</span>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--ctp-green)' }}>✓ Accessible HTML5 standards</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'table' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>📊</span> Tabela de Dados Dinâmica (Data Grid)
-            </h2>
-            <p style={{ color: 'var(--ctp-subtext0)', margin: '-1.5rem 0 1.5rem 0', fontSize: '0.95rem' }}>
-              Um componente de Grid altamente dinâmico com modos Client-side e Server-side, paginação e ordenação controladas, edição inline e visualizador de logs de API.
-            </p>
-
-            {/* Metrics Bar */}
-            <div className="metrics-grid" style={{ marginBottom: '1.5rem' }}>
-              <div className="metric-card glass-panel">
-                <div className="metric-info">
-                  <span className="metric-title">Total Funcionários</span>
-                  <span className="metric-value">{tableTotalItems}</span>
-                  <span className="metric-sub">Base de dados ativa</span>
-                </div>
-                <div className="metric-icon-box">👥</div>
-              </div>
-              <div className="metric-card glass-panel">
-                <div className="metric-info">
-                  <span className="metric-title">Média Salarial</span>
-                  <span className="metric-value">
-                    {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(
-                      tableData.length > 0 
-                        ? tableData.reduce((acc, curr) => acc + curr.salary, 0) / tableData.length 
-                        : 0
-                    )}
-                  </span>
-                  <span className="metric-sub">Conjunto carregado</span>
-                </div>
-                <div className="metric-icon-box">💰</div>
-              </div>
-              <div className="metric-card glass-panel">
-                <div className="metric-info">
-                  <span className="metric-title">Ativos / Inativos</span>
-                  <span className="metric-value">
-                    {tableData.filter(e => e.status === 'Active').length} / {tableData.filter(e => e.status === 'Inactive').length}
-                  </span>
-                  <span className="metric-sub">Status dos carregados</span>
-                </div>
-                <div className="metric-icon-box">⚡</div>
-              </div>
-              <div className="metric-card glass-panel">
-                <div className="metric-info">
-                  <span className="metric-title">Itens Selecionados</span>
-                  <span className="metric-value">{selectedTableIds.length}</span>
-                  <span className="metric-sub">Ações em lote disponíveis</span>
-                </div>
-                <div className="metric-icon-box">✓</div>
-              </div>
-            </div>
-
-            <div className="playground-section" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              {/* Controls and Filters Area */}
-              <div className="glass-panel" style={{ padding: '1rem 1.25rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                  {/* Mode switch */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--ctp-text)' }}>Modo:</span>
-                    <div className="mode-selector">
-                      <button
-                        type="button"
-                        className={`mode-btn ${tableMode === 'client' ? 'active' : ''}`}
-                        onClick={() => {
-                          setTableMode('client');
-                          setSelectedTableIds([]);
-                        }}
-                      >
-                        Client-side
-                      </button>
-                      <button
-                        type="button"
-                        className={`mode-btn ${tableMode === 'server' ? 'active' : ''}`}
-                        onClick={() => {
-                          setTableMode('server');
-                          setSelectedTableIds([]);
-                        }}
-                      >
-                        Server-side
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Design Settings */}
-                  <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                    <select
-                      value={tableColor}
-                      onChange={(e) => setTableColor(e.target.value as FormControlColor)}
-                      className="filter-select"
-                      style={{ padding: '0.4rem 2rem 0.4rem 1rem' }}
-                    >
-                      <option value="mauve">Mauve</option>
-                      <option value="blue">Blue</option>
-                      <option value="green">Green</option>
-                      <option value="red">Red</option>
-                      <option value="yellow">Yellow</option>
-                      <option value="pink">Pink</option>
-                      <option value="teal">Teal</option>
-                    </select>
-                    
-                    <select
-                      value={tableSize}
-                      onChange={(e) => setTableSize(e.target.value as FormControlSize)}
-                      className="filter-select"
-                      style={{ padding: '0.4rem 2rem 0.4rem 1rem' }}
-                    >
-                      <option value="sm">Pequeno (sm)</option>
-                      <option value="md">Médio (md)</option>
-                      <option value="lg">Grande (lg)</option>
-                    </select>
-
-                    <button
-                      type="button"
-                      className="btn-secondary"
-                      onClick={() => setShowColumnDropdown(!showColumnDropdown)}
-                      style={{ position: 'relative', padding: '0.4rem 1rem' }}
-                    >
-                      👁️ Colunas
-                      {showColumnDropdown && (
-                        <div className="popover-menu" style={{ top: '100%', right: 0, marginTop: '0.5rem', textAlign: 'left' }}>
-                          <div className="popover-header">Exibir Colunas</div>
-                          {Object.keys(visibleColumns).map(colKey => (
-                            <label key={colKey} className="column-checkbox-label" onClick={(e) => e.stopPropagation()}>
-                              <input
-                                type="checkbox"
-                                checked={visibleColumns[colKey]}
-                                onChange={(e) => setVisibleColumns({ ...visibleColumns, [colKey]: e.target.checked })}
-                              />
-                              {colKey === 'id' ? 'ID' :
-                               colKey === 'name' ? 'Nome' :
-                               colKey === 'email' ? 'E-mail' :
-                               colKey === 'role' ? 'Cargo' :
-                               colKey === 'department' ? 'Departamento' :
-                               colKey === 'status' ? 'Status' :
-                               colKey === 'salary' ? 'Salário' :
-                               colKey === 'joinedDate' ? 'Admissão' : colKey}
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Table Toolbar & Content Container */}
-              <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
-                {/* Search & Filters */}
-                <div className="filter-bar" style={{ borderBottom: '1px solid var(--ctp-surface1)' }}>
-                  <div className="filters-left">
-                    <div className="search-input-wrapper">
-                      <span className="search-icon">🔍</span>
-                      <input
-                        type="text"
-                        placeholder="Buscar funcionário..."
-                        className="search-input"
-                        value={tableSearch}
-                        onChange={(e) => setTableSearch(e.target.value)}
-                      />
-                    </div>
-
-                    <select
-                      value={tableStatus}
-                      onChange={(e) => setTableStatus(e.target.value)}
-                      className="filter-select"
-                    >
-                      <option value="All">Todos os Status</option>
-                      <option value="Active">Ativos</option>
-                      <option value="Inactive">Inativos</option>
-                      <option value="Pending">Pendentes</option>
-                    </select>
-
-                    <select
-                      value={tableRole}
-                      onChange={(e) => setTableRole(e.target.value)}
-                      className="filter-select"
-                    >
-                      <option value="All">Todos os Cargos</option>
-                      {getFilterMetadata().roles.map(r => (
-                        <option key={r} value={r}>{r}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="filters-right">
-                    <button type="button" className="btn-secondary" onClick={exportTableToCSV}>
-                      📥 Exportar CSV
-                    </button>
-                    <button type="button" className="btn-primary" onClick={() => setShowAddModal(true)}>
-                      ➕ Novo Funcionário
-                    </button>
-                  </div>
-                </div>
-
-                {/* Bulk Actions Inline Bar (Dribbble-inspired, above the header) */}
-                {selectedTableIds.length > 0 && (
-                  <div className="ctp-bulk-actions-inline">
-                    <div className="ctp-bulk-actions-inline-left">
-                      <span className="ctp-bulk-actions-inline-arrow">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="9 14 4 9 9 4" />
-                          <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
-                        </svg>
-                      </span>
-                      <span>{selectedTableIds.length} selecionados</span>
-                    </div>
-                    <div className="ctp-bulk-actions-inline-right">
-                      <button
-                        type="button"
-                        className="ctp-bulk-actions-btn"
-                        onClick={() => showToast("Dica: Dê um duplo clique nas células de Cargo ou Salário dos funcionários para editar!")}
-                        title="Dica de Edição"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                        </svg>
-                      </button>
-                      <button
-                        type="button"
-                        className="ctp-bulk-actions-btn"
-                        onClick={exportSelectedToCSV}
-                        title="Exportar Selecionados para CSV"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                          <polyline points="7 10 12 15 17 10" />
-                          <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                      </button>
-                      <button
-                        type="button"
-                        className="ctp-bulk-actions-btn ctp-bulk-actions-btn--danger"
-                        onClick={handleTableDeleteMultiple}
-                        title="Excluir Selecionados"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="3 6 5 6 21 6" />
-                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                        </svg>
-                      </button>
-                      <button
-                        type="button"
-                        className="ctp-bulk-actions-btn"
-                        onClick={() => setSelectedTableIds([])}
-                        title="Cancelar Seleção"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="18" y1="6" x2="6" y2="18" />
-                          <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* The Table Wrapper */}
-                <div className="table-wrapper">
-                  <Table<Employee>
-                    data={tableData}
-                    columns={[
-                      { key: 'id', header: 'ID', sortable: true },
-                      { key: 'name', header: 'Nome', sortable: true },
-                      { key: 'email', header: 'E-mail', sortable: true },
-                      { key: 'role', header: 'Cargo', sortable: true, editable: true },
-                      { key: 'department', header: 'Departamento' },
-                      {
-                        key: 'status',
-                        header: 'Status',
-                        sortable: true,
-                        render: (_, value) => {
-                          const badgeClass = `ctp-table-badge ctp-table-badge--${value.toLowerCase()}`;
-                          const label = value === 'Active' ? 'Ativo' : value === 'Inactive' ? 'Inativo' : 'Pendente';
-                          return (
-                            <span className={badgeClass}>
-                              <span className="ctp-badge-dot" />
-                              {label}
-                            </span>
-                          );
-                        }
-                      },
-                      {
-                        key: 'salary',
-                        header: 'Salário',
-                        sortable: true,
-                        editable: true,
-                        align: 'right',
-                        render: (_, value) => {
-                          return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(Number(value));
-                        }
-                      },
-                      {
-                        key: 'joinedDate',
-                        header: 'Admissão',
-                        sortable: true,
-                        render: (_, value) => {
-                          const parts = String(value).split('-');
-                          return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value);
-                        }
-                      },
-                      {
-                        key: 'actions',
-                        header: 'Ações',
-                        align: 'center',
-                        render: (row) => (
-                          <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
-                            <button
-                              type="button"
-                              className="ctp-table-action-btn"
-                              onClick={() => {
-                                showToast("Dica: Dê um duplo clique nas células de Cargo ou Salário para editar!");
-                              }}
-                              title="Editar cargo ou salário (clique duplo nas células)"
-                            >
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                              </svg>
-                            </button>
-                            <button
-                              type="button"
-                              className="ctp-table-action-btn ctp-table-action-btn--danger"
-                              onClick={() => handleTableDeleteRow(row.id)}
-                              title="Excluir funcionário"
-                            >
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="3 6 5 6 21 6" />
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                              </svg>
-                            </button>
-                          </div>
-                        )
-                      }
-                    ].filter(col => col.key === 'actions' || visibleColumns[col.key])}
-                    rowKey={(row) => row.id}
-                    sortField={tableSortField}
-                    sortOrder={tableSortOrder}
-                    onSort={handleTableSort}
-                    selectedRowIds={selectedTableIds}
-                    onSelectionChange={setSelectedTableIds}
-                    onCellEdit={handleTableCellEdit}
-                    isLoading={tableIsLoading}
-                    size={tableSize}
-                    color={tableColor}
-                    emptyState="Nenhum funcionário encontrado com os filtros ativos."
-                  />
-                </div>
-
-                {/* Table Footer with custom layout of Pagination controls */}
-                <div className="pagination-bar" style={{ borderTop: '1px solid var(--ctp-surface2)' }}>
-                  <div className="pagination-left">
-                    <PageSizeSelector
-                      pageSize={tableLimit}
-                      onPageSizeChange={setTableLimit}
-                      size={tableSize}
-                      color={tableColor}
-                    />
-                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
-                      Total de registros: <strong>{tableTotalItems}</strong>
-                    </span>
-                  </div>
-
-                  <Pagination
-                    currentPage={tablePage}
-                    totalPages={tableTotalPages}
-                    onPageChange={setTablePage}
-                    size={tableSize}
-                    color={tableColor}
-                    showFirstLast={true}
-                    showPrevNext={true}
-                  />
-                </div>
-              </div>
-
-              {/* API Inspector Logs Console */}
-              <div className="api-inspector">
-                <div className="inspector-header">
-                  <div className="inspector-title">
-                    <span className={`status-dot ${tableIsLoading ? 'loading' : ''}`} />
-                    API REQUEST INSPECTOR {tableMode === 'client' ? '(In-Memory Local Mode)' : '(Simulated HTTP REST)'}
-                  </div>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--ctp-overlay1)' }}>Apenas requisições GET do servidor mock</span>
-                </div>
-                <div className="inspector-body">
-                  {tableMode === 'client' ? (
-                    <div style={{ color: 'var(--ctp-overlay1)', fontStyle: 'italic', padding: '0.5rem 0' }}>
-                      Operações realizadas em memória no cliente. Nenhuma chamada de API efetuada.
-                    </div>
-                  ) : apiLogs.length === 0 ? (
-                    <div style={{ color: 'var(--ctp-overlay1)', fontStyle: 'italic', padding: '0.5rem 0' }}>
-                      Nenhuma requisição registrada ainda. Altere filtros ou mude de página.
-                    </div>
-                  ) : (
-                    apiLogs.map(log => (
-                      <div key={log.id} className="log-entry">
-                        <span className="log-time">[{log.time}]</span>
-                        <span className="log-method">{log.method}</span>
-                        <span className="log-url">{log.url}</span>
-                        <span className="log-meta">{log.meta}</span>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-
-              {/* Playground Code Display */}
-              <div>
-                <div className="tabs-header">
-                  {(['react', 'vue', 'angular'] as const).map((tab) => (
-                    <button
-                      key={tab}
-                      className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                      onClick={() => setActiveTab(tab)}
-                    >
-                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                    </button>
-                  ))}
-                </div>
-                
-                <div className="code-container">
-                  <button
-                    className="code-copy-btn"
-                    onClick={() => {
-                      const code = activeTab === 'react' ? getReactTableCode() : activeTab === 'vue' ? getVueTableCode() : getAngularTableCode();
-                      const plainText = code.replace(/<[^>]*>/g, '');
-                      copyToClipboard(plainText, `${activeTab} table snippet`);
-                    }}
-                  >
-                    Copy Code
-                  </button>
-                  <pre className="code-block">
-                    <code
-                      dangerouslySetInnerHTML={{
-                        __html: activeTab === 'react'
-                          ? getReactTableCode()
-                          : activeTab === 'vue'
-                          ? getVueTableCode()
-                          : getAngularTableCode()
-                      }}
-                    />
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Add Employee Modal */}
-          <Modal
-            isOpen={showAddModal}
-            onClose={() => setShowAddModal(false)}
-            size="md"
-            title="Cadastrar Novo Funcionário"
-            footer={
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
-                <Button variant="ghost" color="lavender" onClick={() => setShowAddModal(false)}>Cancelar</Button>
-                <Button variant="filled" color="green" onClick={handleTableAddRow}>Cadastrar</Button>
-              </div>
-            }
-          >
-            <form onSubmit={handleTableAddRow} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '0.5rem 0' }}>
-              <FormGroup label="Nome Completo" required>
-                <Input
-                  type="text"
-                  placeholder="Ex: Ana Maria Silva"
-                  value={newEmpName}
-                  onChange={(e) => setNewEmpName(e.target.value)}
-                  required
-                />
-              </FormGroup>
-
-              <FormGroup label="E-mail" required>
-                <Input
-                  type="email"
-                  placeholder="Ex: ana.silva@empresa.com"
-                  value={newEmpEmail}
-                  onChange={(e) => setNewEmpEmail(e.target.value)}
-                  required
-                />
-              </FormGroup>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <FormGroup label="Cargo">
-                  <Select
-                    value={newEmpRole}
-                    onChange={(e) => setNewEmpRole(e.target.value)}
-                  >
-                    {getFilterMetadata().roles.map(r => (
-                      <option key={r} value={r}>{r}</option>
-                    ))}
-                  </Select>
-                </FormGroup>
-
-                <FormGroup label="Status">
-                  <Select
-                    value={newEmpStatus}
-                    onChange={(e) => setNewEmpStatus(e.target.value as any)}
-                  >
-                    <option value="Active">Ativo</option>
-                    <option value="Inactive">Inativo</option>
-                    <option value="Pending">Pendente</option>
-                  </Select>
-                </FormGroup>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <FormGroup label="Salário Mensal (R$)">
-                  <Input
-                    type="number"
-                    min="1000"
-                    placeholder="Ex: 5000"
-                    value={newEmpSalary}
-                    onChange={(e) => setNewEmpSalary(e.target.value)}
-                  />
-                </FormGroup>
-
-                <FormGroup label="Data de Admissão">
-                  <Input
-                    type="date"
-                    value={newEmpJoinedDate}
-                    onChange={(e) => setNewEmpJoinedDate(e.target.value)}
-                  />
-                </FormGroup>
-              </div>
-            </form>
-          </Modal>
-        </>
-      )}
-
-      {activeComponent === 'card' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>🎴</span> Card Components Showcase
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Visual demo */}
-              <div className="demo-stage">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
-                  
-                  {/* Subsection A: Card Variants */}
-                  <div>
-                    <h3 className="stage-title">Card Variants</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
-                      <Card variant="filled" padding="md">
-                        <Card.Header title="Filled Variant" subtitle="Default cozy backdrop" />
-                        <Card.Body>
-                          This card has a solid background with a very subtle border and standard shadow.
-                        </Card.Body>
-                      </Card>
-                      <Card variant="elevated" padding="md">
-                        <Card.Header title="Elevated Variant" subtitle="Floating layer feel" />
-                        <Card.Body>
-                          This card utilizes a larger, softer box shadow to feel physically raised above the canvas.
-                        </Card.Body>
-                      </Card>
-                      <Card variant="outline" padding="md">
-                        <Card.Header title="Outline Variant" subtitle="Minimalist container" />
-                        <Card.Body>
-                          This card has a transparent background and a thin solid border outlining its edges.
-                        </Card.Body>
-                      </Card>
-                      <Card variant="flat" padding="md">
-                        <Card.Header title="Flat Variant" subtitle="No borders or shadows" />
-                        <Card.Body>
-                          This card sits flat on the page with a subtle surface background, no border, and no shadow.
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  </div>
-
-                  {/* Subsection B: Accent Colored & Interactive Cards */}
-                  <div>
-                    <h3 className="stage-title">Accents & Colored Background Cards</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
-                      <Card accentColor="mauve" accentPosition="top" isInteractive padding="md">
-                        <Card.Header title="Top Accent Mauve" subtitle="Hover to lift" />
-                        <Card.Body>
-                          Hovering on this interactive card scales it up gently and highlights the border with the Mauve color.
-                        </Card.Body>
-                      </Card>
-                      <Card accentColor="peach" accentPosition="left" isInteractive padding="md">
-                        <Card.Header title="Left Accent Peach" subtitle="Sidebar colored line" />
-                        <Card.Body>
-                          A thick Peach color bar on the left edge. Great for emphasizing card status or categories.
-                        </Card.Body>
-                      </Card>
-                      <Card variant="colored" accentColor="lavender" isInteractive padding="md">
-                        <Card.Header title="Colored Background" subtitle="Lavender Flavor" />
-                        <Card.Body>
-                          This card has the entire background colored using a Catppuccin accent color. Content colors contrast automatically.
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  </div>
-
-                  {/* Subsection C: Rich Content Blog/Profile Card */}
-                  <div>
-                    <h3 className="stage-title">Rich Content Card</h3>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      <Card variant="elevated" isInteractive={cardInteractive} accentColor={cardAccent} accentPosition={cardAccentPos} shape={cardShape} padding={cardPadding} style={{ maxWidth: '440px', width: '100%' }}>
-                        <Card.Header 
-                          title="Catppuccin Palettes" 
-                          subtitle="By CozyDevelopers • 4 hours ago"
-                          avatar={
-                            <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.1rem' }}>
-                              CD
-                            </div>
-                          }
-                          actions={
-                            <button className="ctp-modal__close-btn" style={{ padding: '4px' }} title="Options">
-                              💬
-                            </button>
-                          }
+                      <pre className="code-block">
+                        <code
+                          dangerouslySetInnerHTML={{
+                            __html: activeTab === 'react'
+                              ? getReactStepsCode()
+                              : activeTab === 'vue'
+                                ? getVueStepsCode()
+                                : getAngularStepsCode()
+                          }}
                         />
-                        <Card.Media style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, var(--ctp-mauve), var(--ctp-blue))' }}>
-                          <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--ctp-base)' }}>Visual Banner Area</span>
-                        </Card.Media>
-                        <Card.Body>
-                          <p style={{ margin: 0 }}>
-                            Catppuccin is a community-driven, pastel theme designed to be easy on the eyes. It comes in four beautiful flavors: Latte, Frappé, Macchiato, and Mocha.
-                          </p>
-                        </Card.Body>
-                        <Card.Footer>
-                          <Button variant="ghost" color="lavender" size="sm">Share</Button>
-                          <Button variant="filled" color="mauve" size="sm">Explore</Button>
-                        </Card.Footer>
-                      </Card>
+                      </pre>
                     </div>
                   </div>
-
                 </div>
               </div>
 
-              {/* Right Column: Interactive settings playground */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Interactive Card Builder</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  
-                  <FormGroup label="Card Variant">
-                    <Select value={cardVariant} onChange={(e) => setCardVariant(e.target.value as any)}>
-                      <option value="filled">Filled (Default)</option>
-                      <option value="elevated">Elevated</option>
-                      <option value="outline">Outline</option>
-                      <option value="flat">Flat</option>
-                      <option value="colored">Colored Background</option>
-                    </Select>
-                  </FormGroup>
+              {/* HIGH FIDELITY WIZARD INTEGRATION FLOW */}
+              <div style={{ marginTop: '2.5rem' }}>
+                <h3 style={{ margin: '0 0 1.2rem 0' }}>✨ High-Fidelity Checkout Wizard & Slide Transition Showcase ✨</h3>
 
-                  <FormGroup label="Border Radius Shape">
-                    <Select value={cardShape} onChange={(e) => setCardShape(e.target.value as any)}>
-                      <option value="square">Square (0px)</option>
-                      <option value="rounded">Rounded (12px)</option>
-                      <option value="pill">Pill (24px)</option>
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Body Padding">
-                    <Select value={cardPadding} onChange={(e) => setCardPadding(e.target.value as any)}>
-                      <option value="none">None</option>
-                      <option value="sm">Small (12px)</option>
-                      <option value="md">Medium (20px)</option>
-                      <option value="lg">Large (32px)</option>
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Accent Color">
-                    <Select value={cardAccent} onChange={(e) => setCardAccent(e.target.value as any)}>
-                      {colors.map(c => (
-                        <option key={c.variable} value={c.name.toLowerCase()}>{c.name}</option>
-                      ))}
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Accent Position">
-                    <Select value={cardAccentPos} onChange={(e) => setCardAccentPos(e.target.value as any)}>
-                      <option value="none">None</option>
-                      <option value="top">Top Bar</option>
-                      <option value="left">Left Bar</option>
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Interaction Hover Effect">
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                      <input type="checkbox" checked={cardInteractive} onChange={(e) => setCardInteractive(e.target.checked)} />
-                      <span>Enable Hover Animation</span>
-                    </label>
-                  </FormGroup>
-
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section style={{ marginTop: '3rem' }}>
-            <h2 className="section-title">
-              <span>🏁</span> Tile Components Showcase
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Visual demo */}
-              <div className="demo-stage">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
-
-                  {/* Subsection A: Tile Sizes and Shapes */}
-                  <div>
-                    <h3 className="stage-title">Sizes & Shapes</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', alignItems: 'center' }}>
-                        <Tile size="sm" shape="square" title="Small Square" subtitle="8px padding" icon="⚙️" />
-                        <Tile size="md" shape="rounded" title="Medium Rounded" subtitle="14px padding" icon="🚀" />
-                        <Tile size="lg" shape="pill" title="Large Pill" subtitle="20px padding" icon="💎" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Subsection B: Orientations */}
-                  <div>
-                    <h3 className="stage-title">Layout Orientations</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
-                      <Tile orientation="horizontal" title="Horizontal Layout" subtitle="Icon on left, meta on right" icon="⚡" meta="Ctrl+S" />
-                      <Tile orientation="vertical" title="Vertical Layout" subtitle="Stack elements aligned left" icon="📅" meta="Amanhã" />
-                      <Tile orientation="vertical-center" title="Centered Layout" subtitle="Aligned at the center" icon="🔔" meta="2 novos" />
-                    </div>
-                  </div>
-
-                  {/* Subsection C: Status indicators and variants */}
-                  <div>
-                    <h3 className="stage-title">Tonal Backgrounds, Indicators & Colored Backgrounds</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
-                      <Tile variant="tonal" color="green" indicator="left" icon="✅" title="Concluído" subtitle="Build passou sem avisos" />
-                      <Tile variant="tonal" color="yellow" indicator="top" icon="⚠️" title="Atenção" subtitle="Uso de CPU elevado" />
-                      <Tile variant="colored" color="mauve" icon="🔮" title="Colored Tile" subtitle="Mauve flavor bg" />
-                      <Tile variant="colored" color="peach" icon="🍑" title="Colored Tile" subtitle="Peach flavor bg" />
-                      <Tile variant="tonal" color="red" indicator="right" icon="❌" title="Falha" subtitle="14 testes falharam" />
-                      <Tile variant="tonal" color="blue" indicator="bottom" icon="ℹ️" title="Informações" subtitle="Versão 1.4.0 activa" />
-                    </div>
-                  </div>
-
-                  {/* Subsection D: Single & Multi Selection Checklist */}
-                  <div>
-                    <h3 className="stage-title">Interactive Choice Selection</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                      <div>
-                        <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: 'var(--ctp-subtext0)' }}>Radio Selection (Single)</h4>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                          <Tile 
-                            isInteractive 
-                            isSelected={selectedTileId === 't1'} 
-                            onClick={() => setSelectedTileId('t1')}
-                            title="Plano Padrão" 
-                            subtitle="10 GB de armazenamento rápido" 
-                            meta="R$ 15/mês" 
-                            icon={selectedTileId === 't1' ? '🟢' : '⚪'} 
-                          />
-                          <Tile 
-                            isInteractive 
-                            isSelected={selectedTileId === 't2'} 
-                            onClick={() => setSelectedTileId('t2')}
-                            title="Plano Profissional" 
-                            subtitle="100 GB de armazenamento + CDN" 
-                            meta="R$ 49/mês" 
-                            icon={selectedTileId === 't2' ? '🟢' : '⚪'} 
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: 'var(--ctp-subtext0)' }}>Checkbox Selection (Multiple)</h4>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                          {['m1', 'm2'].map((id, index) => {
-                            const isSelected = multiSelectedTileIds.includes(id);
-                            const toggleSelect = () => {
-                              setMultiSelectedTileIds(prev => 
-                                isSelected ? prev.filter(i => i !== id) : [...prev, id]
-                              );
-                            };
-                            return (
-                              <Tile 
-                                key={id}
-                                isInteractive 
-                                isSelected={isSelected} 
-                                onClick={toggleSelect}
-                                title={index === 0 ? "Backup Diário" : "Suporte VIP 24h"} 
-                                subtitle={index === 0 ? "Envios agendados automáticos" : "Atendimento imediato"} 
-                                meta={index === 0 ? "+ R$ 10" : "+ R$ 25"} 
-                                icon={isSelected ? '☑️' : '⏹️'} 
-                              />
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Subsection E: Stats Grid (Dashboard Mockup) */}
-                  <div>
-                    <h3 className="stage-title">Metrics Dashboard Layout</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
-                      <Tile variant="elevated" color="mauve" indicator="left" orientation="vertical" title="R$ 14.230" subtitle="Receita Mensal" icon="💰" />
-                      <Tile variant="elevated" color="sky" indicator="left" orientation="vertical" title="24.5k" subtitle="Visitas Únicas" icon="👥" />
-                      <Tile variant="elevated" color="green" indicator="left" orientation="vertical" title="99.98%" subtitle="Uptime API" icon="📈" />
-                      <Tile variant="elevated" color="red" indicator="left" orientation="vertical" title="3" subtitle="Erros Pendentes" icon="🐞" />
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Right Column: Details */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Card & Tile Features</h3>
-                <div style={{ color: 'var(--ctp-subtext0)', fontSize: '0.9rem', lineHeight: '1.5' }}>
-                  <p style={{ marginTop: 0 }}>
-                    <strong>Cards</strong> are designed for grouped content containing complex data layouts (images, header actions, body texts, action footers).
-                  </p>
-                  <p>
-                    <strong>Tiles</strong> are compact, single-purpose blocks ideal for dashboard metrics grids, interactive item checklist choices, or horizontal list selections.
-                  </p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', border: '1px solid var(--ctp-surface1)', borderRadius: '8px', backgroundColor: 'var(--ctp-mantle)', marginTop: '1rem' }}>
-                    <div style={{ fontWeight: 'bold', color: 'var(--ctp-mauve)' }}>Atributos Suportados:</div>
-                    <div>• 14 cores do Catppuccin</div>
-                    <div>• Variantes de elevação e tonalidades</div>
-                    <div>• Layouts horizontal e vertical</div>
-                    <div>• Bordas indicativas direcionais</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header">
-                {(['react', 'vue', 'angular'] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => setActiveTab(tab)}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container">
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' ? getReactCardCode() : activeTab === 'vue' ? getVueCardCode() : getAngularCardCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} card snippet`);
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block">
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactCardCode()
-                        : activeTab === 'vue'
-                        ? getVueCardCode()
-                        : getAngularCardCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'icons' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>✨</span> Catppuccin SVG Icons Pack
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Icons Grid */}
-              <div className="demo-stage" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
-                {/* Search Input */}
-                <div style={{ width: '100%' }}>
-                  <input
-                    type="text"
-                    className="ctp-input"
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem 1rem',
-                      borderRadius: '8px',
-                      border: '1px solid var(--ctp-surface1)',
-                      backgroundColor: 'var(--ctp-base)',
-                      color: 'var(--ctp-text)',
-                      outline: 'none',
-                    }}
-                    placeholder="Search icons (e.g. Cat, Home, Settings)..."
-                    value={iconSearch}
-                    onChange={(e) => setIconSearch(e.target.value)}
-                  />
-                </div>
-
-                {/* Categories Grid */}
-                {['Catppuccin', 'Celestial', 'Data & Connections', 'UI & Layout', 'CRUD Actions'].map((category) => {
-                  const filtered = iconList.filter(
-                    (icon) =>
-                      icon.category === category &&
-                      icon.name.toLowerCase().includes(iconSearch.toLowerCase())
-                  );
-
-                  if (filtered.length === 0) return null;
-
-                  return (
-                    <div key={category} style={{ width: '100%' }}>
-                      <h3 className="stage-title" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--ctp-surface0)', paddingBottom: '0.5rem', marginBottom: '1rem', color: 'var(--ctp-mauve)' }}>
-                        {category} Icons
-                        <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 'normal', marginLeft: 'auto' }}>
-                          {filtered.length} icons
-                        </span>
-                      </h3>
-
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '0.75rem' }}>
-                        {filtered.map((item) => {
-                          const IconComponent = item.component;
-                          const isSelected = selectedIconName === item.name;
-                          const className = iconHoverEffect !== 'none' ? `ctp-icon--hover-${iconHoverEffect}` : '';
-
-                          return (
-                            <button
-                              key={item.name}
-                              onClick={() => setSelectedIconName(item.name)}
-                              style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                gap: '0.75rem',
-                                padding: '1rem 0.5rem',
-                                borderRadius: '8px',
-                                border: isSelected ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                                backgroundColor: isSelected ? 'var(--ctp-surface0)' : 'var(--ctp-mantle)',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                                outline: 'none',
-                                color: isSelected ? 'var(--ctp-mauve)' : 'var(--ctp-text)',
-                              }}
-                              className="icon-grid-btn"
-                            >
-                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '48px' }}>
-                                <IconComponent
-                                  size={iconSize}
-                                  color={iconColor}
-                                  strokeWidth={iconStroke}
-                                  className={className}
-                                />
-                              </div>
-                              <span style={{ fontSize: '0.75rem', wordBreak: 'break-all', textAlign: 'center' }}>
-                                {item.name}
-                              </span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Right Column: Customizer Controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Icon Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Stroke Width ({iconStroke.toFixed(1)}px)</label>
-                  <input
-                    type="range"
-                    min="1.0"
-                    max="3.0"
-                    step="0.5"
-                    value={iconStroke}
-                    onChange={(e) => setIconStroke(parseFloat(e.target.value))}
-                    style={{ width: '100%', accentColor: 'var(--ctp-mauve)', cursor: 'pointer' }}
-                  />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--ctp-subtext0)', marginTop: '4px' }}>
-                    <span>1.0 (Lightest)</span>
-                    <span>3.0 (Bold)</span>
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Size ({iconSize}px)</label>
-                  <div style={{ display: 'flex', gap: '0.4rem' }}>
-                    {[16, 24, 32, 48, 64].map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => setIconSize(size)}
-                        style={{
-                          flex: 1,
-                          padding: '0.3rem 0',
-                          fontSize: '0.8rem',
-                          borderRadius: '6px',
-                          border: iconSize === size ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: iconSize === size ? 'var(--ctp-mauve)' : 'transparent',
-                          color: iconSize === size ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Color Theme</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
-                    <button
-                      onClick={() => setIconColor('text')}
-                      title="Default Text Color"
-                      style={{
-                        height: '24px',
-                        borderRadius: '4px',
-                        border: iconColor === 'text' ? '2px solid white' : '1px solid var(--ctp-surface1)',
-                        backgroundColor: 'var(--ctp-text)',
-                        cursor: 'pointer',
-                      }}
-                    />
-                    {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => setIconColor(c)}
-                        title={c.charAt(0).toUpperCase() + c.slice(1)}
-                        style={{
-                          height: '24px',
-                          borderRadius: '4px',
-                          border: iconColor === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: `var(--ctp-${c})`,
-                          cursor: 'pointer',
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Hover Animation Effect</label>
-                  <select
-                    value={iconHoverEffect}
-                    onChange={(e) => setIconHoverEffect(e.target.value as any)}
-                    className="ctp-input"
-                    style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--ctp-surface1)', backgroundColor: 'var(--ctp-base)', color: 'var(--ctp-text)', cursor: 'pointer' }}
-                  >
-                    <option value="none">None (Static)</option>
-                    <option value="spin">Spin (Settings)</option>
-                    <option value="bounce">Bounce Up (Bell/Home)</option>
-                    <option value="scale">Scale Up (Heart/Star)</option>
-                    <option value="wiggle">Wiggle (Fish/Chat)</option>
-                    <option value="pulse">Pulse Loop (Continuous)</option>
-                  </select>
-                </div>
-
-                <div style={{ marginTop: '1.5rem', padding: '12px', border: '1px solid var(--ctp-surface1)', borderRadius: '8px', backgroundColor: 'var(--ctp-mantle)', color: 'var(--ctp-subtext0)', fontSize: '0.8rem', lineHeight: '1.4' }}>
-                  <div style={{ fontWeight: 'bold', color: 'var(--ctp-mauve)', marginBottom: '4px' }}>Developer Info:</div>
-                  Our icons are pure vector SVGs. They scale beautifully to any size without losing crispness and respond instantly to Catppuccin color accents.
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
-                {['react', 'vue', 'angular', 'svg'].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveTab(tab as any);
-                    }}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      border: 'none',
-                      background: 'none',
-                      color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
-                      borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: activeTab === tab ? 'bold' : 'normal',
-                    }}
-                  >
-                    {tab === 'svg' ? 'SVG Raw XML' : tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' 
-                      ? getReactIconCode() 
-                      : activeTab === 'vue' 
-                      ? getVueIconCode() 
-                      : activeTab === 'angular' 
-                      ? getAngularIconCode() 
-                      : getSvgIconCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} icon snippet`);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.3rem 0.6rem',
-                    fontSize: '0.8rem',
-                    borderRadius: '4px',
-                    border: '1px solid var(--ctp-surface1)',
-                    backgroundColor: 'var(--ctp-surface0)',
-                    color: 'var(--ctp-text)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactIconCode()
-                        : activeTab === 'vue'
-                        ? getVueIconCode()
-                        : activeTab === 'angular'
-                        ? getAngularIconCode()
-                        : getSvgIconCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'badge' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>📇</span> Badges & Tags Component
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Visual demo */}
-              <div className="demo-stage">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
-
-                  {/* Subsection A: Badge Variants */}
-                  <div>
-                    <h3 className="stage-title">Badge Variants</h3>
-                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                      <Badge variant="filled" color="mauve">Filled (Default)</Badge>
-                      <Badge variant="tonal" color="mauve">Tonal Tint</Badge>
-                      <Badge variant="outline" color="mauve">Outline Border</Badge>
-                      <Badge variant="flat">Flat Surface</Badge>
-                    </div>
-                  </div>
-
-                  {/* Subsection B: Shapes and Sizes */}
-                  <div>
-                    <h3 className="stage-title">Shapes & Sizes</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>Pill Shape (Default)</span>
-                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <Badge size="sm" shape="pill" color="blue">Small</Badge>
-                            <Badge size="md" shape="pill" color="blue">Medium</Badge>
-                            <Badge size="lg" shape="pill" color="blue">Large</Badge>
-                          </div>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>Rounded Shape (4px)</span>
-                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <Badge size="sm" shape="rounded" color="peach">Small</Badge>
-                            <Badge size="md" shape="rounded" color="peach">Medium</Badge>
-                            <Badge size="lg" shape="rounded" color="peach">Large</Badge>
-                          </div>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>Square Shape (0px)</span>
-                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <Badge size="sm" shape="square" color="green">Small</Badge>
-                            <Badge size="md" shape="square" color="green">Medium</Badge>
-                            <Badge size="lg" shape="square" color="green">Large</Badge>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Subsection C: Palette Showcase */}
-                  <div>
-                    <h3 className="stage-title">Palette Color Choices</h3>
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                      {(['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'] as const).map(color => (
-                        <Badge key={color} variant="tonal" color={color} shape="pill">
-                          {color.charAt(0).toUpperCase() + color.slice(1)}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Subsection D: Dismissible / Closable Tags */}
-                  <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                      <h3 className="stage-title" style={{ margin: 0 }}>Closable Tags Cloud</h3>
-                      {demoTags.length < 6 && (
-                        <Button variant="ghost" color="mauve" size="sm" onClick={() => setDemoTags(['TypeScript', 'React', 'Vue', 'Angular', 'CSS', 'Svelte'])}>
-                          Reset Tags
-                        </Button>
-                      )}
-                    </div>
-                    {demoTags.length === 0 ? (
-                      <div style={{ padding: '16px', border: '1px dashed var(--ctp-surface2)', borderRadius: '8px', textAlign: 'center', color: 'var(--ctp-subtext0)', fontSize: '0.9rem' }}>
-                        All tags dismissed. Click "Reset Tags" to load again.
-                      </div>
-                    ) : (
-                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                        {demoTags.map(tag => (
-                          <Badge 
-                            key={tag} 
-                            variant="tonal" 
-                            color="lavender" 
-                            isDismissible 
-                            onDismiss={() => setDemoTags(prev => prev.filter(t => t !== tag))}
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Subsection E: Real-world status tags mockup */}
-                  <div>
-                    <h3 className="stage-title">Real-world Status Mockups</h3>
-                    <div style={{ display: 'flex', gap: '16px', flexDirection: 'column' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', border: '1px solid var(--ctp-surface0)', borderRadius: '8px', backgroundColor: 'var(--ctp-surface0)' }}>
-                        <span style={{ fontWeight: '500' }}>Task Compile Script</span>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <Badge variant="filled" color="green" icon="✓">Successful</Badge>
-                          <Badge variant="tonal" color="mauve">v1.2.0</Badge>
-                        </div>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', border: '1px solid var(--ctp-surface0)', borderRadius: '8px', backgroundColor: 'var(--ctp-surface0)' }}>
-                        <span style={{ fontWeight: '500' }}>Deploying Production Cluster</span>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <Badge variant="filled" color="yellow" icon="⚙️">Pending</Badge>
-                          <Badge variant="outline" color="yellow">Auth required</Badge>
-                        </div>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', border: '1px solid var(--ctp-surface0)', borderRadius: '8px', backgroundColor: 'var(--ctp-surface0)' }}>
-                        <span style={{ fontWeight: '500' }}>Server Health Check</span>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <Badge variant="filled" color="red" icon="❌">Failed</Badge>
-                          <Badge variant="flat">Incident #8432</Badge>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Live Component Preview */}
-                  <div style={{ marginTop: '1rem', padding: '1.5rem', border: '1px solid var(--ctp-surface1)', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', backgroundColor: 'var(--ctp-mantle)' }}>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)', fontWeight: 'bold' }}>LIVE PREVIEW</span>
-                    <Badge 
-                      variant={badgeVariant} 
-                      size={badgeSize} 
-                      shape={badgeShape} 
-                      color={badgeColor} 
-                      isDismissible={badgeDismissible}
-                      onDismiss={() => showToast('Dismissed live badge!')}
-                      icon={badgeHasIcon ? <SparklesIcon /> : undefined}
-                    >
-                      {badgeText || 'Badge'}
-                    </Badge>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Right Column: Interactive settings builder */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Interactive Badge Customizer</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  
-                  <FormGroup label="Badge Label Text">
-                    <Input 
-                      type="text" 
-                      value={badgeText} 
-                      onChange={(e) => setBadgeText(e.target.value)} 
-                      placeholder="e.g. New Feature" 
-                    />
-                  </FormGroup>
-
-                  <FormGroup label="Variant style">
-                    <Select value={badgeVariant} onChange={(e) => setBadgeVariant(e.target.value as any)}>
-                      <option value="filled">Filled (Default)</option>
-                      <option value="tonal">Tonal</option>
-                      <option value="outline">Outline</option>
-                      <option value="flat">Flat</option>
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Size font/padding">
-                    <Select value={badgeSize} onChange={(e) => setBadgeSize(e.target.value as any)}>
-                      <option value="sm">Small</option>
-                      <option value="md">Medium</option>
-                      <option value="lg">Large</option>
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Border Shape">
-                    <Select value={badgeShape} onChange={(e) => setBadgeShape(e.target.value as any)}>
-                      <option value="square">Square (0px)</option>
-                      <option value="rounded">Rounded (4px)</option>
-                      <option value="pill">Pill (Fully rounded)</option>
-                    </Select>
-                  </FormGroup>
-
-                  <FormGroup label="Theme Accent Color">
-                    <Select value={badgeColor} onChange={(e) => setBadgeColor(e.target.value as any)}>
-                      {colors.map(c => (
-                        <option key={c.variable} value={c.name.toLowerCase()}>{c.name}</option>
-                      ))}
-                    </Select>
-                  </FormGroup>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '0.5rem' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                      <input type="checkbox" checked={badgeHasIcon} onChange={(e) => setBadgeHasIcon(e.target.checked)} />
-                      <span>Include Leading Icon</span>
-                    </label>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                      <input type="checkbox" checked={badgeDismissible} onChange={(e) => setBadgeDismissible(e.target.checked)} />
-                      <span>Dismissible (Close x button)</span>
-                    </label>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header">
-                {(['react', 'vue', 'angular'] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => setActiveTab(tab)}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container">
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' ? getReactBadgeCode() : activeTab === 'vue' ? getVueBadgeCode() : getAngularBadgeCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} badge snippet`);
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block">
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactBadgeCode()
-                        : activeTab === 'vue'
-                        ? getVueBadgeCode()
-                        : getAngularBadgeCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'accordion' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>🪗</span> Accordion & Collapse Component
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Demo Stage */}
-              <div className="demo-stage" style={{ width: '100%' }}>
-                <h3 className="stage-title">Interactive Stage</h3>
-                <div style={{ padding: '2rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)' }}>
-                  <Accordion
-                    variant={accordionVariant}
-                    accentColor={accordionAccent as any}
-                    allowMultiple={accordionAllowMultiple}
-                    value={accordionActiveValue}
-                    onValueChange={setAccordionActiveValue}
-                  >
-                    <Accordion.Item value="item-1">
-                      <Accordion.Header>✨ Introdução ao Catppuccin</Accordion.Header>
-                      <Accordion.Body>
-                        Catppuccin é um tema de cores comunitário super aconchegante e pastel que visa preencher a lacuna entre designs de alto contraste e designs opacos e monótonos. Ele traz 4 flavors maravilhosos (Latte, Frappé, Macchiato e Mocha) para dezenas de aplicativos!
-                      </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item value="item-2">
-                      <Accordion.Header>📦 Design System Multitecnologia</Accordion.Header>
-                      <Accordion.Body>
-                        Este design system foi construído em monorepo com pacotes especializados: CSS puro para estilos universais, além de adaptadores ricos em estados para as frameworks mais populares da Web moderna: React, Vue 3 e Angular.
-                      </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item value="item-3" disabled>
-                      <Accordion.Header>🔒 Funcionalidade Bloqueada (Desabilitado)</Accordion.Header>
-                      <Accordion.Body>
-                        Este painel está desabilitado e não pode ser aberto pelo usuário. É útil para formulários ou fluxos onde etapas estão travadas até uma ação anterior.
-                      </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item value="item-4">
-                      <Accordion.Header>🚀 Suporte a Animações Fluidas</Accordion.Header>
-                      <Accordion.Body>
-                        Usando CSS Grids de transição de linhas (`grid-template-rows`), conseguimos animar o colapso e expansão a partir de altura 0 de forma nativa e extremamente leve, sem cálculos caros de Javascript.
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-                </div>
-              </div>
-
-              {/* Right Column: Customizer Controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Accordion Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Layout Variant</label>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    {(['default', 'split'] as const).map((v) => (
-                      <button
-                        key={v}
-                        onClick={() => setAccordionVariant(v)}
-                        style={{
-                          flex: 1,
-                          padding: '0.5rem',
-                          borderRadius: '6px',
-                          border: accordionVariant === v ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: accordionVariant === v ? 'var(--ctp-mauve)' : 'transparent',
-                          color: accordionVariant === v ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                          fontSize: '0.85rem',
-                          textTransform: 'capitalize',
-                        }}
-                      >
-                        {v}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Expansion Mode</label>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button
-                      onClick={() => handleAccordionMultipleChange(false)}
-                      style={{
-                        flex: 1,
-                        padding: '0.5rem',
-                        borderRadius: '6px',
-                        border: !accordionAllowMultiple ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                        backgroundColor: !accordionAllowMultiple ? 'var(--ctp-mauve)' : 'transparent',
-                        color: !accordionAllowMultiple ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                        cursor: 'pointer',
-                        fontWeight: 'bold',
-                        fontSize: '0.85rem',
-                      }}
-                    >
-                      Single (Accordion)
-                    </button>
-                    <button
-                      onClick={() => handleAccordionMultipleChange(true)}
-                      style={{
-                        flex: 1,
-                        padding: '0.5rem',
-                        borderRadius: '6px',
-                        border: accordionAllowMultiple ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                        backgroundColor: accordionAllowMultiple ? 'var(--ctp-mauve)' : 'transparent',
-                        color: accordionAllowMultiple ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                        cursor: 'pointer',
-                        fontWeight: 'bold',
-                        fontSize: '0.85rem',
-                      }}
-                    >
-                      Multiple (Collapse)
-                    </button>
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Accent Color</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
-                    {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => setAccordionAccent(c)}
-                        title={c.charAt(0).toUpperCase() + c.slice(1)}
-                        style={{
-                          height: '24px',
-                          borderRadius: '4px',
-                          border: accordionAccent === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: `var(--ctp-${c})`,
-                          cursor: 'pointer',
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '1.5rem', padding: '12px', border: '1px solid var(--ctp-surface1)', borderRadius: '8px', backgroundColor: 'var(--ctp-mantle)', color: 'var(--ctp-subtext0)', fontSize: '0.8rem', lineHeight: '1.4' }}>
-                  <div style={{ fontWeight: 'bold', color: 'var(--ctp-mauve)', marginBottom: '4px' }}>Active State:</div>
-                  <pre style={{ margin: 0, fontSize: '0.75rem', overflowX: 'auto', color: 'var(--ctp-text)' }}>
-                    {JSON.stringify(accordionActiveValue)}
-                  </pre>
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
-                {['react', 'vue', 'angular'].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveTab(tab as any);
-                    }}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      border: 'none',
-                      background: 'none',
-                      color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
-                      borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: activeTab === tab ? 'bold' : 'normal',
-                    }}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' 
-                      ? getReactAccordionCode() 
-                      : activeTab === 'vue' 
-                      ? getVueAccordionCode() 
-                      : getAngularAccordionCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} accordion snippet`);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.3rem 0.6rem',
-                    fontSize: '0.8rem',
-                    borderRadius: '4px',
-                    border: '1px solid var(--ctp-surface1)',
-                    backgroundColor: 'var(--ctp-surface0)',
-                    color: 'var(--ctp-text)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactAccordionCode()
-                        : activeTab === 'vue'
-                        ? getVueAccordionCode()
-                        : getAngularAccordionCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'dropdown' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>▾</span> Dropdown Portal Component
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Demo Stage */}
-              <div className="demo-stage" style={{ width: '100%', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <h3 className="stage-title">Interactive Stage</h3>
-                <div style={{ padding: '4rem 2rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Dropdown
-                    trigger={<Button color={dropdownColor}>Abrir Menu de Opções</Button>}
-                    placement={dropdownPlacement}
-                    color={dropdownColor}
-                    closeOnItemClick={dropdownCloseOnItemClick}
-                    autoFlip={dropdownAutoFlip}
-                  >
-                    <Dropdown.Header>Minha Conta</Dropdown.Header>
-                    <Dropdown.Item icon={<UserIcon size={16} />}>Perfil do Usuário</Dropdown.Item>
-                    <Dropdown.Item icon={<SettingsIcon size={16} />}>Configurações</Dropdown.Item>
-                    <Dropdown.Item icon={<BellIcon size={16} />} disabled>Notificações (Desativado)</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Header>Ações Rápidas</Dropdown.Header>
-                    <Dropdown.Item icon={<ExternalLinkIcon size={16} />}>Ver Site Externo</Dropdown.Item>
-                    <Dropdown.Item icon={<TrashIcon size={16} />} danger>Excluir Conta</Dropdown.Item>
-                  </Dropdown>
-                </div>
-              </div>
-
-              {/* Right Column: Customizer Controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Dropdown Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Dropdown Placement</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem' }}>
-                    {(['bottom-start', 'bottom-end', 'bottom', 'top-start', 'top-end', 'top', 'left', 'right'] as const).map((p) => (
-                      <button
-                        key={p}
-                        onClick={() => setDropdownPlacement(p)}
-                        style={{
-                          padding: '0.4rem',
-                          borderRadius: '6px',
-                          border: dropdownPlacement === p ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: dropdownPlacement === p ? 'var(--ctp-mauve)' : 'transparent',
-                          color: dropdownPlacement === p ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                          fontSize: '0.75rem',
-                        }}
-                      >
-                        {p}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Accent Color</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
-                    {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => setDropdownColor(c as any)}
-                        title={c.charAt(0).toUpperCase() + c.slice(1)}
-                        style={{
-                          height: '24px',
-                          borderRadius: '4px',
-                          border: dropdownColor === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: `var(--ctp-${c})`,
-                          cursor: 'pointer',
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={dropdownCloseOnItemClick}
-                      onChange={(e) => setDropdownCloseOnItemClick(e.target.checked)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <span>Close Menu on Item Click</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.75rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={dropdownAutoFlip}
-                      onChange={(e) => setDropdownAutoFlip(e.target.checked)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <span>Enable Viewport Auto-Flip</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
-                {['react', 'vue', 'angular'].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveTab(tab as any);
-                    }}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      border: 'none',
-                      background: 'none',
-                      color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
-                      borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: activeTab === tab ? 'bold' : 'normal',
-                    }}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' 
-                      ? getReactDropdownCode() 
-                      : activeTab === 'vue' 
-                      ? getVueDropdownCode() 
-                      : getAngularDropdownCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} dropdown snippet`);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.3rem 0.6rem',
-                    fontSize: '0.8rem',
-                    borderRadius: '4px',
-                    border: '1px solid var(--ctp-surface1)',
-                    backgroundColor: 'var(--ctp-surface0)',
-                    color: 'var(--ctp-text)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactDropdownCode()
-                        : activeTab === 'vue'
-                        ? getVueDropdownCode()
-                        : getAngularDropdownCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'tooltip' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>💬</span> Tooltip Portal Component
-            </h2>
-
-            <div className="playground-section">
-              {/* Left Column: Demo Stage */}
-              <div className="demo-stage" style={{ width: '100%', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <h3 className="stage-title">Interactive Stage</h3>
-                <div style={{ padding: '4rem 2rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-                  
-                  <Tooltip
-                    content="Olá! Eu sou um Tooltip posicionado via Portal."
-                    placement={tooltipPlacement}
-                    color={tooltipColor}
-                    delay={tooltipDelay}
-                    autoFlip={tooltipAutoFlip}
-                  >
-                    <Button color="mauve">Passe o Mouse Aqui</Button>
-                  </Tooltip>
-
-                  <Tooltip
-                    content="Ação deletar é irreversível!"
-                    placement={tooltipPlacement}
-                    color="red"
-                    delay={tooltipDelay}
-                    autoFlip={tooltipAutoFlip}
-                  >
-                    <button className="ctp-btn ctp-btn--outline ctp-btn--red ctp-btn--md ctp-btn--rounded" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <TrashIcon size={16} />
-                      Excluir Item
-                    </button>
-                  </Tooltip>
-
-                  <Tooltip
-                    content="Informações adicionais sobre o sistema"
-                    placement={tooltipPlacement}
-                    color="blue"
-                    delay={tooltipDelay}
-                    autoFlip={tooltipAutoFlip}
-                  >
-                    <span style={{ cursor: 'help', color: 'var(--ctp-blue)', display: 'inline-flex', alignItems: 'center', gap: '6px', textDecoration: 'underline dotted', fontWeight: 600 }}>
-                      <InfoIcon size={18} />
-                      Mais Informações
-                    </span>
-                  </Tooltip>
-
-                </div>
-              </div>
-
-              {/* Right Column: Customizer Controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Tooltip Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Tooltip Placement</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem' }}>
-                    {(['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right'] as const).map((p) => (
-                      <button
-                        key={p}
-                        onClick={() => setTooltipPlacement(p)}
-                        style={{
-                          padding: '0.4rem',
-                          borderRadius: '6px',
-                          border: tooltipPlacement === p ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: tooltipPlacement === p ? 'var(--ctp-mauve)' : 'transparent',
-                          color: tooltipPlacement === p ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                          fontSize: '0.75rem',
-                        }}
-                      >
-                        {p}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Tooltip Color Presets</label>
-                  <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                    {(['dark', 'light'] as const).map((v) => (
-                      <button
-                        key={v}
-                        onClick={() => setTooltipColor(v)}
-                        style={{
-                          flex: 1,
-                          padding: '0.4rem',
-                          borderRadius: '6px',
-                          border: tooltipColor === v ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: tooltipColor === v ? 'var(--ctp-mauve)' : 'transparent',
-                          color: tooltipColor === v ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                          fontSize: '0.75rem',
-                          textTransform: 'capitalize',
-                        }}
-                      >
-                        {v} theme
-                      </button>
-                    ))}
-                  </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
-                    {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => setTooltipColor(c as any)}
-                        title={c.charAt(0).toUpperCase() + c.slice(1)}
-                        style={{
-                          height: '24px',
-                          borderRadius: '4px',
-                          border: tooltipColor === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: `var(--ctp-${c})`,
-                          cursor: 'pointer',
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Hover Delay ({tooltipDelay}ms)</span>
-                  </label>
-                  <input
-                    type="range"
-                    min="50"
-                    max="1000"
-                    step="50"
-                    value={tooltipDelay}
-                    onChange={(e) => setTooltipDelay(Number(e.target.value))}
-                    style={{ width: '100%', cursor: 'pointer', accentColor: 'var(--ctp-mauve)' }}
-                  />
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={tooltipAutoFlip}
-                      onChange={(e) => setTooltipAutoFlip(e.target.checked)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <span>Enable Viewport Auto-Flip</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
-                {['react', 'vue', 'angular'].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveTab(tab as any);
-                    }}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      border: 'none',
-                      background: 'none',
-                      color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
-                      borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: activeTab === tab ? 'bold' : 'normal',
-                    }}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' 
-                      ? getReactTooltipCode() 
-                      : activeTab === 'vue' 
-                      ? getVueTooltipCode() 
-                      : getAngularTooltipCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} tooltip snippet`);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.3rem 0.6rem',
-                    fontSize: '0.8rem',
-                    borderRadius: '4px',
-                    border: '1px solid var(--ctp-surface1)',
-                    backgroundColor: 'var(--ctp-surface0)',
-                    color: 'var(--ctp-text)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactTooltipCode()
-                        : activeTab === 'vue'
-                        ? getVueTooltipCode()
-                        : getAngularTooltipCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'grid' && (
-        <>
-          <section className="playground-section">
-            <h2 className="section-title">
-              <span>📦</span> Flexbox Grid Component
-            </h2>
-
-            <div className="playground-panel">
-              {/* Left Column: Demo Stage */}
-              <div className="demo-stage" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <h3 className="stage-title">Interactive Stage</h3>
-                
-                {/* Visual grid wrapping container */}
-                <div style={{ padding: '2rem', backgroundColor: 'var(--ctp-crust)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', overflow: 'hidden' }}>
-                  
-                  <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                    1. Flex columns sharing space equally (Automatic Widths)
-                  </h4>
-                  <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign} style={{ marginBottom: '2rem' }}>
-                    <Grid.Col style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface2)', borderRadius: '6px', padding: '1rem', textAlign: 'center', color: 'var(--ctp-mauve)', fontWeight: 'bold' }}>
-                      Auto-col A
-                    </Grid.Col>
-                    <Grid.Col style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface2)', borderRadius: '6px', padding: '1rem', textAlign: 'center', color: 'var(--ctp-mauve)', fontWeight: 'bold' }}>
-                      Auto-col B
-                    </Grid.Col>
-                    <Grid.Col style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface2)', borderRadius: '6px', padding: '1rem', textAlign: 'center', color: 'var(--ctp-mauve)', fontWeight: 'bold' }}>
-                      Auto-col C
-                    </Grid.Col>
-                  </Grid>
-
-                  <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                    2. Column Span Spans (12-Columns grid base)
-                  </h4>
-                  <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign} style={{ marginBottom: '2rem' }}>
-                    <Grid.Col span={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
-                      span-12 (100%)
-                    </Grid.Col>
-                    <Grid.Col span={8} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
-                      span-8 (66.6%)
-                    </Grid.Col>
-                    <Grid.Col span={4} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
-                      span-4 (33.3%)
-                    </Grid.Col>
-                    <Grid.Col span={6} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
-                      span-6 (50%)
-                    </Grid.Col>
-                    <Grid.Col span={6} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
-                      span-6 (50%)
-                    </Grid.Col>
-                  </Grid>
-
-                  <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                    3. Offsets and Alignment
-                  </h4>
-                  <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign} style={{ marginBottom: '2rem' }}>
-                    <Grid.Col span={4} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-peach)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-peach)', fontWeight: 600 }}>
-                      Col 4
-                    </Grid.Col>
-                    <Grid.Col span={4} offset={4} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-peach)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-peach)', fontWeight: 600 }}>
-                      Col 4 Offset 4
-                    </Grid.Col>
-                  </Grid>
-
-                  <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                    4. Responsive Stacking (md=4, sm=12)
-                  </h4>
-                  <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign}>
-                    <Grid.Col md={4} sm={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-green)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-green)' }}>
-                      Col A (md-4 sm-12)
-                    </Grid.Col>
-                    <Grid.Col md={4} sm={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-green)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-green)' }}>
-                      Col B (md-4 sm-12)
-                    </Grid.Col>
-                    <Grid.Col md={4} sm={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-green)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-green)' }}>
-                      Col C (md-4 sm-12)
-                    </Grid.Col>
-                  </Grid>
-
-                </div>
-              </div>
-
-              {/* Right Column: Customizer Controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Grid Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Gap Spacing Size</label>
-                  <div style={{ display: 'flex', gap: '0.4rem' }}>
-                    {([0, 1, 2, 3, 4, 5] as const).map((g) => (
-                      <button
-                        key={g}
-                        onClick={() => setGridGap(g)}
-                        style={{
-                          flex: 1,
-                          padding: '0.4rem',
-                          borderRadius: '6px',
-                          border: gridGap === g ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: gridGap === g ? 'var(--ctp-mauve)' : 'transparent',
-                          color: gridGap === g ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        {g}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Align Columns (Justify Content)</label>
-                  <select
-                    value={gridAlign}
-                    onChange={(e) => setGridAlign(e.target.value as any)}
-                    style={{
-                      width: '100%',
-                      padding: '0.5rem',
-                      borderRadius: '6px',
-                      backgroundColor: 'var(--ctp-surface0)',
-                      border: '1px solid var(--ctp-surface1)',
-                      color: 'var(--ctp-text)',
-                      fontFamily: 'var(--ctp-font-family)',
-                      outline: 'none',
-                    }}
-                  >
-                    <option value="start">Start</option>
-                    <option value="center">Center</option>
-                    <option value="end">End</option>
-                    <option value="space-between">Space Between</option>
-                    <option value="space-around">Space Around</option>
-                  </select>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Vertical Align (Align Items)</label>
-                  <select
-                    value={gridValign}
-                    onChange={(e) => setGridValign(e.target.value as any)}
-                    style={{
-                      width: '100%',
-                      padding: '0.5rem',
-                      borderRadius: '6px',
-                      backgroundColor: 'var(--ctp-surface0)',
-                      border: '1px solid var(--ctp-surface1)',
-                      color: 'var(--ctp-text)',
-                      fontFamily: 'var(--ctp-font-family)',
-                      outline: 'none',
-                    }}
-                  >
-                    <option value="start">Start</option>
-                    <option value="center">Center</option>
-                    <option value="end">End</option>
-                  </select>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.5rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={gridMobile}
-                      onChange={(e) => setGridMobile(e.target.checked)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <span>Force Row layout on Mobile (mobile)</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.75rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={gridMultiline}
-                      onChange={(e) => setGridMultiline(e.target.checked)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <span>Enable Columns Wrapping (multiline)</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
-                {['react', 'vue', 'angular'].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveTab(tab as any);
-                    }}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      border: 'none',
-                      background: 'none',
-                      color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
-                      borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: activeTab === tab ? 'bold' : 'normal',
-                    }}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    const code = activeTab === 'react' 
-                      ? getReactGridCode() 
-                      : activeTab === 'vue' 
-                      ? getVueGridCode() 
-                      : getAngularGridCode();
-                    const plainText = code.replace(/<[^>]*>/g, '');
-                    copyToClipboard(plainText, `${activeTab} grid snippet`);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.3rem 0.6rem',
-                    fontSize: '0.8rem',
-                    borderRadius: '4px',
-                    border: '1px solid var(--ctp-surface1)',
-                    backgroundColor: 'var(--ctp-surface0)',
-                    color: 'var(--ctp-text)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? getReactGridCode()
-                        : activeTab === 'vue'
-                        ? getVueGridCode()
-                        : getAngularGridCode()
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'datepicker' && (
-        <>
-          <section className="playground-section">
-            <h2 className="section-title">
-              <span>📅</span> Date Picker Component
-            </h2>
-
-            <div className="playground-layout">
-              {/* Left column: Live preview */}
-              <div className="playground-preview" style={{ minHeight: '380px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-
-                {/* Hero demo */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Live Preview</div>
-
-                  {dpMode === 'single' ? (
-                    <DatePicker
-                      mode="single"
-                      value={dpDate}
-                      onChange={setDpDate}
-                      color={dpColor}
-                      showToday={dpShowToday}
-                      disabled={dpDisabled}
-                    />
-                  ) : (
-                    <DatePicker
-                      mode="range"
-                      rangeValue={dpRange}
-                      onRangeChange={setDpRange}
-                      color={dpColor}
-                      showToday={dpShowToday}
-                      disabled={dpDisabled}
-                    />
-                  )}
-
-                  {/* Value display */}
-                  <div style={{ padding: '0.75rem 1rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px', border: '1px solid var(--ctp-surface0)', fontSize: '0.85rem', color: 'var(--ctp-subtext1)', minWidth: '260px' }}>
-                    {dpMode === 'single' ? (
-                      <span>
-                        <strong style={{ color: 'var(--ctp-text)' }}>Selecionado:</strong>{' '}
-                        {dpDate ? dpDate.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : <em>nenhum</em>}
-                      </span>
-                    ) : (
-                      <span>
-                        <strong style={{ color: 'var(--ctp-text)' }}>Intervalo:</strong>{' '}
-                        {dpRange.start ? dpRange.start.toLocaleDateString('pt-BR') : '—'}
-                        {' → '}
-                        {dpRange.end ? dpRange.end.toLocaleDateString('pt-BR') : '...'}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Color palette preview */}
-                <div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: '0.75rem' }}>All Accent Colors</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    {(['rosewater','flamingo','pink','mauve','red','maroon','peach','yellow','green','teal','sky','sapphire','blue','lavender'] as FormControlColor[]).map(c => (
-                      <DatePicker
-                        key={c}
-                        mode="single"
-                        value={new Date()}
-                        color={c}
-                        showToday={false}
-                        placeholder={c}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Right column: controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">DatePicker Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Mode</label>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    {(['single', 'range'] as DatePickerMode[]).map(m => (
-                      <button
-                        key={m}
-                        onClick={() => { setDpMode(m); setDpDate(null); setDpRange({ start: null, end: null }); }}
-                        style={{
-                          flex: 1, padding: '0.4rem 0.75rem', borderRadius: '6px',
-                          border: dpMode === m ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: dpMode === m ? 'var(--ctp-mauve)' : 'transparent',
-                          color: dpMode === m ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer', fontWeight: 'bold', fontFamily: 'var(--ctp-font-family)'
-                        }}
-                      >{m}</button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label">Accent Color</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.4rem' }}>
-                    {(['rosewater','flamingo','pink','mauve','red','maroon','peach','yellow','green','teal','sky','sapphire','blue','lavender'] as FormControlColor[]).map(c => (
-                      <button
-                        key={c}
-                        title={c}
-                        onClick={() => setDpColor(c)}
-                        style={{
-                          width: '28px', height: '28px', borderRadius: '50%', border: dpColor === c ? '3px solid var(--ctp-text)' : '2px solid transparent',
-                          backgroundColor: `var(--ctp-${c})`, cursor: 'pointer', transition: 'transform 0.15s ease',
-                          transform: dpColor === c ? 'scale(1.2)' : 'scale(1)'
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input type="checkbox" checked={dpShowToday} onChange={e => setDpShowToday(e.target.checked)} style={{ cursor: 'pointer' }} />
-                    <span>Mostrar botão "Hoje"</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.75rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <input type="checkbox" checked={dpDisabled} onChange={e => setDpDisabled(e.target.checked)} style={{ cursor: 'pointer' }} />
-                    <span>Disabled</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <button
-                    onClick={() => { setDpDate(null); setDpRange({ start: null, end: null }); }}
-                    style={{
-                      width: '100%', padding: '0.5rem', borderRadius: '6px',
-                      border: '1px solid var(--ctp-red)', backgroundColor: 'transparent',
-                      color: 'var(--ctp-red)', cursor: 'pointer', fontFamily: 'var(--ctp-font-family)',
-                      fontWeight: 600, fontSize: '0.85rem'
-                    }}
-                  >
-                    Limpar seleção
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Code snippet */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="code-container" style={{ position: 'relative', marginTop: '0.5rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code dangerouslySetInnerHTML={{ __html: dpMode === 'single'
-                    ? `<span class="hl-tag">&lt;DatePicker</span>\n  <span class="hl-attr">mode</span>=<span class="hl-str">"single"</span>\n  <span class="hl-attr">value</span>=<span class="hl-str">{date}</span>\n  <span class="hl-attr">onChange</span>=<span class="hl-str">{setDate}</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${dpColor}"</span>\n  <span class="hl-attr">showToday</span>=<span class="hl-str">{${dpShowToday}}</span>\n<span class="hl-tag">/&gt;</span>`
-                    : `<span class="hl-tag">&lt;DatePicker</span>\n  <span class="hl-attr">mode</span>=<span class="hl-str">"range"</span>\n  <span class="hl-attr">rangeValue</span>=<span class="hl-str">{range}</span>\n  <span class="hl-attr">onRangeChange</span>=<span class="hl-str">{setRange}</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${dpColor}"</span>\n  <span class="hl-attr">showToday</span>=<span class="hl-str">{${dpShowToday}}</span>\n<span class="hl-tag">/&gt;</span>`
-                  }} />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'shell' && (
-        <>
-          <section className="playground-section">
-            <h2 className="section-title">
-              <span>💻</span> Layout Shell Component
-            </h2>
-
-            <div className="playground-layout">
-              {/* Left column: Live preview */}
-              <div className="playground-preview" style={{ minHeight: '480px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                    Interactive Shell Sandbox
-                  </div>
-                  <button
-                    onClick={() => setShellFullScreen(true)}
-                    style={{
-                      padding: '0.4rem 0.8rem', borderRadius: '6px',
-                      border: '1px solid var(--ctp-mauve)',
-                      backgroundColor: 'var(--ctp-mauve)',
-                      color: 'var(--ctp-base)',
-                      cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem',
-                      fontFamily: 'var(--ctp-font-family)'
-                    }}
-                  >
-                    🚀 Enter Full-Screen View
-                  </button>
-                </div>
-
-                {/* Inline Shell container wrapper */}
                 <div style={{
-                  height: '420px',
-                  width: '100%',
-                  border: '2px dashed var(--ctp-surface1)',
-                  borderRadius: '12px',
+                  background: 'var(--ctp-mantle)',
+                  borderRadius: '16px',
+                  border: '1px solid color-mix(in srgb, var(--ctp-text) 8%, transparent)',
+                  maxWidth: '620px',
+                  margin: '0 auto',
                   overflow: 'hidden',
-                  position: 'relative'
+                  boxShadow: 'var(--ctp-shadow-lg)'
                 }}>
-                  <Shell
-                    layout={shellLayout}
-                    fullScreen={false}
-                    sidebarCollapsed={shellSidebarCollapsed}
-                    sidebarMini={shellSidebarMini}
-                    sidebarMobileOpen={shellSidebarMobileOpen}
-                    onBackdropClick={() => setShellSidebarMobileOpen(false)}
-                    headerHeight={shellHeaderHeight}
-                    sidebarWidth={shellSidebarWidth}
-                    style={{ height: '100%' }}
-                  >
-                    {/* Header */}
-                    {shellLayout !== 'custom' && (
-                      <Shell.Header style={{ justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <button
-                            type="button"
-                            onClick={() => setShellSidebarMobileOpen(!shellSidebarMobileOpen)}
-                            style={{
-                              alignItems: 'center', justifyContent: 'center',
-                              width: '32px', height: '32px', border: 'none', borderRadius: '6px',
-                              backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
-                              cursor: 'pointer', fontSize: '1.1rem'
-                            }}
-                            className="ctp-shell__mobile-toggle"
-                          >
-                            ☰
-                          </button>
-                          <span style={{ fontSize: '1.25rem' }}>🐱</span>
-                          <span style={{ fontWeight: 800, letterSpacing: '0.02em' }}>Catppuccin Shell</span>
-                        </div>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }} className="ctp-d--none ctp-d--inline-desktop">Header Bar</span>
-                          <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--ctp-mauve)' }} />
-                        </div>
-                      </Shell.Header>
-                    )}
+                  {/* Wizard progress stepper header */}
+                  <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--ctp-surface0)', backgroundColor: 'var(--ctp-crust)' }}>
+                    <Steps
+                      currentStep={wizardStep}
+                      stepsCount={3}
+                      variant="timeline"
+                      color={stepsColor}
+                      labels={wizardLabels}
+                      onChangeStep={setWizardStep}
+                    />
+                  </div>
 
-                    {/* Sidebar */}
-                    {shellLayout !== 'simple' && shellLayout !== 'custom' && (
-                      <Shell.Sidebar style={{ padding: shellSidebarMini ? '1rem 0.5rem' : '1.5rem 1rem' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                          {[
-                            { icon: '🏠', label: 'Dashboard' },
-                            { icon: '📊', label: 'Analytics' },
-                            { icon: '👥', label: 'Team Members' },
-                            { icon: '⚙️', label: 'Settings' }
-                          ].map((item, idx) => (
+                  {/* Slider wrapper container */}
+                  <div style={{ padding: '2rem', minHeight: '260px' }}>
+                    <StepsSlider currentStep={wizardStep}>
+
+                      {/* Step 1: Selection */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <h4 style={{ margin: 0 }}>Step 1: Choose Your Flavor</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Select which cozy Catppuccin flavor theme is deployed onto your dashboard framework.
+                        </p>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '8px' }}>
+                          {(['mocha', 'macchiato', 'frappe', 'latte'] as const).map(fl => (
                             <div
-                              key={idx}
+                              key={fl}
+                              onClick={() => setWizardFlavor(fl)}
                               style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.75rem',
-                                padding: '0.6rem 0.8rem',
+                                padding: '12px',
                                 borderRadius: '8px',
-                                backgroundColor: idx === 0 ? 'var(--ctp-surface0)' : 'transparent',
-                                color: idx === 0 ? 'var(--ctp-mauve)' : 'var(--ctp-text)',
-                                fontWeight: idx === 0 ? 'bold' : 'normal',
+                                backgroundColor: 'var(--ctp-crust)',
+                                border: `2px solid ${wizardFlavor === fl ? `var(--ctp-${stepsColor})` : 'transparent'}`,
                                 cursor: 'pointer',
-                                fontSize: '0.9rem',
-                                whiteSpace: 'nowrap',
-                                justifyContent: shellSidebarMini ? 'center' : 'flex-start'
+                                textAlign: 'center',
+                                fontWeight: 'bold',
+                                transition: 'var(--ctp-transition)'
                               }}
-                              title={item.label}
                             >
-                              <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
-                              {!shellSidebarMini && <span>{item.label}</span>}
+                              {fl.charAt(0).toUpperCase() + fl.slice(1)}
                             </div>
                           ))}
                         </div>
-                      </Shell.Sidebar>
-                    )}
-
-                    {/* Main */}
-                    <Shell.Main>
-                      <Shell.Content scrollable={shellScrollable} style={{ padding: '1.5rem' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                          {/* Top Welcome Title */}
-                          <div>
-                            <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800 }}>Bem-vindo ao Sandbox!</h3>
-                            <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>
-                              Layout atual: <code>{shellLayout}</code>. Modifique as opções ao lado para testar responsividade e fluxos.
-                            </p>
-                          </div>
-
-                          {/* Side-by-side Page Columns using Grid component */}
-                          <Grid>
-                            <Grid.Col md={6} sm={12}>
-                              <div style={{
-                                padding: '1.25rem',
-                                borderRadius: '10px',
-                                backgroundColor: 'var(--ctp-mantle)',
-                                border: '1px solid var(--ctp-surface0)',
-                                height: '100%'
-                              }}>
-                                <h4 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>Coluna da Esquerda</h4>
-                                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext1)', lineHeight: 1.4 }}>
-                                  Este painel representa uma página ou bloco principal de conteúdo. O Shell gerencia automaticamente o recuo e o alinhamento.
-                                </p>
-                              </div>
-                            </Grid.Col>
-                            <Grid.Col md={6} sm={12}>
-                              <div style={{
-                                padding: '1.25rem',
-                                borderRadius: '10px',
-                                backgroundColor: 'var(--ctp-mantle)',
-                                border: '1px solid var(--ctp-surface0)',
-                                height: '100%'
-                              }}>
-                                <h4 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>Coluna da Direita</h4>
-                                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext1)', lineHeight: 1.4 }}>
-                                  Esta é a segunda coluna, demonstrando o comportamento lado a lado do Grid integrado ao Shell. Redimensione ou alterne layouts.
-                                </p>
-                              </div>
-                            </Grid.Col>
-                          </Grid>
-
-                          {/* Extra paragraph to show scroll lock */}
-                          {shellScrollable && (
-                            <div style={{
-                              padding: '1.25rem',
-                              borderRadius: '10px',
-                              backgroundColor: 'var(--ctp-crust)',
-                              fontSize: '0.8rem',
-                              color: 'var(--ctp-subtext1)',
-                              lineHeight: 1.5
-                            }}>
-                              <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>Teste de Rolagem Localizada (Overflow Scroll)</h5>
-                              <p style={{ margin: '0 0 0.75rem 0' }}>
-                                O contêiner de conteúdo possui rolagem independente. Veja que o cabeçalho e a barra lateral permanecem fixados enquanto você rola este texto longo:
-                              </p>
-                              {Array.from({ length: 4 }).map((_, i) => (
-                                <p key={i} style={{ margin: '0 0 0.5rem 0' }}>
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec feugiat lectus. Ut et lorem ex. In elementum arcu at lacus rutrum, ut dictum purus dictum.
-                                </p>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </Shell.Content>
-                    </Shell.Main>
-                  </Shell>
-                </div>
-              </div>
-
-              {/* Right column: controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Shell Layout Options</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Grid Layout Area Template</label>
-                  <select
-                    value={shellLayout}
-                    onChange={(e) => setShellLayout(e.target.value as ShellLayout)}
-                    style={{
-                      width: '100%', padding: '0.5rem', borderRadius: '6px',
-                      backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
-                      border: '1px solid var(--ctp-surface1)', fontFamily: 'var(--ctp-font-family)',
-                      fontWeight: 600
-                    }}
-                  >
-                    <option value="header-first">Header First (Header Full width)</option>
-                    <option value="sidebar-first">Sidebar First (Sidebar Full height)</option>
-                    <option value="simple">Simple Layout (Header Only)</option>
-                  </select>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={shellSidebarCollapsed}
-                      onChange={(e) => setShellSidebarCollapsed(e.target.checked)}
-                      disabled={shellLayout === 'simple'}
-                    />
-                    <span>Collapse Sidebar</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.5rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={shellSidebarMini}
-                      onChange={(e) => setShellSidebarMini(e.target.checked)}
-                      disabled={shellLayout === 'simple' || shellSidebarCollapsed}
-                    />
-                    <span>Icon-only (Mini Sidebar)</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.5rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={shellScrollable}
-                      onChange={(e) => setShellScrollable(e.target.checked)}
-                    />
-                    <span>Independent Content Scroll</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1rem' }}>
-                  <label className="control-label">Header Height</label>
-                  <input
-                    type="text"
-                    value={shellHeaderHeight}
-                    onChange={(e) => setShellHeaderHeight(e.target.value)}
-                    style={{
-                      width: '100%', padding: '0.5rem', borderRadius: '6px',
-                      backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
-                      border: '1px solid var(--ctp-surface1)', fontFamily: 'var(--ctp-font-family)'
-                    }}
-                  />
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.75rem' }}>
-                  <label className="control-label">Sidebar Width</label>
-                  <input
-                    type="text"
-                    value={shellSidebarWidth}
-                    onChange={(e) => setShellSidebarWidth(e.target.value)}
-                    disabled={shellLayout === 'simple' || shellSidebarCollapsed}
-                    style={{
-                      width: '100%', padding: '0.5rem', borderRadius: '6px',
-                      backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
-                      border: '1px solid var(--ctp-surface1)', fontFamily: 'var(--ctp-font-family)'
-                    }}
-                  />
-                </div>
-
-                <div style={{ marginTop: '1.5rem', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'color-mix(in srgb, var(--ctp-mauve) 8%, transparent)', border: '1px solid var(--ctp-surface1)' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)', display: 'block', lineHeight: 1.3 }}>
-                    💡 <strong>Dica de Responsividade:</strong> Em telas móveis (&lt;768px), o shell se reorganiza automaticamente. O menu lateral vira uma gaveta flutuante. Use o botão <strong>"Enter Full-Screen View"</strong> acima para testar responsividade real!
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Code snippets */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="code-container" style={{ position: 'relative', marginTop: '0.5rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code dangerouslySetInnerHTML={{ __html: 
-                    `<span class="hl-tag">&lt;Shell</span>\n  <span class="hl-attr">layout</span>=<span class="hl-str">"${shellLayout}"</span>\n  <span class="hl-attr">sidebarCollapsed</span>=<span class="hl-str">{${shellSidebarCollapsed}}</span>\n  <span class="hl-attr">sidebarMini</span>=<span class="hl-str">{${shellSidebarMini}}</span>\n  <span class="hl-attr">headerHeight</span>=<span class="hl-str">"${shellHeaderHeight}"</span>\n  <span class="hl-attr">sidebarWidth</span>=<span class="hl-str">"${shellSidebarWidth}"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Shell.Header&gt;</span>\n    {/* Logo & Navigation Buttons */}\n  <span class="hl-tag">&lt;/Shell.Header&gt;</span>\n\n  <span class="hl-tag">&lt;Shell.Sidebar&gt;</span>\n    {/* Sidebar Links & Icons */}\n  <span class="hl-tag">&lt;/Shell.Sidebar&gt;</span>\n\n  <span class="hl-tag">&lt;Shell.Main&gt;</span>\n    <span class="hl-tag">&lt;Shell.Content</span> <span class="hl-attr">scrollable</span>=<span class="hl-str">{${shellScrollable}}</span><span class="hl-tag">&gt;</span>\n      <span class="hl-tag">&lt;Grid&gt;</span>\n        <span class="hl-tag">&lt;Grid.Col</span> <span class="hl-attr">span</span>=<span class="hl-str">{6}</span><span class="hl-tag">&gt;</span>Página 1<span class="hl-tag">&lt;/Grid.Col&gt;</span>\n        <span class="hl-tag">&lt;Grid.Col</span> <span class="hl-attr">span</span>=<span class="hl-str">{6}</span><span class="hl-tag">&gt;</span>Página 2<span class="hl-tag">&lt;/Grid.Col&gt;</span>\n      <span class="hl-tag">&lt;/Grid&gt;</span>\n    <span class="hl-tag">&lt;/Shell.Content&gt;</span>\n  <span class="hl-tag">&lt;/Shell.Main&gt;</span>\n<span class="hl-tag">&lt;/Shell&gt;</span>`
-                  }} />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'sidebar' && (
-        <>
-          <section className="playground-section">
-            <h2 className="section-title">
-              <span>🚪</span> Rich Sidebar Component
-            </h2>
-
-            <div className="playground-layout">
-              {/* Left column: Live preview */}
-              <div className="playground-preview" style={{ minHeight: '480px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Live Interactive Sidebar Preview
-                </div>
-
-                {/* Simulated Viewport Wrapper */}
-                <div style={{
-                  height: '420px',
-                  width: '100%',
-                  border: '1px solid var(--ctp-surface1)',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  backgroundColor: 'var(--ctp-base)',
-                  position: 'relative'
-                }}>
-                  {/* Sidebar component rendering */}
-                  <Sidebar
-                    variant={sbVariant}
-                    collapsed={sbCollapsed}
-                    expandOnHover={sbExpandOnHover}
-                  >
-                    {/* Header */}
-                    <Sidebar.Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
-                        <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>🐱</span>
-                        {!sbCollapsed && (
-                          <span style={{ fontWeight: 800, fontSize: '0.9rem', whiteSpace: 'nowrap', color: 'var(--ctp-text)' }}>
-                            Catppuccin
-                          </span>
-                        )}
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => setSbCollapsed(!sbCollapsed)}
-                        style={{
-                          background: 'var(--ctp-surface0)',
-                          border: 'none',
-                          borderRadius: '4px',
-                          color: 'var(--ctp-text)',
-                          cursor: 'pointer',
-                          padding: '2px 6px',
-                          fontSize: '0.75rem',
-                          fontFamily: 'monospace',
-                          fontWeight: 'bold',
-                          flexShrink: 0
-                        }}
-                        title={sbCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-                      >
-                        {sbCollapsed ? '⟩' : '⟨'}
-                      </button>
-                    </Sidebar.Header>
 
-                    {/* Navigation items */}
-                    <Sidebar.Section>
-                      {[
-                        { icon: '🏠', label: 'Dashboard' },
-                        { icon: '📊', label: 'Analytics' },
-                        { icon: '📂', label: 'Projects' },
-                        { icon: '💬', label: 'Messages' },
-                        { icon: '⚙️', label: 'Settings' }
-                      ].map((item, idx) => (
-                        <Sidebar.Item
-                          key={idx}
-                          icon={item.icon}
-                          label={item.label}
-                          active={sbActiveItem === idx}
-                          onClick={() => setSbActiveItem(idx)}
-                        />
-                      ))}
-                    </Sidebar.Section>
+                      {/* Step 2: Shipping */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <h4 style={{ margin: 0 }}>Step 2: Shipping & Delivery Destinations</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Fill in shipping address attributes to complete standard order transmission.
+                        </p>
 
-                    {/* Footer */}
-                    <Sidebar.Footer>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', overflow: 'hidden', width: '100%' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '6px' }}>
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>Recipient Name</label>
+                            <input
+                              type="text"
+                              value={wizardShippingName}
+                              onChange={(e) => setWizardShippingName(e.target.value)}
+                              placeholder="e.g. John Doe"
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            />
+                          </div>
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>Street Address</label>
+                            <input
+                              type="text"
+                              value={wizardShippingAddress}
+                              onChange={(e) => setWizardShippingAddress(e.target.value)}
+                              placeholder="e.g. 123 Cozy Avenue"
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            />
+                          </div>
+                          <div className="control-group">
+                            <label style={{ fontSize: '0.78rem' }}>City / Region</label>
+                            <input
+                              type="text"
+                              value={wizardShippingCity}
+                              onChange={(e) => setWizardShippingCity(e.target.value)}
+                              placeholder="e.g. San Francisco"
+                              style={{ padding: '8px', fontSize: '0.85rem' }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Step 3: Success Confirmation */}
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', textAlign: 'center' }}>
                         <div style={{
-                          width: '32px',
-                          height: '32px',
+                          width: '64px',
+                          height: '64px',
                           borderRadius: '50%',
-                          backgroundColor: 'var(--ctp-mauve)',
-                          color: 'var(--ctp-base)',
+                          backgroundColor: 'color-mix(in srgb, var(--ctp-green) 12%, transparent)',
+                          color: 'var(--ctp-green)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          fontWeight: 'bold',
-                          fontSize: '0.85rem',
-                          flexShrink: 0
+                          fontSize: '2rem'
                         }}>
-                          SD
+                          ✓
                         </div>
-                        {!sbCollapsed && (
-                          <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', flex: 1 }}>
-                            <span style={{ fontSize: '0.85rem', fontWeight: 'bold', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', color: 'var(--ctp-text)' }}>
-                              Savunma Dev
-                            </span>
-                            <span style={{ fontSize: '0.7rem', color: 'var(--ctp-subtext0)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                              savunma@catppuccin.dev
-                            </span>
-                          </div>
-                        )}
+                        <h4 style={{ margin: 0, color: 'var(--ctp-green)' }}>Order Transmitted Successfully!</h4>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--ctp-subtext1)', lineHeight: 1.5 }}>
+                          Thank you for choosing Catppuccin! Your theme setup files have been packaged and prepared for shipping.
+                        </p>
+                        <div style={{
+                          backgroundColor: 'var(--ctp-crust)',
+                          width: '100%',
+                          borderRadius: '8px',
+                          padding: '12px',
+                          border: '1px solid var(--ctp-surface0)',
+                          fontSize: '0.82rem',
+                          textAlign: 'left',
+                          marginTop: '8px'
+                        }}>
+                          <div><strong>Flavor selected:</strong> {wizardFlavor}</div>
+                          <div><strong>Deliver to:</strong> {wizardShippingName}</div>
+                          <div><strong>Address:</strong> {wizardShippingAddress}, {wizardShippingCity}</div>
+                        </div>
                       </div>
-                    </Sidebar.Footer>
-                  </Sidebar>
 
-                  {/* Main Content Area in simulator */}
+                    </StepsSlider>
+                  </div>
+
+                  {/* Wizard Control footer action buttons */}
                   <div style={{
-                    flex: 1,
-                    padding: '2rem',
+                    padding: '1.2rem 1.5rem',
+                    borderTop: '1px solid var(--ctp-surface0)',
                     display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'var(--ctp-base)',
-                    color: 'var(--ctp-text)',
-                    boxSizing: 'border-box'
+                    justifyContent: 'space-between',
+                    backgroundColor: 'var(--ctp-crust)',
+                    gap: '12px'
                   }}>
-                    <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>
-                      {sbActiveItem === 0 && '🏠'}
-                      {sbActiveItem === 1 && '📊'}
-                      {sbActiveItem === 2 && '📂'}
-                      {sbActiveItem === 3 && '💬'}
-                      {sbActiveItem === 4 && '⚙️'}
-                    </div>
-                    <h3 style={{ margin: 0, fontWeight: 800 }}>
-                      Página: {[
-                        'Dashboard',
-                        'Analytics',
-                        'Projects',
-                        'Messages',
-                        'Settings'
-                      ][sbActiveItem]}
-                    </h3>
-                    <p style={{ margin: '8px 0 0', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', textAlign: 'center' }}>
-                      Simulação de conteúdo ativo. Alterne as seções do menu lateral.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right column: controls */}
-              <div className="playground-controls">
-                <h3 className="controls-title">Sidebar Customizer</h3>
-
-                <div className="control-group">
-                  <label className="control-label">Sidebar Visual Style</label>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    {(['fixed', 'floated'] as const).map(v => (
-                      <button
-                        key={v}
-                        onClick={() => setSbVariant(v)}
-                        style={{
-                          flex: 1, padding: '0.4rem 0.75rem', borderRadius: '6px',
-                          border: sbVariant === v ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
-                          backgroundColor: sbVariant === v ? 'var(--ctp-mauve)' : 'transparent',
-                          color: sbVariant === v ? 'var(--ctp-base)' : 'var(--ctp-text)',
-                          cursor: 'pointer', fontWeight: 'bold', fontFamily: 'var(--ctp-font-family)'
-                        }}
-                      >{v.toUpperCase()}</button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '1.25rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={sbCollapsed}
-                      onChange={(e) => setSbCollapsed(e.target.checked)}
-                    />
-                    <span>Collapsed (Mini Mode)</span>
-                  </label>
-                </div>
-
-                <div className="control-group" style={{ marginTop: '0.5rem' }}>
-                  <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={sbExpandOnHover}
-                      onChange={(e) => setSbExpandOnHover(e.target.checked)}
-                      disabled={!sbCollapsed}
-                    />
-                    <span>Expand on Hover (when Collapsed)</span>
-                  </label>
-                </div>
-
-                <div style={{ marginTop: '1.5rem', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'color-mix(in srgb, var(--ctp-mauve) 8%, transparent)', border: '1px solid var(--ctp-surface1)' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)', display: 'block', lineHeight: 1.3 }}>
-                    💡 <strong>Como testar:</strong> Ative a opção <strong>"Collapsed (Mini Mode)"</strong> e passe o mouse sobre o menu lateral. Se a opção <strong>"Expand on Hover"</strong> estiver ligada, a barra irá se expandir suavemente como overlay sobre o conteúdo da página, e encolherá ao tirar o mouse!
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Code snippets */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="code-container" style={{ position: 'relative', marginTop: '0.5rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code dangerouslySetInnerHTML={{ __html: 
-                    `<span class="hl-tag">&lt;Sidebar</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${sbVariant}"</span>\n  <span class="hl-attr">collapsed</span>=<span class="hl-str">{${sbCollapsed}}</span>\n  <span class="hl-attr">expandOnHover</span>=<span class="hl-str">{${sbExpandOnHover}}</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Sidebar.Header&gt;</span>\n    🐱 Brand\n    <span class="hl-tag">&lt;button</span> <span class="hl-attr">onClick</span>=<span class="hl-str">{(e) =&gt; setCollapsed(!collapsed)}</span><span class="hl-tag">&gt;</span>⟨<span class="hl-tag">&lt;/button&gt;</span>\n  <span class="hl-tag">&lt;/Sidebar.Header&gt;</span>\n\n  <span class="hl-tag">&lt;Sidebar.Section&gt;</span>\n    <span class="hl-tag">&lt;Sidebar.Item</span> <span class="hl-attr">icon</span>=<span class="hl-str">"🏠"</span> <span class="hl-attr">label</span>=<span class="hl-str">"Dashboard"</span> <span class="hl-attr">active</span>=<span class="hl-str">{active === 0}</span> <span class="hl-attr">onClick</span>=<span class="hl-str">{() =&gt; setActive(0)}</span> <span class="hl-tag">/&gt;</span>\n    <span class="hl-tag">&lt;Sidebar.Item</span> <span class="hl-attr">icon</span>=<span class="hl-str">"📊"</span> <span class="hl-attr">label</span>=<span class="hl-str">"Analytics"</span> <span class="hl-attr">active</span>=<span class="hl-str">{active === 1}</span> <span class="hl-attr">onClick</span>=<span class="hl-str">{() =&gt; setActive(1)}</span> <span class="hl-tag">/&gt;</span>\n  <span class="hl-tag">&lt;/Sidebar.Section&gt;</span>\n<span class="hl-tag">&lt;/Sidebar&gt;</span>`
-                  }} />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'typography' && (
-        <>
-          <section className="playground-section">
-            <h2 className="section-title">
-              <span>🔤</span> Typography & Text Helpers
-            </h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              {/* Card 1: Font Scale Showcase */}
-              <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
-                <div className="ctp-card__header">
-                  <h3 className="ctp-card__title">Scale & Hierarchy</h3>
-                  <p className="ctp-card__subtitle">Default font sizes and heading modifiers using BEM</p>
-                </div>
-                <div className="ctp-card__body" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  <div style={{ borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1rem' }}>
-                    <h1 className="ctp-title ctp-title--h1">Heading 1 (.ctp-title--h1)</h1>
-                    <h2 className="ctp-title ctp-title--h2">Heading 2 (.ctp-title--h2)</h2>
-                    <h3 className="ctp-title ctp-title--h3">Heading 3 (.ctp-title--h3)</h3>
-                    <h4 className="ctp-title ctp-title--h4">Heading 4 (.ctp-title--h4)</h4>
-                    <h5 className="ctp-title ctp-title--h5">Heading 5 (.ctp-title--h5)</h5>
-                    <h6 className="ctp-title ctp-title--h6">Heading 6 (.ctp-title--h6)</h6>
-                  </div>
-                  <div>
-                    <p className="ctp-text ctp-text--lead">Lead paragraph (.ctp-text--lead) - Perfect for introductory copy with a slightly larger size.</p>
-                    <p className="ctp-text ctp-text--body">Body text (.ctp-text--body / default) - Standard paragraph text with comfortable reading line-height of 1.6.</p>
-                    <p className="ctp-text ctp-text--sm">Small text (.ctp-text--sm) - Excellent for captions, secondary descriptions or card footers.</p>
-                    <p className="ctp-text ctp-text--xs">Extra small text (.ctp-text--xs) - Ideal for labels, badges metadata or tiny details.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2: Font Weights Showcase */}
-              <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
-                <div className="ctp-card__header">
-                  <h3 className="ctp-card__title">Font Weights</h3>
-                  <p className="ctp-card__subtitle">Cozy weight variants matching Outfit design token scales</p>
-                </div>
-                <div className="ctp-card__body" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-                  <div>
-                    <p className="ctp-text ctp-text--light" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Light 300</p>
-                    <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--light</code>
-                  </div>
-                  <div>
-                    <p className="ctp-text ctp-text--regular" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Regular 400</p>
-                    <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--regular</code>
-                  </div>
-                  <div>
-                    <p className="ctp-text ctp-text--medium" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Medium 500</p>
-                    <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--medium</code>
-                  </div>
-                  <div>
-                    <p className="ctp-text ctp-text--semibold" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Semibold 600</p>
-                    <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--semibold</code>
-                  </div>
-                  <div>
-                    <p className="ctp-text ctp-text--bold" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Bold 700</p>
-                    <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--bold</code>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3: Color Helpers Showcase */}
-              <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
-                <div className="ctp-card__header">
-                  <h3 className="ctp-card__title">Solid Text Colors</h3>
-                  <p className="ctp-card__subtitle">Catppuccin colors mapped directly to typography modifiers</p>
-                </div>
-                <div className="ctp-card__body">
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
-                    {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender', 'text', 'subtext1', 'subtext0', 'overlay2'].map((c) => (
-                      <div key={c} style={{ display: 'flex', flexDirection: 'column', padding: '10px', backgroundColor: 'var(--ctp-mantle)', borderRadius: '6px', border: '1px solid var(--ctp-surface0)' }}>
-                        <span className={`ctp-text ctp-text--bold ctp-text--${c}`} style={{ marginBottom: '4px', textTransform: 'capitalize' }}>{c}</span>
-                        <code style={{ fontSize: '0.7rem', color: 'var(--ctp-overlay1)', overflow: 'hidden', textOverflow: 'ellipsis' }}>.ctp-text--{c}</code>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 4: Gradient Text Gallery */}
-              <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
-                <div className="ctp-card__header">
-                  <h3 className="ctp-card__title">Gradient Title Gallery</h3>
-                  <p className="ctp-card__subtitle">Premium text gradients combining Catppuccin color pairings</p>
-                </div>
-                <div className="ctp-card__body">
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
-                    {[
-                      { name: 'Mauve & Blue', class: 'ctp-title--gradient-mauve-blue', colors: 'Mauve to Blue' },
-                      { name: 'Peach & Red', class: 'ctp-title--gradient-peach-red', colors: 'Peach to Red' },
-                      { name: 'Green & Teal', class: 'ctp-title--gradient-green-teal', colors: 'Green to Teal' },
-                      { name: 'Lavender & Pink', class: 'ctp-title--gradient-lavender-pink', colors: 'Lavender to Pink' },
-                      { name: 'Yellow & Peach', class: 'ctp-title--gradient-yellow-peach', colors: 'Yellow to Peach' },
-                      { name: 'Rosewater & Flamingo', class: 'ctp-title--gradient-rosewater-flamingo', colors: 'Rosewater to Flamingo' },
-                      { name: 'Sky & Blue', class: 'ctp-title--gradient-sky-blue', colors: 'Sky to Blue' }
-                    ].map((g) => (
-                      <div 
-                        key={g.class} 
-                        style={{ 
-                          display: 'flex', 
-                          flexDirection: 'column', 
-                          padding: '1.5rem', 
-                          backgroundColor: 'var(--ctp-mantle)', 
-                          borderRadius: '8px', 
-                          border: '1px solid var(--ctp-surface1)',
-                          position: 'relative'
-                        }}
-                      >
-                        <h2 className={`ctp-title ctp-title--h2 ${g.class}`} style={{ marginBottom: '8px', fontSize: '1.8rem' }}>
-                          Catppuccin
-                        </h2>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--ctp-text)', fontWeight: 600 }}>{g.name}</span>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)', marginBottom: '1rem' }}>{g.colors}</span>
-                        
-                        <button
-                          className="ctp-btn ctp-btn--sm ctp-btn--outline ctp-btn--rounded"
-                          onClick={() => copyToClipboard(`class="ctp-title ctp-title--h1 ${g.class}"`, `Class ${g.class}`)}
-                          style={{ marginTop: 'auto', alignSelf: 'flex-start', fontSize: '0.75rem', padding: '4px 10px' }}
+                    {wizardStep < 2 ? (
+                      <>
+                        <Button
+                          variant="outline"
+                          disabled={wizardStep === 0}
+                          onClick={() => setWizardStep(s => Math.max(0, s - 1))}
                         >
-                          Copy class code
-                        </button>
-                      </div>
-                    ))}
+                          Back
+                        </Button>
+                        <Button
+                          variant="filled"
+                          color={stepsColor}
+                          disabled={isWizardNextDisabled()}
+                          onClick={() => setWizardStep(s => Math.min(2, s + 1))}
+                        >
+                          {wizardStep === 1 ? 'Place Order' : 'Next Step'}
+                        </Button>
+                      </>
+                    ) : (
+                      <Button
+                        variant="tonal"
+                        color={stepsColor}
+                        onClick={resetWizard}
+                        style={{ width: '100%' }}
+                      >
+                        Restart Checkout Wizard
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
+          )}
 
-            {/* Playground Code Display */}
-            <div style={{ marginTop: '2rem' }}>
-              <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
-                {['react', 'vue', 'angular'].map((tab) => (
-                  <button
-                    key={tab}
-                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveTab(tab as any);
-                    }}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      border: 'none',
-                      background: 'none',
-                      color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
-                      borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
-                      fontWeight: activeTab === tab ? 'bold' : 'normal',
-                    }}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
-                <button
-                  className="code-copy-btn"
-                  onClick={() => {
-                    let codeText = '';
-                    if (activeTab === 'react') {
-                      codeText = '<h1 className="ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue">Catppuccin Gradient</h1>';
-                    } else if (activeTab === 'vue') {
-                      codeText = '<h1 class="ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue">Catppuccin Gradient</h1>';
-                    } else {
-                      codeText = '<h1 class="ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue">Catppuccin Gradient</h1>';
-                    }
-                    copyToClipboard(codeText, `${activeTab} typography snippet`);
-                  }}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.3rem 0.6rem',
-                    fontSize: '0.8rem',
-                    borderRadius: '4px',
-                    border: '1px solid var(--ctp-surface1)',
-                    backgroundColor: 'var(--ctp-surface0)',
-                    color: 'var(--ctp-text)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Copy Code
-                </button>
-                <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: activeTab === 'react'
-                        ? `<span class="hl-tag">&lt;h1</span> <span class="hl-attr">className</span>=<span class="hl-str">"ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue"</span><span class="hl-tag">&gt;</span>Catppuccin Gradient<span class="hl-tag">&lt;/h1&gt;</span>`
-                        : activeTab === 'vue'
-                        ? `<span class="hl-tag">&lt;h1</span> <span class="hl-attr">class</span>=<span class="hl-str">"ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue"</span><span class="hl-tag">&gt;</span>Catppuccin Gradient<span class="hl-tag">&lt;/h1&gt;</span>`
-                        : `<span class="hl-tag">&lt;h1</span> <span class="hl-attr">class</span>=<span class="hl-str">"ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue"</span><span class="hl-tag">&gt;</span>Catppuccin Gradient<span class="hl-tag">&lt;/h1&gt;</span>`
-                    }}
-                  />
-                </pre>
-              </div>
-            </div>
-          </section>
-        </>
-       )}
+          {/* PROGRESS BAR & SCROLLBAR TAB */}
+          {activeComponent === 'progress' && (
+            <section>
+              <h2 className="section-title">
+                <span>📈</span> Progress Bar & Scrollbar Utilities
+              </h2>
 
-      {/* ===== TEXT EDITOR ===== */}
-      {activeComponent === 'texteditor' && (
-        <>
-          <section className="showcase-section">
-            <div className="section-header">
-              <div>
-                <h2 className="section-title">✍️ Text Editor</h2>
-                <p className="section-description">
-                  Editor de texto rico baseado em <strong>Tiptap</strong> + ProseMirror.
-                  Suporta importação e exportação nativa de <code>Markdown</code>, modo WYSIWYG e modo Markdown raw,
-                  toolbar completa e bubble menu de seleção de texto.
-                </p>
-              </div>
-            </div>
+              <div className="playground-section">
+                {/* Progress Config */}
+                <div className="playground-card" style={{ gap: '1.2rem' }}>
+                  <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Progress Bar Configuration</h3>
 
-            <div className="playground-card">
-              <div className="playground-controls">
-                <div className="control-group">
-                  <label className="control-label">Cor de Destaque</label>
-                  <div className="control-row" style={{ flexWrap: 'wrap', gap: '6px' }}>
-                    {(['rosewater','flamingo','pink','mauve','red','maroon','peach','yellow','green','teal','sky','sapphire','blue','lavender'] as TextEditorColor[]).map(c => (
+                  <div className="control-grid">
+                    <div className="control-group control-group--full">
+                      <label htmlFor="progress-label-input">Label Text</label>
+                      <input
+                        id="progress-label-input"
+                        type="text"
+                        value={progressLabel}
+                        onChange={(e) => setProgressLabel(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="progress-color-select">Color Accent</label>
+                      <select
+                        id="progress-color-select"
+                        value={progressColor}
+                        onChange={(e) => setProgressColor(e.target.value as ProgressBarColor)}
+                      >
+                        {colors.map((c) => (
+                          <option key={c.name} value={c.name.toLowerCase()}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="progress-size-select">Size Height</label>
+                      <select
+                        id="progress-size-select"
+                        value={progressSize}
+                        onChange={(e) => setProgressSize(e.target.value as ProgressBarSize)}
+                      >
+                        <option value="sm">Small (sm, 6px)</option>
+                        <option value="md">Medium (md, 10px)</option>
+                        <option value="lg">Large (lg, 16px)</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="progress-val-input">Progress Value: {progressVal}%</label>
+                      <input
+                        id="progress-val-input"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={progressVal}
+                        onChange={(e) => setProgressVal(Number(e.target.value))}
+                        disabled={progressIndeterminate}
+                        style={{ cursor: 'pointer', accentColor: `var(--ctp-${progressColor})` }}
+                      />
+                    </div>
+
+                    <div className="control-group">
+                      <label htmlFor="progress-position-select">Value Position</label>
+                      <select
+                        id="progress-position-select"
+                        value={progressValPosition}
+                        onChange={(e) => setProgressValPosition(e.target.value as any)}
+                        disabled={!progressShowValue || progressSize !== 'lg'}
+                      >
+                        <option value="outside">Outside (above bar)</option>
+                        <option value="inside">Inside (centered, LG height only)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '4px' }}>
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={progressIndeterminate}
+                        onChange={(e) => setProgressIndeterminate(e.target.checked)}
+                      />
+                      Indeterminate Loop Loading
+                    </label>
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={progressStriped}
+                        onChange={(e) => setProgressStriped(e.target.checked)}
+                      />
+                      Striped Diagonal Texture
+                    </label>
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={progressAnimated}
+                        onChange={(e) => setProgressAnimated(e.target.checked)}
+                        disabled={!progressStriped}
+                      />
+                      Animate Stripe Movement
+                    </label>
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        checked={progressShowValue}
+                        onChange={(e) => setProgressShowValue(e.target.checked)}
+                        disabled={progressIndeterminate}
+                      />
+                      Show Value Percentage Text
+                    </label>
+                  </div>
+                </div>
+
+                {/* Progress Preview Canvas */}
+                <div className="playground-card playground-card--preview">
+                  <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
+
+                  <div className="preview-canvas" style={{ padding: '2rem', minHeight: '160px' }}>
+                    <ProgressBar
+                      value={progressVal}
+                      size={progressSize}
+                      color={progressColor}
+                      striped={progressStriped}
+                      animated={progressAnimated}
+                      indeterminate={progressIndeterminate}
+                      showValue={progressShowValue}
+                      valuePosition={progressValPosition}
+                      label={progressLabel || undefined}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+
+                  <div>
+                    <div className="tabs-header">
+                      {(['react', 'vue', 'angular'] as const).map((tab) => (
+                        <button
+                          key={tab}
+                          className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                          onClick={() => setActiveTab(tab)}
+                        >
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="code-container">
                       <button
-                        key={c}
-                        type="button"
-                        onClick={() => setEditorColor(c)}
-                        title={c}
+                        className="code-copy-btn"
+                        onClick={() => copyToClipboard(getRawTextCode(), `${activeTab} snippet`)}
+                      >
+                        Copy Code
+                      </button>
+                      <pre className="code-block">
+                        <code
+                          dangerouslySetInnerHTML={{
+                            __html: activeTab === 'react'
+                              ? getReactProgressCode()
+                              : activeTab === 'vue'
+                                ? getVueProgressCode()
+                                : getAngularProgressCode()
+                          }}
+                        />
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SCROLLBAR COMPARISON SHOWCASE */}
+              <div style={{ marginTop: '2.5rem', marginBottom: '3rem' }}>
+                <h3 style={{ margin: '0 0 0.8rem 0' }}>✨ Custom Scrollbar Utility vs Browser Default Scrollbar ✨</h3>
+                <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.9rem', color: 'var(--ctp-subtext0)' }}>
+                  Compare standard browser scrollbars with the customized, premium, color-mix hoverable <code>.ctp-scrollbar</code> utility.
+                </p>
+
+                {/* Scroll color selector */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--ctp-mantle)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', marginBottom: '1.5rem' }}>
+                  <span style={{ fontWeight: 'bold', fontSize: '0.88rem' }}>Scroll Thumb Hover Accent:</span>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {colors.map((c) => (
+                      <button
+                        key={c.name}
+                        onClick={() => setScrollAccent(c.name.toLowerCase() as any)}
                         style={{
-                          width: 22, height: 22, borderRadius: '50%',
-                          border: editorColor === c ? '2.5px solid var(--ctp-text)' : '2px solid transparent',
-                          background: `var(--ctp-${c})`,
-                          cursor: 'pointer', padding: 0, outline: 'none',
-                          boxShadow: editorColor === c ? '0 0 0 2px var(--ctp-base)' : 'none',
-                          transition: 'all 0.15s'
+                          background: `var(${c.variable})`,
+                          border: `2px solid ${scrollAccent === c.name.toLowerCase() ? 'var(--ctp-text)' : 'transparent'}`,
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '50%',
+                          cursor: 'pointer',
+                          boxShadow: 'var(--ctp-shadow-sm)',
+                          transition: 'transform 0.15s ease'
                         }}
+                        title={`Highlight in ${c.name} on hover`}
                       />
                     ))}
                   </div>
+                  <span style={{ textTransform: 'capitalize', fontSize: '0.85rem', fontWeight: 'bold', color: `var(--ctp-${scrollAccent})` }}>
+                    {scrollAccent}
+                  </span>
                 </div>
-                <div className="control-group">
-                  <label className="control-label">Tamanho</label>
-                  <div className="control-row">
-                    {(['sm','md','lg'] as TextEditorSize[]).map(s => (
-                      <button key={s} type="button"
-                        className={`prop-btn ${editorSize === s ? 'active' : ''}`}
-                        onClick={() => setEditorSize(s)}
-                      >{s}</button>
-                    ))}
-                  </div>
-                </div>
-                <div className="control-group">
-                  <label className="control-label">Limite de Caracteres</label>
-                  <div className="control-row">
-                    {([0, 200, 500, 1000]).map(n => (
-                      <button key={n} type="button"
-                        className={`prop-btn ${editorMaxLength === n ? 'active' : ''}`}
-                        onClick={() => setEditorMaxLength(n)}
-                      >{n === 0 ? 'Ilimitado' : n}</button>
-                    ))}
-                  </div>
-                </div>
-                <div className="control-group">
-                  <label className="control-label">Modo</label>
-                  <div className="control-row">
-                    <button type="button"
-                      className={`prop-btn ${!editorReadOnly ? 'active' : ''}`}
-                      onClick={() => setEditorReadOnly(false)}
-                    >Editável</button>
-                    <button type="button"
-                      className={`prop-btn ${editorReadOnly ? 'active' : ''}`}
-                      onClick={() => setEditorReadOnly(true)}
-                    >Read-only</button>
-                  </div>
-                </div>
-              </div>
 
-              <div className="playground-preview" style={{ padding: '24px' }}>
-                <TextEditor
-                  color={editorColor}
-                  size={editorSize}
-                  maxLength={editorMaxLength}
-                  readOnly={editorReadOnly}
-                  allowFullscreen={true}
-                  placeholder="Comece a escrever… (suporta **Markdown**)."
-                  defaultValue={`# Bem-vindo ao Catppuccin Text Editor\n\nEste é um editor **rico** baseado em [Tiptap](https://tiptap.dev). Você pode usar:\n\n- **Negrito**, *itálico*, ~~riscado~~ e \`código inline\`\n- Listas ordenadas e não-ordenadas\n- Blockquotes, tabelas e régua horizontal\n\n> Use o botão **Markdown** na barra de status para alternar entre WYSIWYG e código Markdown!\n\n---\n\nSelecione um texto para ver o **bubble menu** de formatação rápida.`}
-                  onChange={(md) => setEditorContent(md)}
-                />
-              </div>
-            </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
 
-            {editorContent && (
-              <div style={{ marginTop: 24, borderRadius: 12, border: '1.5px solid var(--ctp-surface1)', overflow: 'hidden' }}>
-                <div style={{
-                  padding: '10px 16px', background: 'var(--ctp-mantle)',
-                  borderBottom: '1px solid var(--ctp-surface0)', fontSize: '0.8rem',
-                  fontWeight: 600, color: 'var(--ctp-subtext0)', display: 'flex', alignItems: 'center', gap: 8
-                }}>
-                  <span>📄</span> Saída Markdown (onChange)
-                </div>
-                <pre style={{
-                  margin: 0, padding: '16px 20px',
-                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-                  fontSize: '0.82rem', lineHeight: 1.7, color: 'var(--ctp-text)',
-                  background: 'var(--ctp-base)', overflowX: 'auto', whiteSpace: 'pre-wrap'
-                }}>{editorContent}</pre>
-              </div>
-            )}
-
-            <div className="code-section" style={{ marginTop: 32 }}>
-              <h3 className="code-section-title">Como usar</h3>
-              <pre className="code-block" style={{ padding: '1rem', overflowX: 'auto' }}>
-                <code dangerouslySetInnerHTML={{ __html:
-                  `<span class="hl-comment">// React</span>\n` +
-                  `<span class="hl-tag">&lt;TextEditor</span>\n` +
-                  `  <span class="hl-attr">color</span>=<span class="hl-str">"${editorColor}"</span>\n` +
-                  `  <span class="hl-attr">size</span>=<span class="hl-str">"${editorSize}"</span>\n` +
-                  (editorMaxLength > 0 ? `  <span class="hl-attr">maxLength</span>=<span class="hl-str">{${editorMaxLength}}</span>\n` : '') +
-                  (editorReadOnly ? `  <span class="hl-attr">readOnly</span>\n` : '') +
-                  `  <span class="hl-attr">onChange</span>=<span class="hl-str">{(markdown) =&gt; console.log(markdown)}</span>\n` +
-                  `<span class="hl-tag">/&gt;</span>`
-                }} />
-              </pre>
-            </div>
-
-          </section>
-        </>
-      )}
-
-      {activeComponent === 'charts' && (
-        <>
-          <section>
-            <h2 className="section-title">
-              <span>📊</span> Charts — Catppuccin × Recharts
-            </h2>
-
-            {/* KPI Stat Cards */}
-            <div className="ctp-chart-stats">
-              {[
-                { label: 'Downloads', value: '284K', trend: '+18.4%', up: true },
-                { label: 'GitHub Stars', value: '12.7K', trend: '+6.2%', up: true },
-                { label: 'Contributors', value: '348', trend: '+11.5%', up: true },
-                { label: 'Open Issues', value: '37', trend: '-14%', up: false },
-              ].map((stat) => (
-                <div key={stat.label} className="ctp-chart-stat">
-                  <div className="ctp-chart-stat__label">{stat.label}</div>
-                  <div className="ctp-chart-stat__value">{stat.value}</div>
-                  <div className={`ctp-chart-stat__trend ctp-chart-stat__trend--${stat.up ? 'up' : 'down'}`}>
-                    {stat.up ? '↑' : '↓'} {stat.trend} vs last month
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* 2-column chart grid */}
-            <div className="ctp-charts-grid">
-              {/* Line Chart */}
-              <div className="ctp-chart-card">
-                <div className="ctp-chart-card__header">
-                  <div>
-                    <h3 className="ctp-chart-card__name">Weekly Downloads</h3>
-                    <p className="ctp-chart-card__subtitle">npm package installs per week</p>
-                  </div>
-                  <div className="ctp-chart-card__badge">📈 Line</div>
-                </div>
-                <CtpLineChart
-                  xAxisKey="week"
-                  series={[
-                    { key: 'react', label: 'React', colorIndex: 0 },
-                    { key: 'vue', label: 'Vue', colorIndex: 1 },
-                    { key: 'angular', label: 'Angular', colorIndex: 2 },
-                  ]}
-                  data={[
-                    { week: 'W1', react: 4800, vue: 3200, angular: 2100 },
-                    { week: 'W2', react: 5200, vue: 3600, angular: 2400 },
-                    { week: 'W3', react: 4900, vue: 3400, angular: 2600 },
-                    { week: 'W4', react: 6100, vue: 4100, angular: 2900 },
-                    { week: 'W5', react: 5800, vue: 4500, angular: 3100 },
-                    { week: 'W6', react: 7200, vue: 4800, angular: 3400 },
-                    { week: 'W7', react: 6900, vue: 5200, angular: 3700 },
-                    { week: 'W8', react: 8100, vue: 5600, angular: 4000 },
-                  ]}
-                  height={250}
-                />
-              </div>
-
-              {/* Bar Chart */}
-              <div className="ctp-chart-card">
-                <div className="ctp-chart-card__header">
-                  <div>
-                    <h3 className="ctp-chart-card__name">Stars by Category</h3>
-                    <p className="ctp-chart-card__subtitle">GitHub stars across Catppuccin ports</p>
-                  </div>
-                  <div className="ctp-chart-card__badge">📊 Bar</div>
-                </div>
-                <CtpBarChart
-                  xAxisKey="name"
-                  series={[{ key: 'stars', label: 'Stars (k)' }]}
-                  rainbowMode
-                  data={[
-                    { name: 'VS Code', stars: 4.8 },
-                    { name: 'Nvim', stars: 3.5 },
-                    { name: 'iTerm', stars: 2.8 },
-                    { name: 'Discord', stars: 2.1 },
-                    { name: 'Alacritty', stars: 1.6 },
-                    { name: 'GitHub', stars: 2.5 },
-                    { name: 'Spicetify', stars: 1.1 },
-                  ]}
-                  height={250}
-                  showLegend={false}
-                />
-              </div>
-
-              {/* Area Chart */}
-              <div className="ctp-chart-card">
-                <div className="ctp-chart-card__header">
-                  <div>
-                    <h3 className="ctp-chart-card__name">Community Growth</h3>
-                    <p className="ctp-chart-card__subtitle">Cumulative contributors over time</p>
-                  </div>
-                  <div className="ctp-chart-card__badge">🌊 Area</div>
-                </div>
-                <CtpAreaChart
-                  xAxisKey="month"
-                  series={[
-                    { key: 'members', label: 'Community Members', colorIndex: 3 },
-                    { key: 'contributors', label: 'Contributors', colorIndex: 2 },
-                  ]}
-                  data={[
-                    { month: 'Jan', members: 1200, contributors: 42 },
-                    { month: 'Feb', members: 1800, contributors: 68 },
-                    { month: 'Mar', members: 2600, contributors: 95 },
-                    { month: 'Apr', members: 3400, contributors: 134 },
-                    { month: 'May', members: 4800, contributors: 178 },
-                    { month: 'Jun', members: 6200, contributors: 223 },
-                    { month: 'Jul', members: 7900, contributors: 271 },
-                    { month: 'Aug', members: 9800, contributors: 320 },
-                    { month: 'Sep', members: 11400, contributors: 348 },
-                  ]}
-                  height={250}
-                />
-              </div>
-
-              {/* Radar Chart */}
-              <div className="ctp-chart-card">
-                <div className="ctp-chart-card__header">
-                  <div>
-                    <h3 className="ctp-chart-card__name">Framework Scorecard</h3>
-                    <p className="ctp-chart-card__subtitle">Catppuccin port quality by framework</p>
-                  </div>
-                  <div className="ctp-chart-card__badge">🕸️ Radar</div>
-                </div>
-                <CtpRadarChart
-                  angleKey="criterion"
-                  series={[
-                    { key: 'react', label: 'React', colorIndex: 0 },
-                    { key: 'vue', label: 'Vue', colorIndex: 1 },
-                    { key: 'angular', label: 'Angular', colorIndex: 2 },
-                  ]}
-                  data={[
-                    { criterion: 'Coverage', react: 95, vue: 88, angular: 82 },
-                    { criterion: 'A11y', react: 90, vue: 85, angular: 88 },
-                    { criterion: 'Perf', react: 92, vue: 94, angular: 86 },
-                    { criterion: 'DX', react: 96, vue: 91, angular: 78 },
-                    { criterion: 'Bundle', react: 85, vue: 92, angular: 74 },
-                    { criterion: 'Docs', react: 94, vue: 87, angular: 90 },
-                  ]}
-                  height={250}
-                />
-              </div>
-
-              {/* Pie/Donut Chart - full width */}
-              <div className="ctp-chart-card ctp-charts-grid--full">
-                <div className="ctp-chart-card__header">
-                  <div>
-                    <h3 className="ctp-chart-card__name">Flavor Popularity</h3>
-                    <p className="ctp-chart-card__subtitle">Which Catppuccin flavor users love most — hover each slice</p>
-                  </div>
-                  <div className="ctp-chart-card__badge">🍩 Donut</div>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'center' }}>
-                  <CtpPieChart
-                    donut
-                    height={280}
-                    data={[
-                      { name: 'Macchiato', value: 38400 },
-                      { name: 'Mocha', value: 29700 },
-                      { name: 'Frappé', value: 18200 },
-                      { name: 'Latte', value: 14600 },
-                    ]}
-                  />
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    {[
-                      { name: 'Macchiato', value: '38.4K', pct: '38%', colorIdx: 0 },
-                      { name: 'Mocha', value: '29.7K', pct: '30%', colorIdx: 1 },
-                      { name: 'Frappé', value: '18.2K', pct: '18%', colorIdx: 2 },
-                      { name: 'Latte', value: '14.6K', pct: '15%', colorIdx: 3 },
-                    ].map((item) => (
-                      <div key={item.name} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div style={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: '50%',
-                          backgroundColor: ['var(--ctp-mauve)', 'var(--ctp-blue)', 'var(--ctp-green)', 'var(--ctp-peach)'][item.colorIdx],
-                          flexShrink: 0,
-                        }} />
-                        <div style={{ flex: 1 }}>
-                          <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--ctp-text)' }}>{item.name}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)' }}>{item.value} downloads</div>
-                        </div>
-                        <div style={{
-                          background: 'var(--ctp-surface1)',
-                          borderRadius: '6px',
-                          padding: '2px 8px',
-                          fontSize: '0.8rem',
-                          fontWeight: 700,
-                          color: 'var(--ctp-text)',
-                          fontVariantNumeric: 'tabular-nums',
-                        }}>{item.pct}</div>
-                      </div>
-                    ))}
-                    <div style={{ marginTop: '8px', padding: '12px', background: 'var(--ctp-mantle)', borderRadius: '10px', fontSize: '0.78rem', color: 'var(--ctp-subtext0)', lineHeight: 1.5 }}>
-                      💡 <strong style={{ color: 'var(--ctp-text)' }}>Tip:</strong> Hover over each donut slice to see detailed stats with an animated expand effect.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Horizontal Bar Chart - full width */}
-              <div className="ctp-chart-card ctp-charts-grid--full">
-                <div className="ctp-chart-card__header">
-                  <div>
-                    <h3 className="ctp-chart-card__name">Top Ports by Stars</h3>
-                    <p className="ctp-chart-card__subtitle">GitHub stars across the Catppuccin ecosystem</p>
-                  </div>
-                  <div className="ctp-chart-card__badge">↔️ Horizontal Bar</div>
-                </div>
-                <CtpBarChart
-                  xAxisKey="name"
-                  layout="vertical"
-                  series={[{ key: 'stars', label: 'Stars (k)' }]}
-                  rainbowMode
-                  showLegend={false}
-                  data={[
-                    { name: 'VS Code', stars: 4800 },
-                    { name: 'GitHub CSS', stars: 2500 },
-                    { name: 'Neovim', stars: 3500 },
-                    { name: 'Discord', stars: 2100 },
-                    { name: 'Firefox', stars: 1600 },
-                    { name: 'KDE Plasma', stars: 1700 },
-                    { name: 'Alacritty', stars: 1200 },
-                    { name: 'Spicetify', stars: 1100 },
-                  ]}
-                  height={320}
-                />
-              </div>
-            </div>
-
-            {/* Info box about theme reactivity */}
-            <div style={{
-              marginTop: '24px',
-              padding: '20px 24px',
-              background: 'linear-gradient(135deg, color-mix(in srgb, var(--ctp-mauve) 10%, transparent), color-mix(in srgb, var(--ctp-blue) 8%, transparent))',
-              border: '1px solid color-mix(in srgb, var(--ctp-mauve) 20%, transparent)',
-              borderRadius: '16px',
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '16px',
-            }}>
-              <div style={{ fontSize: '1.8rem', flexShrink: 0 }}>🎨</div>
-              <div>
-                <div style={{ fontWeight: 700, color: 'var(--ctp-text)', marginBottom: '6px', fontSize: '0.95rem' }}>Reactive Theme Colors</div>
-                <div style={{ color: 'var(--ctp-subtext1)', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                  All charts read colors from <code style={{ background: 'var(--ctp-surface0)', padding: '1px 5px', borderRadius: '4px', fontSize: '0.8rem' }}>CSS custom properties</code> at runtime via a custom hook. Switch the flavor using the theme buttons in the top bar — the charts <strong style={{ color: 'var(--ctp-text)' }}>recolor instantly</strong> without any re-renders, powered by a <code style={{ background: 'var(--ctp-surface0)', padding: '1px 5px', borderRadius: '4px', fontSize: '0.8rem' }}>MutationObserver</code> watching the <code style={{ background: 'var(--ctp-surface0)', padding: '1px 5px', borderRadius: '4px', fontSize: '0.8rem' }}>data-theme</code> attribute.
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-      {activeComponent === 'skeleton' && (
-        <>
-          <section>
-            <h2 className="section-title"><span>💀</span> Skeleton Playground</h2>
-            <div className="playground-section">
-              <div className="playground-card">
-                <h3>Preview</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', background: 'var(--ctp-mantle)', borderRadius: '12px' }}>
-                  <Skeleton variant="text" size="lg" width="60%" />
-                  <Skeleton variant="text" size="md" width="80%" />
-                  <Skeleton variant="text" size="sm" width="40%" />
-                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '8px' }}>
-                    <Skeleton variant="circle" size="xl" />
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <Skeleton variant="text" size="md" width="50%" />
-                      <Skeleton variant="text" size="sm" width="70%" />
-                    </div>
-                  </div>
-                  <Skeleton variant="rect" size="xl" />
-                  <Skeleton count={3} gap="8px" variant="text" size="sm" />
-                </div>
-              </div>
-            </div>
-            <div style={{ padding: '16px', background: 'var(--ctp-crust)', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', marginTop: '16px' }}>
-              Variants: <code>text</code>, <code>circle</code>, <code>rect</code>. Sizes: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>. 
-              Use <code>count</code> for repeated skeletons, <code>animated=false</code> to disable shimmer.
-            </div>
-          </section>
-        </>
-      )}
-      {activeComponent === 'alert' && (
-        <>
-          <section>
-            <h2 className="section-title"><span>⚠️</span> Alert Playground</h2>
-            <div className="playground-section">
-              <div className="playground-card">
-                <h3>Variants</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <Alert variant="info" title="Information">This is an informational alert.</Alert>
-                  <Alert variant="success" title="Success">Operation completed successfully.</Alert>
-                  <Alert variant="warning" title="Warning">Please review before proceeding.</Alert>
-                  <Alert variant="error" title="Error">Something went wrong.</Alert>
-                </div>
-              </div>
-              <div className="playground-card" style={{ marginTop: '16px' }}>
-                <h3>Dismissible</h3>
-                <Alert variant="info" title="Dismiss me" dismissible>Click the X to dismiss this alert.</Alert>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-      {activeComponent === 'avatar' && (
-        <>
-          <section>
-            <h2 className="section-title"><span>👤</span> Avatar Playground</h2>
-            <div className="playground-section">
-              <div className="playground-card">
-                <h3>Individual Avatars</h3>
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-                  <Avatar src="https://i.pravatar.cc/64?img=1" size="sm" />
-                  <Avatar src="https://i.pravatar.cc/64?img=2" size="md" />
-                  <Avatar src="https://i.pravatar.cc/64?img=3" size="lg" />
-                  <Avatar src="https://i.pravatar.cc/64?img=4" size="xl" />
-                  <Avatar fallback="John Doe" size="md" />
-                  <Avatar fallback="A" size="md" />
-                </div>
-              </div>
-              <div className="playground-card" style={{ marginTop: '16px' }}>
-                <h3>Avatar Group</h3>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-                  <AvatarGroup max={4}>
-                    <Avatar src="https://i.pravatar.cc/64?img=5" />
-                    <Avatar src="https://i.pravatar.cc/64?img=6" />
-                    <Avatar src="https://i.pravatar.cc/64?img=7" />
-                    <Avatar src="https://i.pravatar.cc/64?img=8" />
-                    <Avatar src="https://i.pravatar.cc/64?img=9" />
-                  </AvatarGroup>
-                  <AvatarGroup size="lg" max={3}>
-                    <Avatar fallback="Alice" />
-                    <Avatar fallback="Bob" />
-                    <Avatar fallback="Charlie" />
-                    <Avatar fallback="Diana" />
-                    <Avatar fallback="Eve" />
-                  </AvatarGroup>
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-      {activeComponent === 'breadcrumb' && (
-        <>
-          <section>
-            <h2 className="section-title"><span>🍞</span> Breadcrumb Playground</h2>
-            <div className="playground-section">
-              <div className="playground-card">
-                <h3>Examples</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '20px', background: 'var(--ctp-mantle)', borderRadius: '12px' }}>
-                  <Breadcrumb items={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Documentation', href: '/docs' },
-                    { label: 'Components' },
-                  ]} />
-                  <Breadcrumb items={[
-                    { label: '🐱 Catppuccin', href: '/' },
-                    { label: 'Design System', href: '/ds' },
-                    { label: 'React' },
-                  ]} />
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-      {activeComponent === 'carousel' && (
-        <>
-          <section>
-            <h2 className="section-title"><span>🎠</span> Carousel Playground</h2>
-            <div className="playground-section">
-              <div className="playground-card">
-                <h3>Auto-play Carousel</h3>
-                <Carousel autoPlay autoPlayInterval={3000}>
-                  {[
-                    { color: 'var(--ctp-mauve)', label: 'Mauve' },
-                    { color: 'var(--ctp-blue)', label: 'Blue' },
-                    { color: 'var(--ctp-green)', label: 'Green' },
-                    { color: 'var(--ctp-peach)', label: 'Peach' },
-                  ].map((slide, i) => (
-                    <div key={i} style={{
-                      height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      background: slide.color, borderRadius: 12, fontSize: '1.5rem', fontWeight: 700,
-                      color: 'var(--ctp-base)'
+                  {/* Box 1: Browser Default */}
+                  <div className="playground-card" style={{ gap: '1rem', padding: '1.5rem' }}>
+                    <h4 style={{ margin: 0, color: 'var(--ctp-subtext1)' }}>🚫 Default Browser Scrollbar</h4>
+                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>
+                      Stiff edges, default system colors, lacks design system coordination.
+                    </p>
+                    <div style={{
+                      height: '240px',
+                      overflowY: 'scroll',
+                      backgroundColor: 'var(--ctp-crust)',
+                      borderRadius: '8px',
+                      padding: '12px',
+                      border: '1px solid var(--ctp-surface0)',
+                      lineHeight: '1.6',
+                      fontSize: '0.85rem',
+                      fontFamily: 'monospace',
+                      whiteSpace: 'pre'
                     }}>
-                      {slide.label}
+                      {Array.from({ length: 25 }).map((_, i) => `[SYS_DEFAULT_LOG_LINE_${i + 1}]: Loading asset catalog... done!\n[SYS_DEFAULT_LOG_LINE_${i + 1}]: Allocating buffer page cache...\n[SYS_DEFAULT_LOG_LINE_${i + 1}]: Initializing theme variables... done!\n`).join('')}
+                    </div>
+                  </div>
+
+                  {/* Box 2: Custom Catppuccin Scroll */}
+                  <div className="playground-card" style={{ gap: '1rem', padding: '1.5rem' }}>
+                    <h4 style={{ margin: 0, color: `var(--ctp-${scrollAccent})` }}>✨ Catppuccin Scrollbar (<code>.ctp-scrollbar</code>)</h4>
+                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>
+                      Rounded shape, thin width, mantle background integration, hover highlights.
+                    </p>
+                    <div className={`ctp-scrollbar ctp-scrollbar--${scrollAccent}`} style={{
+                      height: '240px',
+                      overflowY: 'scroll',
+                      backgroundColor: 'var(--ctp-crust)',
+                      borderRadius: '8px',
+                      padding: '12px',
+                      border: '1px solid var(--ctp-surface0)',
+                      lineHeight: '1.6',
+                      fontSize: '0.85rem',
+                      fontFamily: 'monospace',
+                      whiteSpace: 'pre'
+                    }}>
+                      {Array.from({ length: 25 }).map((_, i) => {
+                        const lineStr = `[CTP_ACCENT_LOG_LINE_${i + 1}]: Loading asset catalog... done!\n[CTP_ACCENT_LOG_LINE_${i + 1}]: Allocating buffer page cache...\n[CTP_ACCENT_LOG_LINE_${i + 1}]: Initializing theme variables... done!\n`;
+                        return lineStr;
+                      }).join('')}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+          )}
+
+          {activeComponent === 'drawer' && (
+            <>
+              {/* Drawer Component Showcase */}
+              <section>
+                <h2 className="section-title">
+                  <span>🚪</span> Retractable Drawer Panel Showcase
+                </h2>
+                <div className="playground-section">
+                  {/* Settings Panel */}
+                  <div className="playground-card" style={{ height: 'fit-content' }}>
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>Drawer Configuration</h3>
+
+                    <div className="control-grid">
+                      <div className="control-group">
+                        <label htmlFor="drawer-position-select">Slide Position</label>
+                        <select
+                          id="drawer-position-select"
+                          value={drawerPosition}
+                          onChange={(e) => setDrawerPosition(e.target.value as DrawerPosition)}
+                        >
+                          <option value="right">Right (Direita)</option>
+                          <option value="left">Left (Esquerda)</option>
+                          <option value="top">Top (Topo)</option>
+                          <option value="bottom">Bottom (Base)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="drawer-size-select">Drawer Size</label>
+                        <select
+                          id="drawer-size-select"
+                          value={drawerSize}
+                          onChange={(e) => setDrawerSize(e.target.value as DrawerSize)}
+                        >
+                          <option value="sm">Small (sm)</option>
+                          <option value="md">Medium (md)</option>
+                          <option value="lg">Large (lg)</option>
+                          <option value="full">Full Screen (full)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="drawer-accent-select">Accent Color</label>
+                        <select
+                          id="drawer-accent-select"
+                          value={drawerAccent}
+                          onChange={(e) => setDrawerAccent(e.target.value as FormControlColor)}
+                        >
+                          {colors.map((c) => (
+                            <option key={c.name} value={c.name.toLowerCase()}>
+                              {c.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="drawer-title-input">Header Title</label>
+                        <input
+                          id="drawer-title-input"
+                          type="text"
+                          value={drawerTitle}
+                          onChange={(e) => setDrawerTitle(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ marginTop: '12px', borderTop: '1px solid var(--ctp-surface0)', paddingTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label>Toggles & Overlay Behaviors</label>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={drawerCloseOnOverlayClick}
+                            onChange={(e) => setDrawerCloseOnOverlayClick(e.target.checked)}
+                          />
+                          Close on backdrop click
+                        </label>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={drawerCloseOnEsc}
+                            onChange={(e) => setDrawerCloseOnEsc(e.target.checked)}
+                          />
+                          Close on ESC key press
+                        </label>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={drawerShowCloseButton}
+                            onChange={(e) => setDrawerShowCloseButton(e.target.checked)}
+                          />
+                          Show close cross button
+                        </label>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={drawerShowFooter}
+                            onChange={(e) => setDrawerShowFooter(e.target.checked)}
+                          />
+                          Show footer actions
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Preview and Snippet area */}
+                  <div className="playground-card playground-card--preview">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Trigger Preview</h3>
+
+                    <div className="preview-canvas" style={{ minHeight: '180px', flexDirection: 'column', gap: '12px' }}>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--ctp-subtext0)', textAlign: 'center' }}>
+                        Clique no botão abaixo para abrir o Drawer com as configurações atuais.
+                      </span>
+                      <Button
+                        variant="filled"
+                        color={drawerAccent}
+                        onClick={() => setIsDrawerOpen(true)}
+                      >
+                        Abrir Painel Lateral (Drawer)
+                      </Button>
+                    </div>
+
+                    <div>
+                      <div className="tabs-header">
+                        {(['react', 'vue', 'angular'] as const).map((tab) => (
+                          <button
+                            key={tab}
+                            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                          >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="code-container">
+                        <button
+                          className="code-copy-btn"
+                          onClick={() => {
+                            const code = activeTab === 'react' ? getReactDrawerCode() : activeTab === 'vue' ? getVueDrawerCode() : getAngularDrawerCode();
+                            const plainText = code.replace(/<[^>]*>/g, '');
+                            copyToClipboard(plainText, `${activeTab} drawer snippet`);
+                          }}
+                        >
+                          Copy Code
+                        </button>
+                        <pre className="code-block">
+                          <code
+                            dangerouslySetInnerHTML={{
+                              __html: activeTab === 'react'
+                                ? getReactDrawerCode()
+                                : activeTab === 'vue'
+                                  ? getVueDrawerCode()
+                                  : getAngularDrawerCode()
+                            }}
+                          />
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Live Drawer Instance Component */}
+                <Drawer
+                  isOpen={isDrawerOpen}
+                  onClose={() => setIsDrawerOpen(false)}
+                  title={
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      🚪 {drawerTitle}
+                    </span>
+                  }
+                  position={drawerPosition}
+                  size={drawerSize}
+                  color={drawerAccent}
+                  closeOnOverlayClick={drawerCloseOnOverlayClick}
+                  closeOnEsc={drawerCloseOnEsc}
+                  showCloseButton={drawerShowCloseButton}
+                  footer={
+                    drawerShowFooter ? (
+                      <>
+                        <Button variant="ghost" color="red" onClick={() => setIsDrawerOpen(false)}>
+                          Cancelar
+                        </Button>
+                        <Button variant="filled" color="green" onClick={() => setIsDrawerOpen(false)}>
+                          Salvar Ajustes
+                        </Button>
+                      </>
+                    ) : undefined
+                  }
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                    <p style={{ margin: 0 }}>
+                      Este é o painel lateral deslizante do sistema de design Catppuccin, posicionado no lado <strong>{drawerPosition}</strong>.
+                    </p>
+                    <div style={{ padding: '12px', borderRadius: '8px', backgroundColor: 'var(--ctp-crust)', border: '1px solid var(--ctp-surface0)' }}>
+                      <h4 style={{ margin: '0 0 6px 0', fontSize: '0.9rem', color: `var(--ctp-${drawerAccent})` }}>Guia de Customização</h4>
+                      <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.85rem', lineHeight: '1.5' }}>
+                        <li>Experimente mudar o slide para Top ou Bottom.</li>
+                        <li>O corpo principal aceita scroll vertical caso a capacidade estoure.</li>
+                        <li>Utiliza foco travado por acessibilidade.</li>
+                      </ul>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label htmlFor="drawer-demo-name" style={{ fontSize: '0.8rem' }}>Nome de Usuário</label>
+                      <input
+                        id="drawer-demo-name"
+                        type="text"
+                        defaultValue="Miau da Silva"
+                        style={{ backgroundColor: 'var(--ctp-base)', border: '1px solid var(--ctp-surface1)' }}
+                      />
+                    </div>
+                  </div>
+                </Drawer>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'select' && (
+            <>
+              {/* Advanced Selects Showcase */}
+              <section>
+                <h2 className="section-title">
+                  <span>🔍</span> Advanced Select Components
+                </h2>
+                <div className="playground-section">
+                  {/* Settings Panel */}
+                  <div className="playground-card" style={{ height: 'fit-content' }}>
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>Select Configuration</h3>
+
+                    <div className="control-grid">
+                      <div className="control-group">
+                        <label htmlFor="select-accent-picker">Accent Flavor</label>
+                        <select
+                          id="select-accent-picker"
+                          value={selectAccent}
+                          onChange={(e) => setSelectAccent(e.target.value as FormControlColor)}
+                        >
+                          {colors.map((c) => (
+                            <option key={c.name} value={c.name.toLowerCase()}>
+                              {c.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="select-size-picker">Controls Size</label>
+                        <select
+                          id="select-size-picker"
+                          value={selectSize}
+                          onChange={(e) => setSelectSize(e.target.value as FormControlSize)}
+                        >
+                          <option value="sm">Small (sm)</option>
+                          <option value="md">Medium (md)</option>
+                          <option value="lg">Large (lg)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="select-shape-picker">Controls Shape</label>
+                        <select
+                          id="select-shape-picker"
+                          value={selectShape}
+                          onChange={(e) => setSelectShape(e.target.value as FormControlShape)}
+                        >
+                          <option value="square">Square</option>
+                          <option value="rounded">Rounded</option>
+                          <option value="pill">Pill</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label className="checkbox-label" style={{ marginTop: '22px' }}>
+                          <input
+                            type="checkbox"
+                            checked={selectSearchable}
+                            onChange={(e) => setSelectSearchable(e.target.checked)}
+                          />
+                          Enable MultiSelect Search
+                        </label>
+                      </div>
+                    </div>
+
+                    <div style={{ marginTop: '12px', borderTop: '1px solid var(--ctp-surface0)', paddingTop: '12px' }}>
+                      <label>TreeSelect Behaviors</label>
+                      <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
+                        <label className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={selectMultipleTree}
+                            onChange={(e) => {
+                              setSelectMultipleTree(e.target.checked);
+                              setSelectValueTreeSingle('');
+                              setSelectValueTreeMulti(['showcase']);
+                            }}
+                          />
+                          Enable Tree Multiple Selection
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Previews and Code snippets */}
+                  <div className="playground-card playground-card--preview">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Canvas Previews</h3>
+
+                    <div className="preview-canvas" style={{ minHeight: '260px', flexDirection: 'column', gap: '20px', padding: '1.5rem', justifyContent: 'flex-start', alignItems: 'stretch' }}>
+
+                      {/* 1. MultiSelect Canvas */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <span style={{ fontSize: '0.82rem', color: 'var(--ctp-subtext0)', fontWeight: 600 }}>MultiSelect Dropdown (Tags + Filtro):</span>
+                        <MultiSelect
+                          options={selectTechOptions}
+                          value={selectValueMulti}
+                          onChange={setSelectValueMulti}
+                          color={selectAccent}
+                          size={selectSize}
+                          shape={selectShape}
+                          searchable={selectSearchable}
+                          placeholder="Escolha tecnologias..."
+                        />
+                      </div>
+
+                      {/* 2. TreeSelect Canvas */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <span style={{ fontSize: '0.82rem', color: 'var(--ctp-subtext0)', fontWeight: 600 }}>TreeSelect Dropdown (Pastas Colapsáveis):</span>
+                        <TreeSelect
+                          data={selectTreeData}
+                          multiple={selectMultipleTree}
+                          value={selectValueTreeSingle}
+                          onChange={setSelectValueTreeSingle}
+                          multipleValue={selectValueTreeMulti}
+                          onChangeMultiple={setSelectValueTreeMulti}
+                          color={selectAccent}
+                          size={selectSize}
+                          shape={selectShape}
+                          placeholder="Escolha arquivos..."
+                        />
+                      </div>
+
+                    </div>
+
+                    <div>
+                      <div className="tabs-header">
+                        {(['react', 'vue', 'angular'] as const).map((tab) => (
+                          <button
+                            key={tab}
+                            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                          >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="code-container">
+                        <button
+                          className="code-copy-btn"
+                          onClick={() => {
+                            const code = activeTab === 'react' ? getReactSelectCode() : activeTab === 'vue' ? getVueSelectCode() : getAngularSelectCode();
+                            const plainText = code.replace(/<[^>]*>/g, '');
+                            copyToClipboard(plainText, `${activeTab} select snippet`);
+                          }}
+                        >
+                          Copy Code
+                        </button>
+                        <pre className="code-block">
+                          <code
+                            dangerouslySetInnerHTML={{
+                              __html: activeTab === 'react'
+                                ? getReactSelectCode()
+                                : activeTab === 'vue'
+                                  ? getVueSelectCode()
+                                  : getAngularSelectCode()
+                            }}
+                          />
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Selection data logs */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '2rem' }}>
+                  <div className="payload-canvas">
+                    <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${selectAccent})` }}>MultiSelect Selected Keys</h4>
+                    <pre className="code-block" style={{ margin: 0, padding: '10px' }}>
+                      <code style={{ color: 'var(--ctp-green)' }}>{JSON.stringify(selectValueMulti, null, 2)}</code>
+                    </pre>
+                  </div>
+
+                  <div className="payload-canvas">
+                    <h4 style={{ margin: '0 0 8px 0', color: `var(--ctp-${selectAccent})` }}>TreeSelect Selected Keys</h4>
+                    <pre className="code-block" style={{ margin: 0, padding: '10px' }}>
+                      <code style={{ color: 'var(--ctp-green)' }}>
+                        {selectMultipleTree ? JSON.stringify(selectValueTreeMulti, null, 2) : JSON.stringify(selectValueTreeSingle, null, 2)}
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'colorpicker' && (
+            <>
+              {/* Color Picker Showcase */}
+              <section>
+                <h2 className="section-title">
+                  <span>🎨</span> Color Picker Component
+                </h2>
+                <div className="playground-section">
+                  {/* Settings Panel */}
+                  <div className="playground-card" style={{ height: 'fit-content' }}>
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>ColorPicker Settings</h3>
+
+                    <div className="control-grid">
+                      <div className="control-group">
+                        <label htmlFor="cp-variant-select">Picker Variant</label>
+                        <select
+                          id="cp-variant-select"
+                          value={colorPickerVariant}
+                          onChange={(e) => setColorPickerVariant(e.target.value as ColorPickerVariant)}
+                        >
+                          <option value="both">Both (Swatches + Custom)</option>
+                          <option value="swatches">Swatches Only</option>
+                          <option value="custom">Custom Spectrum Only</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="cp-size-select">Component Size</label>
+                        <select
+                          id="cp-size-select"
+                          value={colorPickerSize}
+                          onChange={(e) => setColorPickerSize(e.target.value as ColorPickerSize)}
+                        >
+                          <option value="sm">Small (sm)</option>
+                          <option value="md">Medium (md)</option>
+                          <option value="lg">Large (lg)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="cp-flavor-select">Accent Palette Flavor</label>
+                        <select
+                          id="cp-flavor-select"
+                          value={colorPickerFlavor}
+                          onChange={(e) => setColorPickerFlavor(e.target.value as any)}
+                        >
+                          <option value="latte">Latte (Light)</option>
+                          <option value="frappe">Frappé (Low Contrast Dark)</option>
+                          <option value="macchiato">Macchiato (Cozy Dark)</option>
+                          <option value="mocha">Mocha (Classic Dark)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                        <label className="checkbox-label" style={{ marginTop: '22px' }}>
+                          <input
+                            type="checkbox"
+                            checked={colorPickerShowHexInput}
+                            onChange={(e) => setColorPickerShowHexInput(e.target.checked)}
+                          />
+                          Show HEX text input
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Canvas & Live Code */}
+                  <div className="playground-card playground-card--preview">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Interactive Canvas</h3>
+
+                    <div className="preview-canvas" style={{ minHeight: '160px', flexDirection: 'column', gap: '20px', padding: '2rem' }}>
+                      <ColorPicker
+                        value={colorPickerVal}
+                        onChange={setColorPickerVal}
+                        flavor={colorPickerFlavor}
+                        variant={colorPickerVariant}
+                        size={colorPickerSize}
+                        showHexInput={colorPickerShowHexInput}
+                      />
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Current Selected Value:</span>
+                        <strong style={{ fontFamily: 'monospace', color: colorPickerVal, textShadow: '0 0 8px rgba(0,0,0,0.2)' }}>
+                          {colorPickerVal.toUpperCase()}
+                        </strong>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="tabs-header">
+                        {(['react', 'vue', 'angular'] as const).map((tab) => (
+                          <button
+                            key={tab}
+                            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                          >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="code-container">
+                        <button
+                          className="code-copy-btn"
+                          onClick={() => {
+                            const code = activeTab === 'react' ? getReactColorPickerCode() : activeTab === 'vue' ? getVueColorPickerCode() : getAngularColorPickerCode();
+                            const plainText = code.replace(/<[^>]*>/g, '');
+                            copyToClipboard(plainText, `${activeTab} colorpicker snippet`);
+                          }}
+                        >
+                          Copy Code
+                        </button>
+                        <pre className="code-block">
+                          <code
+                            dangerouslySetInnerHTML={{
+                              __html: activeTab === 'react'
+                                ? getReactColorPickerCode()
+                                : activeTab === 'vue'
+                                  ? getVueColorPickerCode()
+                                  : getAngularColorPickerCode()
+                            }}
+                          />
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dynamic Theme customizer demonstration card */}
+                <div style={{ marginTop: '2rem' }}>
+                  <h3 className="section-subtitle" style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--ctp-text)' }}>
+                    🎨 Dynamic Card Customization Demo
+                  </h3>
+
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '2rem'
+                  }}>
+                    <div style={{
+                      padding: '2rem',
+                      borderRadius: '12px',
+                      backgroundColor: 'var(--ctp-mantle)',
+                      border: `2px solid ${colorPickerVal}`,
+                      boxShadow: `0 8px 32px -4px ${colorPickerVal}15, 0 0 16px ${colorPickerVal}10`,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '1.2rem',
+                      transition: 'all 0.3s ease'
+                    }}>
+                      <h4 style={{ margin: 0, fontSize: '1.25rem', color: colorPickerVal }}>
+                        Live Customized Preview
+                      </h4>
+                      <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                        Selecting a color in the picker above automatically injects the hex code into this card's styling. The border color, shadows, heading, and button below are all reactive to your choice.
+                      </p>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{
+                          width: '24px',
+                          height: '24px',
+                          borderRadius: '50%',
+                          backgroundColor: colorPickerVal,
+                          border: '2px solid var(--ctp-crust)',
+                          boxShadow: 'var(--ctp-shadow-sm)'
+                        }} />
+                        <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)', fontFamily: 'monospace' }}>
+                          Accent color: {colorPickerVal.toUpperCase()}
+                        </span>
+                      </div>
+
+                      <div style={{ marginTop: '0.5rem' }}>
+                        <button
+                          type="button"
+                          style={{
+                            padding: '10px 20px',
+                            borderRadius: '6px',
+                            border: 'none',
+                            backgroundColor: colorPickerVal,
+                            color: 'var(--ctp-base)',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            transition: 'transform 0.2s ease, opacity 0.2s ease',
+                            boxShadow: `0 4px 12px ${colorPickerVal}30`
+                          }}
+                          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                          onClick={() => showToast(`Clicked button with accent color: ${colorPickerVal}`)}
+                        >
+                          Accent Primary Button
+                        </button>
+                      </div>
+                    </div>
+
+                    <div style={{
+                      padding: '2rem',
+                      borderRadius: '12px',
+                      backgroundColor: 'var(--ctp-mantle)',
+                      border: '1px solid var(--ctp-surface0)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}>
+                      <div>
+                        <h4 style={{ margin: '0 0 0.8rem 0', fontSize: '1.1rem', color: 'var(--ctp-text)' }}>
+                          How it works
+                        </h4>
+                        <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                          In React, you bind state to the value and handle updates with onChange:
+                        </p>
+                        <pre className="code-block" style={{ marginTop: '0.8rem', padding: '10px', fontSize: '0.8rem' }}>
+                          <code style={{ color: 'var(--ctp-mauve)' }}>
+                            {`const [color, setColor] = useState("#cba6f7");\n\nreturn (\n  <ColorPicker\n    value={color}\n    onChange={setColor}\n  />\n);`}
+                          </code>
+                        </pre>
+                      </div>
+
+                      <div style={{ borderTop: '1px solid var(--ctp-surface0)', paddingTop: '1rem', marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext1)' }}>Need custom palettes?</span>
+                        <a href="https://github.com/catppuccin/catppuccin" target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', color: 'var(--ctp-blue)', textDecoration: 'none', fontWeight: 600 }}>Catppuccin GitHub →</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'pagination' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>📄</span> Pagination & Page Size Selector
+                </h2>
+                <div className="playground-section">
+                  {/* Settings Panel */}
+                  <div className="playground-card" style={{ height: 'fit-content' }}>
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem', color: 'var(--ctp-mauve)' }}>Pagination Settings</h3>
+
+                    <div className="control-grid">
+                      <div className="control-group">
+                        <label htmlFor="pag-color-select">Accent Color Accent</label>
+                        <select
+                          id="pag-color-select"
+                          value={paginationColor}
+                          onChange={(e) => setPaginationColor(e.target.value as FormControlColor)}
+                        >
+                          <option value="mauve">Mauve</option>
+                          <option value="rosewater">Rosewater</option>
+                          <option value="flamingo">Flamingo</option>
+                          <option value="pink">Pink</option>
+                          <option value="red">Red</option>
+                          <option value="maroon">Maroon</option>
+                          <option value="peach">Peach</option>
+                          <option value="yellow">Yellow</option>
+                          <option value="green">Green</option>
+                          <option value="teal">Teal</option>
+                          <option value="sky">Sky</option>
+                          <option value="sapphire">Sapphire</option>
+                          <option value="blue">Blue</option>
+                          <option value="lavender">Lavender</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="pag-size-select">Component Size</label>
+                        <select
+                          id="pag-size-select"
+                          value={paginationSize}
+                          onChange={(e) => setPaginationSize(e.target.value as FormControlSize)}
+                        >
+                          <option value="sm">Small (sm)</option>
+                          <option value="md">Medium (md)</option>
+                          <option value="lg">Large (lg)</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="pag-shape-select">Button Shape</label>
+                        <select
+                          id="pag-shape-select"
+                          value={paginationShape}
+                          onChange={(e) => setPaginationShape(e.target.value as FormControlShape)}
+                        >
+                          <option value="square">Square</option>
+                          <option value="rounded">Rounded</option>
+                          <option value="pill">Pill</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group">
+                        <label htmlFor="pag-sibling-select">Sibling Pages Count</label>
+                        <select
+                          id="pag-sibling-select"
+                          value={paginationSiblingCount}
+                          onChange={(e) => setPaginationSiblingCount(Number(e.target.value))}
+                        >
+                          <option value="1">1 page sibling</option>
+                          <option value="2">2 page siblings</option>
+                          <option value="3">3 page siblings</option>
+                        </select>
+                      </div>
+
+                      <div className="control-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input
+                            type="checkbox"
+                            checked={paginationShowFirstLast}
+                            onChange={(e) => setPaginationShowFirstLast(e.target.checked)}
+                          />
+                          Show First/Last buttons
+                        </label>
+                        <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input
+                            type="checkbox"
+                            checked={paginationShowPrevNext}
+                            onChange={(e) => setPaginationShowPrevNext(e.target.checked)}
+                          />
+                          Show Prev/Next buttons
+                        </label>
+                        <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input
+                            type="checkbox"
+                            checked={paginationShowPageInput}
+                            onChange={(e) => setPaginationShowPageInput(e.target.checked)}
+                          />
+                          Show manual page input
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Canvas & Live Code */}
+                  <div className="playground-card playground-card--preview">
+                    <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Interactive Demo</h3>
+
+                    <div className="preview-canvas" style={{ minHeight: '380px', flexDirection: 'column', gap: '20px', padding: '1.5rem', justifyContent: 'space-between', backgroundColor: 'var(--ctp-crust)', borderRadius: '8px' }}>
+
+                      {/* paginated items display */}
+                      <div style={{ width: '100%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '0.5rem' }}>
+                          <h4 style={{ margin: 0, color: `var(--ctp-${paginationColor})` }}>Catppuccin Ecosystem Ports</h4>
+                          <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                            Mostrando {Math.min((paginationPage - 1) * paginationLimit + 1, mockPorts.length)} - {Math.min(paginationPage * paginationLimit, mockPorts.length)} de {mockPorts.length}
+                          </span>
+                        </div>
+
+                        <div style={{ display: 'grid', gap: '10px' }}>
+                          {mockPorts.slice((paginationPage - 1) * paginationLimit, paginationPage * paginationLimit).map((port, idx) => (
+                            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: '6px', backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)' }}>
+                              <div>
+                                <div style={{ fontWeight: 600, color: 'var(--ctp-text)' }}>{port.name}</div>
+                                <div style={{ fontSize: '0.75rem', color: 'var(--ctp-overlay1)' }}>Developer: {port.developer}</div>
+                              </div>
+                              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <span style={{ fontSize: '0.8rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: `var(--ctp-${paginationColor})` }}>{port.category}</span>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--ctp-yellow)' }}>⭐ {port.stars}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Sliced pagination controls */}
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', width: '100%', borderTop: '1px solid var(--ctp-surface1)', paddingTop: '1rem' }}>
+                        <PageSizeSelector
+                          pageSize={paginationLimit}
+                          onPageSizeChange={setPaginationLimit}
+                          size={paginationSize}
+                          shape={paginationShape}
+                          color={paginationColor}
+                        />
+
+                        <Pagination
+                          currentPage={paginationPage}
+                          totalPages={Math.ceil(mockPorts.length / paginationLimit)}
+                          onPageChange={setPaginationPage}
+                          siblingCount={paginationSiblingCount}
+                          size={paginationSize}
+                          shape={paginationShape}
+                          color={paginationColor}
+                          showFirstLast={paginationShowFirstLast}
+                          showPrevNext={paginationShowPrevNext}
+                          showPageInput={paginationShowPageInput}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Code snippets block */}
+                    <div style={{ marginTop: '1.5rem' }}>
+                      <div className="tabs-header">
+                        {(['react', 'vue', 'angular'] as const).map((tab) => (
+                          <button
+                            key={tab}
+                            className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                          >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="code-container">
+                        <button
+                          className="code-copy-btn"
+                          onClick={() => {
+                            const code = activeTab === 'react' ? getReactPaginationCode() : activeTab === 'vue' ? getVuePaginationCode() : getAngularPaginationCode();
+                            const plainText = code.replace(/<[^>]*>/g, '');
+                            copyToClipboard(plainText, `${activeTab} pagination snippet`);
+                          }}
+                        >
+                          Copy Code
+                        </button>
+                        <pre className="code-block">
+                          <code
+                            dangerouslySetInnerHTML={{
+                              __html: activeTab === 'react'
+                                ? getReactPaginationCode()
+                                : activeTab === 'vue'
+                                  ? getVuePaginationCode()
+                                  : getAngularPaginationCode()
+                            }}
+                          />
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Split layout usage guide */}
+                <div style={{ marginTop: '2rem' }}>
+                  <h3 className="section-subtitle" style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--ctp-text)' }}>
+                    📖 Modular Split Usage Layout
+                  </h3>
+
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '2rem'
+                  }}>
+                    <div style={{
+                      padding: '1.5rem',
+                      borderRadius: '12px',
+                      backgroundColor: 'var(--ctp-mantle)',
+                      border: '1px solid var(--ctp-surface0)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '1rem'
+                    }}>
+                      <h4 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--ctp-teal)' }}>
+                        Why modular separate components?
+                      </h4>
+                      <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                        Rather than forcing developers into a single monolithic block, keeping <code>Pagination</code> and <code>PageSizeSelector</code> separate guarantees ultimate layout control.
+                      </p>
+                      <ul style={{ margin: 0, paddingLeft: '20px', color: 'var(--ctp-subtext1)', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                        <li>Position rows selector in the top-right and numbers on the bottom-right</li>
+                        <li>Align them side-by-side or stack them vertically on mobile</li>
+                        <li>Omit the selector entirely for static infinite-scroll or fixed layouts</li>
+                        <li>Customize labels, icons, borders, shapes, sizes, and accent colors independently</li>
+                      </ul>
+                    </div>
+
+                    <div style={{
+                      padding: '1.5rem',
+                      borderRadius: '12px',
+                      backgroundColor: 'var(--ctp-mantle)',
+                      border: '1px solid var(--ctp-surface0)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '1rem',
+                      justifyContent: 'space-between'
+                    }}>
+                      <div>
+                        <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', color: 'var(--ctp-text)' }}>
+                          Ellipsis Boundary Folding Algorithm
+                        </h4>
+                        <p style={{ margin: 0, color: 'var(--ctp-subtext0)', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                          The pagination component includes smart collapsing logic. On larger datasets, the hook truncates intermediate elements, ensuring rendering stays compact and does not wrap or look messy:
+                        </p>
+                        <div style={{ marginTop: '10px', display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>1</span>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-overlay1)' }}>...</span>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>4</span>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: `var(--ctp-${paginationColor})`, color: 'var(--ctp-base)', fontWeight: 600 }}>5</span>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>6</span>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-overlay1)' }}>...</span>
+                          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--ctp-surface1)', color: 'var(--ctp-text)' }}>12</span>
+                        </div>
+                      </div>
+
+                      <div style={{ borderTop: '1px solid var(--ctp-surface0)', paddingTop: '0.8rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext1)' }}>Keyboard friendly</span>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--ctp-green)' }}>✓ Accessible HTML5 standards</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'table' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>📊</span> Tabela de Dados Dinâmica (Data Grid)
+                </h2>
+                <p style={{ color: 'var(--ctp-subtext0)', margin: '-1.5rem 0 1.5rem 0', fontSize: '0.95rem' }}>
+                  Um componente de Grid altamente dinâmico com modos Client-side e Server-side, paginação e ordenação controladas, edição inline e visualizador de logs de API.
+                </p>
+
+                {/* Metrics Bar */}
+                <div className="metrics-grid" style={{ marginBottom: '1.5rem' }}>
+                  <div className="metric-card glass-panel">
+                    <div className="metric-info">
+                      <span className="metric-title">Total Funcionários</span>
+                      <span className="metric-value">{tableTotalItems}</span>
+                      <span className="metric-sub">Base de dados ativa</span>
+                    </div>
+                    <div className="metric-icon-box">👥</div>
+                  </div>
+                  <div className="metric-card glass-panel">
+                    <div className="metric-info">
+                      <span className="metric-title">Média Salarial</span>
+                      <span className="metric-value">
+                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(
+                          tableData.length > 0
+                            ? tableData.reduce((acc, curr) => acc + curr.salary, 0) / tableData.length
+                            : 0
+                        )}
+                      </span>
+                      <span className="metric-sub">Conjunto carregado</span>
+                    </div>
+                    <div className="metric-icon-box">💰</div>
+                  </div>
+                  <div className="metric-card glass-panel">
+                    <div className="metric-info">
+                      <span className="metric-title">Ativos / Inativos</span>
+                      <span className="metric-value">
+                        {tableData.filter(e => e.status === 'Active').length} / {tableData.filter(e => e.status === 'Inactive').length}
+                      </span>
+                      <span className="metric-sub">Status dos carregados</span>
+                    </div>
+                    <div className="metric-icon-box">⚡</div>
+                  </div>
+                  <div className="metric-card glass-panel">
+                    <div className="metric-info">
+                      <span className="metric-title">Itens Selecionados</span>
+                      <span className="metric-value">{selectedTableIds.length}</span>
+                      <span className="metric-sub">Ações em lote disponíveis</span>
+                    </div>
+                    <div className="metric-icon-box">✓</div>
+                  </div>
+                </div>
+
+                <div className="playground-section" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  {/* Controls and Filters Area */}
+                  <div className="glass-panel" style={{ padding: '1rem 1.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                      {/* Mode switch */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--ctp-text)' }}>Modo:</span>
+                        <ButtonGroup
+                          selectionMode="single"
+                          value={tableMode}
+                          onChange={(val) => {
+                            if (val) {
+                              setTableMode(val as 'client' | 'server');
+                              setSelectedTableIds([]);
+                            }
+                          }}
+                          orientation="horizontal"
+                        >
+                          <ButtonGroupItem value="client" variant={tableMode === 'client' ? 'filled' : 'ghost'} color={tableColor} size="sm">
+                            Client-side
+                          </ButtonGroupItem>
+                          <ButtonGroupItem value="server" variant={tableMode === 'server' ? 'filled' : 'ghost'} color={tableColor} size="sm">
+                            Server-side
+                          </ButtonGroupItem>
+                        </ButtonGroup>
+                      </div>
+
+                      {/* Design Settings */}
+                      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                        <Select
+                          value={tableColor}
+                          onChange={(e) => setTableColor(e.target.value as FormControlColor)}
+                          size="sm"
+                          color={tableColor}
+                          style={{ minWidth: '120px' }}
+                        >
+                          <option value="mauve">Mauve</option>
+                          <option value="blue">Blue</option>
+                          <option value="green">Green</option>
+                          <option value="red">Red</option>
+                          <option value="yellow">Yellow</option>
+                          <option value="pink">Pink</option>
+                          <option value="teal">Teal</option>
+                        </Select>
+
+                        <Select
+                          value={tableSize}
+                          onChange={(e) => setTableSize(e.target.value as FormControlSize)}
+                          size="sm"
+                          color={tableColor}
+                          style={{ minWidth: '130px' }}
+                        >
+                          <option value="sm">Pequeno (sm)</option>
+                          <option value="md">Médio (md)</option>
+                          <option value="lg">Grande (lg)</option>
+                        </Select>
+
+                        <Button
+                          type="button"
+                          variant="tonal"
+                          color={tableColor}
+                          size="sm"
+                          leftIcon={<EyeIcon size={14} />}
+                          onClick={() => setShowColumnDropdown(!showColumnDropdown)}
+                          style={{ position: 'relative' }}
+                        >
+                          Colunas
+                          {showColumnDropdown && (
+                            <div className="popover-menu" style={{ top: '100%', right: 0, marginTop: '0.5rem', textAlign: 'left' }}>
+                              <div className="popover-header">Exibir Colunas</div>
+                              {Object.keys(visibleColumns).map(colKey => (
+                                <label key={colKey} className="column-checkbox-label" onClick={(e) => e.stopPropagation()}>
+                                  <input
+                                    type="checkbox"
+                                    className="ctp-table-checkbox"
+                                    style={{ marginRight: '8px' }}
+                                    checked={visibleColumns[colKey]}
+                                    onChange={(e) => setVisibleColumns({ ...visibleColumns, [colKey]: e.target.checked })}
+                                  />
+                                  {colKey === 'id' ? 'ID' :
+                                    colKey === 'name' ? 'Nome' :
+                                      colKey === 'email' ? 'E-mail' :
+                                        colKey === 'role' ? 'Cargo' :
+                                          colKey === 'department' ? 'Departamento' :
+                                            colKey === 'status' ? 'Status' :
+                                              colKey === 'salary' ? 'Salário' :
+                                                colKey === 'joinedDate' ? 'Admissão' : colKey}
+                                </label>
+                              ))}
+                            </div>
+                          )}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Table Toolbar & Content Container */}
+                  <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+                    {/* Search & Filters */}
+                    <div className="filter-bar">
+                      <div className="filters-left" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <div className="search-input-wrapper">
+                          <span className="search-icon">
+                            <SearchIcon size={14} />
+                          </span>
+                          <Input
+                            type="text"
+                            placeholder="Buscar funcionário..."
+                            className="search-input"
+                            value={tableSearch}
+                            onChange={(e) => setTableSearch(e.target.value)}
+                            size={tableSize}
+                            color={tableColor}
+                          />
+                        </div>
+
+                        <Select
+                          value={tableStatus}
+                          onChange={(e) => setTableStatus(e.target.value)}
+                          size={tableSize}
+                          color={tableColor}
+                          style={{ width: '160px' }}
+                        >
+                          <option value="All">Todos os Status</option>
+                          <option value="Active">Ativos</option>
+                          <option value="Inactive">Inativos</option>
+                          <option value="Pending">Pendentes</option>
+                        </Select>
+
+                        <Select
+                          value={tableRole}
+                          onChange={(e) => setTableRole(e.target.value)}
+                          size={tableSize}
+                          color={tableColor}
+                          style={{ width: '160px' }}
+                        >
+                          <option value="All">Todos os Cargos</option>
+                          {getFilterMetadata().roles.map(r => (
+                            <option key={r} value={r}>{r}</option>
+                          ))}
+                        </Select>
+                      </div>
+
+                      <div className="filters-right" style={{ display: 'flex', gap: '8px' }}>
+                        <Button
+                          type="button"
+                          variant="tonal"
+                          color={tableColor}
+                          size={tableSize}
+                          leftIcon={<DownloadIcon size={14} />}
+                          onClick={exportTableToCSV}
+                        >
+                          Exportar CSV
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="filled"
+                          color={tableColor}
+                          size={tableSize}
+                          leftIcon={<PlusIcon size={14} />}
+                          onClick={() => setShowAddModal(true)}
+                        >
+                          Novo Funcionário
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Bulk Actions Inline Bar (Dribbble-inspired, above the header) */}
+                    {selectedTableIds.length > 0 && (
+                      <div className="ctp-bulk-actions-inline">
+                        <div className="ctp-bulk-actions-inline-left">
+                          <span className="ctp-bulk-actions-inline-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="9 14 4 9 9 4" />
+                              <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
+                            </svg>
+                          </span>
+                          <span>{selectedTableIds.length} selecionados</span>
+                        </div>
+                        <div className="ctp-bulk-actions-inline-right">
+                          <button
+                            type="button"
+                            className="ctp-bulk-actions-btn"
+                            onClick={() => showToast("Dica: Dê um duplo clique nas células de Cargo ou Salário dos funcionários para editar!")}
+                            title="Dica de Edição"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            className="ctp-bulk-actions-btn"
+                            onClick={exportSelectedToCSV}
+                            title="Exportar Selecionados para CSV"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="7 10 12 15 17 10" />
+                              <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            className="ctp-bulk-actions-btn ctp-bulk-actions-btn--danger"
+                            onClick={handleTableDeleteMultiple}
+                            title="Excluir Selecionados"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="3 6 5 6 21 6" />
+                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            className="ctp-bulk-actions-btn"
+                            onClick={() => setSelectedTableIds([])}
+                            title="Cancelar Seleção"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* The Table Wrapper */}
+                    <div className="table-wrapper">
+                      <Table<Employee>
+                        data={tableData}
+                        columns={[
+                          { key: 'id', header: 'ID', sortable: true },
+                          { key: 'name', header: 'Nome', sortable: true },
+                          { key: 'email', header: 'E-mail', sortable: true },
+                          { key: 'role', header: 'Cargo', sortable: true, editable: true },
+                          { key: 'department', header: 'Departamento' },
+                          {
+                            key: 'status',
+                            header: 'Status',
+                            sortable: true,
+                            render: (_, value) => {
+                              const badgeClass = `ctp-table-badge ctp-table-badge--${value.toLowerCase()}`;
+                              const label = value === 'Active' ? 'Ativo' : value === 'Inactive' ? 'Inativo' : 'Pendente';
+                              return (
+                                <span className={badgeClass}>
+                                  <span className="ctp-badge-dot" />
+                                  {label}
+                                </span>
+                              );
+                            }
+                          },
+                          {
+                            key: 'salary',
+                            header: 'Salário',
+                            sortable: true,
+                            editable: true,
+                            align: 'right',
+                            render: (_, value) => {
+                              return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(Number(value));
+                            }
+                          },
+                          {
+                            key: 'joinedDate',
+                            header: 'Admissão',
+                            sortable: true,
+                            render: (_, value) => {
+                              const parts = String(value).split('-');
+                              return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value);
+                            }
+                          },
+                          {
+                            key: 'actions',
+                            header: 'Ações',
+                            align: 'center',
+                            render: (row) => (
+                              <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
+                                <button
+                                  type="button"
+                                  className="ctp-table-action-btn"
+                                  onClick={() => {
+                                    showToast("Dica: Dê um duplo clique nas células de Cargo ou Salário para editar!");
+                                  }}
+                                  title="Editar cargo ou salário (clique duplo nas células)"
+                                >
+                                  <EditIcon size={14} />
+                                </button>
+                                <button
+                                  type="button"
+                                  className="ctp-table-action-btn ctp-table-action-btn--danger"
+                                  onClick={() => handleTableDeleteRow(row.id)}
+                                  title="Excluir funcionário"
+                                >
+                                  <TrashIcon size={14} />
+                                </button>
+                              </div>
+                            )
+                          }
+                        ].filter(col => col.key === 'actions' || visibleColumns[col.key])}
+                        rowKey={(row) => row.id}
+                        sortField={tableSortField}
+                        sortOrder={tableSortOrder}
+                        onSort={handleTableSort}
+                        selectedRowIds={selectedTableIds}
+                        onSelectionChange={setSelectedTableIds}
+                        onCellEdit={handleTableCellEdit}
+                        isLoading={tableIsLoading}
+                        size={tableSize}
+                        color={tableColor}
+                        emptyState="Nenhum funcionário encontrado com os filtros ativos."
+                      />
+                    </div>
+
+                    {/* Table Footer with custom layout of Pagination controls */}
+                    <div className="pagination-bar" style={{ borderTop: '1px solid var(--ctp-surface2)' }}>
+                      <div className="pagination-left">
+                        <PageSizeSelector
+                          pageSize={tableLimit}
+                          onPageSizeChange={setTableLimit}
+                          size={tableSize}
+                          color={tableColor}
+                        />
+                        <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)' }}>
+                          Total de registros: <strong>{tableTotalItems}</strong>
+                        </span>
+                      </div>
+
+                      <Pagination
+                        currentPage={tablePage}
+                        totalPages={tableTotalPages}
+                        onPageChange={setTablePage}
+                        size={tableSize}
+                        color={tableColor}
+                        showFirstLast={true}
+                        showPrevNext={true}
+                      />
+                    </div>
+                  </div>
+
+                  {/* API Inspector Logs Console */}
+                  <div className="api-inspector">
+                    <div className="inspector-header">
+                      <div className="inspector-title">
+                        <span className={`status-dot ${tableIsLoading ? 'loading' : ''}`} />
+                        API REQUEST INSPECTOR {tableMode === 'client' ? '(In-Memory Local Mode)' : '(Simulated HTTP REST)'}
+                      </div>
+                      <span style={{ fontSize: '0.8rem', color: 'var(--ctp-overlay1)' }}>Apenas requisições GET do servidor mock</span>
+                    </div>
+                    <div className="inspector-body">
+                      {tableMode === 'client' ? (
+                        <div style={{ color: 'var(--ctp-overlay1)', fontStyle: 'italic', padding: '0.5rem 0' }}>
+                          Operações realizadas em memória no cliente. Nenhuma chamada de API efetuada.
+                        </div>
+                      ) : apiLogs.length === 0 ? (
+                        <div style={{ color: 'var(--ctp-overlay1)', fontStyle: 'italic', padding: '0.5rem 0' }}>
+                          Nenhuma requisição registrada ainda. Altere filtros ou mude de página.
+                        </div>
+                      ) : (
+                        apiLogs.map(log => (
+                          <div key={log.id} className="log-entry">
+                            <span className="log-time">[{log.time}]</span>
+                            <span className="log-method">{log.method}</span>
+                            <span className="log-url">{log.url}</span>
+                            <span className="log-meta">{log.meta}</span>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Playground Code Display */}
+                  <div>
+                    <div className="tabs-header">
+                      {(['react', 'vue', 'angular'] as const).map((tab) => (
+                        <button
+                          key={tab}
+                          className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                          onClick={() => setActiveTab(tab)}
+                        >
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="code-container">
+                      <button
+                        className="code-copy-btn"
+                        onClick={() => {
+                          const code = activeTab === 'react' ? getReactTableCode() : activeTab === 'vue' ? getVueTableCode() : getAngularTableCode();
+                          const plainText = code.replace(/<[^>]*>/g, '');
+                          copyToClipboard(plainText, `${activeTab} table snippet`);
+                        }}
+                      >
+                        Copy Code
+                      </button>
+                      <pre className="code-block">
+                        <code
+                          dangerouslySetInnerHTML={{
+                            __html: activeTab === 'react'
+                              ? getReactTableCode()
+                              : activeTab === 'vue'
+                                ? getVueTableCode()
+                                : getAngularTableCode()
+                          }}
+                        />
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Add Employee Modal */}
+              <Modal
+                isOpen={showAddModal}
+                onClose={() => setShowAddModal(false)}
+                size="md"
+                title="Cadastrar Novo Funcionário"
+                footer={
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', width: '100%' }}>
+                    <Button variant="ghost" color="lavender" onClick={() => setShowAddModal(false)}>Cancelar</Button>
+                    <Button variant="filled" color="green" onClick={handleTableAddRow}>Cadastrar</Button>
+                  </div>
+                }
+              >
+                <form onSubmit={handleTableAddRow} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '0.5rem 0' }}>
+                  <FormGroup label="Nome Completo" required>
+                    <Input
+                      type="text"
+                      placeholder="Ex: Ana Maria Silva"
+                      value={newEmpName}
+                      onChange={(e) => setNewEmpName(e.target.value)}
+                      required
+                    />
+                  </FormGroup>
+
+                  <FormGroup label="E-mail" required>
+                    <Input
+                      type="email"
+                      placeholder="Ex: ana.silva@empresa.com"
+                      value={newEmpEmail}
+                      onChange={(e) => setNewEmpEmail(e.target.value)}
+                      required
+                    />
+                  </FormGroup>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <FormGroup label="Cargo">
+                      <Select
+                        value={newEmpRole}
+                        onChange={(e) => setNewEmpRole(e.target.value)}
+                      >
+                        {getFilterMetadata().roles.map(r => (
+                          <option key={r} value={r}>{r}</option>
+                        ))}
+                      </Select>
+                    </FormGroup>
+
+                    <FormGroup label="Status">
+                      <Select
+                        value={newEmpStatus}
+                        onChange={(e) => setNewEmpStatus(e.target.value as any)}
+                      >
+                        <option value="Active">Ativo</option>
+                        <option value="Inactive">Inativo</option>
+                        <option value="Pending">Pendente</option>
+                      </Select>
+                    </FormGroup>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <FormGroup label="Salário Mensal (R$)">
+                      <Input
+                        type="number"
+                        min="1000"
+                        placeholder="Ex: 5000"
+                        value={newEmpSalary}
+                        onChange={(e) => setNewEmpSalary(e.target.value)}
+                      />
+                    </FormGroup>
+
+                    <FormGroup label="Data de Admissão">
+                      <Input
+                        type="date"
+                        value={newEmpJoinedDate}
+                        onChange={(e) => setNewEmpJoinedDate(e.target.value)}
+                      />
+                    </FormGroup>
+                  </div>
+                </form>
+              </Modal>
+            </>
+          )}
+
+          {activeComponent === 'card' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>🎴</span> Card Components Showcase
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Visual demo */}
+                  <div className="demo-stage">
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
+
+                      {/* Subsection A: Card Variants */}
+                      <div>
+                        <h3 className="stage-title">Card Variants</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
+                          <Card variant="filled" padding="md">
+                            <Card.Header title="Filled Variant" subtitle="Default cozy backdrop" />
+                            <Card.Body>
+                              This card has a solid background with a very subtle border and standard shadow.
+                            </Card.Body>
+                          </Card>
+                          <Card variant="elevated" padding="md">
+                            <Card.Header title="Elevated Variant" subtitle="Floating layer feel" />
+                            <Card.Body>
+                              This card utilizes a larger, softer box shadow to feel physically raised above the canvas.
+                            </Card.Body>
+                          </Card>
+                          <Card variant="outline" padding="md">
+                            <Card.Header title="Outline Variant" subtitle="Minimalist container" />
+                            <Card.Body>
+                              This card has a transparent background and a thin solid border outlining its edges.
+                            </Card.Body>
+                          </Card>
+                          <Card variant="flat" padding="md">
+                            <Card.Header title="Flat Variant" subtitle="No borders or shadows" />
+                            <Card.Body>
+                              This card sits flat on the page with a subtle surface background, no border, and no shadow.
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      </div>
+
+                      {/* Subsection B: Accent Colored & Interactive Cards */}
+                      <div>
+                        <h3 className="stage-title">Accents & Colored Background Cards</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
+                          <Card accentColor="mauve" accentPosition="top" isInteractive padding="md">
+                            <Card.Header title="Top Accent Mauve" subtitle="Hover to lift" />
+                            <Card.Body>
+                              Hovering on this interactive card scales it up gently and highlights the border with the Mauve color.
+                            </Card.Body>
+                          </Card>
+                          <Card accentColor="peach" accentPosition="left" isInteractive padding="md">
+                            <Card.Header title="Left Accent Peach" subtitle="Sidebar colored line" />
+                            <Card.Body>
+                              A thick Peach color bar on the left edge. Great for emphasizing card status or categories.
+                            </Card.Body>
+                          </Card>
+                          <Card variant="colored" accentColor="lavender" isInteractive padding="md">
+                            <Card.Header title="Colored Background" subtitle="Lavender Flavor" />
+                            <Card.Body>
+                              This card has the entire background colored using a Catppuccin accent color. Content colors contrast automatically.
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      </div>
+
+                      {/* Subsection C: Rich Content Blog/Profile Card */}
+                      <div>
+                        <h3 className="stage-title">Rich Content Card</h3>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                          <Card variant="elevated" isInteractive={cardInteractive} accentColor={cardAccent} accentPosition={cardAccentPos} shape={cardShape} padding={cardPadding} style={{ maxWidth: '440px', width: '100%' }}>
+                            <Card.Header
+                              title="Catppuccin Palettes"
+                              subtitle="By CozyDevelopers • 4 hours ago"
+                              avatar={
+                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--ctp-mauve)', color: 'var(--ctp-base)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                                  CD
+                                </div>
+                              }
+                              actions={
+                                <button className="ctp-modal__close-btn" style={{ padding: '4px' }} title="Options">
+                                  💬
+                                </button>
+                              }
+                            />
+                            <Card.Media style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, var(--ctp-mauve), var(--ctp-blue))' }}>
+                              <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--ctp-base)' }}>Visual Banner Area</span>
+                            </Card.Media>
+                            <Card.Body>
+                              <p style={{ margin: 0 }}>
+                                Catppuccin is a community-driven, pastel theme designed to be easy on the eyes. It comes in four beautiful flavors: Latte, Frappé, Macchiato, and Mocha.
+                              </p>
+                            </Card.Body>
+                            <Card.Footer>
+                              <Button variant="ghost" color="lavender" size="sm">Share</Button>
+                              <Button variant="filled" color="mauve" size="sm">Explore</Button>
+                            </Card.Footer>
+                          </Card>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Right Column: Interactive settings playground */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Interactive Card Builder</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
+                      <FormGroup label="Card Variant">
+                        <Select value={cardVariant} onChange={(e) => setCardVariant(e.target.value as any)}>
+                          <option value="filled">Filled (Default)</option>
+                          <option value="elevated">Elevated</option>
+                          <option value="outline">Outline</option>
+                          <option value="flat">Flat</option>
+                          <option value="colored">Colored Background</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Border Radius Shape">
+                        <Select value={cardShape} onChange={(e) => setCardShape(e.target.value as any)}>
+                          <option value="square">Square (0px)</option>
+                          <option value="rounded">Rounded (12px)</option>
+                          <option value="pill">Pill (24px)</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Body Padding">
+                        <Select value={cardPadding} onChange={(e) => setCardPadding(e.target.value as any)}>
+                          <option value="none">None</option>
+                          <option value="sm">Small (12px)</option>
+                          <option value="md">Medium (20px)</option>
+                          <option value="lg">Large (32px)</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Accent Color">
+                        <Select value={cardAccent} onChange={(e) => setCardAccent(e.target.value as any)}>
+                          {colors.map(c => (
+                            <option key={c.variable} value={c.name.toLowerCase()}>{c.name}</option>
+                          ))}
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Accent Position">
+                        <Select value={cardAccentPos} onChange={(e) => setCardAccentPos(e.target.value as any)}>
+                          <option value="none">None</option>
+                          <option value="top">Top Bar</option>
+                          <option value="left">Left Bar</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Interaction Hover Effect">
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={cardInteractive} onChange={(e) => setCardInteractive(e.target.checked)} />
+                          <span>Enable Hover Animation</span>
+                        </label>
+                      </FormGroup>
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section style={{ marginTop: '3rem' }}>
+                <h2 className="section-title">
+                  <span>🏁</span> Tile Components Showcase
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Visual demo */}
+                  <div className="demo-stage">
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
+
+                      {/* Subsection A: Tile Sizes and Shapes */}
+                      <div>
+                        <h3 className="stage-title">Sizes & Shapes</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', alignItems: 'center' }}>
+                            <Tile size="sm" shape="square" title="Small Square" subtitle="8px padding" icon="⚙️" />
+                            <Tile size="md" shape="rounded" title="Medium Rounded" subtitle="14px padding" icon="🚀" />
+                            <Tile size="lg" shape="pill" title="Large Pill" subtitle="20px padding" icon="💎" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Subsection B: Orientations */}
+                      <div>
+                        <h3 className="stage-title">Layout Orientations</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
+                          <Tile orientation="horizontal" title="Horizontal Layout" subtitle="Icon on left, meta on right" icon="⚡" meta="Ctrl+S" />
+                          <Tile orientation="vertical" title="Vertical Layout" subtitle="Stack elements aligned left" icon="📅" meta="Amanhã" />
+                          <Tile orientation="vertical-center" title="Centered Layout" subtitle="Aligned at the center" icon="🔔" meta="2 novos" />
+                        </div>
+                      </div>
+
+                      {/* Subsection C: Status indicators and variants */}
+                      <div>
+                        <h3 className="stage-title">Tonal Backgrounds, Indicators & Colored Backgrounds</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
+                          <Tile variant="tonal" color="green" indicator="left" icon="✅" title="Concluído" subtitle="Build passou sem avisos" />
+                          <Tile variant="tonal" color="yellow" indicator="top" icon="⚠️" title="Atenção" subtitle="Uso de CPU elevado" />
+                          <Tile variant="colored" color="mauve" icon="🔮" title="Colored Tile" subtitle="Mauve flavor bg" />
+                          <Tile variant="colored" color="peach" icon="🍑" title="Colored Tile" subtitle="Peach flavor bg" />
+                          <Tile variant="tonal" color="red" indicator="right" icon="❌" title="Falha" subtitle="14 testes falharam" />
+                          <Tile variant="tonal" color="blue" indicator="bottom" icon="ℹ️" title="Informações" subtitle="Versão 1.4.0 activa" />
+                        </div>
+                      </div>
+
+                      {/* Subsection D: Single & Multi Selection Checklist */}
+                      <div>
+                        <h3 className="stage-title">Interactive Choice Selection</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                          <div>
+                            <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: 'var(--ctp-subtext0)' }}>Radio Selection (Single)</h4>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                              <Tile
+                                isInteractive
+                                isSelected={selectedTileId === 't1'}
+                                onClick={() => setSelectedTileId('t1')}
+                                title="Plano Padrão"
+                                subtitle="10 GB de armazenamento rápido"
+                                meta="R$ 15/mês"
+                                icon={selectedTileId === 't1' ? '🟢' : '⚪'}
+                              />
+                              <Tile
+                                isInteractive
+                                isSelected={selectedTileId === 't2'}
+                                onClick={() => setSelectedTileId('t2')}
+                                title="Plano Profissional"
+                                subtitle="100 GB de armazenamento + CDN"
+                                meta="R$ 49/mês"
+                                icon={selectedTileId === 't2' ? '🟢' : '⚪'}
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: 'var(--ctp-subtext0)' }}>Checkbox Selection (Multiple)</h4>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                              {['m1', 'm2'].map((id, index) => {
+                                const isSelected = multiSelectedTileIds.includes(id);
+                                const toggleSelect = () => {
+                                  setMultiSelectedTileIds(prev =>
+                                    isSelected ? prev.filter(i => i !== id) : [...prev, id]
+                                  );
+                                };
+                                return (
+                                  <Tile
+                                    key={id}
+                                    isInteractive
+                                    isSelected={isSelected}
+                                    onClick={toggleSelect}
+                                    title={index === 0 ? "Backup Diário" : "Suporte VIP 24h"}
+                                    subtitle={index === 0 ? "Envios agendados automáticos" : "Atendimento imediato"}
+                                    meta={index === 0 ? "+ R$ 10" : "+ R$ 25"}
+                                    icon={isSelected ? '☑️' : '⏹️'}
+                                  />
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Subsection E: Stats Grid (Dashboard Mockup) */}
+                      <div>
+                        <h3 className="stage-title">Metrics Dashboard Layout</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+                          <Tile variant="elevated" color="mauve" indicator="left" orientation="vertical" title="R$ 14.230" subtitle="Receita Mensal" icon="💰" />
+                          <Tile variant="elevated" color="sky" indicator="left" orientation="vertical" title="24.5k" subtitle="Visitas Únicas" icon="👥" />
+                          <Tile variant="elevated" color="green" indicator="left" orientation="vertical" title="99.98%" subtitle="Uptime API" icon="📈" />
+                          <Tile variant="elevated" color="red" indicator="left" orientation="vertical" title="3" subtitle="Erros Pendentes" icon="🐞" />
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Right Column: Details */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Card & Tile Features</h3>
+                    <div style={{ color: 'var(--ctp-subtext0)', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                      <p style={{ marginTop: 0 }}>
+                        <strong>Cards</strong> are designed for grouped content containing complex data layouts (images, header actions, body texts, action footers).
+                      </p>
+                      <p>
+                        <strong>Tiles</strong> are compact, single-purpose blocks ideal for dashboard metrics grids, interactive item checklist choices, or horizontal list selections.
+                      </p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', border: '1px solid var(--ctp-surface1)', borderRadius: '8px', backgroundColor: 'var(--ctp-mantle)', marginTop: '1rem' }}>
+                        <div style={{ fontWeight: 'bold', color: 'var(--ctp-mauve)' }}>Atributos Suportados:</div>
+                        <div>• 14 cores do Catppuccin</div>
+                        <div>• Variantes de elevação e tonalidades</div>
+                        <div>• Layouts horizontal e vertical</div>
+                        <div>• Bordas indicativas direcionais</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header">
+                    {(['react', 'vue', 'angular'] as const).map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => setActiveTab(tab)}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container">
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react' ? getReactCardCode() : activeTab === 'vue' ? getVueCardCode() : getAngularCardCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} card snippet`);
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block">
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactCardCode()
+                            : activeTab === 'vue'
+                              ? getVueCardCode()
+                              : getAngularCardCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'icons' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>✨</span> Catppuccin SVG Icons Pack
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Icons Grid */}
+                  <div className="demo-stage" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
+                    {/* Search Input */}
+                    <div style={{ width: '100%' }}>
+                      <input
+                        type="text"
+                        className="ctp-input"
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem 1rem',
+                          borderRadius: '8px',
+                          border: '1px solid var(--ctp-surface1)',
+                          backgroundColor: 'var(--ctp-base)',
+                          color: 'var(--ctp-text)',
+                          outline: 'none',
+                        }}
+                        placeholder="Search icons (e.g. Cat, Home, Settings)..."
+                        value={iconSearch}
+                        onChange={(e) => setIconSearch(e.target.value)}
+                      />
+                    </div>
+
+                    {/* Categories Grid */}
+                    {['Catppuccin', 'Celestial', 'Data & Connections', 'UI & Layout', 'CRUD Actions'].map((category) => {
+                      const filtered = iconList.filter(
+                        (icon) =>
+                          icon.category === category &&
+                          icon.name.toLowerCase().includes(iconSearch.toLowerCase())
+                      );
+
+                      if (filtered.length === 0) return null;
+
+                      return (
+                        <div key={category} style={{ width: '100%' }}>
+                          <h3 className="stage-title" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--ctp-surface0)', paddingBottom: '0.5rem', marginBottom: '1rem', color: 'var(--ctp-mauve)' }}>
+                            {category} Icons
+                            <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 'normal', marginLeft: 'auto' }}>
+                              {filtered.length} icons
+                            </span>
+                          </h3>
+
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '0.75rem' }}>
+                            {filtered.map((item) => {
+                              const IconComponent = item.component;
+                              const isSelected = selectedIconName === item.name;
+                              const className = iconHoverEffect !== 'none' ? `ctp-icon--hover-${iconHoverEffect}` : '';
+
+                              return (
+                                <button
+                                  key={item.name}
+                                  onClick={() => setSelectedIconName(item.name)}
+                                  style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    padding: '1rem 0.5rem',
+                                    borderRadius: '8px',
+                                    border: isSelected ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                                    backgroundColor: isSelected ? 'var(--ctp-surface0)' : 'var(--ctp-mantle)',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease',
+                                    outline: 'none',
+                                    color: isSelected ? 'var(--ctp-mauve)' : 'var(--ctp-text)',
+                                  }}
+                                  className="icon-grid-btn"
+                                >
+                                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '48px' }}>
+                                    <IconComponent
+                                      size={iconSize}
+                                      color={iconColor}
+                                      strokeWidth={iconStroke}
+                                      className={className}
+                                    />
+                                  </div>
+                                  <span style={{ fontSize: '0.75rem', wordBreak: 'break-all', textAlign: 'center' }}>
+                                    {item.name}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Right Column: Customizer Controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Icon Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Stroke Width ({iconStroke.toFixed(1)}px)</label>
+                      <input
+                        type="range"
+                        min="1.0"
+                        max="3.0"
+                        step="0.5"
+                        value={iconStroke}
+                        onChange={(e) => setIconStroke(parseFloat(e.target.value))}
+                        style={{ width: '100%', accentColor: 'var(--ctp-mauve)', cursor: 'pointer' }}
+                      />
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--ctp-subtext0)', marginTop: '4px' }}>
+                        <span>1.0 (Lightest)</span>
+                        <span>3.0 (Bold)</span>
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Size ({iconSize}px)</label>
+                      <div style={{ display: 'flex', gap: '0.4rem' }}>
+                        {[16, 24, 32, 48, 64].map((size) => (
+                          <button
+                            key={size}
+                            onClick={() => setIconSize(size)}
+                            style={{
+                              flex: 1,
+                              padding: '0.3rem 0',
+                              fontSize: '0.8rem',
+                              borderRadius: '6px',
+                              border: iconSize === size ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: iconSize === size ? 'var(--ctp-mauve)' : 'transparent',
+                              color: iconSize === size ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                            }}
+                          >
+                            {size}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Color Theme</label>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
+                        <button
+                          onClick={() => setIconColor('text')}
+                          title="Default Text Color"
+                          style={{
+                            height: '24px',
+                            borderRadius: '4px',
+                            border: iconColor === 'text' ? '2px solid white' : '1px solid var(--ctp-surface1)',
+                            backgroundColor: 'var(--ctp-text)',
+                            cursor: 'pointer',
+                          }}
+                        />
+                        {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
+                          <button
+                            key={c}
+                            onClick={() => setIconColor(c)}
+                            title={c.charAt(0).toUpperCase() + c.slice(1)}
+                            style={{
+                              height: '24px',
+                              borderRadius: '4px',
+                              border: iconColor === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: `var(--ctp-${c})`,
+                              cursor: 'pointer',
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Hover Animation Effect</label>
+                      <select
+                        value={iconHoverEffect}
+                        onChange={(e) => setIconHoverEffect(e.target.value as any)}
+                        className="ctp-input"
+                        style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--ctp-surface1)', backgroundColor: 'var(--ctp-base)', color: 'var(--ctp-text)', cursor: 'pointer' }}
+                      >
+                        <option value="none">None (Static)</option>
+                        <option value="spin">Spin (Settings)</option>
+                        <option value="bounce">Bounce Up (Bell/Home)</option>
+                        <option value="scale">Scale Up (Heart/Star)</option>
+                        <option value="wiggle">Wiggle (Fish/Chat)</option>
+                        <option value="pulse">Pulse Loop (Continuous)</option>
+                      </select>
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem', padding: '12px', border: '1px solid var(--ctp-surface1)', borderRadius: '8px', backgroundColor: 'var(--ctp-mantle)', color: 'var(--ctp-subtext0)', fontSize: '0.8rem', lineHeight: '1.4' }}>
+                      <div style={{ fontWeight: 'bold', color: 'var(--ctp-mauve)', marginBottom: '4px' }}>Developer Info:</div>
+                      Our icons are pure vector SVGs. They scale beautifully to any size without losing crispness and respond instantly to Catppuccin color accents.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
+                    {['react', 'vue', 'angular', 'svg'].map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveTab(tab as any);
+                        }}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          background: 'none',
+                          color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
+                          borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
+                          cursor: 'pointer',
+                          fontSize: '0.9rem',
+                          fontWeight: activeTab === tab ? 'bold' : 'normal',
+                        }}
+                      >
+                        {tab === 'svg' ? 'SVG Raw XML' : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react'
+                          ? getReactIconCode()
+                          : activeTab === 'vue'
+                            ? getVueIconCode()
+                            : activeTab === 'angular'
+                              ? getAngularIconCode()
+                              : getSvgIconCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} icon snippet`);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '0.5rem',
+                        right: '0.5rem',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '4px',
+                        border: '1px solid var(--ctp-surface1)',
+                        backgroundColor: 'var(--ctp-surface0)',
+                        color: 'var(--ctp-text)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactIconCode()
+                            : activeTab === 'vue'
+                              ? getVueIconCode()
+                              : activeTab === 'angular'
+                                ? getAngularIconCode()
+                                : getSvgIconCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'badge' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>📇</span> Badges & Tags Component
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Visual demo */}
+                  <div className="demo-stage">
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
+
+                      {/* Subsection A: Badge Variants */}
+                      <div>
+                        <h3 className="stage-title">Badge Variants</h3>
+                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                          <Badge variant="filled" color="mauve">Filled (Default)</Badge>
+                          <Badge variant="tonal" color="mauve">Tonal Tint</Badge>
+                          <Badge variant="outline" color="mauve">Outline Border</Badge>
+                          <Badge variant="flat">Flat Surface</Badge>
+                        </div>
+                      </div>
+
+                      {/* Subsection B: Shapes and Sizes */}
+                      <div>
+                        <h3 className="stage-title">Shapes & Sizes</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                              <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>Pill Shape (Default)</span>
+                              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <Badge size="sm" shape="pill" color="blue">Small</Badge>
+                                <Badge size="md" shape="pill" color="blue">Medium</Badge>
+                                <Badge size="lg" shape="pill" color="blue">Large</Badge>
+                              </div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                              <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>Rounded Shape (4px)</span>
+                              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <Badge size="sm" shape="rounded" color="peach">Small</Badge>
+                                <Badge size="md" shape="rounded" color="peach">Medium</Badge>
+                                <Badge size="lg" shape="rounded" color="peach">Large</Badge>
+                              </div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                              <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }}>Square Shape (0px)</span>
+                              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <Badge size="sm" shape="square" color="green">Small</Badge>
+                                <Badge size="md" shape="square" color="green">Medium</Badge>
+                                <Badge size="lg" shape="square" color="green">Large</Badge>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Subsection C: Palette Showcase */}
+                      <div>
+                        <h3 className="stage-title">Palette Color Choices</h3>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                          {(['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'] as const).map(color => (
+                            <Badge key={color} variant="tonal" color={color} shape="pill">
+                              {color.charAt(0).toUpperCase() + color.slice(1)}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Subsection D: Dismissible / Closable Tags */}
+                      <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                          <h3 className="stage-title" style={{ margin: 0 }}>Closable Tags Cloud</h3>
+                          {demoTags.length < 6 && (
+                            <Button variant="ghost" color="mauve" size="sm" onClick={() => setDemoTags(['TypeScript', 'React', 'Vue', 'Angular', 'CSS', 'Svelte'])}>
+                              Reset Tags
+                            </Button>
+                          )}
+                        </div>
+                        {demoTags.length === 0 ? (
+                          <div style={{ padding: '16px', border: '1px dashed var(--ctp-surface2)', borderRadius: '8px', textAlign: 'center', color: 'var(--ctp-subtext0)', fontSize: '0.9rem' }}>
+                            All tags dismissed. Click "Reset Tags" to load again.
+                          </div>
+                        ) : (
+                          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                            {demoTags.map(tag => (
+                              <Badge
+                                key={tag}
+                                variant="tonal"
+                                color="lavender"
+                                isDismissible
+                                onDismiss={() => setDemoTags(prev => prev.filter(t => t !== tag))}
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Subsection E: Real-world status tags mockup */}
+                      <div>
+                        <h3 className="stage-title">Real-world Status Mockups</h3>
+                        <div style={{ display: 'flex', gap: '16px', flexDirection: 'column' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', border: '1px solid var(--ctp-surface0)', borderRadius: '8px', backgroundColor: 'var(--ctp-surface0)' }}>
+                            <span style={{ fontWeight: '500' }}>Task Compile Script</span>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <Badge variant="filled" color="green" icon="✓">Successful</Badge>
+                              <Badge variant="tonal" color="mauve">v1.2.0</Badge>
+                            </div>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', border: '1px solid var(--ctp-surface0)', borderRadius: '8px', backgroundColor: 'var(--ctp-surface0)' }}>
+                            <span style={{ fontWeight: '500' }}>Deploying Production Cluster</span>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <Badge variant="filled" color="yellow" icon="⚙️">Pending</Badge>
+                              <Badge variant="outline" color="yellow">Auth required</Badge>
+                            </div>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', border: '1px solid var(--ctp-surface0)', borderRadius: '8px', backgroundColor: 'var(--ctp-surface0)' }}>
+                            <span style={{ fontWeight: '500' }}>Server Health Check</span>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <Badge variant="filled" color="red" icon="❌">Failed</Badge>
+                              <Badge variant="flat">Incident #8432</Badge>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Live Component Preview */}
+                      <div style={{ marginTop: '1rem', padding: '1.5rem', border: '1px solid var(--ctp-surface1)', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', backgroundColor: 'var(--ctp-mantle)' }}>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext1)', fontWeight: 'bold' }}>LIVE PREVIEW</span>
+                        <Badge
+                          variant={badgeVariant}
+                          size={badgeSize}
+                          shape={badgeShape}
+                          color={badgeColor}
+                          isDismissible={badgeDismissible}
+                          onDismiss={() => showToast('Dismissed live badge!')}
+                          icon={badgeHasIcon ? <SparklesIcon /> : undefined}
+                        >
+                          {badgeText || 'Badge'}
+                        </Badge>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Right Column: Interactive settings builder */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Interactive Badge Customizer</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
+                      <FormGroup label="Badge Label Text">
+                        <Input
+                          type="text"
+                          value={badgeText}
+                          onChange={(e) => setBadgeText(e.target.value)}
+                          placeholder="e.g. New Feature"
+                        />
+                      </FormGroup>
+
+                      <FormGroup label="Variant style">
+                        <Select value={badgeVariant} onChange={(e) => setBadgeVariant(e.target.value as any)}>
+                          <option value="filled">Filled (Default)</option>
+                          <option value="tonal">Tonal</option>
+                          <option value="outline">Outline</option>
+                          <option value="flat">Flat</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Size font/padding">
+                        <Select value={badgeSize} onChange={(e) => setBadgeSize(e.target.value as any)}>
+                          <option value="sm">Small</option>
+                          <option value="md">Medium</option>
+                          <option value="lg">Large</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Border Shape">
+                        <Select value={badgeShape} onChange={(e) => setBadgeShape(e.target.value as any)}>
+                          <option value="square">Square (0px)</option>
+                          <option value="rounded">Rounded (4px)</option>
+                          <option value="pill">Pill (Fully rounded)</option>
+                        </Select>
+                      </FormGroup>
+
+                      <FormGroup label="Theme Accent Color">
+                        <Select value={badgeColor} onChange={(e) => setBadgeColor(e.target.value as any)}>
+                          {colors.map(c => (
+                            <option key={c.variable} value={c.name.toLowerCase()}>{c.name}</option>
+                          ))}
+                        </Select>
+                      </FormGroup>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '0.5rem' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={badgeHasIcon} onChange={(e) => setBadgeHasIcon(e.target.checked)} />
+                          <span>Include Leading Icon</span>
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={badgeDismissible} onChange={(e) => setBadgeDismissible(e.target.checked)} />
+                          <span>Dismissible (Close x button)</span>
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header">
+                    {(['react', 'vue', 'angular'] as const).map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => setActiveTab(tab)}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container">
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react' ? getReactBadgeCode() : activeTab === 'vue' ? getVueBadgeCode() : getAngularBadgeCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} badge snippet`);
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block">
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactBadgeCode()
+                            : activeTab === 'vue'
+                              ? getVueBadgeCode()
+                              : getAngularBadgeCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'accordion' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>🪗</span> Accordion & Collapse Component
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Demo Stage */}
+                  <div className="demo-stage" style={{ width: '100%' }}>
+                    <h3 className="stage-title">Interactive Stage</h3>
+                    <div style={{ padding: '2rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)' }}>
+                      <Accordion
+                        variant={accordionVariant}
+                        colorMode={accordionColorMode}
+                        accentColor={accordionAccent as any}
+                        allowMultiple={accordionAllowMultiple}
+                        value={accordionActiveValue}
+                        onValueChange={setAccordionActiveValue}
+                      >
+                        <Accordion.Item value="item-1">
+                          <Accordion.Header>✨ Introdução ao Catppuccin</Accordion.Header>
+                          <Accordion.Body>
+                            Catppuccin é um tema de cores comunitário super aconchegante e pastel que visa preencher a lacuna entre designs de alto contraste e designs opacos e monótonos. Ele traz 4 flavors maravilhosos (Latte, Frappé, Macchiato e Mocha) para dezenas de aplicativos!
+                          </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item value="item-2">
+                          <Accordion.Header>📦 Design System Multitecnologia</Accordion.Header>
+                          <Accordion.Body>
+                            Este design system foi construído em monorepo com pacotes especializados: CSS puro para estilos universais, além de adaptadores ricos em estados para as frameworks mais populares da Web moderna: React, Vue 3 e Angular.
+                          </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item value="item-3" disabled>
+                          <Accordion.Header>🔒 Funcionalidade Bloqueada (Desabilitado)</Accordion.Header>
+                          <Accordion.Body>
+                            Este painel está desabilitado e não pode ser aberto pelo usuário. É útil para formulários ou fluxos onde etapas estão travadas até uma ação anterior.
+                          </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item value="item-4">
+                          <Accordion.Header>🚀 Suporte a Animações Fluidas</Accordion.Header>
+                          <Accordion.Body>
+                            Usando CSS Grids de transição de linhas (`grid-template-rows`), conseguimos animar o colapso e expansão a partir de altura 0 de forma nativa e extremamente leve, sem cálculos caros de Javascript.
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Customizer Controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Accordion Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Layout Variant</label>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        {(['default', 'split'] as const).map((v) => (
+                          <button
+                            key={v}
+                            onClick={() => setAccordionVariant(v)}
+                            style={{
+                              flex: 1,
+                              padding: '0.5rem',
+                              borderRadius: '6px',
+                              border: accordionVariant === v ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: accordionVariant === v ? 'var(--ctp-mauve)' : 'transparent',
+                              color: accordionVariant === v ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                              fontSize: '0.85rem',
+                              textTransform: 'capitalize',
+                            }}
+                          >
+                            {v}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Color Mode</label>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        {(['none', 'colored', 'tonal'] as const).map((m) => (
+                          <button
+                            key={m}
+                            onClick={() => setAccordionColorMode(m)}
+                            style={{
+                              flex: 1,
+                              padding: '0.5rem',
+                              borderRadius: '6px',
+                              border: accordionColorMode === m ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: accordionColorMode === m ? 'var(--ctp-mauve)' : 'transparent',
+                              color: accordionColorMode === m ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                              fontSize: '0.85rem',
+                              textTransform: 'capitalize',
+                            }}
+                          >
+                            {m}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Expansion Mode</label>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button
+                          onClick={() => handleAccordionMultipleChange(false)}
+                          style={{
+                            flex: 1,
+                            padding: '0.5rem',
+                            borderRadius: '6px',
+                            border: !accordionAllowMultiple ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                            backgroundColor: !accordionAllowMultiple ? 'var(--ctp-mauve)' : 'transparent',
+                            color: !accordionAllowMultiple ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                            cursor: 'pointer',
+                            fontWeight: 'bold',
+                            fontSize: '0.85rem',
+                          }}
+                        >
+                          Single (Accordion)
+                        </button>
+                        <button
+                          onClick={() => handleAccordionMultipleChange(true)}
+                          style={{
+                            flex: 1,
+                            padding: '0.5rem',
+                            borderRadius: '6px',
+                            border: accordionAllowMultiple ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                            backgroundColor: accordionAllowMultiple ? 'var(--ctp-mauve)' : 'transparent',
+                            color: accordionAllowMultiple ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                            cursor: 'pointer',
+                            fontWeight: 'bold',
+                            fontSize: '0.85rem',
+                          }}
+                        >
+                          Multiple (Collapse)
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Accent Color</label>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
+                        {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
+                          <button
+                            key={c}
+                            onClick={() => setAccordionAccent(c)}
+                            title={c.charAt(0).toUpperCase() + c.slice(1)}
+                            style={{
+                              height: '24px',
+                              borderRadius: '4px',
+                              border: accordionAccent === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: `var(--ctp-${c})`,
+                              cursor: 'pointer',
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem', padding: '12px', border: '1px solid var(--ctp-surface1)', borderRadius: '8px', backgroundColor: 'var(--ctp-mantle)', color: 'var(--ctp-subtext0)', fontSize: '0.8rem', lineHeight: '1.4' }}>
+                      <div style={{ fontWeight: 'bold', color: 'var(--ctp-mauve)', marginBottom: '4px' }}>Active State:</div>
+                      <pre style={{ margin: 0, fontSize: '0.75rem', overflowX: 'auto', color: 'var(--ctp-text)' }}>
+                        {JSON.stringify(accordionActiveValue)}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
+                    {['react', 'vue', 'angular'].map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveTab(tab as any);
+                        }}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          background: 'none',
+                          color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
+                          borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
+                          cursor: 'pointer',
+                          fontSize: '0.9rem',
+                          fontWeight: activeTab === tab ? 'bold' : 'normal',
+                        }}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react'
+                          ? getReactAccordionCode()
+                          : activeTab === 'vue'
+                            ? getVueAccordionCode()
+                            : getAngularAccordionCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} accordion snippet`);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '0.5rem',
+                        right: '0.5rem',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '4px',
+                        border: '1px solid var(--ctp-surface1)',
+                        backgroundColor: 'var(--ctp-surface0)',
+                        color: 'var(--ctp-text)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactAccordionCode()
+                            : activeTab === 'vue'
+                              ? getVueAccordionCode()
+                              : getAngularAccordionCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'dropdown' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>▾</span> Dropdown Portal Component
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Demo Stage */}
+                  <div className="demo-stage" style={{ width: '100%', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <h3 className="stage-title">Interactive Stage</h3>
+                    <div style={{ padding: '4rem 2rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <Dropdown
+                        trigger={<Button color={dropdownColor}>Abrir Menu de Opções</Button>}
+                        placement={dropdownPlacement}
+                        color={dropdownColor}
+                        closeOnItemClick={dropdownCloseOnItemClick}
+                        autoFlip={dropdownAutoFlip}
+                      >
+                        <Dropdown.Header>Minha Conta</Dropdown.Header>
+                        <Dropdown.Item icon={<UserIcon size={16} />}>Perfil do Usuário</Dropdown.Item>
+                        <Dropdown.Item icon={<SettingsIcon size={16} />}>Configurações</Dropdown.Item>
+                        <Dropdown.Item icon={<BellIcon size={16} />} disabled>Notificações (Desativado)</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Header>Ações Rápidas</Dropdown.Header>
+                        <Dropdown.Item icon={<ExternalLinkIcon size={16} />}>Ver Site Externo</Dropdown.Item>
+                        <Dropdown.Item icon={<TrashIcon size={16} />} danger>Excluir Conta</Dropdown.Item>
+                      </Dropdown>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Customizer Controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Dropdown Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Dropdown Placement</label>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem' }}>
+                        {(['bottom-start', 'bottom-end', 'bottom', 'top-start', 'top-end', 'top', 'left', 'right'] as const).map((p) => (
+                          <button
+                            key={p}
+                            onClick={() => setDropdownPlacement(p)}
+                            style={{
+                              padding: '0.4rem',
+                              borderRadius: '6px',
+                              border: dropdownPlacement === p ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: dropdownPlacement === p ? 'var(--ctp-mauve)' : 'transparent',
+                              color: dropdownPlacement === p ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                              fontSize: '0.75rem',
+                            }}
+                          >
+                            {p}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Accent Color</label>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
+                        {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
+                          <button
+                            key={c}
+                            onClick={() => setDropdownColor(c as any)}
+                            title={c.charAt(0).toUpperCase() + c.slice(1)}
+                            style={{
+                              height: '24px',
+                              borderRadius: '4px',
+                              border: dropdownColor === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: `var(--ctp-${c})`,
+                              cursor: 'pointer',
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={dropdownCloseOnItemClick}
+                          onChange={(e) => setDropdownCloseOnItemClick(e.target.checked)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <span>Close Menu on Item Click</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.75rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={dropdownAutoFlip}
+                          onChange={(e) => setDropdownAutoFlip(e.target.checked)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <span>Enable Viewport Auto-Flip</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
+                    {['react', 'vue', 'angular'].map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveTab(tab as any);
+                        }}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          background: 'none',
+                          color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
+                          borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
+                          cursor: 'pointer',
+                          fontSize: '0.9rem',
+                          fontWeight: activeTab === tab ? 'bold' : 'normal',
+                        }}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react'
+                          ? getReactDropdownCode()
+                          : activeTab === 'vue'
+                            ? getVueDropdownCode()
+                            : getAngularDropdownCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} dropdown snippet`);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '0.5rem',
+                        right: '0.5rem',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '4px',
+                        border: '1px solid var(--ctp-surface1)',
+                        backgroundColor: 'var(--ctp-surface0)',
+                        color: 'var(--ctp-text)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactDropdownCode()
+                            : activeTab === 'vue'
+                              ? getVueDropdownCode()
+                              : getAngularDropdownCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'tooltip' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>💬</span> Tooltip Portal Component
+                </h2>
+
+                <div className="playground-section">
+                  {/* Left Column: Demo Stage */}
+                  <div className="demo-stage" style={{ width: '100%', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <h3 className="stage-title">Interactive Stage</h3>
+                    <div style={{ padding: '4rem 2rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+
+                      <Tooltip
+                        content="Olá! Eu sou um Tooltip posicionado via Portal."
+                        placement={tooltipPlacement}
+                        color={tooltipColor}
+                        delay={tooltipDelay}
+                        autoFlip={tooltipAutoFlip}
+                      >
+                        <Button color="mauve">Passe o Mouse Aqui</Button>
+                      </Tooltip>
+
+                      <Tooltip
+                        content="Ação deletar é irreversível!"
+                        placement={tooltipPlacement}
+                        color="red"
+                        delay={tooltipDelay}
+                        autoFlip={tooltipAutoFlip}
+                      >
+                        <button className="ctp-btn ctp-btn--outline ctp-btn--red ctp-btn--md ctp-btn--rounded" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <TrashIcon size={16} />
+                          Excluir Item
+                        </button>
+                      </Tooltip>
+
+                      <Tooltip
+                        content="Informações adicionais sobre o sistema"
+                        placement={tooltipPlacement}
+                        color="blue"
+                        delay={tooltipDelay}
+                        autoFlip={tooltipAutoFlip}
+                      >
+                        <span style={{ cursor: 'help', color: 'var(--ctp-blue)', display: 'inline-flex', alignItems: 'center', gap: '6px', textDecoration: 'underline dotted', fontWeight: 600 }}>
+                          <InfoIcon size={18} />
+                          Mais Informações
+                        </span>
+                      </Tooltip>
+
+                    </div>
+                  </div>
+
+                  {/* Right Column: Customizer Controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Tooltip Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Tooltip Placement</label>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem' }}>
+                        {(['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right'] as const).map((p) => (
+                          <button
+                            key={p}
+                            onClick={() => setTooltipPlacement(p)}
+                            style={{
+                              padding: '0.4rem',
+                              borderRadius: '6px',
+                              border: tooltipPlacement === p ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: tooltipPlacement === p ? 'var(--ctp-mauve)' : 'transparent',
+                              color: tooltipPlacement === p ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                              fontSize: '0.75rem',
+                            }}
+                          >
+                            {p}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Tooltip Color Presets</label>
+                      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                        {(['dark', 'light'] as const).map((v) => (
+                          <button
+                            key={v}
+                            onClick={() => setTooltipColor(v)}
+                            style={{
+                              flex: 1,
+                              padding: '0.4rem',
+                              borderRadius: '6px',
+                              border: tooltipColor === v ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: tooltipColor === v ? 'var(--ctp-mauve)' : 'transparent',
+                              color: tooltipColor === v ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                              fontSize: '0.75rem',
+                              textTransform: 'capitalize',
+                            }}
+                          >
+                            {v} theme
+                          </button>
+                        ))}
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.4rem' }}>
+                        {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'peach', 'yellow', 'green', 'teal', 'blue', 'sky', 'lavender', 'sapphire', 'maroon'].map((c) => (
+                          <button
+                            key={c}
+                            onClick={() => setTooltipColor(c as any)}
+                            title={c.charAt(0).toUpperCase() + c.slice(1)}
+                            style={{
+                              height: '24px',
+                              borderRadius: '4px',
+                              border: tooltipColor === c ? '2px solid white' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: `var(--ctp-${c})`,
+                              cursor: 'pointer',
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span>Hover Delay ({tooltipDelay}ms)</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="50"
+                        max="1000"
+                        step="50"
+                        value={tooltipDelay}
+                        onChange={(e) => setTooltipDelay(Number(e.target.value))}
+                        style={{ width: '100%', cursor: 'pointer', accentColor: 'var(--ctp-mauve)' }}
+                      />
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={tooltipAutoFlip}
+                          onChange={(e) => setTooltipAutoFlip(e.target.checked)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <span>Enable Viewport Auto-Flip</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
+                    {['react', 'vue', 'angular'].map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveTab(tab as any);
+                        }}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          background: 'none',
+                          color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
+                          borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
+                          cursor: 'pointer',
+                          fontSize: '0.9rem',
+                          fontWeight: activeTab === tab ? 'bold' : 'normal',
+                        }}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react'
+                          ? getReactTooltipCode()
+                          : activeTab === 'vue'
+                            ? getVueTooltipCode()
+                            : getAngularTooltipCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} tooltip snippet`);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '0.5rem',
+                        right: '0.5rem',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '4px',
+                        border: '1px solid var(--ctp-surface1)',
+                        backgroundColor: 'var(--ctp-surface0)',
+                        color: 'var(--ctp-text)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactTooltipCode()
+                            : activeTab === 'vue'
+                              ? getVueTooltipCode()
+                              : getAngularTooltipCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'grid' && (
+            <>
+              <section className="playground-section">
+                <h2 className="section-title">
+                  <span>📦</span> Flexbox Grid Component
+                </h2>
+
+                <div className="playground-panel">
+                  {/* Left Column: Demo Stage */}
+                  <div className="demo-stage" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <h3 className="stage-title">Interactive Stage</h3>
+
+                    {/* Visual grid wrapping container */}
+                    <div style={{ padding: '2rem', backgroundColor: 'var(--ctp-crust)', borderRadius: '12px', border: '1px solid var(--ctp-surface0)', overflow: 'hidden' }}>
+
+                      <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
+                        1. Flex columns sharing space equally (Automatic Widths)
+                      </h4>
+                      <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign} style={{ marginBottom: '2rem' }}>
+                        <Grid.Col style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface2)', borderRadius: '6px', padding: '1rem', textAlign: 'center', color: 'var(--ctp-mauve)', fontWeight: 'bold' }}>
+                          Auto-col A
+                        </Grid.Col>
+                        <Grid.Col style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface2)', borderRadius: '6px', padding: '1rem', textAlign: 'center', color: 'var(--ctp-mauve)', fontWeight: 'bold' }}>
+                          Auto-col B
+                        </Grid.Col>
+                        <Grid.Col style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface2)', borderRadius: '6px', padding: '1rem', textAlign: 'center', color: 'var(--ctp-mauve)', fontWeight: 'bold' }}>
+                          Auto-col C
+                        </Grid.Col>
+                      </Grid>
+
+                      <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
+                        2. Column Span Spans (12-Columns grid base)
+                      </h4>
+                      <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign} style={{ marginBottom: '2rem' }}>
+                        <Grid.Col span={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
+                          span-12 (100%)
+                        </Grid.Col>
+                        <Grid.Col span={8} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
+                          span-8 (66.6%)
+                        </Grid.Col>
+                        <Grid.Col span={4} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
+                          span-4 (33.3%)
+                        </Grid.Col>
+                        <Grid.Col span={6} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
+                          span-6 (50%)
+                        </Grid.Col>
+                        <Grid.Col span={6} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-surface1)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-text)' }}>
+                          span-6 (50%)
+                        </Grid.Col>
+                      </Grid>
+
+                      <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
+                        3. Offsets and Alignment
+                      </h4>
+                      <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign} style={{ marginBottom: '2rem' }}>
+                        <Grid.Col span={4} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-peach)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-peach)', fontWeight: 600 }}>
+                          Col 4
+                        </Grid.Col>
+                        <Grid.Col span={4} offset={4} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-peach)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-peach)', fontWeight: 600 }}>
+                          Col 4 Offset 4
+                        </Grid.Col>
+                      </Grid>
+
+                      <h4 style={{ color: 'var(--ctp-subtext0)', margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
+                        4. Responsive Stacking (md=4, sm=12)
+                      </h4>
+                      <Grid gap={gridGap} mobile={gridMobile} multiline={gridMultiline} align={gridAlign} valign={gridValign}>
+                        <Grid.Col md={4} sm={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-green)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-green)' }}>
+                          Col A (md-4 sm-12)
+                        </Grid.Col>
+                        <Grid.Col md={4} sm={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-green)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-green)' }}>
+                          Col B (md-4 sm-12)
+                        </Grid.Col>
+                        <Grid.Col md={4} sm={12} style={{ backgroundColor: 'var(--ctp-surface0)', border: '1px solid var(--ctp-green)', borderRadius: '6px', padding: '0.75rem', textAlign: 'center', color: 'var(--ctp-green)' }}>
+                          Col C (md-4 sm-12)
+                        </Grid.Col>
+                      </Grid>
+
+                    </div>
+                  </div>
+
+                  {/* Right Column: Customizer Controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Grid Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Gap Spacing Size</label>
+                      <div style={{ display: 'flex', gap: '0.4rem' }}>
+                        {([0, 1, 2, 3, 4, 5] as const).map((g) => (
+                          <button
+                            key={g}
+                            onClick={() => setGridGap(g)}
+                            style={{
+                              flex: 1,
+                              padding: '0.4rem',
+                              borderRadius: '6px',
+                              border: gridGap === g ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: gridGap === g ? 'var(--ctp-mauve)' : 'transparent',
+                              color: gridGap === g ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              fontWeight: 'bold',
+                            }}
+                          >
+                            {g}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Align Columns (Justify Content)</label>
+                      <select
+                        value={gridAlign}
+                        onChange={(e) => setGridAlign(e.target.value as any)}
+                        style={{
+                          width: '100%',
+                          padding: '0.5rem',
+                          borderRadius: '6px',
+                          backgroundColor: 'var(--ctp-surface0)',
+                          border: '1px solid var(--ctp-surface1)',
+                          color: 'var(--ctp-text)',
+                          fontFamily: 'var(--ctp-font-family)',
+                          outline: 'none',
+                        }}
+                      >
+                        <option value="start">Start</option>
+                        <option value="center">Center</option>
+                        <option value="end">End</option>
+                        <option value="space-between">Space Between</option>
+                        <option value="space-around">Space Around</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Vertical Align (Align Items)</label>
+                      <select
+                        value={gridValign}
+                        onChange={(e) => setGridValign(e.target.value as any)}
+                        style={{
+                          width: '100%',
+                          padding: '0.5rem',
+                          borderRadius: '6px',
+                          backgroundColor: 'var(--ctp-surface0)',
+                          border: '1px solid var(--ctp-surface1)',
+                          color: 'var(--ctp-text)',
+                          fontFamily: 'var(--ctp-font-family)',
+                          outline: 'none',
+                        }}
+                      >
+                        <option value="start">Start</option>
+                        <option value="center">Center</option>
+                        <option value="end">End</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.5rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={gridMobile}
+                          onChange={(e) => setGridMobile(e.target.checked)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <span>Force Row layout on Mobile (mobile)</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.75rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={gridMultiline}
+                          onChange={(e) => setGridMultiline(e.target.checked)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <span>Enable Columns Wrapping (multiline)</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
+                    {['react', 'vue', 'angular'].map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveTab(tab as any);
+                        }}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          background: 'none',
+                          color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
+                          borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
+                          cursor: 'pointer',
+                          fontSize: '0.9rem',
+                          fontWeight: activeTab === tab ? 'bold' : 'normal',
+                        }}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        const code = activeTab === 'react'
+                          ? getReactGridCode()
+                          : activeTab === 'vue'
+                            ? getVueGridCode()
+                            : getAngularGridCode();
+                        const plainText = code.replace(/<[^>]*>/g, '');
+                        copyToClipboard(plainText, `${activeTab} grid snippet`);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '0.5rem',
+                        right: '0.5rem',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '4px',
+                        border: '1px solid var(--ctp-surface1)',
+                        backgroundColor: 'var(--ctp-surface0)',
+                        color: 'var(--ctp-text)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? getReactGridCode()
+                            : activeTab === 'vue'
+                              ? getVueGridCode()
+                              : getAngularGridCode()
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'datepicker' && (
+            <>
+              <section className="playground-section">
+                <h2 className="section-title">
+                  <span>📅</span> Date Picker Component
+                </h2>
+
+                <div className="playground-layout">
+                  {/* Left column: Live preview */}
+                  <div className="playground-preview" style={{ minHeight: '380px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+
+                    {/* Hero demo */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Live Preview</div>
+
+                      {dpMode === 'single' ? (
+                        <DatePicker
+                          mode="single"
+                          value={dpDate}
+                          onChange={setDpDate}
+                          color={dpColor}
+                          showToday={dpShowToday}
+                          disabled={dpDisabled}
+                        />
+                      ) : (
+                        <DatePicker
+                          mode="range"
+                          rangeValue={dpRange}
+                          onRangeChange={setDpRange}
+                          color={dpColor}
+                          showToday={dpShowToday}
+                          disabled={dpDisabled}
+                        />
+                      )}
+
+                      {/* Value display */}
+                      <div style={{ padding: '0.75rem 1rem', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px', border: '1px solid var(--ctp-surface0)', fontSize: '0.85rem', color: 'var(--ctp-subtext1)', minWidth: '260px' }}>
+                        {dpMode === 'single' ? (
+                          <span>
+                            <strong style={{ color: 'var(--ctp-text)' }}>Selecionado:</strong>{' '}
+                            {dpDate ? dpDate.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : <em>nenhum</em>}
+                          </span>
+                        ) : (
+                          <span>
+                            <strong style={{ color: 'var(--ctp-text)' }}>Intervalo:</strong>{' '}
+                            {dpRange.start ? dpRange.start.toLocaleDateString('pt-BR') : '—'}
+                            {' → '}
+                            {dpRange.end ? dpRange.end.toLocaleDateString('pt-BR') : '...'}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Color palette preview */}
+                    <div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: '0.75rem' }}>All Accent Colors</div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                        {(['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'] as FormControlColor[]).map(c => (
+                          <DatePicker
+                            key={c}
+                            mode="single"
+                            value={new Date()}
+                            color={c}
+                            showToday={false}
+                            placeholder={c}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Right column: controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">DatePicker Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Mode</label>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        {(['single', 'range'] as DatePickerMode[]).map(m => (
+                          <button
+                            key={m}
+                            onClick={() => { setDpMode(m); setDpDate(null); setDpRange({ start: null, end: null }); }}
+                            style={{
+                              flex: 1, padding: '0.4rem 0.75rem', borderRadius: '6px',
+                              border: dpMode === m ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: dpMode === m ? 'var(--ctp-mauve)' : 'transparent',
+                              color: dpMode === m ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer', fontWeight: 'bold', fontFamily: 'var(--ctp-font-family)'
+                            }}
+                          >{m}</button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label">Accent Color</label>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.4rem' }}>
+                        {(['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'] as FormControlColor[]).map(c => (
+                          <button
+                            key={c}
+                            title={c}
+                            onClick={() => setDpColor(c)}
+                            style={{
+                              width: '28px', height: '28px', borderRadius: '50%', border: dpColor === c ? '3px solid var(--ctp-text)' : '2px solid transparent',
+                              backgroundColor: `var(--ctp-${c})`, cursor: 'pointer', transition: 'transform 0.15s ease',
+                              transform: dpColor === c ? 'scale(1.2)' : 'scale(1)'
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input type="checkbox" checked={dpShowToday} onChange={e => setDpShowToday(e.target.checked)} style={{ cursor: 'pointer' }} />
+                        <span>Mostrar botão "Hoje"</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.75rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input type="checkbox" checked={dpDisabled} onChange={e => setDpDisabled(e.target.checked)} style={{ cursor: 'pointer' }} />
+                        <span>Disabled</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <button
+                        onClick={() => { setDpDate(null); setDpRange({ start: null, end: null }); }}
+                        style={{
+                          width: '100%', padding: '0.5rem', borderRadius: '6px',
+                          border: '1px solid var(--ctp-red)', backgroundColor: 'transparent',
+                          color: 'var(--ctp-red)', cursor: 'pointer', fontFamily: 'var(--ctp-font-family)',
+                          fontWeight: 600, fontSize: '0.85rem'
+                        }}
+                      >
+                        Limpar seleção
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Code snippet */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="code-container" style={{ position: 'relative', marginTop: '0.5rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code dangerouslySetInnerHTML={{
+                        __html: dpMode === 'single'
+                          ? `<span class="hl-tag">&lt;DatePicker</span>\n  <span class="hl-attr">mode</span>=<span class="hl-str">"single"</span>\n  <span class="hl-attr">value</span>=<span class="hl-str">{date}</span>\n  <span class="hl-attr">onChange</span>=<span class="hl-str">{setDate}</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${dpColor}"</span>\n  <span class="hl-attr">showToday</span>=<span class="hl-str">{${dpShowToday}}</span>\n<span class="hl-tag">/&gt;</span>`
+                          : `<span class="hl-tag">&lt;DatePicker</span>\n  <span class="hl-attr">mode</span>=<span class="hl-str">"range"</span>\n  <span class="hl-attr">rangeValue</span>=<span class="hl-str">{range}</span>\n  <span class="hl-attr">onRangeChange</span>=<span class="hl-str">{setRange}</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${dpColor}"</span>\n  <span class="hl-attr">showToday</span>=<span class="hl-str">{${dpShowToday}}</span>\n<span class="hl-tag">/&gt;</span>`
+                      }} />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'shell' && (
+            <>
+              <section className="playground-section">
+                <h2 className="section-title">
+                  <span>💻</span> Layout Shell Component
+                </h2>
+
+                <div className="playground-layout">
+                  {/* Left column: Live preview */}
+                  <div className="playground-preview" style={{ minHeight: '480px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                        Interactive Shell Sandbox
+                      </div>
+                      <button
+                        onClick={() => setShellFullScreen(true)}
+                        style={{
+                          padding: '0.4rem 0.8rem', borderRadius: '6px',
+                          border: '1px solid var(--ctp-mauve)',
+                          backgroundColor: 'var(--ctp-mauve)',
+                          color: 'var(--ctp-base)',
+                          cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem',
+                          fontFamily: 'var(--ctp-font-family)'
+                        }}
+                      >
+                        🚀 Enter Full-Screen View
+                      </button>
+                    </div>
+
+                    {/* Inline Shell container wrapper */}
+                    <div style={{
+                      height: '420px',
+                      width: '100%',
+                      border: '2px dashed var(--ctp-surface1)',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      position: 'relative'
+                    }}>
+                      <Shell
+                        layout={shellLayout}
+                        fullScreen={false}
+                        sidebarCollapsed={shellSidebarCollapsed}
+                        sidebarMini={shellSidebarMini}
+                        sidebarMobileOpen={shellSidebarMobileOpen}
+                        onBackdropClick={() => setShellSidebarMobileOpen(false)}
+                        headerHeight={shellHeaderHeight}
+                        sidebarWidth={shellSidebarWidth}
+                        style={{ height: '100%' }}
+                      >
+                        {/* Header */}
+                        {shellLayout !== 'custom' && (
+                          <Shell.Header style={{ justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                              <button
+                                type="button"
+                                onClick={() => setShellSidebarMobileOpen(!shellSidebarMobileOpen)}
+                                style={{
+                                  alignItems: 'center', justifyContent: 'center',
+                                  width: '32px', height: '32px', border: 'none', borderRadius: '6px',
+                                  backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
+                                  cursor: 'pointer', fontSize: '1.1rem'
+                                }}
+                                className="ctp-shell__mobile-toggle"
+                              >
+                                ☰
+                              </button>
+                              <span style={{ fontSize: '1.25rem' }}>🐱</span>
+                              <span style={{ fontWeight: 800, letterSpacing: '0.02em' }}>Catppuccin Shell</span>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                              <span style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)' }} className="ctp-d--none ctp-d--inline-desktop">Header Bar</span>
+                              <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--ctp-mauve)' }} />
+                            </div>
+                          </Shell.Header>
+                        )}
+
+                        {/* Sidebar */}
+                        {shellLayout !== 'simple' && shellLayout !== 'custom' && (
+                          <Shell.Sidebar style={{ padding: shellSidebarMini ? '1rem 0.5rem' : '1.5rem 1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                              {[
+                                { icon: '🏠', label: 'Dashboard' },
+                                { icon: '📊', label: 'Analytics' },
+                                { icon: '👥', label: 'Team Members' },
+                                { icon: '⚙️', label: 'Settings' }
+                              ].map((item, idx) => (
+                                <div
+                                  key={idx}
+                                  style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    padding: '0.6rem 0.8rem',
+                                    borderRadius: '8px',
+                                    backgroundColor: idx === 0 ? 'var(--ctp-surface0)' : 'transparent',
+                                    color: idx === 0 ? 'var(--ctp-mauve)' : 'var(--ctp-text)',
+                                    fontWeight: idx === 0 ? 'bold' : 'normal',
+                                    cursor: 'pointer',
+                                    fontSize: '0.9rem',
+                                    whiteSpace: 'nowrap',
+                                    justifyContent: shellSidebarMini ? 'center' : 'flex-start'
+                                  }}
+                                  title={item.label}
+                                >
+                                  <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
+                                  {!shellSidebarMini && <span>{item.label}</span>}
+                                </div>
+                              ))}
+                            </div>
+                          </Shell.Sidebar>
+                        )}
+
+                        {/* Main */}
+                        <Shell.Main>
+                          <Shell.Content scrollable={shellScrollable} style={{ padding: '1.5rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                              {/* Top Welcome Title */}
+                              <div>
+                                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800 }}>Bem-vindo ao Sandbox!</h3>
+                                <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>
+                                  Layout atual: <code>{shellLayout}</code>. Modifique as opções ao lado para testar responsividade e fluxos.
+                                </p>
+                              </div>
+
+                              {/* Side-by-side Page Columns using Grid component */}
+                              <Grid>
+                                <Grid.Col md={6} sm={12}>
+                                  <div style={{
+                                    padding: '1.25rem',
+                                    borderRadius: '10px',
+                                    backgroundColor: 'var(--ctp-mantle)',
+                                    border: '1px solid var(--ctp-surface0)',
+                                    height: '100%'
+                                  }}>
+                                    <h4 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>Coluna da Esquerda</h4>
+                                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext1)', lineHeight: 1.4 }}>
+                                      Este painel representa uma página ou bloco principal de conteúdo. O Shell gerencia automaticamente o recuo e o alinhamento.
+                                    </p>
+                                  </div>
+                                </Grid.Col>
+                                <Grid.Col md={6} sm={12}>
+                                  <div style={{
+                                    padding: '1.25rem',
+                                    borderRadius: '10px',
+                                    backgroundColor: 'var(--ctp-mantle)',
+                                    border: '1px solid var(--ctp-surface0)',
+                                    height: '100%'
+                                  }}>
+                                    <h4 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>Coluna da Direita</h4>
+                                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--ctp-subtext1)', lineHeight: 1.4 }}>
+                                      Esta é a segunda coluna, demonstrando o comportamento lado a lado do Grid integrado ao Shell. Redimensione ou alterne layouts.
+                                    </p>
+                                  </div>
+                                </Grid.Col>
+                              </Grid>
+
+                              {/* Extra paragraph to show scroll lock */}
+                              {shellScrollable && (
+                                <div style={{
+                                  padding: '1.25rem',
+                                  borderRadius: '10px',
+                                  backgroundColor: 'var(--ctp-crust)',
+                                  fontSize: '0.8rem',
+                                  color: 'var(--ctp-subtext1)',
+                                  lineHeight: 1.5
+                                }}>
+                                  <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>Teste de Rolagem Localizada (Overflow Scroll)</h5>
+                                  <p style={{ margin: '0 0 0.75rem 0' }}>
+                                    O contêiner de conteúdo possui rolagem independente. Veja que o cabeçalho e a barra lateral permanecem fixados enquanto você rola este texto longo:
+                                  </p>
+                                  {Array.from({ length: 4 }).map((_, i) => (
+                                    <p key={i} style={{ margin: '0 0 0.5rem 0' }}>
+                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec feugiat lectus. Ut et lorem ex. In elementum arcu at lacus rutrum, ut dictum purus dictum.
+                                    </p>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </Shell.Content>
+                        </Shell.Main>
+                      </Shell>
+                    </div>
+                  </div>
+
+                  {/* Right column: controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Shell Layout Options</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Grid Layout Area Template</label>
+                      <select
+                        value={shellLayout}
+                        onChange={(e) => setShellLayout(e.target.value as ShellLayout)}
+                        style={{
+                          width: '100%', padding: '0.5rem', borderRadius: '6px',
+                          backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
+                          border: '1px solid var(--ctp-surface1)', fontFamily: 'var(--ctp-font-family)',
+                          fontWeight: 600
+                        }}
+                      >
+                        <option value="header-first">Header First (Header Full width)</option>
+                        <option value="sidebar-first">Sidebar First (Sidebar Full height)</option>
+                        <option value="simple">Simple Layout (Header Only)</option>
+                      </select>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={shellSidebarCollapsed}
+                          onChange={(e) => setShellSidebarCollapsed(e.target.checked)}
+                          disabled={shellLayout === 'simple'}
+                        />
+                        <span>Collapse Sidebar</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.5rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={shellSidebarMini}
+                          onChange={(e) => setShellSidebarMini(e.target.checked)}
+                          disabled={shellLayout === 'simple' || shellSidebarCollapsed}
+                        />
+                        <span>Icon-only (Mini Sidebar)</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.5rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={shellScrollable}
+                          onChange={(e) => setShellScrollable(e.target.checked)}
+                        />
+                        <span>Independent Content Scroll</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1rem' }}>
+                      <label className="control-label">Header Height</label>
+                      <input
+                        type="text"
+                        value={shellHeaderHeight}
+                        onChange={(e) => setShellHeaderHeight(e.target.value)}
+                        style={{
+                          width: '100%', padding: '0.5rem', borderRadius: '6px',
+                          backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
+                          border: '1px solid var(--ctp-surface1)', fontFamily: 'var(--ctp-font-family)'
+                        }}
+                      />
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.75rem' }}>
+                      <label className="control-label">Sidebar Width</label>
+                      <input
+                        type="text"
+                        value={shellSidebarWidth}
+                        onChange={(e) => setShellSidebarWidth(e.target.value)}
+                        disabled={shellLayout === 'simple' || shellSidebarCollapsed}
+                        style={{
+                          width: '100%', padding: '0.5rem', borderRadius: '6px',
+                          backgroundColor: 'var(--ctp-surface0)', color: 'var(--ctp-text)',
+                          border: '1px solid var(--ctp-surface1)', fontFamily: 'var(--ctp-font-family)'
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'color-mix(in srgb, var(--ctp-mauve) 8%, transparent)', border: '1px solid var(--ctp-surface1)' }}>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)', display: 'block', lineHeight: 1.3 }}>
+                        💡 <strong>Dica de Responsividade:</strong> Em telas móveis (&lt;768px), o shell se reorganiza automaticamente. O menu lateral vira uma gaveta flutuante. Use o botão <strong>"Enter Full-Screen View"</strong> acima para testar responsividade real!
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Code snippets */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="code-container" style={{ position: 'relative', marginTop: '0.5rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code dangerouslySetInnerHTML={{
+                        __html:
+                          `<span class="hl-tag">&lt;Shell</span>\n  <span class="hl-attr">layout</span>=<span class="hl-str">"${shellLayout}"</span>\n  <span class="hl-attr">sidebarCollapsed</span>=<span class="hl-str">{${shellSidebarCollapsed}}</span>\n  <span class="hl-attr">sidebarMini</span>=<span class="hl-str">{${shellSidebarMini}}</span>\n  <span class="hl-attr">headerHeight</span>=<span class="hl-str">"${shellHeaderHeight}"</span>\n  <span class="hl-attr">sidebarWidth</span>=<span class="hl-str">"${shellSidebarWidth}"</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Shell.Header&gt;</span>\n    {/* Logo & Navigation Buttons */}\n  <span class="hl-tag">&lt;/Shell.Header&gt;</span>\n\n  <span class="hl-tag">&lt;Shell.Sidebar&gt;</span>\n    {/* Sidebar Links & Icons */}\n  <span class="hl-tag">&lt;/Shell.Sidebar&gt;</span>\n\n  <span class="hl-tag">&lt;Shell.Main&gt;</span>\n    <span class="hl-tag">&lt;Shell.Content</span> <span class="hl-attr">scrollable</span>=<span class="hl-str">{${shellScrollable}}</span><span class="hl-tag">&gt;</span>\n      <span class="hl-tag">&lt;Grid&gt;</span>\n        <span class="hl-tag">&lt;Grid.Col</span> <span class="hl-attr">span</span>=<span class="hl-str">{6}</span><span class="hl-tag">&gt;</span>Página 1<span class="hl-tag">&lt;/Grid.Col&gt;</span>\n        <span class="hl-tag">&lt;Grid.Col</span> <span class="hl-attr">span</span>=<span class="hl-str">{6}</span><span class="hl-tag">&gt;</span>Página 2<span class="hl-tag">&lt;/Grid.Col&gt;</span>\n      <span class="hl-tag">&lt;/Grid&gt;</span>\n    <span class="hl-tag">&lt;/Shell.Content&gt;</span>\n  <span class="hl-tag">&lt;/Shell.Main&gt;</span>\n<span class="hl-tag">&lt;/Shell&gt;</span>`
+                      }} />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'sidebar' && (
+            <>
+              <section className="playground-section">
+                <h2 className="section-title">
+                  <span>🚪</span> Rich Sidebar Component
+                </h2>
+
+                <div className="playground-layout">
+                  {/* Left column: Live preview */}
+                  <div className="playground-preview" style={{ minHeight: '480px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--ctp-subtext0)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                      Live Interactive Sidebar Preview
+                    </div>
+
+                    {/* Simulated Viewport Wrapper */}
+                    <div style={{
+                      height: '420px',
+                      width: '100%',
+                      border: '1px solid var(--ctp-surface1)',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      backgroundColor: 'var(--ctp-base)',
+                      position: 'relative'
+                    }}>
+                      {/* Sidebar component rendering */}
+                      <Sidebar
+                        variant={sbVariant}
+                        collapsed={sbCollapsed}
+                        expandOnHover={sbExpandOnHover}
+                      >
+                        {/* Header */}
+                        <Sidebar.Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
+                            <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>🐱</span>
+                            {!sbCollapsed && (
+                              <span style={{ fontWeight: 800, fontSize: '0.9rem', whiteSpace: 'nowrap', color: 'var(--ctp-text)' }}>
+                                Catppuccin
+                              </span>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setSbCollapsed(!sbCollapsed)}
+                            style={{
+                              background: 'var(--ctp-surface0)',
+                              border: 'none',
+                              borderRadius: '4px',
+                              color: 'var(--ctp-text)',
+                              cursor: 'pointer',
+                              padding: '2px 6px',
+                              fontSize: '0.75rem',
+                              fontFamily: 'monospace',
+                              fontWeight: 'bold',
+                              flexShrink: 0
+                            }}
+                            title={sbCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+                          >
+                            {sbCollapsed ? '⟩' : '⟨'}
+                          </button>
+                        </Sidebar.Header>
+
+                        {/* Navigation items */}
+                        <Sidebar.Section>
+                          {[
+                            { icon: '🏠', label: 'Dashboard' },
+                            { icon: '📊', label: 'Analytics' },
+                            { icon: '📂', label: 'Projects' },
+                            { icon: '💬', label: 'Messages' },
+                            { icon: '⚙️', label: 'Settings' }
+                          ].map((item, idx) => (
+                            <Sidebar.Item
+                              key={idx}
+                              icon={item.icon}
+                              label={item.label}
+                              active={sbActiveItem === idx}
+                              onClick={() => setSbActiveItem(idx)}
+                            />
+                          ))}
+                        </Sidebar.Section>
+
+                        {/* Footer */}
+                        <Sidebar.Footer>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', overflow: 'hidden', width: '100%' }}>
+                            <div style={{
+                              width: '32px',
+                              height: '32px',
+                              borderRadius: '50%',
+                              backgroundColor: 'var(--ctp-mauve)',
+                              color: 'var(--ctp-base)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontWeight: 'bold',
+                              fontSize: '0.85rem',
+                              flexShrink: 0
+                            }}>
+                              SD
+                            </div>
+                            {!sbCollapsed && (
+                              <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', flex: 1 }}>
+                                <span style={{ fontSize: '0.85rem', fontWeight: 'bold', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', color: 'var(--ctp-text)' }}>
+                                  Savunma Dev
+                                </span>
+                                <span style={{ fontSize: '0.7rem', color: 'var(--ctp-subtext0)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                                  savunma@catppuccin.dev
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </Sidebar.Footer>
+                      </Sidebar>
+
+                      {/* Main Content Area in simulator */}
+                      <div style={{
+                        flex: 1,
+                        padding: '2rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'var(--ctp-base)',
+                        color: 'var(--ctp-text)',
+                        boxSizing: 'border-box'
+                      }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>
+                          {sbActiveItem === 0 && '🏠'}
+                          {sbActiveItem === 1 && '📊'}
+                          {sbActiveItem === 2 && '📂'}
+                          {sbActiveItem === 3 && '💬'}
+                          {sbActiveItem === 4 && '⚙️'}
+                        </div>
+                        <h3 style={{ margin: 0, fontWeight: 800 }}>
+                          Página: {[
+                            'Dashboard',
+                            'Analytics',
+                            'Projects',
+                            'Messages',
+                            'Settings'
+                          ][sbActiveItem]}
+                        </h3>
+                        <p style={{ margin: '8px 0 0', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', textAlign: 'center' }}>
+                          Simulação de conteúdo ativo. Alterne as seções do menu lateral.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right column: controls */}
+                  <div className="playground-controls">
+                    <h3 className="controls-title">Sidebar Customizer</h3>
+
+                    <div className="control-group">
+                      <label className="control-label">Sidebar Visual Style</label>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        {(['fixed', 'floated'] as const).map(v => (
+                          <button
+                            key={v}
+                            onClick={() => setSbVariant(v)}
+                            style={{
+                              flex: 1, padding: '0.4rem 0.75rem', borderRadius: '6px',
+                              border: sbVariant === v ? '1px solid var(--ctp-mauve)' : '1px solid var(--ctp-surface1)',
+                              backgroundColor: sbVariant === v ? 'var(--ctp-mauve)' : 'transparent',
+                              color: sbVariant === v ? 'var(--ctp-base)' : 'var(--ctp-text)',
+                              cursor: 'pointer', fontWeight: 'bold', fontFamily: 'var(--ctp-font-family)'
+                            }}
+                          >{v.toUpperCase()}</button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '1.25rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={sbCollapsed}
+                          onChange={(e) => setSbCollapsed(e.target.checked)}
+                        />
+                        <span>Collapsed (Mini Mode)</span>
+                      </label>
+                    </div>
+
+                    <div className="control-group" style={{ marginTop: '0.5rem' }}>
+                      <label className="control-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={sbExpandOnHover}
+                          onChange={(e) => setSbExpandOnHover(e.target.checked)}
+                          disabled={!sbCollapsed}
+                        />
+                        <span>Expand on Hover (when Collapsed)</span>
+                      </label>
+                    </div>
+
+                    <div style={{ marginTop: '1.5rem', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'color-mix(in srgb, var(--ctp-mauve) 8%, transparent)', border: '1px solid var(--ctp-surface1)' }}>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)', display: 'block', lineHeight: 1.3 }}>
+                        💡 <strong>Como testar:</strong> Ative a opção <strong>"Collapsed (Mini Mode)"</strong> e passe o mouse sobre o menu lateral. Se a opção <strong>"Expand on Hover"</strong> estiver ligada, a barra irá se expandir suavemente como overlay sobre o conteúdo da página, e encolherá ao tirar o mouse!
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Code snippets */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="code-container" style={{ position: 'relative', marginTop: '0.5rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code dangerouslySetInnerHTML={{
+                        __html:
+                          `<span class="hl-tag">&lt;Sidebar</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${sbVariant}"</span>\n  <span class="hl-attr">collapsed</span>=<span class="hl-str">{${sbCollapsed}}</span>\n  <span class="hl-attr">expandOnHover</span>=<span class="hl-str">{${sbExpandOnHover}}</span>\n<span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Sidebar.Header&gt;</span>\n    🐱 Brand\n    <span class="hl-tag">&lt;button</span> <span class="hl-attr">onClick</span>=<span class="hl-str">{(e) =&gt; setCollapsed(!collapsed)}</span><span class="hl-tag">&gt;</span>⟨<span class="hl-tag">&lt;/button&gt;</span>\n  <span class="hl-tag">&lt;/Sidebar.Header&gt;</span>\n\n  <span class="hl-tag">&lt;Sidebar.Section&gt;</span>\n    <span class="hl-tag">&lt;Sidebar.Item</span> <span class="hl-attr">icon</span>=<span class="hl-str">"🏠"</span> <span class="hl-attr">label</span>=<span class="hl-str">"Dashboard"</span> <span class="hl-attr">active</span>=<span class="hl-str">{active === 0}</span> <span class="hl-attr">onClick</span>=<span class="hl-str">{() =&gt; setActive(0)}</span> <span class="hl-tag">/&gt;</span>\n    <span class="hl-tag">&lt;Sidebar.Item</span> <span class="hl-attr">icon</span>=<span class="hl-str">"📊"</span> <span class="hl-attr">label</span>=<span class="hl-str">"Analytics"</span> <span class="hl-attr">active</span>=<span class="hl-str">{active === 1}</span> <span class="hl-attr">onClick</span>=<span class="hl-str">{() =&gt; setActive(1)}</span> <span class="hl-tag">/&gt;</span>\n  <span class="hl-tag">&lt;/Sidebar.Section&gt;</span>\n<span class="hl-tag">&lt;/Sidebar&gt;</span>`
+                      }} />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'typography' && (
+            <>
+              <section className="playground-section">
+                <h2 className="section-title">
+                  <span>🔤</span> Typography & Text Helpers
+                </h2>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                  {/* Card 1: Font Scale Showcase */}
+                  <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
+                    <div className="ctp-card__header">
+                      <h3 className="ctp-card__title">Scale & Hierarchy</h3>
+                      <p className="ctp-card__subtitle">Default font sizes and heading modifiers using BEM</p>
+                    </div>
+                    <div className="ctp-card__body" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                      <div style={{ borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1rem' }}>
+                        <h1 className="ctp-title ctp-title--h1">Heading 1 (.ctp-title--h1)</h1>
+                        <h2 className="ctp-title ctp-title--h2">Heading 2 (.ctp-title--h2)</h2>
+                        <h3 className="ctp-title ctp-title--h3">Heading 3 (.ctp-title--h3)</h3>
+                        <h4 className="ctp-title ctp-title--h4">Heading 4 (.ctp-title--h4)</h4>
+                        <h5 className="ctp-title ctp-title--h5">Heading 5 (.ctp-title--h5)</h5>
+                        <h6 className="ctp-title ctp-title--h6">Heading 6 (.ctp-title--h6)</h6>
+                      </div>
+                      <div>
+                        <p className="ctp-text ctp-text--lead">Lead paragraph (.ctp-text--lead) - Perfect for introductory copy with a slightly larger size.</p>
+                        <p className="ctp-text ctp-text--body">Body text (.ctp-text--body / default) - Standard paragraph text with comfortable reading line-height of 1.6.</p>
+                        <p className="ctp-text ctp-text--sm">Small text (.ctp-text--sm) - Excellent for captions, secondary descriptions or card footers.</p>
+                        <p className="ctp-text ctp-text--xs">Extra small text (.ctp-text--xs) - Ideal for labels, badges metadata or tiny details.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Font Weights Showcase */}
+                  <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
+                    <div className="ctp-card__header">
+                      <h3 className="ctp-card__title">Font Weights</h3>
+                      <p className="ctp-card__subtitle">Cozy weight variants matching Outfit design token scales</p>
+                    </div>
+                    <div className="ctp-card__body" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                      <div>
+                        <p className="ctp-text ctp-text--light" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Light 300</p>
+                        <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--light</code>
+                      </div>
+                      <div>
+                        <p className="ctp-text ctp-text--regular" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Regular 400</p>
+                        <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--regular</code>
+                      </div>
+                      <div>
+                        <p className="ctp-text ctp-text--medium" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Medium 500</p>
+                        <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--medium</code>
+                      </div>
+                      <div>
+                        <p className="ctp-text ctp-text--semibold" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Semibold 600</p>
+                        <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--semibold</code>
+                      </div>
+                      <div>
+                        <p className="ctp-text ctp-text--bold" style={{ fontSize: '1.5rem', marginBottom: '4px' }}>Bold 700</p>
+                        <code className="ctp-text--xs" style={{ color: 'var(--ctp-subtext0)' }}>.ctp-text--bold</code>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Color Helpers Showcase */}
+                  <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
+                    <div className="ctp-card__header">
+                      <h3 className="ctp-card__title">Solid Text Colors</h3>
+                      <p className="ctp-card__subtitle">Catppuccin colors mapped directly to typography modifiers</p>
+                    </div>
+                    <div className="ctp-card__body">
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem' }}>
+                        {['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender', 'text', 'subtext1', 'subtext0', 'overlay2'].map((c) => (
+                          <div key={c} style={{ display: 'flex', flexDirection: 'column', padding: '10px', backgroundColor: 'var(--ctp-mantle)', borderRadius: '6px', border: '1px solid var(--ctp-surface0)' }}>
+                            <span className={`ctp-text ctp-text--bold ctp-text--${c}`} style={{ marginBottom: '4px', textTransform: 'capitalize' }}>{c}</span>
+                            <code style={{ fontSize: '0.7rem', color: 'var(--ctp-overlay1)', overflow: 'hidden', textOverflow: 'ellipsis' }}>.ctp-text--{c}</code>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 4: Gradient Text Gallery */}
+                  <div className="ctp-card ctp-card--filled ctp-card--rounded ctp-card--padding-md">
+                    <div className="ctp-card__header">
+                      <h3 className="ctp-card__title">Gradient Title Gallery</h3>
+                      <p className="ctp-card__subtitle">Premium text gradients combining Catppuccin color pairings</p>
+                    </div>
+                    <div className="ctp-card__body">
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
+                        {[
+                          { name: 'Mauve & Blue', class: 'ctp-title--gradient-mauve-blue', colors: 'Mauve to Blue' },
+                          { name: 'Peach & Red', class: 'ctp-title--gradient-peach-red', colors: 'Peach to Red' },
+                          { name: 'Green & Teal', class: 'ctp-title--gradient-green-teal', colors: 'Green to Teal' },
+                          { name: 'Lavender & Pink', class: 'ctp-title--gradient-lavender-pink', colors: 'Lavender to Pink' },
+                          { name: 'Yellow & Peach', class: 'ctp-title--gradient-yellow-peach', colors: 'Yellow to Peach' },
+                          { name: 'Rosewater & Flamingo', class: 'ctp-title--gradient-rosewater-flamingo', colors: 'Rosewater to Flamingo' },
+                          { name: 'Sky & Blue', class: 'ctp-title--gradient-sky-blue', colors: 'Sky to Blue' }
+                        ].map((g) => (
+                          <div
+                            key={g.class}
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              padding: '1.5rem',
+                              backgroundColor: 'var(--ctp-mantle)',
+                              borderRadius: '8px',
+                              border: '1px solid var(--ctp-surface1)',
+                              position: 'relative'
+                            }}
+                          >
+                            <h2 className={`ctp-title ctp-title--h2 ${g.class}`} style={{ marginBottom: '8px', fontSize: '1.8rem' }}>
+                              Catppuccin
+                            </h2>
+                            <span style={{ fontSize: '0.85rem', color: 'var(--ctp-text)', fontWeight: 600 }}>{g.name}</span>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)', marginBottom: '1rem' }}>{g.colors}</span>
+
+                            <button
+                              className="ctp-btn ctp-btn--sm ctp-btn--outline ctp-btn--rounded"
+                              onClick={() => copyToClipboard(`class="ctp-title ctp-title--h1 ${g.class}"`, `Class ${g.class}`)}
+                              style={{ marginTop: 'auto', alignSelf: 'flex-start', fontSize: '0.75rem', padding: '4px 10px' }}
+                            >
+                              Copy class code
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Playground Code Display */}
+                <div style={{ marginTop: '2rem' }}>
+                  <div className="tabs-header" style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--ctp-surface1)', paddingBottom: '1px' }}>
+                    {['react', 'vue', 'angular'].map((tab) => (
+                      <button
+                        key={tab}
+                        className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                        onClick={() => {
+                          setActiveTab(tab as any);
+                        }}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          background: 'none',
+                          color: activeTab === tab ? 'var(--ctp-mauve)' : 'var(--ctp-subtext0)',
+                          borderBottom: activeTab === tab ? '2px solid var(--ctp-mauve)' : 'none',
+                          cursor: 'pointer',
+                          fontSize: '0.9rem',
+                          fontWeight: activeTab === tab ? 'bold' : 'normal',
+                        }}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="code-container" style={{ position: 'relative', marginTop: '1rem', borderRadius: '8px', overflow: 'hidden' }}>
+                    <button
+                      className="code-copy-btn"
+                      onClick={() => {
+                        let codeText = '';
+                        if (activeTab === 'react') {
+                          codeText = '<h1 className="ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue">Catppuccin Gradient</h1>';
+                        } else if (activeTab === 'vue') {
+                          codeText = '<h1 class="ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue">Catppuccin Gradient</h1>';
+                        } else {
+                          codeText = '<h1 class="ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue">Catppuccin Gradient</h1>';
+                        }
+                        copyToClipboard(codeText, `${activeTab} typography snippet`);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '0.5rem',
+                        right: '0.5rem',
+                        padding: '0.3rem 0.6rem',
+                        fontSize: '0.8rem',
+                        borderRadius: '4px',
+                        border: '1px solid var(--ctp-surface1)',
+                        backgroundColor: 'var(--ctp-surface0)',
+                        color: 'var(--ctp-text)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Copy Code
+                    </button>
+                    <pre className="code-block" style={{ margin: 0, padding: '1rem', overflowX: 'auto', backgroundColor: 'var(--ctp-mantle)', borderRadius: '8px' }}>
+                      <code
+                        dangerouslySetInnerHTML={{
+                          __html: activeTab === 'react'
+                            ? `<span class="hl-tag">&lt;h1</span> <span class="hl-attr">className</span>=<span class="hl-str">"ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue"</span><span class="hl-tag">&gt;</span>Catppuccin Gradient<span class="hl-tag">&lt;/h1&gt;</span>`
+                            : activeTab === 'vue'
+                              ? `<span class="hl-tag">&lt;h1</span> <span class="hl-attr">class</span>=<span class="hl-str">"ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue"</span><span class="hl-tag">&gt;</span>Catppuccin Gradient<span class="hl-tag">&lt;/h1&gt;</span>`
+                              : `<span class="hl-tag">&lt;h1</span> <span class="hl-attr">class</span>=<span class="hl-str">"ctp-title ctp-title--h1 ctp-title--gradient-mauve-blue"</span><span class="hl-tag">&gt;</span>Catppuccin Gradient<span class="hl-tag">&lt;/h1&gt;</span>`
+                        }}
+                      />
+                    </pre>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {/* ===== TEXT EDITOR ===== */}
+          {activeComponent === 'texteditor' && (
+            <>
+              <section className="showcase-section">
+                <div className="section-header">
+                  <div>
+                    <h2 className="section-title">✍️ Text Editor</h2>
+                    <p className="section-description">
+                      Editor de texto rico baseado em <strong>Tiptap</strong> + ProseMirror.
+                      Suporta importação e exportação nativa de <code>Markdown</code>, modo WYSIWYG e modo Markdown raw,
+                      toolbar completa e bubble menu de seleção de texto.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="playground-card">
+                  <div className="playground-controls">
+                    <div className="control-group">
+                      <label className="control-label">Cor de Destaque</label>
+                      <div className="control-row" style={{ flexWrap: 'wrap', gap: '6px' }}>
+                        {(['rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'] as TextEditorColor[]).map(c => (
+                          <button
+                            key={c}
+                            type="button"
+                            onClick={() => setEditorColor(c)}
+                            title={c}
+                            style={{
+                              width: 22, height: 22, borderRadius: '50%',
+                              border: editorColor === c ? '2.5px solid var(--ctp-text)' : '2px solid transparent',
+                              background: `var(--ctp-${c})`,
+                              cursor: 'pointer', padding: 0, outline: 'none',
+                              boxShadow: editorColor === c ? '0 0 0 2px var(--ctp-base)' : 'none',
+                              transition: 'all 0.15s'
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="control-group">
+                      <label className="control-label">Tamanho</label>
+                      <div className="control-row">
+                        {(['sm', 'md', 'lg'] as TextEditorSize[]).map(s => (
+                          <button key={s} type="button"
+                            className={`prop-btn ${editorSize === s ? 'active' : ''}`}
+                            onClick={() => setEditorSize(s)}
+                          >{s}</button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="control-group">
+                      <label className="control-label">Limite de Caracteres</label>
+                      <div className="control-row">
+                        {([0, 200, 500, 1000]).map(n => (
+                          <button key={n} type="button"
+                            className={`prop-btn ${editorMaxLength === n ? 'active' : ''}`}
+                            onClick={() => setEditorMaxLength(n)}
+                          >{n === 0 ? 'Ilimitado' : n}</button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="control-group">
+                      <label className="control-label">Modo</label>
+                      <div className="control-row">
+                        <button type="button"
+                          className={`prop-btn ${!editorReadOnly ? 'active' : ''}`}
+                          onClick={() => setEditorReadOnly(false)}
+                        >Editável</button>
+                        <button type="button"
+                          className={`prop-btn ${editorReadOnly ? 'active' : ''}`}
+                          onClick={() => setEditorReadOnly(true)}
+                        >Read-only</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="playground-preview" style={{ padding: '24px' }}>
+                    <TextEditor
+                      color={editorColor}
+                      size={editorSize}
+                      maxLength={editorMaxLength}
+                      readOnly={editorReadOnly}
+                      allowFullscreen={true}
+                      placeholder="Comece a escrever… (suporta **Markdown**)."
+                      defaultValue={`# Bem-vindo ao Catppuccin Text Editor\n\nEste é um editor **rico** baseado em [Tiptap](https://tiptap.dev). Você pode usar:\n\n- **Negrito**, *itálico*, ~~riscado~~ e \`código inline\`\n- Listas ordenadas e não-ordenadas\n- Blockquotes, tabelas e régua horizontal\n\n> Use o botão **Markdown** na barra de status para alternar entre WYSIWYG e código Markdown!\n\n---\n\nSelecione um texto para ver o **bubble menu** de formatação rápida.`}
+                      onChange={(md) => setEditorContent(md)}
+                    />
+                  </div>
+                </div>
+
+                {editorContent && (
+                  <div style={{ marginTop: 24, borderRadius: 12, border: '1.5px solid var(--ctp-surface1)', overflow: 'hidden' }}>
+                    <div style={{
+                      padding: '10px 16px', background: 'var(--ctp-mantle)',
+                      borderBottom: '1px solid var(--ctp-surface0)', fontSize: '0.8rem',
+                      fontWeight: 600, color: 'var(--ctp-subtext0)', display: 'flex', alignItems: 'center', gap: 8
+                    }}>
+                      <span>📄</span> Saída Markdown (onChange)
+                    </div>
+                    <pre style={{
+                      margin: 0, padding: '16px 20px',
+                      fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                      fontSize: '0.82rem', lineHeight: 1.7, color: 'var(--ctp-text)',
+                      background: 'var(--ctp-base)', overflowX: 'auto', whiteSpace: 'pre-wrap'
+                    }}>{editorContent}</pre>
+                  </div>
+                )}
+
+                <div className="code-section" style={{ marginTop: 32 }}>
+                  <h3 className="code-section-title">Como usar</h3>
+                  <pre className="code-block" style={{ padding: '1rem', overflowX: 'auto' }}>
+                    <code dangerouslySetInnerHTML={{
+                      __html:
+                        `<span class="hl-comment">// React</span>\n` +
+                        `<span class="hl-tag">&lt;TextEditor</span>\n` +
+                        `  <span class="hl-attr">color</span>=<span class="hl-str">"${editorColor}"</span>\n` +
+                        `  <span class="hl-attr">size</span>=<span class="hl-str">"${editorSize}"</span>\n` +
+                        (editorMaxLength > 0 ? `  <span class="hl-attr">maxLength</span>=<span class="hl-str">{${editorMaxLength}}</span>\n` : '') +
+                        (editorReadOnly ? `  <span class="hl-attr">readOnly</span>\n` : '') +
+                        `  <span class="hl-attr">onChange</span>=<span class="hl-str">{(markdown) =&gt; console.log(markdown)}</span>\n` +
+                        `<span class="hl-tag">/&gt;</span>`
+                    }} />
+                  </pre>
+                </div>
+
+              </section>
+            </>
+          )}
+
+          {activeComponent === 'charts' && (
+            <>
+              <section>
+                <h2 className="section-title">
+                  <span>📊</span> Charts — Catppuccin × Recharts
+                </h2>
+
+                {/* KPI Stat Cards */}
+                <div className="ctp-chart-stats">
+                  {[
+                    { label: 'Downloads', value: '284K', trend: '+18.4%', up: true },
+                    { label: 'GitHub Stars', value: '12.7K', trend: '+6.2%', up: true },
+                    { label: 'Contributors', value: '348', trend: '+11.5%', up: true },
+                    { label: 'Open Issues', value: '37', trend: '-14%', up: false },
+                  ].map((stat) => (
+                    <div key={stat.label} className="ctp-chart-stat">
+                      <div className="ctp-chart-stat__label">{stat.label}</div>
+                      <div className="ctp-chart-stat__value">{stat.value}</div>
+                      <div className={`ctp-chart-stat__trend ctp-chart-stat__trend--${stat.up ? 'up' : 'down'}`}>
+                        {stat.up ? '↑' : '↓'} {stat.trend} vs last month
+                      </div>
                     </div>
                   ))}
-                </Carousel>
-              </div>
-            </div>
-            <div style={{ padding: '16px', background: 'var(--ctp-crust)', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', marginTop: '16px' }}>
-              Props: <code>showArrows</code>, <code>showDots</code>, <code>autoPlay</code>, <code>autoPlayInterval</code>.
-              Navigation via keyboard, swipe, or dots.
-            </div>
-          </section>
-        </>
-      )}
-      {activeComponent === 'toast' && (
-        <>
-          <section>
-            <h2 className="section-title"><span>🍞</span> Toast / Snackbar Playground</h2>
-            <div className="playground-section">
-              <div className="playground-card">
-                <h3>Position</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  {(['top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'] as const).map(p => (
-                    <button key={p} className={`ctp-btn ctp-btn--sm ${toastPosition === p ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastPosition(p)}>
-                      {p}
-                    </button>
-                  ))}
                 </div>
-              </div>
-              <div className="playground-card">
-                <h3>Mode</h3>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                  <button className={`ctp-btn ctp-btn--sm ${!toastFilled ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastFilled(false)}>
-                    Accent (borda)
-                  </button>
-                  <button className={`ctp-btn ctp-btn--sm ${toastFilled ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastFilled(true)}>
-                    Filled (fundo)
-                  </button>
-                </div>
-              </div>
-              <div className="playground-card">
-                <h3>Color Override</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <button
-                    className={`ctp-btn ctp-btn--sm ${!toastColor ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`}
-                    onClick={() => setToastColor('')}
-                  >
-                    Default (via variant)
-                  </button>
-                  {colors.map(c => (
-                    <button
-                      key={c.name}
-                      title={c.name}
-                      onClick={() => setToastColor(c.name.toLowerCase())}
-                      style={{
-                        width: 32, height: 32, borderRadius: 8, border: toastColor === c.name.toLowerCase() ? '3px solid var(--ctp-text)' : '2px solid transparent',
-                        background: `var(${c.variable})`, cursor: 'pointer', outline: 'none',
-                      }}
+
+                {/* 2-column chart grid */}
+                <div className="ctp-charts-grid">
+                  {/* Line Chart */}
+                  <div className="ctp-chart-card">
+                    <div className="ctp-chart-card__header">
+                      <div>
+                        <h3 className="ctp-chart-card__name">Weekly Downloads</h3>
+                        <p className="ctp-chart-card__subtitle">npm package installs per week</p>
+                      </div>
+                      <div className="ctp-chart-card__badge">📈 Line</div>
+                    </div>
+                    <CtpLineChart
+                      xAxisKey="week"
+                      series={[
+                        { key: 'react', label: 'React', colorIndex: 0 },
+                        { key: 'vue', label: 'Vue', colorIndex: 1 },
+                        { key: 'angular', label: 'Angular', colorIndex: 2 },
+                      ]}
+                      data={[
+                        { week: 'W1', react: 4800, vue: 3200, angular: 2100 },
+                        { week: 'W2', react: 5200, vue: 3600, angular: 2400 },
+                        { week: 'W3', react: 4900, vue: 3400, angular: 2600 },
+                        { week: 'W4', react: 6100, vue: 4100, angular: 2900 },
+                        { week: 'W5', react: 5800, vue: 4500, angular: 3100 },
+                        { week: 'W6', react: 7200, vue: 4800, angular: 3400 },
+                        { week: 'W7', react: 6900, vue: 5200, angular: 3700 },
+                        { week: 'W8', react: 8100, vue: 5600, angular: 4000 },
+                      ]}
+                      height={250}
                     />
-                  ))}
+                  </div>
+
+                  {/* Bar Chart */}
+                  <div className="ctp-chart-card">
+                    <div className="ctp-chart-card__header">
+                      <div>
+                        <h3 className="ctp-chart-card__name">Stars by Category</h3>
+                        <p className="ctp-chart-card__subtitle">GitHub stars across Catppuccin ports</p>
+                      </div>
+                      <div className="ctp-chart-card__badge">📊 Bar</div>
+                    </div>
+                    <CtpBarChart
+                      xAxisKey="name"
+                      series={[{ key: 'stars', label: 'Stars (k)' }]}
+                      rainbowMode
+                      data={[
+                        { name: 'VS Code', stars: 4.8 },
+                        { name: 'Nvim', stars: 3.5 },
+                        { name: 'iTerm', stars: 2.8 },
+                        { name: 'Discord', stars: 2.1 },
+                        { name: 'Alacritty', stars: 1.6 },
+                        { name: 'GitHub', stars: 2.5 },
+                        { name: 'Spicetify', stars: 1.1 },
+                      ]}
+                      height={250}
+                      showLegend={false}
+                    />
+                  </div>
+
+                  {/* Area Chart */}
+                  <div className="ctp-chart-card">
+                    <div className="ctp-chart-card__header">
+                      <div>
+                        <h3 className="ctp-chart-card__name">Community Growth</h3>
+                        <p className="ctp-chart-card__subtitle">Cumulative contributors over time</p>
+                      </div>
+                      <div className="ctp-chart-card__badge">🌊 Area</div>
+                    </div>
+                    <CtpAreaChart
+                      xAxisKey="month"
+                      series={[
+                        { key: 'members', label: 'Community Members', colorIndex: 3 },
+                        { key: 'contributors', label: 'Contributors', colorIndex: 2 },
+                      ]}
+                      data={[
+                        { month: 'Jan', members: 1200, contributors: 42 },
+                        { month: 'Feb', members: 1800, contributors: 68 },
+                        { month: 'Mar', members: 2600, contributors: 95 },
+                        { month: 'Apr', members: 3400, contributors: 134 },
+                        { month: 'May', members: 4800, contributors: 178 },
+                        { month: 'Jun', members: 6200, contributors: 223 },
+                        { month: 'Jul', members: 7900, contributors: 271 },
+                        { month: 'Aug', members: 9800, contributors: 320 },
+                        { month: 'Sep', members: 11400, contributors: 348 },
+                      ]}
+                      height={250}
+                    />
+                  </div>
+
+                  {/* Radar Chart */}
+                  <div className="ctp-chart-card">
+                    <div className="ctp-chart-card__header">
+                      <div>
+                        <h3 className="ctp-chart-card__name">Framework Scorecard</h3>
+                        <p className="ctp-chart-card__subtitle">Catppuccin port quality by framework</p>
+                      </div>
+                      <div className="ctp-chart-card__badge">🕸️ Radar</div>
+                    </div>
+                    <CtpRadarChart
+                      angleKey="criterion"
+                      series={[
+                        { key: 'react', label: 'React', colorIndex: 0 },
+                        { key: 'vue', label: 'Vue', colorIndex: 1 },
+                        { key: 'angular', label: 'Angular', colorIndex: 2 },
+                      ]}
+                      data={[
+                        { criterion: 'Coverage', react: 95, vue: 88, angular: 82 },
+                        { criterion: 'A11y', react: 90, vue: 85, angular: 88 },
+                        { criterion: 'Perf', react: 92, vue: 94, angular: 86 },
+                        { criterion: 'DX', react: 96, vue: 91, angular: 78 },
+                        { criterion: 'Bundle', react: 85, vue: 92, angular: 74 },
+                        { criterion: 'Docs', react: 94, vue: 87, angular: 90 },
+                      ]}
+                      height={250}
+                    />
+                  </div>
+
+                  {/* Pie/Donut Chart - full width */}
+                  <div className="ctp-chart-card ctp-charts-grid--full">
+                    <div className="ctp-chart-card__header">
+                      <div>
+                        <h3 className="ctp-chart-card__name">Flavor Popularity</h3>
+                        <p className="ctp-chart-card__subtitle">Which Catppuccin flavor users love most — hover each slice</p>
+                      </div>
+                      <div className="ctp-chart-card__badge">🍩 Donut</div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'center' }}>
+                      <CtpPieChart
+                        donut
+                        height={280}
+                        data={[
+                          { name: 'Macchiato', value: 38400 },
+                          { name: 'Mocha', value: 29700 },
+                          { name: 'Frappé', value: 18200 },
+                          { name: 'Latte', value: 14600 },
+                        ]}
+                      />
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {[
+                          { name: 'Macchiato', value: '38.4K', pct: '38%', colorIdx: 0 },
+                          { name: 'Mocha', value: '29.7K', pct: '30%', colorIdx: 1 },
+                          { name: 'Frappé', value: '18.2K', pct: '18%', colorIdx: 2 },
+                          { name: 'Latte', value: '14.6K', pct: '15%', colorIdx: 3 },
+                        ].map((item) => (
+                          <div key={item.name} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <div style={{
+                              width: 10,
+                              height: 10,
+                              borderRadius: '50%',
+                              backgroundColor: ['var(--ctp-mauve)', 'var(--ctp-blue)', 'var(--ctp-green)', 'var(--ctp-peach)'][item.colorIdx],
+                              flexShrink: 0,
+                            }} />
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--ctp-text)' }}>{item.name}</div>
+                              <div style={{ fontSize: '0.75rem', color: 'var(--ctp-subtext0)' }}>{item.value} downloads</div>
+                            </div>
+                            <div style={{
+                              background: 'var(--ctp-surface1)',
+                              borderRadius: '6px',
+                              padding: '2px 8px',
+                              fontSize: '0.8rem',
+                              fontWeight: 700,
+                              color: 'var(--ctp-text)',
+                              fontVariantNumeric: 'tabular-nums',
+                            }}>{item.pct}</div>
+                          </div>
+                        ))}
+                        <div style={{ marginTop: '8px', padding: '12px', background: 'var(--ctp-mantle)', borderRadius: '10px', fontSize: '0.78rem', color: 'var(--ctp-subtext0)', lineHeight: 1.5 }}>
+                          💡 <strong style={{ color: 'var(--ctp-text)' }}>Tip:</strong> Hover over each donut slice to see detailed stats with an animated expand effect.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Horizontal Bar Chart - full width */}
+                  <div className="ctp-chart-card ctp-charts-grid--full">
+                    <div className="ctp-chart-card__header">
+                      <div>
+                        <h3 className="ctp-chart-card__name">Top Ports by Stars</h3>
+                        <p className="ctp-chart-card__subtitle">GitHub stars across the Catppuccin ecosystem</p>
+                      </div>
+                      <div className="ctp-chart-card__badge">↔️ Horizontal Bar</div>
+                    </div>
+                    <CtpBarChart
+                      xAxisKey="name"
+                      layout="vertical"
+                      series={[{ key: 'stars', label: 'Stars (k)' }]}
+                      rainbowMode
+                      showLegend={false}
+                      data={[
+                        { name: 'VS Code', stars: 4800 },
+                        { name: 'GitHub CSS', stars: 2500 },
+                        { name: 'Neovim', stars: 3500 },
+                        { name: 'Discord', stars: 2100 },
+                        { name: 'Firefox', stars: 1600 },
+                        { name: 'KDE Plasma', stars: 1700 },
+                        { name: 'Alacritty', stars: 1200 },
+                        { name: 'Spicetify', stars: 1100 },
+                      ]}
+                      height={320}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="playground-card">
-                <h3>Custom CSS Class</h3>
-                <input
-                  type="text"
-                  placeholder="e.g. my-toast-class"
-                  value={toastCustomClass}
-                  onChange={e => setToastCustomClass(e.target.value)}
-                  style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid var(--ctp-surface0)', background: 'var(--ctp-mantle)', color: 'var(--ctp-text)', width: '100%', maxWidth: 300 }}
-                />
-              </div>
-              <div className="playground-card">
-                <h3>Trigger Toasts</h3>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  <button className="ctp-btn" onClick={() => toast({
-                    title: 'Saved', description: 'Your changes have been saved.', variant: 'info',
-                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
-                    className: toastCustomClass || undefined,
-                  })}>
-                    Info Toast
-                  </button>
-                  <button className="ctp-btn" onClick={() => toast({
-                    title: 'Success!', description: 'Operation completed.', variant: 'success',
-                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
-                    className: toastCustomClass || undefined,
-                  })}>
-                    Success Toast
-                  </button>
-                  <button className="ctp-btn" onClick={() => toast({
-                    title: 'Warning', description: 'Please check your input.', variant: 'warning',
-                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
-                    className: toastCustomClass || undefined,
-                  })}>
-                    Warning Toast
-                  </button>
-                  <button className="ctp-btn" onClick={() => toast({
-                    title: 'Error', description: 'Something went wrong.', variant: 'error',
-                    position: toastPosition, filled: toastFilled, color: toastColor || undefined,
-                    className: toastCustomClass || undefined,
-                  })}>
-                    Error Toast
-                  </button>
+
+                {/* Info box about theme reactivity */}
+                <div style={{
+                  marginTop: '24px',
+                  padding: '20px 24px',
+                  background: 'linear-gradient(135deg, color-mix(in srgb, var(--ctp-mauve) 10%, transparent), color-mix(in srgb, var(--ctp-blue) 8%, transparent))',
+                  border: '1px solid color-mix(in srgb, var(--ctp-mauve) 20%, transparent)',
+                  borderRadius: '16px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '16px',
+                }}>
+                  <div style={{ fontSize: '1.8rem', flexShrink: 0 }}>🎨</div>
+                  <div>
+                    <div style={{ fontWeight: 700, color: 'var(--ctp-text)', marginBottom: '6px', fontSize: '0.95rem' }}>Reactive Theme Colors</div>
+                    <div style={{ color: 'var(--ctp-subtext1)', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                      All charts read colors from <code style={{ background: 'var(--ctp-surface0)', padding: '1px 5px', borderRadius: '4px', fontSize: '0.8rem' }}>CSS custom properties</code> at runtime via a custom hook. Switch the flavor using the theme buttons in the top bar — the charts <strong style={{ color: 'var(--ctp-text)' }}>recolor instantly</strong> without any re-renders, powered by a <code style={{ background: 'var(--ctp-surface0)', padding: '1px 5px', borderRadius: '4px', fontSize: '0.8rem' }}>MutationObserver</code> watching the <code style={{ background: 'var(--ctp-surface0)', padding: '1px 5px', borderRadius: '4px', fontSize: '0.8rem' }}>data-theme</code> attribute.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <Toaster position={toastPosition} />
-          </section>
-        </>
-      )}
+              </section>
+            </>
+          )}
+          {activeComponent === 'skeleton' && (
+            <>
+              <section>
+                <h2 className="section-title"><span>💀</span> Skeleton Playground</h2>
+                <div className="playground-section">
+                  <div className="playground-card">
+                    <h3>Preview</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', background: 'var(--ctp-mantle)', borderRadius: '12px' }}>
+                      <Skeleton variant="text" size="lg" width="60%" />
+                      <Skeleton variant="text" size="md" width="80%" />
+                      <Skeleton variant="text" size="sm" width="40%" />
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '8px' }}>
+                        <Skeleton variant="circle" size="xl" />
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          <Skeleton variant="text" size="md" width="50%" />
+                          <Skeleton variant="text" size="sm" width="70%" />
+                        </div>
+                      </div>
+                      <Skeleton variant="rect" size="xl" />
+                      <Skeleton count={3} gap="8px" variant="text" size="sm" />
+                    </div>
+                  </div>
+                </div>
+                <div style={{ padding: '16px', background: 'var(--ctp-crust)', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', marginTop: '16px' }}>
+                  Variants: <code>text</code>, <code>circle</code>, <code>rect</code>. Sizes: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>.
+                  Use <code>count</code> for repeated skeletons, <code>animated=false</code> to disable shimmer.
+                </div>
+              </section>
+            </>
+          )}
+          {activeComponent === 'alert' && (
+            <>
+              <section>
+                <h2 className="section-title"><span>⚠️</span> Alert Playground</h2>
+                <div className="playground-section">
+                  <div className="playground-card">
+                    <h3>Variants</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <Alert variant="info" title="Information">This is an informational alert.</Alert>
+                      <Alert variant="success" title="Success">Operation completed successfully.</Alert>
+                      <Alert variant="warning" title="Warning">Please review before proceeding.</Alert>
+                      <Alert variant="error" title="Error">Something went wrong.</Alert>
+                    </div>
+                  </div>
+                  <div className="playground-card" style={{ marginTop: '16px' }}>
+                    <h3>Dismissible</h3>
+                    <Alert variant="info" title="Dismiss me" dismissible>Click the X to dismiss this alert.</Alert>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+          {activeComponent === 'avatar' && (
+            <>
+              <section>
+                <h2 className="section-title"><span>👤</span> Avatar Playground</h2>
+                <div className="playground-section">
+                  <div className="playground-card">
+                    <h3>Individual Avatars</h3>
+                    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <Avatar src="https://i.pravatar.cc/64?img=1" size="sm" />
+                      <Avatar src="https://i.pravatar.cc/64?img=2" size="md" />
+                      <Avatar src="https://i.pravatar.cc/64?img=3" size="lg" />
+                      <Avatar src="https://i.pravatar.cc/64?img=4" size="xl" />
+                      <Avatar fallback="John Doe" size="md" />
+                      <Avatar fallback="A" size="md" />
+                    </div>
+                  </div>
+                  <div className="playground-card" style={{ marginTop: '16px' }}>
+                    <h3>Avatar Group</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+                      <AvatarGroup max={4}>
+                        <Avatar src="https://i.pravatar.cc/64?img=5" />
+                        <Avatar src="https://i.pravatar.cc/64?img=6" />
+                        <Avatar src="https://i.pravatar.cc/64?img=7" />
+                        <Avatar src="https://i.pravatar.cc/64?img=8" />
+                        <Avatar src="https://i.pravatar.cc/64?img=9" />
+                      </AvatarGroup>
+                      <AvatarGroup size="lg" max={3}>
+                        <Avatar fallback="Alice" />
+                        <Avatar fallback="Bob" />
+                        <Avatar fallback="Charlie" />
+                        <Avatar fallback="Diana" />
+                        <Avatar fallback="Eve" />
+                      </AvatarGroup>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+          {activeComponent === 'breadcrumb' && (
+            <>
+              <section>
+                <h2 className="section-title"><span>🍞</span> Breadcrumb Playground</h2>
+                <div className="playground-section">
+                  <div className="playground-card">
+                    <h3>Examples</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '20px', background: 'var(--ctp-mantle)', borderRadius: '12px' }}>
+                      <Breadcrumb items={[
+                        { label: 'Home', href: '/' },
+                        { label: 'Documentation', href: '/docs' },
+                        { label: 'Components' },
+                      ]} />
+                      <Breadcrumb items={[
+                        { label: '🐱 Catppuccin', href: '/' },
+                        { label: 'Design System', href: '/ds' },
+                        { label: 'React' },
+                      ]} />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+          {activeComponent === 'carousel' && (
+            <>
+              <section>
+                <h2 className="section-title"><span>🎠</span> Carousel Playground</h2>
+                <div className="playground-section">
+                  <div className="playground-card">
+                    <h3>Auto-play Carousel</h3>
+                    <Carousel autoPlay autoPlayInterval={3000}>
+                      {[
+                        { color: 'var(--ctp-mauve)', label: 'Mauve' },
+                        { color: 'var(--ctp-blue)', label: 'Blue' },
+                        { color: 'var(--ctp-green)', label: 'Green' },
+                        { color: 'var(--ctp-peach)', label: 'Peach' },
+                      ].map((slide, i) => (
+                        <div key={i} style={{
+                          height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          background: slide.color, borderRadius: 12, fontSize: '1.5rem', fontWeight: 700,
+                          color: 'var(--ctp-base)'
+                        }}>
+                          {slide.label}
+                        </div>
+                      ))}
+                    </Carousel>
+                  </div>
+                </div>
+                <div style={{ padding: '16px', background: 'var(--ctp-crust)', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--ctp-subtext0)', marginTop: '16px' }}>
+                  Props: <code>showArrows</code>, <code>showDots</code>, <code>autoPlay</code>, <code>autoPlayInterval</code>.
+                  Navigation via keyboard, swipe, or dots.
+                </div>
+              </section>
+            </>
+          )}
+          {activeComponent === 'toast' && (
+            <>
+              <section>
+                <h2 className="section-title"><span>🍞</span> Toast / Snackbar Playground</h2>
+                <div className="playground-section">
+                  <div className="playground-card">
+                    <h3>Position</h3>
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                      {(['top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'] as const).map(p => (
+                        <button key={p} className={`ctp-btn ctp-btn--sm ${toastPosition === p ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastPosition(p)}>
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="playground-card">
+                    <h3>Mode</h3>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                      <button className={`ctp-btn ctp-btn--sm ${!toastFilled ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastFilled(false)}>
+                        Accent (borda)
+                      </button>
+                      <button className={`ctp-btn ctp-btn--sm ${toastFilled ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`} onClick={() => setToastFilled(true)}>
+                        Filled (fundo)
+                      </button>
+                    </div>
+                  </div>
+                  <div className="playground-card">
+                    <h3>Color Override</h3>
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+                      <button
+                        className={`ctp-btn ctp-btn--sm ${!toastColor ? 'ctp-btn--filled ctp-btn--mauve' : 'ctp-btn--outline'}`}
+                        onClick={() => setToastColor('')}
+                      >
+                        Default (via variant)
+                      </button>
+                      {colors.map(c => (
+                        <button
+                          key={c.name}
+                          title={c.name}
+                          onClick={() => setToastColor(c.name.toLowerCase())}
+                          style={{
+                            width: 32, height: 32, borderRadius: 8, border: toastColor === c.name.toLowerCase() ? '3px solid var(--ctp-text)' : '2px solid transparent',
+                            background: `var(${c.variable})`, cursor: 'pointer', outline: 'none',
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="playground-card">
+                    <h3>Custom CSS Class</h3>
+                    <input
+                      type="text"
+                      placeholder="e.g. my-toast-class"
+                      value={toastCustomClass}
+                      onChange={e => setToastCustomClass(e.target.value)}
+                      style={{ padding: '8px 12px', borderRadius: 8, border: '1px solid var(--ctp-surface0)', background: 'var(--ctp-mantle)', color: 'var(--ctp-text)', width: '100%', maxWidth: 300 }}
+                    />
+                  </div>
+                  <div className="playground-card">
+                    <h3>Trigger Toasts</h3>
+                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                      <button className="ctp-btn" onClick={() => toast({
+                        title: 'Saved', description: 'Your changes have been saved.', variant: 'info',
+                        position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                        className: toastCustomClass || undefined,
+                      })}>
+                        Info Toast
+                      </button>
+                      <button className="ctp-btn" onClick={() => toast({
+                        title: 'Success!', description: 'Operation completed.', variant: 'success',
+                        position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                        className: toastCustomClass || undefined,
+                      })}>
+                        Success Toast
+                      </button>
+                      <button className="ctp-btn" onClick={() => toast({
+                        title: 'Warning', description: 'Please check your input.', variant: 'warning',
+                        position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                        className: toastCustomClass || undefined,
+                      })}>
+                        Warning Toast
+                      </button>
+                      <button className="ctp-btn" onClick={() => toast({
+                        title: 'Error', description: 'Something went wrong.', variant: 'error',
+                        position: toastPosition, filled: toastFilled, color: toastColor || undefined,
+                        className: toastCustomClass || undefined,
+                      })}>
+                        Error Toast
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <Toaster position={toastPosition} />
+              </section>
+            </>
+          )}
         </div>
       </main>
     </div>
