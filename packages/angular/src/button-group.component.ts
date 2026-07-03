@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+export type ButtonGroupVariant = 'filled' | 'outline' | 'ghost';
 export type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
 
 @Component({
@@ -42,6 +43,8 @@ export type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
 })
 export class ButtonGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   orientation = input<'horizontal' | 'vertical'>('horizontal');
+  variant = input<ButtonGroupVariant>('filled');
+  shape = input<'square' | 'rounded' | 'pill'>('rounded');
   selectionMode = input<ButtonGroupSelectionMode>('none');
   
   value = model<any>(null);
@@ -59,11 +62,19 @@ export class ButtonGroupComponent implements ControlValueAccessor, AfterViewInit
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  private isPillReady = computed(() => {
+    const style = this.pillStyle();
+    return !('opacity' in style);
+  });
+
   wrapperClass = computed(() => {
     return [
       'ctp-btn-group',
       `ctp-btn-group--${this.orientation()}`,
-      this.selectionMode() === 'single' ? 'ctp-btn-group--segmented' : ''
+      `ctp-btn-group--${this.variant()}`,
+      `ctp-btn-group--${this.shape()}`,
+      this.selectionMode() === 'single' && this.isPillReady() ? 'ctp-btn-group--pill-active' : '',
+      this.selectionMode() !== 'none' ? `ctp-btn-group--${this.selectionMode()}` : ''
     ].join(' ').trim();
   });
 
@@ -71,12 +82,12 @@ export class ButtonGroupComponent implements ControlValueAccessor, AfterViewInit
     const activeVal = this.value();
     const mode = this.selectionMode();
     if (mode !== 'single' || activeVal === null || activeVal === undefined) {
-      return { display: 'none' };
+      return { opacity: '0', pointerEvents: 'none' };
     }
 
     const activeEl = this.buttonElementsMap.get(activeVal);
     if (!activeEl || !this.containerRef) {
-      return { display: 'none' };
+      return { opacity: '0', pointerEvents: 'none' };
     }
 
     const containerRect = this.containerRef.nativeElement.getBoundingClientRect();
@@ -88,7 +99,6 @@ export class ButtonGroupComponent implements ControlValueAccessor, AfterViewInit
     const height = activeRect.height;
 
     return {
-      display: 'block',
       transform: `translate(${left}px, ${top}px)`,
       width: `${width}px`,
       height: `${height}px`

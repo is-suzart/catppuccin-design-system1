@@ -1,15 +1,18 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { Button, ButtonProps } from './Button';
+import { Button, ButtonProps, ButtonShape } from './Button';
 import { usePrefix } from './PrefixContext';
 import { cn, cnEl } from './cn';
 
 export type ButtonGroupOrientation = 'horizontal' | 'vertical';
+export type ButtonGroupVariant = 'filled' | 'outline' | 'ghost';
 export type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
 
 export interface ButtonGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   orientation?: ButtonGroupOrientation;
+  variant?: ButtonGroupVariant;
+  shape?: ButtonShape;
   selectionMode?: ButtonGroupSelectionMode;
-  value?: any; // string | number | string[] | number[]
+  value?: any;
   onChange?: (value: any) => void;
   className?: string;
   disabled?: boolean;
@@ -29,6 +32,8 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
   (
     {
       orientation = 'horizontal',
+      variant = 'filled',
+      shape = 'rounded',
       selectionMode = 'none',
       value,
       onChange,
@@ -42,8 +47,10 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [pillStyle, setPillStyle] = useState<React.CSSProperties>({
-      display: 'none',
+      opacity: 0,
+      pointerEvents: 'none' as const,
     });
+    const [pillReady, setPillReady] = useState(false);
     
     // Track references of option buttons to measure their dimensions
     const buttonElementsMap = useRef<Map<any, HTMLButtonElement>>(new Map());
@@ -59,13 +66,15 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
 
     const updatePillPosition = () => {
       if (!containerRef.current || selectionMode !== 'single') {
-        setPillStyle({ display: 'none' });
+        setPillStyle({ opacity: 0, pointerEvents: 'none' as const });
+        setPillReady(false);
         return;
       }
 
       const activeElement = buttonElementsMap.current.get(value);
       if (!activeElement) {
-        setPillStyle({ display: 'none' });
+        setPillStyle({ opacity: 0, pointerEvents: 'none' as const });
+        setPillReady(false);
         return;
       }
 
@@ -82,12 +91,13 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
         width: `${width}px`,
         height: `${height}px`,
       });
+      setPillReady(true);
     };
 
     // Recalculate on value change
     useEffect(() => {
       updatePillPosition();
-    }, [value, selectionMode]);
+    }, [value, selectionMode, variant]);
 
     // Recalculate on resize
     useEffect(() => {
@@ -145,7 +155,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     };
 
     const classNames = [
-      cn(prefix, 'btn-group', [orientation, selectionMode === 'single' ? 'segmented' : undefined]),
+      cn(prefix, 'btn-group', [orientation, variant, shape, (selectionMode === 'single' && pillReady) ? 'pill-active' : undefined, selectionMode !== 'none' ? selectionMode : undefined]),
       className,
     ]
       .filter(Boolean)

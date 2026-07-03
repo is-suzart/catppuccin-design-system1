@@ -1,14 +1,18 @@
-/* Segmented Control / ButtonGroup stylesheet */
+/* ── Button Group ── */
 
 .ctp-btn-group {
-  --pill-left: 0px;
-  --pill-top: 0px;
-  --pill-width: 0px;
-  --pill-height: 0px;
-  
   display: inline-flex;
+  vertical-align: middle;
   position: relative;
   user-select: none;
+  box-sizing: border-box;
+  padding: 4px;
+  gap: 4px;
+  align-items: center;
+}
+
+.ctp-btn-group,
+.ctp-btn-group * {
   box-sizing: border-box;
 }
 
@@ -20,70 +24,148 @@
   flex-direction: column;
 }
 
-/* Sliding Pill active indicator */
-.ctp-btn-group__pill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: var(--pill-width);
-  height: var(--pill-height);
-  background-color: var(--ctp-mauve);
-  border-radius: inherit;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-  z-index: 1;
+/* ── Shape modifiers ── */
+
+.ctp-btn-group--square {
+  --ctp-btn-group-radius: var(--ctp-radius-square);
 }
 
-/* Segmented Control specific styles */
-.ctp-btn-group--segmented {
-  background-color: var(--ctp-surface0) !important;
-  padding: 4px !important;
-  border-radius: 9999px !important;
-  gap: 4px !important;
-  display: inline-flex !important;
-  align-items: center;
+.ctp-btn-group--rounded {
+  --ctp-btn-group-radius: var(--ctp-radius-rounded);
 }
 
-.ctp-btn-group--segmented.ctp-btn-group--vertical {
-  flex-direction: column !important;
-  border-radius: 20px !important; /* Fallback for vertical track */
+.ctp-btn-group--pill {
+  --ctp-btn-group-radius: var(--ctp-radius-pill);
 }
 
-.ctp-btn-group--segmented .ctp-btn {
+/* ── Variants ── */
+
+/* Filled: solid surface container (default) */
+.ctp-btn-group--filled {
+  background-color: var(--ctp-surface0);
+  border: none;
+}
+
+/* Outline: border-only container */
+.ctp-btn-group--outline {
+  background-color: transparent;
+  border: 1.5px solid var(--ctp-surface0);
+}
+
+/* Ghost: no container chrome, just items flowing */
+.ctp-btn-group--ghost {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  gap: 4px;
+}
+
+/* ── Shared container shape ── */
+
+.ctp-btn-group--filled,
+.ctp-btn-group--outline {
+  border-radius: var(--ctp-btn-group-radius, var(--ctp-radius-pill));
+}
+
+/* ── Items inside the group ── */
+
+.ctp-btn-group .ctp-btn {
   position: relative;
   z-index: 2;
-  background-color: transparent !important;
-  border: none !important;
-  color: var(--ctp-subtext0) !important;
-  box-shadow: none !important;
-  margin: 0 !important;
-  border-radius: 9999px !important;
-  transition: background-color 0.2s ease, color 0.2s ease !important;
+  background-color: transparent;
+  border: none;
+  color: var(--ctp-subtext0);
+  box-shadow: none;
+  margin: 0;
+  border-radius: var(--ctp-btn-group-radius, var(--ctp-radius-pill));
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ctp-btn-group--segmented .ctp-btn:hover:not(:disabled):not(.ctp-btn--active) {
-  color: var(--ctp-text) !important;
-  background-color: color-mix(in srgb, var(--ctp-text) 8%, transparent) !important;
+.ctp-btn-group .ctp-btn:hover:not(:disabled):not(.ctp-btn--active) {
+  color: var(--ctp-text);
+  background-color: color-mix(in srgb, var(--ctp-text) 8%, transparent);
 }
 
-/* Active Segmented Item state */
-.ctp-btn-group--segmented .ctp-btn.ctp-btn--active {
-  background-color: var(--ctp-btn-color-token, var(--ctp-mauve)) !important;
-  color: var(--ctp-crust) !important;
-  font-weight: 600 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  border-radius: 9999px !important;
+/* Active item — solid background, always visible */
+.ctp-btn-group .ctp-btn.ctp-btn--active {
+  background-color: var(--ctp-btn-color-token, var(--ctp-mauve));
+  color: var(--ctp-base);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: var(--ctp-btn-group-radius, var(--ctp-radius-pill));
 }
 
-/* Disabled items */
-.ctp-btn-group--segmented .ctp-btn:disabled {
+.ctp-btn-group .ctp-btn.ctp-btn--active:hover {
+  background-color: var(--ctp-btn-color-token, var(--ctp-mauve));
+}
+
+.ctp-btn-group .ctp-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* Hide sliding pill indicator visually */
+/* ── Dividers between items ── */
+
+.ctp-btn-group--horizontal .ctp-btn:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background-color: color-mix(in srgb, var(--ctp-text) 10%, transparent);
+  pointer-events: none;
+}
+
+.ctp-btn-group--vertical .ctp-btn:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 20%;
+  width: 60%;
+  height: 1px;
+  background-color: color-mix(in srgb, var(--ctp-text) 10%, transparent);
+  pointer-events: none;
+}
+
+/* Hide divider next to active item */
+.ctp-btn-group .ctp-btn.ctp-btn--active + .ctp-btn::before,
+.ctp-btn-group .ctp-btn.ctp-btn--active::before {
+  display: none;
+}
+
+/* Ghost: no dividers */
+.ctp-btn-group--ghost .ctp-btn:not(:first-child)::before {
+  display: none;
+}
+
+/* Ghost: buttons keep their own shape */
+.ctp-btn-group--ghost .ctp-btn {
+  border-radius: inherit;
+}
+
+/* ── Pill sliding indicator ── */
+/* The pill is an animated background that slides behind the active button.
+   It is only used in single-select mode. The active button becomes transparent
+   so the pill color shows through. */
+
 .ctp-btn-group__pill {
-  display: none !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--ctp-btn-color-token, var(--ctp-mauve));
+  border-radius: var(--ctp-btn-group-radius, var(--ctp-radius-pill));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              width 0.25s ease,
+              height 0.25s ease;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* When pill-active is set AND the pill is visible (via inline style from JS),
+   the active button gives up its own background to let the pill show through. */
+.ctp-btn-group--pill-active .ctp-btn.ctp-btn--active {
+  background-color: transparent;
+  box-shadow: none;
 }

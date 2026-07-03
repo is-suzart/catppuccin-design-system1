@@ -81,4 +81,6 @@ export {
 
 export { toast } from './toast';
 export type { ToastVariant, ToastPosition, ToastOptions, ToastItem } from './toast';
+export type { Column, TableSize, TableColor } from './Table.vue';
+export type { ButtonGroupVariant } from './ButtonGroup.vue';
 

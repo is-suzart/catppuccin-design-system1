@@ -6,7 +6,7 @@
     @keydown="handleKeyDown"
   >
     <div
-      v-if="selectionMode === 'single'"
+      v-if="props.selectionMode === 'single'"
       class="ctp-btn-group__pill"
       :style="pillStyle"
     />
@@ -17,10 +17,13 @@
 <script setup lang="ts">
 import { computed, provide, ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
 
+export type ButtonGroupVariant = 'filled' | 'outline' | 'ghost';
 type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
 
 interface Props {
   orientation?: 'horizontal' | 'vertical';
+  variant?: ButtonGroupVariant;
+  shape?: 'square' | 'rounded' | 'pill';
   selectionMode?: ButtonGroupSelectionMode;
   modelValue?: any;
   disabled?: boolean;
@@ -28,6 +31,8 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   orientation: 'horizontal',
+  variant: 'filled',
+  shape: 'rounded',
   selectionMode: 'none',
   disabled: false,
 });
@@ -44,19 +49,24 @@ const pillStyle = ref({
   transform: 'translate(0px, 0px)',
   width: '0px',
   height: '0px',
-  display: 'none',
+  opacity: '0',
+  pointerEvents: 'none',
 });
+
+const pillReady = ref(false);
 
 const updatePill = () => {
   nextTick(() => {
     if (!containerRef.value || props.selectionMode !== 'single') {
-      pillStyle.value = { ...pillStyle.value, display: 'none' };
+      pillStyle.value = { ...pillStyle.value, opacity: '0', pointerEvents: 'none' };
+      pillReady.value = false;
       return;
     }
 
     const activeEl = buttonElements.value.get(props.modelValue);
     if (!activeEl) {
-      pillStyle.value = { ...pillStyle.value, display: 'none' };
+      pillStyle.value = { ...pillStyle.value, opacity: '0', pointerEvents: 'none' };
+      pillReady.value = false;
       return;
     }
 
@@ -72,8 +82,10 @@ const updatePill = () => {
       transform: `translate(${left}px, ${top}px)`,
       width: `${width}px`,
       height: `${height}px`,
-      display: 'block',
+      opacity: '1',
+      pointerEvents: 'none',
     };
+    pillReady.value = true;
   });
 };
 
@@ -163,7 +175,10 @@ const wrapperClass = computed(() => {
   return [
     'ctp-btn-group',
     `ctp-btn-group--${props.orientation}`,
-    props.selectionMode === 'single' ? 'ctp-btn-group--segmented' : '',
+    `ctp-btn-group--${props.variant}`,
+    `ctp-btn-group--${props.shape}`,
+    props.selectionMode === 'single' && pillReady.value ? 'ctp-btn-group--pill-active' : '',
+    props.selectionMode !== 'none' ? `ctp-btn-group--${props.selectionMode}` : '',
   ];
 });
 </script>

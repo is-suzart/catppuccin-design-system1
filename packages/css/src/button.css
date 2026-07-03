@@ -177,88 +177,10 @@
   }
 }
 
-/* --- Button Group Layout --- */
-
-.ctp-btn-group {
-  display: inline-flex;
-  vertical-align: middle;
-  box-sizing: border-box;
-}
-
-.ctp-btn-group,
-.ctp-btn-group * {
-  box-sizing: border-box;
-}
-
-.ctp-btn-group--horizontal {
-  flex-direction: row;
-}
-
-.ctp-btn-group--vertical {
-  flex-direction: column;
-}
-
-/* Ensure active/hover button borders paint on top of neighbors */
-.ctp-btn-group > .ctp-btn {
-  position: relative;
-}
-
-.ctp-btn-group > .ctp-btn:hover,
-.ctp-btn-group > .ctp-btn:focus-visible,
-.ctp-btn-group > .ctp-btn:active {
-  z-index: 2;
-}
-
-/* --- Horizontal Border & Radius Merging --- */
-
-.ctp-btn-group--horizontal > .ctp-btn:not(:first-child) {
-  margin-left: -1.5px;
-}
-
-/* Middle buttons: reset all corners */
-.ctp-btn-group--horizontal > .ctp-btn:not(:first-child):not(:last-child) {
-  border-radius: 0 !important;
-}
-
-/* First button: reset right corners */
-.ctp-btn-group--horizontal > .ctp-btn:first-child:not(:last-child) {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
-
-/* Last button: reset left corners */
-.ctp-btn-group--horizontal > .ctp-btn:last-child:not(:first-child) {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-}
-
-/* --- Vertical Border & Radius Merging --- */
-
-.ctp-btn-group--vertical > .ctp-btn:not(:first-child) {
-  margin-top: -1.5px;
-}
-
-/* Middle buttons: reset all corners */
-.ctp-btn-group--vertical > .ctp-btn:not(:first-child):not(:last-child) {
-  border-radius: 0 !important;
-}
-
-/* First button: reset bottom corners */
-.ctp-btn-group--vertical > .ctp-btn:first-child:not(:last-child) {
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
-
-/* Last button: reset top corners */
-.ctp-btn-group--vertical > .ctp-btn:last-child:not(:first-child) {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-}
-
-/* Active / Selected Button state inside a button group */
+/* Active / Selected Button state */
 .ctp-btn.ctp-btn--active {
-  background-color: var(--ctp-btn-color-token) !important;
-  color: var(--ctp-base) !important;
-  border-color: var(--ctp-btn-color-token) !important;
+  background-color: var(--ctp-btn-color-token);
+  color: var(--ctp-base);
+  border-color: var(--ctp-btn-color-token);
 }
 
