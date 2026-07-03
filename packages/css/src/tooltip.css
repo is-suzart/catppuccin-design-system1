@@ -17,14 +17,46 @@
   color: var(--tooltip-color);
   border: 1px solid var(--tooltip-border);
   opacity: 0;
-  animation: ctp-tooltip-fade-in 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: ctp-tooltip-fade-in 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes ctp-tooltip-fade-in {
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes ctp-tooltip-direction-top {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ctp-tooltip-direction-bottom {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ctp-tooltip-direction-left {
+  from { opacity: 0; transform: translateX(4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ctp-tooltip-direction-right {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.ctp-tooltip--placement-top { animation-name: ctp-tooltip-direction-top; }
+.ctp-tooltip--placement-bottom { animation-name: ctp-tooltip-direction-bottom; }
+.ctp-tooltip--placement-left { animation-name: ctp-tooltip-direction-left; }
+.ctp-tooltip--placement-right { animation-name: ctp-tooltip-direction-right; }
+.ctp-tooltip--placement-top-start { animation-name: ctp-tooltip-direction-top; }
+.ctp-tooltip--placement-top-end { animation-name: ctp-tooltip-direction-top; }
+.ctp-tooltip--placement-bottom-start { animation-name: ctp-tooltip-direction-bottom; }
+.ctp-tooltip--placement-bottom-end { animation-name: ctp-tooltip-direction-bottom; }
+.ctp-tooltip--placement-left-start { animation-name: ctp-tooltip-direction-left; }
+.ctp-tooltip--placement-left-end { animation-name: ctp-tooltip-direction-left; }
+.ctp-tooltip--placement-right-start { animation-name: ctp-tooltip-direction-right; }
+.ctp-tooltip--placement-right-end { animation-name: ctp-tooltip-direction-right; }
 
 /* Color Presets */
 .ctp-tooltip--preset-dark {

@@ -88,12 +88,15 @@
 /* Interactive (Hoverable) Card state */
 .ctp-card--interactive {
   cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
 }
 .ctp-card--interactive:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.015);
 }
 .ctp-card--interactive:hover:not(.ctp-card--colored) {
-  box-shadow: var(--ctp-shadow-lg), 0 8px 20px -6px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--ctp-shadow-lg), 0 12px 28px -4px color-mix(in srgb, var(--ctp-card-color-token) 15%, transparent);
   border-color: var(--ctp-card-color-token);
 }
 .ctp-card--colored.ctp-card--interactive:hover {

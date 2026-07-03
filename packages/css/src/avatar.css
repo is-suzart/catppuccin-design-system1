@@ -57,10 +57,20 @@
 
 .ctp-avatar-group .ctp-avatar {
   border: 2px solid var(--ctp-base);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.2s ease;
 }
 
 .ctp-avatar-group .ctp-avatar:not(:first-child) {
   margin-left: -8px;
+}
+
+.ctp-avatar-group .ctp-avatar:hover {
+  transform: translateY(-4px) scale(1.12);
+  border-color: var(--ctp-mauve);
+  z-index: 10;
 }
 
 .ctp-avatar-group--sm .ctp-avatar:not(:first-child) {
