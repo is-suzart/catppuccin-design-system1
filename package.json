@@ -6,7 +6,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "bun --filter catppuccin-showcase dev",
-    "build": "bun --filter \"*\" build"
+    "dev": "yarn workspace catppuccin-showcase dev",
+    "build": "yarn workspaces foreach -A run build"
   }
 }

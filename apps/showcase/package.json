@@ -12,8 +12,12 @@
     "@catppuccin-ds/css": "file:../../packages/css",
     "@catppuccin-ds/react": "file:../../packages/react",
     "@catppuccin-ds/react-pro": "file:../../packages/react-pro",
+    "@dnd-kit/core": "^6.3.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-is": "^18.3.1",
     "react-router-dom": "^6.30.4",
     "recharts": "^3.8.1"
   },
