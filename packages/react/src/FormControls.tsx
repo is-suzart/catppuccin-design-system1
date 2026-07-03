@@ -185,7 +185,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <label className={rowClass}>
         <input ref={ref} type="checkbox" disabled={disabled} {...props} />
-        <span className={cnEl(prefix, 'checkbox', 'box')}>
+        <span className={`${prefix}-checkbox-box`}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
@@ -217,8 +217,8 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     return (
       <label className={rowClass}>
         <input ref={ref} type="checkbox" disabled={disabled} {...props} />
-        <span className={cnEl(prefix, 'switch', 'track')}>
-          <span className={cnEl(prefix, 'switch', 'thumb')}></span>
+        <span className={`${prefix}-switch-track`}>
+          <span className={`${prefix}-switch-thumb`}></span>
         </span>
         <span>{label}</span>
       </label>
@@ -271,8 +271,8 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
                 onChange={onChange}
                 disabled={disabled}
               />
-              <span className={cnEl(prefix, 'radio', 'circle')}>
-                <span className={cnEl(prefix, 'radio', 'dot')}></span>
+              <span className={`${prefix}-radio-circle`}>
+                <span className={`${prefix}-radio-dot`}></span>
               </span>
               <span>{opt.label}</span>
             </label>
@@ -324,7 +324,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
           className={cn(prefix, 'slider')}
           {...props}
         />
-        {showValue && <span className={cnEl(prefix, 'slider', 'value')}>{value}</span>}
+        {showValue && <span className={`${prefix}-slider-value`}>{value}</span>}
       </div>
     );
   }

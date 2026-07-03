@@ -157,7 +157,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {showFirstLast && (
         <button
           type="button"
-          className={cnEl(prefix, 'pagination', 'item')}
+          className={`${prefix}-pagination-item`}
           onClick={() => handlePageSelect(1)}
           disabled={disabled || isFirst}
           aria-label="Go to first page"
@@ -174,7 +174,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {showPrevNext && (
         <button
           type="button"
-          className={cnEl(prefix, 'pagination', 'item')}
+          className={`${prefix}-pagination-item`}
           onClick={() => handlePageSelect(currentPage - 1)}
           disabled={disabled || isFirst}
           aria-label="Go to previous page"
@@ -190,7 +190,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {paginationRange.map((pageNumber, idx) => {
         if (pageNumber === DOTS) {
           return (
-            <span key={`dots-${idx}`} className={cnEl(prefix, 'pagination', 'ellipsis')} aria-hidden="true">
+            <span key={`dots-${idx}`} className={`${prefix}-pagination-ellipsis`} aria-hidden="true">
               &#8230;
             </span>
           );
@@ -202,7 +202,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           <button
             key={`page-${pageNumber}`}
             type="button"
-            className={`${cnEl(prefix, 'pagination', 'item')} ${isCurrent ? `${prefix}-pagination-item--active` : ''}`}
+            className={`${prefix}-pagination-item ${isCurrent ? `${prefix}-pagination-item--active` : ''}`}
             onClick={() => handlePageSelect(pageNumber as number)}
             disabled={disabled}
             aria-label={`Go to page ${pageNumber}`}
@@ -215,10 +215,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 
       {/* Manual Page Input field */}
       {showPageInput && (
-        <div className={cnEl(prefix, 'pagination', 'input-container')}>
+        <div className={`${prefix}-pagination-input-container`}>
           <input
             type="number"
-            className={cnEl(prefix, 'pagination', 'input')}
+            className={`${prefix}-pagination-input`}
             min={1}
             max={totalPages}
             value={inputVal}
@@ -236,7 +236,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         isInputActive ? (
           <button
             type="button"
-            className={`${cnEl(prefix, 'pagination', 'item')} ${prefix}-pagination-item--confirm`}
+            className={`${prefix}-pagination-item ${prefix}-pagination-item--confirm`}
             onClick={handlePageInputSubmit}
             disabled={disabled || !isValidPage}
             aria-label="Confirm page selection"
@@ -249,7 +249,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         ) : (
           <button
             type="button"
-            className={cnEl(prefix, 'pagination', 'item')}
+            className={`${prefix}-pagination-item`}
             onClick={() => handlePageSelect(currentPage + 1)}
             disabled={disabled || isLast}
             aria-label="Go to next page"
@@ -266,7 +266,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {showFirstLast && (
         <button
           type="button"
-          className={cnEl(prefix, 'pagination', 'item')}
+          className={`${prefix}-pagination-item`}
           onClick={() => handlePageSelect(totalPages)}
           disabled={disabled || isLast}
           aria-label="Go to last page"
