@@ -1,6 +1,7 @@
 import { Component, input, computed, output, signal, effect, inject } from '@angular/core';
 
 export type AccordionVariant = 'default' | 'split';
+export type AccordionColorMode = 'none' | 'colored' | 'tonal';
 export type AccordionAccentColor =
   | 'rosewater'
   | 'flamingo'
@@ -28,6 +29,7 @@ export type AccordionAccentColor =
 })
 export class CptAccordionComponent {
   variant = input<AccordionVariant>('default');
+  colorMode = input<AccordionColorMode>('none');
   accentColor = input<AccordionAccentColor | undefined>(undefined);
   allowMultiple = input<boolean>(false);
   activeValues = input<string | string[]>([]);
@@ -50,10 +52,14 @@ export class CptAccordionComponent {
   }
 
   accordionClass = computed(() => {
+    const variantClass = `ctp-accordion--${this.variant()}`;
+    const colorModeClass = this.colorMode() !== 'none' ? `ctp-accordion--${this.colorMode()}` : '';
+    const accentColorClass = this.accentColor() ? `ctp-accordion--${this.accentColor()}` : '';
     return [
       'ctp-accordion',
-      `ctp-accordion--${this.variant()}`,
-      this.accentColor() ? `ctp-accordion--${this.accentColor()}` : ''
+      variantClass,
+      colorModeClass,
+      accentColorClass
     ].filter(Boolean).join(' ');
   });
 

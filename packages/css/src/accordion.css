@@ -1,7 +1,7 @@
 /* Core Accordion Stylesheet */
 
 .ctp-accordion {
-  --ctp-accordion-accent-color: var(--ctp-mauve); /* default accent color */
+  --ctp-accordion-accent-color: var(--ctp-mauve);
   --ctp-accordion-border-color: color-mix(in srgb, var(--ctp-text) 10%, transparent);
 
   display: flex;
@@ -11,9 +11,9 @@
   box-sizing: border-box;
 }
 
-/* Accordion Variants */
+/* ── Layout Variants ── */
 
-/* 1. Default (Merged items inside a card-like container) */
+/* Default (merged items in a card-like container) */
 .ctp-accordion--default {
   border: 1px solid var(--ctp-accordion-border-color);
   border-radius: var(--ctp-radius-rounded);
@@ -29,7 +29,7 @@
   border-bottom: none;
 }
 
-/* 2. Split (Separated items with gaps) */
+/* Split (separated items with gaps) */
 .ctp-accordion--split {
   gap: 12px;
 }
@@ -48,76 +48,86 @@
   box-shadow: var(--ctp-shadow-md);
 }
 
-/* 3. Default Colored */
-.ctp-accordion--default-colored {
-  border: 1px solid var(--ctp-accordion-border-color);
-  border-radius: var(--ctp-radius-rounded);
-  background-color: var(--ctp-surface0);
-  overflow: hidden;
-}
+/* ── Color Modes ── */
 
-.ctp-accordion--default-colored .ctp-accordion__item {
-  border-bottom: 1px solid var(--ctp-accordion-border-color);
-}
-
-.ctp-accordion--default-colored .ctp-accordion__item:last-child {
-  border-bottom: none;
-}
-
-.ctp-accordion--default-colored .ctp-accordion__item--open {
+/* Colored: solid accent background on all items (closed & open) */
+.ctp-accordion--colored .ctp-accordion__item {
   background-color: var(--ctp-accordion-accent-color);
+  border-color: color-mix(in srgb, var(--ctp-base) 15%, transparent);
+  transition: background-color var(--ctp-transition-duration) var(--ctp-transition-timing),
+              border-color var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion--default-colored .ctp-accordion__item--open > .ctp-accordion__header {
+.ctp-accordion--colored .ctp-accordion__header {
   color: var(--ctp-base);
 }
 
-.ctp-accordion--default-colored .ctp-accordion__item--open > .ctp-accordion__header .ctp-accordion__chevron {
+.ctp-accordion--colored .ctp-accordion__chevron {
   color: var(--ctp-base);
 }
 
-.ctp-accordion--default-colored .ctp-accordion__item--open > .ctp-accordion__collapse .ctp-accordion__body {
+.ctp-accordion--colored .ctp-accordion__header:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ctp-base) 8%, transparent);
+}
+
+.ctp-accordion--colored .ctp-accordion__item--open > .ctp-accordion__header {
+  color: var(--ctp-base);
+}
+
+.ctp-accordion--colored .ctp-accordion__item--open > .ctp-accordion__header .ctp-accordion__chevron {
+  color: var(--ctp-base);
+}
+
+.ctp-accordion--colored .ctp-accordion__item--open > .ctp-accordion__collapse .ctp-accordion__body {
   color: color-mix(in srgb, var(--ctp-base) 85%, transparent);
 }
 
-/* 4. Split Colored */
-.ctp-accordion--split-colored {
-  gap: 12px;
+.ctp-accordion--colored .ctp-accordion__item--open {
+  box-shadow: var(--ctp-shadow-md);
 }
 
-.ctp-accordion--split-colored .ctp-accordion__item {
-  border: 1px solid var(--ctp-accordion-border-color);
-  border-radius: var(--ctp-radius-rounded);
-  background-color: var(--ctp-surface0);
-  overflow: hidden;
-  transition: all var(--ctp-transition-duration) var(--ctp-transition-timing);
+/* Tonal: tinted accent background on all items (closed & open) */
+.ctp-accordion--tonal .ctp-accordion__item {
+  background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 8%, var(--ctp-surface0));
+  border-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 15%, transparent);
+  transition: background-color var(--ctp-transition-duration) var(--ctp-transition-timing),
+              border-color var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion--split-colored .ctp-accordion__item--open {
-  background-color: var(--ctp-accordion-accent-color);
+.ctp-accordion--tonal .ctp-accordion__header {
+  color: var(--ctp-accordion-accent-color);
+}
+
+.ctp-accordion--tonal .ctp-accordion__chevron {
+  color: var(--ctp-accordion-accent-color);
+}
+
+.ctp-accordion--tonal .ctp-accordion__header:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 12%, var(--ctp-surface0));
+}
+
+/* Tonal: tinted accent background on open items (intensified to 14%) */
+.ctp-accordion--tonal .ctp-accordion__item--open {
+  background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 14%, var(--ctp-surface0));
   border-color: var(--ctp-accordion-accent-color);
   box-shadow: var(--ctp-shadow-md);
 }
 
-.ctp-accordion--split-colored .ctp-accordion__item--open > .ctp-accordion__header {
-  color: var(--ctp-base);
+.ctp-accordion--tonal .ctp-accordion__item--open > .ctp-accordion__header:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 18%, var(--ctp-surface0));
 }
 
-.ctp-accordion--split-colored .ctp-accordion__item--open > .ctp-accordion__header .ctp-accordion__chevron {
-  color: var(--ctp-base);
+/* Themed default container borders and backgrounds */
+.ctp-accordion--default.ctp-accordion--colored {
+  border-color: var(--ctp-accordion-accent-color);
 }
 
-.ctp-accordion--split-colored .ctp-accordion__item--open > .ctp-accordion__collapse .ctp-accordion__body {
-  color: color-mix(in srgb, var(--ctp-base) 85%, transparent);
+.ctp-accordion--default.ctp-accordion--tonal {
+  border-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 25%, var(--ctp-accordion-border-color));
+  background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 8%, var(--ctp-surface0));
 }
 
-/* Hover behaviors for open states on colored variant */
-.ctp-accordion--default-colored .ctp-accordion__item--open > .ctp-accordion__header:hover:not(:disabled),
-.ctp-accordion--split-colored .ctp-accordion__item--open > .ctp-accordion__header:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.06);
-}
-
-/* Accent Color Mappings */
+/* ── Accent Color Mappings ── */
 .ctp-accordion--rosewater { --ctp-accordion-accent-color: var(--ctp-rosewater); }
 .ctp-accordion--flamingo  { --ctp-accordion-accent-color: var(--ctp-flamingo); }
 .ctp-accordion--pink      { --ctp-accordion-accent-color: var(--ctp-pink); }
@@ -133,8 +143,7 @@
 .ctp-accordion--blue      { --ctp-accordion-accent-color: var(--ctp-blue); }
 .ctp-accordion--lavender  { --ctp-accordion-accent-color: var(--ctp-lavender); }
 
-/* Accordion Item Styles */
-
+/* ── Item ── */
 .ctp-accordion__item {
   box-sizing: border-box;
 }
@@ -173,7 +182,6 @@
   opacity: 0.5;
 }
 
-/* Header Text / Custom Content */
 .ctp-accordion__title {
   flex: 1;
   display: flex;
@@ -181,12 +189,11 @@
   gap: 8px;
 }
 
-/* Open states headers */
 .ctp-accordion__item--open > .ctp-accordion__header {
   color: var(--ctp-accordion-accent-color);
 }
 
-/* Indicator Chevron Icon */
+/* Chevron */
 .ctp-accordion__chevron {
   width: 18px;
   height: 18px;
@@ -206,7 +213,7 @@
   color: var(--ctp-accordion-accent-color);
 }
 
-/* Animated Grid Height Transitions */
+/* Collapse animation */
 .ctp-accordion__collapse {
   display: grid;
   grid-template-rows: 0fr;

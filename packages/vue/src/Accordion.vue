@@ -8,6 +8,7 @@
 import { computed, provide, ref, watch } from 'vue';
 
 type AccordionVariant = 'default' | 'split';
+type AccordionColorMode = 'none' | 'colored' | 'tonal';
 type AccordionAccentColor =
   | 'rosewater'
   | 'flamingo'
@@ -26,6 +27,7 @@ type AccordionAccentColor =
 
 interface Props {
   variant?: AccordionVariant;
+  colorMode?: AccordionColorMode;
   accentColor?: AccordionAccentColor;
   allowMultiple?: boolean;
   modelValue?: string | string[];
@@ -33,6 +35,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
+  colorMode: 'none',
   allowMultiple: false,
 });
 
@@ -68,14 +71,16 @@ const toggleValue = (value: string) => {
 provide('accordion', {
   openValues,
   toggleValue,
+  colorMode: computed(() => props.colorMode),
   accentColor: computed(() => props.accentColor),
 });
 
 const accordionClass = computed(() => {
-  return [
-    'ctp-accordion',
+  const modifiers = [
     `ctp-accordion--${props.variant}`,
+    props.colorMode !== 'none' ? `ctp-accordion--${props.colorMode}` : '',
     props.accentColor ? `ctp-accordion--${props.accentColor}` : '',
   ];
+  return ['ctp-accordion', ...modifiers.filter(Boolean)];
 });
 </script>

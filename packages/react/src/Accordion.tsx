@@ -3,6 +3,7 @@ import { usePrefix } from './PrefixContext';
 import { cn, cnEl } from './cn';
 
 export type AccordionVariant = 'default' | 'split';
+export type AccordionColorMode = 'none' | 'colored' | 'tonal';
 export type AccordionAccentColor =
   | 'rosewater'
   | 'flamingo'
@@ -21,6 +22,7 @@ export type AccordionAccentColor =
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: AccordionVariant;
+  colorMode?: AccordionColorMode;
   accentColor?: AccordionAccentColor;
   allowMultiple?: boolean;
   defaultValue?: string | string[];
@@ -32,6 +34,7 @@ interface AccordionContextType {
   openValues: string[];
   toggleValue: (value: string) => void;
   variant: AccordionVariant;
+  colorMode: AccordionColorMode;
   accentColor?: AccordionAccentColor;
 }
 
@@ -169,6 +172,7 @@ export const Accordion: React.FC<AccordionProps> & {
   Body: React.FC<AccordionBodyProps>;
 } = ({
   variant = 'default',
+  colorMode = 'none',
   accentColor,
   allowMultiple = false,
   defaultValue,
@@ -211,8 +215,11 @@ export const Accordion: React.FC<AccordionProps> & {
 
   const prefix = usePrefix();
 
+  const modifiers = [variant, colorMode !== 'none' ? colorMode : null, accentColor]
+    .filter((m): m is string => !!m);
+
   const classNames = [
-    cn(prefix, 'accordion', [variant, accentColor].filter(Boolean) as string[]),
+    cn(prefix, 'accordion', modifiers),
     className,
   ]
     .filter(Boolean)
@@ -224,6 +231,7 @@ export const Accordion: React.FC<AccordionProps> & {
         openValues: currentOpenValues,
         toggleValue,
         variant,
+        colorMode,
         accentColor,
       }}
     >
