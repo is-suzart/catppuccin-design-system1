@@ -41,7 +41,8 @@ export const Stepper: React.FC<StepperProps> = ({
   const prefix = usePrefix();
 
   const wrapperClassNames = [
-    cn(prefix, 'stepper-wrapper', [orientation, variant, color]),
+    cn(prefix, 'stepper-wrapper'),
+    cn(prefix, 'stepper', [orientation, variant, color]),
     className,
   ]
     .filter(Boolean)
@@ -95,7 +96,7 @@ export const Stepper: React.FC<StepperProps> = ({
                 <div 
                   className={cnEl(prefix, 'stepper', 'track-active')} 
                   style={{ 
-                    height: index < currentStep ? '100%' : index === currentStep ? '50%' : '0%' 
+                    height: index < currentStep ? '100%' : '0%' 
                   }} 
                 />
               </div>
