@@ -2144,7 +2144,7 @@ export default function App() {
               className={`sidebar-nav-item ${activeComponent === 'table' ? 'active' : ''}`}
               onClick={() => { setActiveComponent('table'); setIsSidebarOpen(false); }}
             >
-              📊 Tabela de Dados
+              📊 Data Table
             </button>
             <button
               className={`sidebar-nav-item ${activeComponent === 'card' ? 'active' : ''}`}
@@ -2276,7 +2276,7 @@ export default function App() {
                 {activeComponent === 'select' && '🔍 Advanced Select Components'}
                 {activeComponent === 'colorpicker' && '🎨 Color Picker Component'}
                 {activeComponent === 'pagination' && '📄 Pagination & Page Size'}
-                {activeComponent === 'table' && '📊 Tabela de Dados Dinâmica'}
+                {activeComponent === 'table' && '📊 Data Table Dinâmica'}
                 {activeComponent === 'card' && '🎴 Cards & Tiles Components'}
                 {activeComponent === 'icons' && '✨ Icons Pack'}
                 {activeComponent === 'badge' && '📇 Badges & Tags Components'}
@@ -5289,7 +5289,7 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
             <>
               <section>
                 <h2 className="section-title">
-                  <span>📊</span> Tabela de Dados Dinâmica (Data Grid)
+                  <span>📊</span> Data Table Dinâmica (Data Grid)
                 </h2>
                 <p style={{ color: 'var(--ctp-subtext0)', margin: '-1.5rem 0 1.5rem 0', fontSize: '0.95rem' }}>
                   Um componente de Grid altamente dinâmico com modos Client-side e Server-side, paginação e ordenação controladas, edição inline e visualizador de logs de API.
