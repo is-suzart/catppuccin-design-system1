@@ -126,10 +126,10 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         aria-expanded={isOpen}
       >
         {selectedOptions.length === 0 ? (
-          <span className={cnEl(prefix, 'select', 'placeholder')}>{placeholder}</span>
+          <span className={`${prefix}-select-placeholder`}>{placeholder}</span>
         ) : (
           selectedOptions.map(opt => (
-            <span key={opt.value} className={cnEl(prefix, 'tag', 'chip')}>
+            <span key={opt.value} className={`${prefix}-tag-chip`}>
               {opt.label}
               <button
                 type="button"
@@ -153,7 +153,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       {isOpen && (
         <div className={cn(prefix, 'dropdown-menu')}>
           {searchable && (
-            <div className={cnEl(prefix, 'dropdown', 'search')}>
+            <div className={`${prefix}-dropdown-search`}>
               <input
                 type="text"
                 className={cnEl(prefix, 'dropdown-search', 'input')}
@@ -165,9 +165,9 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
             </div>
           )}
 
-          <div className={cnEl(prefix, 'dropdown', 'list')} role="listbox" aria-multiselectable="true">
+          <div className={`${prefix}-dropdown-list`} role="listbox" aria-multiselectable="true">
             {filteredOptions.length === 0 ? (
-              <div className={cnEl(prefix, 'dropdown', 'no-results')}>Nenhum resultado encontrado</div>
+              <div className={`${prefix}-dropdown-no-results`}>Nenhum resultado encontrado</div>
             ) : (
               filteredOptions.map(opt => {
                 const isSelected = value.includes(opt.value);
@@ -176,7 +176,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                     key={opt.value}
                     role="option"
                     aria-selected={isSelected}
-                    className={`${cnEl(prefix, 'dropdown', 'item')} ${isSelected ? `${prefix}-dropdown-item--selected` : ''}`}
+                    className={`${`${prefix}-dropdown-item`} ${isSelected ? `${prefix}-dropdown-item--selected` : ''}`}
                     onClick={() => handleSelectOption(opt.value)}
                   >
                     <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -380,12 +380,12 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
       >
         {multiple ? (
           multipleValue.length === 0 ? (
-            <span className={cnEl(prefix, 'select', 'placeholder')}>{placeholder}</span>
+            <span className={`${prefix}-select-placeholder`}>{placeholder}</span>
           ) : (
             multipleValue.map(val => {
               const label = getLabelByValue(data, val) || val;
               return (
-                <span key={val} className={cnEl(prefix, 'tag', 'chip')}>
+                <span key={val} className={`${prefix}-tag-chip`}>
                   {label}
                   <button
                     type="button"
@@ -401,7 +401,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
           )
         ) : (
           !value ? (
-            <span className={cnEl(prefix, 'select', 'placeholder')}>{placeholder}</span>
+            <span className={`${prefix}-select-placeholder`}>{placeholder}</span>
           ) : (
             <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
               {getLabelByValue(data, value) || value}
@@ -418,9 +418,9 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
 
       {isOpen && (
         <div className={cn(prefix, 'dropdown-menu')}>
-          <div className={cnEl(prefix, 'dropdown', 'list')} role="tree" aria-multiselectable={multiple}>
+          <div className={`${prefix}-dropdown-list`} role="tree" aria-multiselectable={multiple}>
             {visibleNodes.length === 0 ? (
-              <div className={cnEl(prefix, 'dropdown', 'no-results')}>Nenhum nó disponível</div>
+              <div className={`${prefix}-dropdown-no-results`}>Nenhum nó disponível</div>
             ) : (
               visibleNodes.map(({ node, depth }) => {
                 const isSelected = multiple ? multipleValue.includes(node.value) : value === node.value;
@@ -428,7 +428,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
                 const isExpanded = !!expandedKeys[node.value];
 
                 const itemClass = [
-                  cnEl(prefix, 'dropdown', 'item'),
+                  `${prefix}-dropdown-item`,
                   `${prefix}-dropdown-item--depth-${depth}`,
                   isSelected ? `${prefix}-dropdown-item--selected` : '',
                   node.disabled ? `${prefix}-dropdown-item--disabled` : '',
@@ -448,7 +448,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
                     <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {hasChildren ? (
                         <span
-                          className={`${cnEl(prefix, 'tree-node', 'arrow')} ${isExpanded ? `${prefix}-tree-node-arrow--expanded` : ''}`}
+                          className={`${`${prefix}-tree-node-arrow`} ${isExpanded ? `${prefix}-tree-node-arrow--expanded` : ''}`}
                           onClick={(e) => handleToggleExpand(e, node.value)}
                         >
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
