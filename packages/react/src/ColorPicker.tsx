@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePrefix } from './PrefixContext';
-import { cn, cnEl } from './cn';
+import { cn } from './cn';
 
 export type ColorPickerVariant = 'swatches' | 'custom' | 'both';
 export type ColorPickerSize = 'sm' | 'md' | 'lg';
@@ -324,14 +324,14 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
 
   const renderSwatches = () => {
     return (
-      <div className={cnEl(prefix, 'colorpicker', 'swatches')}>
+      <div className={`${prefix}-colorpicker-swatches`}>
         {Object.entries(activeFlavorColors).map(([colorName, hexVal]) => {
           const isActive = value.toLowerCase() === hexVal.toLowerCase();
           return (
             <button
               key={colorName}
               type="button"
-              className={`${cnEl(prefix, 'colorpicker', 'chip')} ${isActive ? `${prefix}-colorpicker-chip--active` : ''}`}
+              className={`${`${prefix}-colorpicker-chip`} ${isActive ? `${prefix}-colorpicker-chip--active` : ''}`}
               style={{ backgroundColor: hexVal }}
               onClick={() => handleSwatchClick(hexVal)}
               title={`${colorName.charAt(0).toUpperCase() + colorName.slice(1)} (${hexVal})`}
@@ -348,10 +348,10 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
     const hueColor = hsvToHex(hsv.h, 100, 100);
 
     return (
-      <div className={cnEl(prefix, 'colorpicker', 'popover-wrapper')} ref={popoverRef}>
+      <div className={`${prefix}-colorpicker-popover-wrapper`} ref={popoverRef}>
         <button
           type="button"
-          className={cnEl(prefix, 'colorpicker', 'custom-trigger')}
+          className={`${prefix}-colorpicker-custom-trigger`}
           style={{ backgroundColor: value }}
           onClick={() => setShowPopover(!showPopover)}
           aria-label="Custom color spectrum picker"
@@ -359,19 +359,19 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
         />
         
         {showPopover && (
-          <div className={cnEl(prefix, 'colorpicker', 'popover')}>
+          <div className={`${prefix}-colorpicker-popover`}>
             {/* SV Pad */}
             <div
               ref={padRef}
-              className={cnEl(prefix, 'colorpicker', 'sv-pad')}
+              className={`${prefix}-colorpicker-sv-pad`}
               style={{ backgroundColor: hueColor }}
               onMouseDown={handlePadMouseDown}
               onTouchStart={handlePadTouchStart}
             >
-              <div className={cnEl(prefix, 'colorpicker', 'sv-gradient-s')} />
-              <div className={cnEl(prefix, 'colorpicker', 'sv-gradient-v')} />
+              <div className={`${prefix}-colorpicker-sv-gradient-s`} />
+              <div className={`${prefix}-colorpicker-sv-gradient-v`} />
               <div
-                className={cnEl(prefix, 'colorpicker', 'sv-marker')}
+                className={`${prefix}-colorpicker-sv-marker`}
                 style={{
                   left: `${hsv.s}%`,
                   top: `${100 - hsv.v}%`
@@ -380,25 +380,25 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
             </div>
             
             {/* Hue Slider */}
-            <div className={cnEl(prefix, 'colorpicker', 'hue-container')}>
+            <div className={`${prefix}-colorpicker-hue-container`}>
               <input
                 type="range"
                 min="0"
                 max="360"
                 value={hsv.h}
                 onChange={handleHueSliderChange}
-                className={cnEl(prefix, 'colorpicker', 'hue-slider')}
+                className={`${prefix}-colorpicker-hue-slider`}
                 aria-label="Hue spectrum selection"
               />
             </div>
             
             {/* Footer */}
-            <div className={cnEl(prefix, 'colorpicker', 'popover-footer')}>
+            <div className={`${prefix}-colorpicker-popover-footer`}>
               <div
-                className={cnEl(prefix, 'colorpicker', 'popover-preview')}
+                className={`${prefix}-colorpicker-popover-preview`}
                 style={{ backgroundColor: value }}
               />
-              <span className={cnEl(prefix, 'colorpicker', 'popover-value')}>
+              <span className={`${prefix}-colorpicker-popover-value`}>
                 {value.toUpperCase()}
               </span>
             </div>
@@ -411,23 +411,22 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   const containerClasses = cn(
     prefix,
     'colorpicker',
-    size,
-    className,
+    [size, className],
   );
 
   return (
     <div className={containerClasses}>
-      <div className={cnEl(prefix, 'colorpicker', 'row')}>
+      <div className={`${prefix}-colorpicker-row`}>
         {(variant === 'swatches' || variant === 'both') && renderSwatches()}
-        {variant === 'both' && <div className={cnEl(prefix, 'colorpicker', 'divider')} />}
+        {variant === 'both' && <div className={`${prefix}-colorpicker-divider`} />}
         {(variant === 'custom' || variant === 'both') && renderCustomTrigger()}
 
         {showHexInput && (
-          <div className={cnEl(prefix, 'colorpicker', 'input-group')}>
-            <span className={cnEl(prefix, 'colorpicker', 'input-prefix')}>#</span>
+          <div className={`${prefix}-colorpicker-input-group`}>
+            <span className={`${prefix}-colorpicker-input-prefix`}>#</span>
             <input
               type="text"
-              className={cnEl(prefix, 'colorpicker', 'input')}
+              className={`${prefix}-colorpicker-input`}
               value={localHex.replace('#', '').toUpperCase()}
               onChange={handleTextInputChange}
               placeholder="FFFFFF"

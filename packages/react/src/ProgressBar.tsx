@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePrefix } from './PrefixContext';
-import { cn, cnEl } from './cn';
+import { cn } from './cn';
 
 export type ProgressBarSize = 'sm' | 'md' | 'lg';
 export type ProgressBarColor =
@@ -72,10 +72,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     if (!label && !(showValue && valuePosition === 'outside')) return null;
 
     return (
-      <div className={cnEl(prefix, 'progressbar', 'label-group')}>
-        {label && <span className={cnEl(prefix, 'progressbar', 'label')}>{label}</span>}
+      <div className={`${prefix}-progressbar-label-group`}>
+        {label && <span className={`${prefix}-progressbar-label`}>{label}</span>}
         {showValue && valuePosition === 'outside' && !indeterminate && (
-          <span className={cnEl(prefix, 'progressbar', 'value-text')}>{progressPercent}%</span>
+          <span className={`${prefix}-progressbar-value-text`}>{progressPercent}%</span>
         )}
       </div>
     );
@@ -91,13 +91,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       aria-label={label}
     >
       {renderLabelGroup()}
-      <div className={cnEl(prefix, 'progressbar', 'track')}>
+      <div className={`${prefix}-progressbar-track`}>
         <div
-          className={cnEl(prefix, 'progressbar', 'fill')}
+          className={`${prefix}-progressbar-fill`}
           style={indeterminate ? undefined : { width: `${percent}%` }}
         >
           {showValue && valuePosition === 'inside' && size === 'lg' && !indeterminate && (
-            <span className={cnEl(prefix, 'progressbar', 'value-inside')}>{progressPercent}%</span>
+            <span className={`${prefix}-progressbar-value-inside`}>{progressPercent}%</span>
           )}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePrefix } from './PrefixContext';
-import { cn, cnEl } from './cn';
+import { cn } from './cn';
 
 export type StepsVariant = 'timeline' | 'carousel';
 export type StepsColor =
@@ -76,9 +76,9 @@ export const Steps: React.FC<StepsProps> = ({
 
   return (
     <div className={timelineClasses}>
-      <div className={cnEl(prefix, 'steps', 'track')}>
+      <div className={`${prefix}-steps-track`}>
         <div
-          className={cnEl(prefix, 'steps', 'progress')}
+          className={`${prefix}-steps-progress`}
           style={progressStyle}
         />
       </div>
@@ -86,10 +86,11 @@ export const Steps: React.FC<StepsProps> = ({
       {Array.from({ length: stepsCount }).map((_, index) => {
         const isActive = index === currentStep;
         const isCompleted = index < currentStep;
-        const itemClass = cn(prefix, 'steps__item', [
+        const itemModifiers = [
           isActive ? 'active' : '',
           isCompleted ? 'completed' : '',
-        ].filter(Boolean));
+        ].filter(Boolean);
+        const itemClass = `${prefix}-steps-item` + (itemModifiers.length ? ' ' + itemModifiers.map(m => `${prefix}-steps-item--${m}`).join(' ') : '');
 
         return (
           <button
@@ -98,8 +99,8 @@ export const Steps: React.FC<StepsProps> = ({
             onClick={() => handleStepClick(index)}
             aria-label={`Step ${index + 1}`}
           >
-            <div className={cnEl(prefix, 'steps', 'dot')} />
-            {labels[index] && <span className={cnEl(prefix, 'steps', 'label')}>{labels[index]}</span>}
+            <div className={`${prefix}-steps-dot`} />
+            {labels[index] && <span className={`${prefix}-steps-label`}>{labels[index]}</span>}
           </button>
         );
       })}
