@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   CtpLineChart,
   CtpAreaChart,
@@ -24,7 +24,6 @@ import {
   StepperVariant,
   Overlay,
   Modal,
-  ModalSize,
   Input,
   Select,
   FormGroup,
@@ -54,7 +53,6 @@ import {
   ColorPicker,
   ColorPickerVariant,
   ColorPickerSize,
-  ColorPickerColor,
   FormControlColor,
   FormControlSize,
   FormControlShape,
@@ -63,6 +61,11 @@ import {
   Table,
   Column,
   Card,
+  CardVariant,
+  CardShape,
+  CardPadding,
+  CardAccentColor,
+  CardAccentPosition,
   Tile,
   CatIcon,
   PawIcon,
@@ -138,6 +141,11 @@ import {
   BadgeColor,
   Dropdown,
   Tooltip,
+  Placement,
+  GridGap,
+  GridAlign,
+  GridValign,
+  ToastColor,
   Grid,
   DatePicker,
   DatePickerMode,
@@ -155,14 +163,17 @@ import {
   Carousel,
   Toaster,
   toast,
+  TreeTable,
+  TreeColumn,
 } from '@catppuccin-ds/react';
 
 import {
   DragDropProvider,
   ReorderableTabs,
   ReorderableTable,
+  Kanban,
 } from '@catppuccin-ds/react-pro';
-import type { ReorderableColumn } from '@catppuccin-ds/react-pro';
+import type { ReorderableColumn, KanbanColumn, KanbanItem } from '@catppuccin-ds/react-pro';
 import '@catppuccin-ds/react-pro/src/pro.css';
 
 import {
@@ -175,6 +186,9 @@ import {
   getFullLocalDatabase,
   getFilterMetadata
 } from './mockDatabase';
+
+import { initialFilesData, FileNode } from './mockFilesDatabase';
+
 
 
 // Definitions for color palette info per theme
@@ -262,7 +276,7 @@ const initialFormSchema: FieldSchema[] = [
   { id: 'fullName', label: 'Full Name', type: 'text', placeholder: 'e.g. John Doe', required: true, width: 50 },
   { id: 'emailAddress', label: 'Email Address', type: 'email', placeholder: 'john@catppuccin.com', required: true, width: 50 },
   { id: 'userRole', label: 'System Role', type: 'select', defaultValue: 'developer', options: [{ label: 'Software Developer', value: 'developer' }, { label: 'Product Manager', value: 'pm' }, { label: 'UX/UI Designer', value: 'designer' }], required: true, width: 33 },
-  { id: 'experienceYears', label: 'Years of Experience', type: 'slider', defaultValue: 3, validation: { min: 0, max: 20 }, required: false, width: 66 },
+  { id: 'experienceYears', label: 'Years of Experience', type: 'slider', defaultValue: 3, validation: { min: 0, max: 20 }, required: false, width: 50 },
   { id: 'skills', label: 'Preferred Stack Options', type: 'radio', defaultValue: 'react', options: [{ label: 'React.js', value: 'react' }, { label: 'Vue.js', value: 'vue' }, { label: 'Angular.js', value: 'angular' }], required: false, width: 100 },
   { id: 'termsChecked', label: 'Accept Cozy Guidelines', type: 'switch', defaultValue: false, required: true, placeholder: 'Agree to community terms of service', width: 100 },
   { id: 'specialRequests', label: 'Special Workspace Instructions', type: 'textarea', placeholder: 'Any extra hardware details...', required: false, width: 100 }
@@ -512,7 +526,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Navigation: buttons, buttongroup, stepper, modal, tabs, form, steps, progress, drawer, select, colorpicker, table, card, icons
-  const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar' | 'skeleton' | 'alert' | 'avatar' | 'breadcrumb' | 'carousel' | 'toast' | 'pro'>('button');
+  const [activeComponent, setActiveComponent] = useState<'button' | 'buttongroup' | 'stepper' | 'modal' | 'tabs' | 'form' | 'steps' | 'progress' | 'drawer' | 'select' | 'colorpicker' | 'pagination' | 'table' | 'card' | 'icons' | 'badge' | 'accordion' | 'dropdown' | 'tooltip' | 'grid' | 'typography' | 'texteditor' | 'charts' | 'datepicker' | 'shell' | 'sidebar' | 'skeleton' | 'alert' | 'avatar' | 'breadcrumb' | 'carousel' | 'toast' | 'pro' | 'kanban'>('button');
 
   // --- TEXT EDITOR PLAYGROUND STATES ---
   const [editorColor, setEditorColor] = useState<TextEditorColor>('mauve');
@@ -529,7 +543,7 @@ export default function App() {
   // --- TOAST PLAYGROUND STATES ---
   const [toastPosition, setToastPosition] = useState<'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'>('bottom-right');
   const [toastFilled, setToastFilled] = useState(false);
-  const [toastColor, setToastColor] = useState<string>('');
+  const [toastColor, setToastColor] = useState<ToastColor | ''>('');
   const [toastCustomClass, setToastCustomClass] = useState('');
 
 
@@ -565,6 +579,16 @@ export default function App() {
   const [paginationShowPageInput, setPaginationShowPageInput] = useState(true);
 
   // --- TABLE PLAYGROUND STATES ---
+  const [tableSubTab, setTableSubTab] = useState<'standard' | 'tree'>('standard');
+  const [treeSearch, setTreeSearch] = useState('');
+  const [treeSelectedIds, setTreeSelectedIds] = useState<(string | number)[]>([]);
+  const [treeExpandedIds, setTreeExpandedIds] = useState<(string | number)[]>([]);
+  const [treeSortField, setTreeSortField] = useState<string>('name');
+  const [treeSortOrder, setTreeSortOrder] = useState<'asc' | 'desc' | ''>('asc');
+  const [treeColor, setTreeColor] = useState<FormControlColor>('mauve');
+  const [treeSize, setTreeSize] = useState<FormControlSize>('md');
+  const [treeCascade, setTreeCascade] = useState(true);
+
   const [tableMode, setTableMode] = useState<'client' | 'server'>('server');
   const [tableData, setTableData] = useState<Employee[]>([]);
   const [tableSearch, setTableSearch] = useState('');
@@ -623,6 +647,46 @@ export default function App() {
   const [newEmpStatus, setNewEmpStatus] = useState<'Active' | 'Inactive' | 'Pending'>('Active');
   const [newEmpSalary, setNewEmpSalary] = useState('5000');
   const [newEmpJoinedDate, setNewEmpJoinedDate] = useState(() => new Date().toISOString().split('T')[0]);
+
+  // Pro Kanban Board states
+  const initialKanbanColumns: KanbanColumn[] = [
+    { id: 'backlog', title: 'A fazer (Backlog)', color: 'maroon' },
+    { id: 'todo', title: 'Pronto para Iniciar (To Do)', color: 'peach' },
+    { id: 'in-progress', title: 'Em Progresso (In Progress)', color: 'blue' },
+    { id: 'done', title: 'Concluído (Done)', color: 'green' }
+  ];
+  const initialKanbanItems: KanbanItem[] = [
+    { id: 'task-1', columnId: 'done', title: 'Configurar Estrutura Monorepo', description: 'Estruturação do workspace Yarn com pacotes individuais para react, css e showcase.', tags: ['Dev', 'Setup'] },
+    { id: 'task-2', columnId: 'done', title: 'Definir Paleta de Cores', description: 'Integração completa com os tons oficiais do Catppuccin (Macchiato/Mocha/Latte).', tags: ['Design'] },
+    { id: 'task-3', columnId: 'in-progress', title: 'Implementar Componentes Core', description: 'Desenvolvimento e testes dos botões, inputs, modais e accordion.', tags: ['React', 'Core'] },
+    { id: 'task-4', columnId: 'todo', title: 'Redigir Documentação Técnica', description: 'Escrever guias detalhados sobre como consumir os pacotes do design system.', tags: ['Docs'] },
+    { id: 'task-5', columnId: 'in-progress', title: 'Criar Componente de Kanban Pro', description: 'Novo componente Kanban com suporte nativo a arrastar e soltar (reordenável).', tags: ['Pro', 'Dev'] },
+    { id: 'task-6', columnId: 'backlog', title: 'Testar Acessibilidade Teclado', description: 'Garantir que a reordenação das colunas e cartões atenda aos requisitos WCAG.', tags: ['Acessibilidade'] }
+  ];
+
+  const [kanbanColumns] = useState<KanbanColumn[]>(initialKanbanColumns);
+  const [kanbanItems, setKanbanItems] = useState<KanbanItem[]>(initialKanbanItems);
+  const [kanbanThemeColor, setKanbanThemeColor] = useState<string>('mauve');
+  const [activeKanbanTab, setActiveKanbanTab] = useState<'react' | 'vue' | 'angular'>('react');
+
+  // New card form states
+  const [newCardTitle, setNewCardTitle] = useState('');
+  const [newCardDesc, setNewCardDesc] = useState('');
+  const [newCardColumn, setNewCardColumn] = useState('todo');
+  const [newCardTags, setNewCardTags] = useState('');
+
+  // --- CODE GENERATORS FOR KANBAN ---
+  const getReactKanbanCode = () => {
+    return `<span class="hl-tag">&lt;DragDropProvider</span> <span class="hl-attr">apiKey</span>=<span class="hl-str">"sk_live_your_key"</span><span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;Kanban</span>\n    <span class="hl-attr">columns</span>=<span class="hl-str">{columns}</span>\n    <span class="hl-attr">items</span>=<span class="hl-str">{items}</span>\n    <span class="hl-attr">onItemsChange</span>=<span class="hl-str">{(newItems) =&gt; setItems(newItems)}</span>\n    <span class="hl-attr">color</span>=<span class="hl-str">"${kanbanThemeColor}"</span>\n  <span class="hl-tag">/&gt;</span>\n<span class="hl-tag">&lt;/DragDropProvider&gt;</span>`;
+  };
+
+  const getVueKanbanCode = () => {
+    return `<span class="hl-tag">&lt;CtpDragDropProvider</span> <span class="hl-attr">api-key</span>=<span class="hl-str">"sk_live_your_key"</span><span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;CtpKanban</span>\n    <span class="hl-attr">:columns</span>=<span class="hl-str">"columns"</span>\n    <span class="hl-attr">:items</span>=<span class="hl-str">"items"</span>\n    <span class="hl-attr">@items-change</span>=<span class="hl-str">"onItemsChange"</span>\n    <span class="hl-attr">color</span>=<span class="hl-str">"${kanbanThemeColor}"</span>\n  <span class="hl-tag">/&gt;</span>\n<span class="hl-tag">&lt;/CtpDragDropProvider&gt;</span>`;
+  };
+
+  const getAngularKanbanCode = () => {
+    return `<span class="hl-tag">&lt;ctp-drag-drop-provider</span> <span class="hl-attr">apiKey</span>=<span class="hl-str">"sk_live_your_key"</span><span class="hl-tag">&gt;</span>\n  <span class="hl-tag">&lt;ctp-kanban</span>\n    <span class="hl-attr">[columns]</span>=<span class="hl-str">"columns"</span>\n    <span class="hl-attr">[items]</span>=<span class="hl-str">"items"</span>\n    <span class="hl-attr">(itemsChange)</span>=<span class="hl-str">"onItemsChange($event)"</span>\n    <span class="hl-attr">color</span>=<span class="hl-str">"${kanbanThemeColor}"</span>\n  <span class="hl-tag">/&gt;</span>\n<span class="hl-tag">&lt;/ctp-drag-drop-provider&gt;</span>`;
+  };
 
 
   // --- SELECT PLAYGROUND STATES ---
@@ -1454,6 +1518,19 @@ export default function App() {
     return `<span class="hl-tag">&lt;ctp-button-group</span>${propsStr ? props.map(p => `\n  <span class="hl-attr">${p.split('=')[0]}</span>${p.includes('=') ? `=<span class="hl-str">${p.substring(p.indexOf('=') + 1)}</span>` : ''}`).join('') : ''}\n<span class="hl-tag">&gt;</span>${buttonsMarkup}\n<span class="hl-tag">&lt;/ctp-button-group&gt;</span>`;
   };
 
+  // --- CODE GENERATORS FOR STEPPER ---
+  const getReactStepCode = () => {
+    return `<span class="hl-tag">&lt;Stepper</span>\n  <span class="hl-attr">steps</span>=<span class="hl-str">{demoSteps}</span>\n  <span class="hl-attr">currentStep</span>=<span class="hl-str">{${currentStep}}</span>\n  <span class="hl-attr">orientation</span>=<span class="hl-str">"${stepOrientation}"</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${stepVariant}"</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${stepColor}"</span>\n<span class="hl-tag">/&gt;</span>`;
+  };
+
+  const getVueStepCode = () => {
+    return `<span class="hl-tag">&lt;CtpStepper</span>\n  <span class="hl-attr">:steps</span>=<span class="hl-str">"demoSteps"</span>\n  <span class="hl-attr">:current-step</span>=<span class="hl-str">"${currentStep}"</span>\n  <span class="hl-attr">orientation</span>=<span class="hl-str">"${stepOrientation}"</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${stepVariant}"</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${stepColor}"</span>\n<span class="hl-tag">/&gt;</span>`;
+  };
+
+  const getAngularStepCode = () => {
+    return `<span class="hl-tag">&lt;ctp-stepper</span>\n  <span class="hl-attr">[steps]</span>=<span class="hl-str">"demoSteps"</span>\n  <span class="hl-attr">[currentStep]</span>=<span class="hl-str">"${currentStep}"</span>\n  <span class="hl-attr">orientation</span>=<span class="hl-str">"${stepOrientation}"</span>\n  <span class="hl-attr">variant</span>=<span class="hl-str">"${stepVariant}"</span>\n  <span class="hl-attr">color</span>=<span class="hl-str">"${stepColor}"</span>\n<span class="hl-tag">&gt;&lt;/ctp-stepper&gt;</span>`;
+  };
+
   // --- CODE GENERATOR FOR STEPS ---
   const getReactStepsCode = () => {
     const props = [`stepsCount={${stepsCount}}`, `currentStep={${stepsCurrent}}`];
@@ -1814,7 +1891,117 @@ export default function App() {
   if (isOpenNested1) openStack.push({ name: 'Layer 1 Modal', size: 'lg' });
   if (isOpenNested2) openStack.push({ name: 'Layer 2 Modal', size: 'md' });
   if (isOpenNested3) openStack.push({ name: 'Layer 3 Modal', size: 'sm' });
-  if (customOverlayOpen) openStack.push({ name: 'Custom Raw Overlay', size: 'custom' });
+  // --- TREE TABLE SHOWCASE MEMOS ---
+  const treeStats = useMemo(() => {
+    let foldersCount = 0;
+    let filesCount = 0;
+    let totalSize = 0;
+
+    const calculate = (nodes: FileNode[]) => {
+      nodes.forEach(node => {
+        if (node.type === 'Diretório') {
+          foldersCount++;
+        } else {
+          filesCount++;
+        }
+        totalSize += node.sizeBytes;
+        const children = node.children;
+        if (Array.isArray(children)) {
+          calculate(children);
+        }
+      });
+    };
+    calculate(initialFilesData);
+
+    return {
+      foldersCount,
+      filesCount,
+      totalSize: totalSize > 1024 * 1024
+        ? `${(totalSize / (1024 * 1024)).toFixed(1)} MB`
+        : `${(totalSize / 1024).toFixed(1)} KB`,
+    };
+  }, []);
+
+  const treeColumns = useMemo<TreeColumn<FileNode>[]>(() => [
+    {
+      key: 'name',
+      header: 'Nome',
+      sortable: true,
+      render: (row: FileNode, value: any, _depth: number, isExpanded: boolean, _hasChildren: boolean) => {
+        let icon = '📄';
+        if (row.type === 'Diretório') {
+          icon = isExpanded ? '📂' : '📁';
+        } else if (row.type === 'PDF') {
+          icon = '📕';
+        } else if (row.type.includes('Imagem')) {
+          icon = '🖼️';
+        } else if (row.type.includes('Configuração') || row.type.includes('JSON')) {
+          icon = '⚙️';
+        } else if (row.type.includes('Word')) {
+          icon = '📘';
+        } else if (row.type.includes('TypeScript') || row.type.includes('React')) {
+          icon = '⚛️';
+        } else if (row.type.includes('Markdown')) {
+          icon = '📝';
+        } else if (row.type.includes('Vídeo')) {
+          icon = '🎥';
+        } else if (row.type.includes('Planilha')) {
+          icon = '📊';
+        } else if (row.type.includes('Oculto') || row.type.includes('git')) {
+          icon = '🔧';
+        }
+        return (
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '1.1rem' }}>{icon}</span>
+            <span style={{ fontWeight: row.type === 'Diretório' ? 600 : 400 }}>{value}</span>
+          </span>
+        );
+      }
+    },
+    {
+      key: 'type',
+      header: 'Tipo',
+      render: (row: FileNode, value: any) => (
+        <span
+          style={{
+            fontSize: '0.85rem',
+            padding: '2px 8px',
+            borderRadius: '4px',
+            backgroundColor: row.type === 'Diretório' ? 'var(--ctp-surface1)' : 'var(--ctp-surface0)',
+            color: row.type === 'Diretório' ? 'var(--ctp-teal)' : 'var(--ctp-text)',
+          }}
+        >
+          {value}
+        </span>
+      )
+    },
+    {
+      key: 'size',
+      header: 'Tamanho',
+      sortable: true,
+      align: 'right',
+      sortValue: (row: FileNode) => row.sizeBytes,
+      render: (_row: FileNode, value: any) => (
+        <span style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--ctp-subtext1)' }}>
+          {value}
+        </span>
+      )
+    },
+    {
+      key: 'updatedAt',
+      header: 'Última Modificação',
+      sortable: true,
+      align: 'center',
+      render: (_row: FileNode, value: any) => {
+        if (!value) return '-';
+        return (
+          <span style={{ color: 'var(--ctp-subtext0)', fontSize: '0.85rem' }}>
+            {new Date(value).toLocaleDateString('pt-BR')}
+          </span>
+        );
+      }
+    }
+  ], []);
 
   if (shellFullScreen) {
     return (
@@ -2234,7 +2421,13 @@ export default function App() {
               className={`sidebar-nav-item ${activeComponent === 'pro' ? 'active' : ''}`}
               onClick={() => { setActiveComponent('pro'); setIsSidebarOpen(false); }}
             >
-              ⚡ Reorderable Tabs
+              ⚡ Reorderable Tabs & Table
+            </button>
+            <button
+              className={`sidebar-nav-item ${activeComponent === 'kanban' ? 'active' : ''}`}
+              onClick={() => { setActiveComponent('kanban'); setIsSidebarOpen(false); }}
+            >
+              📋 Kanban Board
             </button>
           </div>
         </div>
@@ -3499,6 +3692,153 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                   </div>
                 </div>
               </div>
+
+            </section>
+          )}
+
+          {/* KANBAN BOARD SHOWCASE TAB */}
+          {activeComponent === 'kanban' && (
+            <section>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <h2 className="section-title" style={{ margin: 0 }}>
+                  <span>📋</span> Pro: Quadro Kanban Reordenável (Kanban Board)
+                </h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--ctp-subtext0)' }}>Cor Temática:</span>
+                  <Select
+                    value={kanbanThemeColor}
+                    onChange={(e) => setKanbanThemeColor(e.target.value)}
+                    size="sm"
+                    color="mauve"
+                    style={{ minWidth: '120px' }}
+                  >
+                    <option value="rosewater">Rosewater</option>
+                    <option value="flamingo">Flamingo</option>
+                    <option value="pink">Pink</option>
+                    <option value="mauve">Mauve</option>
+                    <option value="red">Red</option>
+                    <option value="maroon">Maroon</option>
+                    <option value="peach">Peach</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="green">Green</option>
+                    <option value="teal">Teal</option>
+                    <option value="sky">Sky</option>
+                    <option value="sapphire">Sapphire</option>
+                    <option value="blue">Blue</option>
+                    <option value="lavender">Lavender</option>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Add New Task Card Form */}
+              <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem', border: '1px solid var(--ctp-surface0)' }}>
+                <h4 style={{ margin: '0 0 1rem 0', fontSize: '0.95rem', color: 'var(--ctp-subtext1)' }}>🆕 Adicionar Novo Cartão de Tarefa</h4>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: '1 1 200px' }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ctp-subtext0)' }}>Título da Tarefa</label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Implementar testes unitários"
+                      value={newCardTitle}
+                      onChange={(e) => setNewCardTitle(e.target.value)}
+                      size="sm"
+                      color="mauve"
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: '2 1 300px' }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ctp-subtext0)' }}>Descrição da Tarefa</label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Cobertura de testes nos fluxos drag-and-drop..."
+                      value={newCardDesc}
+                      onChange={(e) => setNewCardDesc(e.target.value)}
+                      size="sm"
+                      color="mauve"
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: '1 1 150px' }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ctp-subtext0)' }}>Coluna Inicial</label>
+                    <Select
+                      value={newCardColumn}
+                      onChange={(e) => setNewCardColumn(e.target.value)}
+                      size="sm"
+                      color="mauve"
+                    >
+                      {kanbanColumns.map(col => (
+                        <option key={col.id} value={col.id}>{col.title}</option>
+                      ))}
+                    </Select>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: '1 1 150px' }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ctp-subtext0)' }}>Tags (separadas por vírgula)</label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Dev, Testes"
+                      value={newCardTags}
+                      onChange={(e) => setNewCardTags(e.target.value)}
+                      size="sm"
+                      color="mauve"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className={`ctp-btn ctp-btn--filled ctp-btn--sm ctp-btn--${kanbanThemeColor}`}
+                    onClick={() => {
+                      if (!newCardTitle.trim()) return;
+                      const newCard: KanbanItem = {
+                        id: `task-${Date.now()}`,
+                        columnId: newCardColumn,
+                        title: newCardTitle,
+                        description: newCardDesc || undefined,
+                        tags: newCardTags ? newCardTags.split(',').map(t => t.trim()).filter(Boolean) : []
+                      };
+                      setKanbanItems(prev => [...prev, newCard]);
+                      setNewCardTitle('');
+                      setNewCardDesc('');
+                      setNewCardTags('');
+                      showToast("Novo cartão adicionado com sucesso!");
+                    }}
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+
+              {/* Kanban Playground area */}
+              <div className="playground-section">
+                <div className="playground-card playground-card--preview" style={{ padding: '0.25rem' }}>
+                  <div className="preview-canvas" style={{ padding: '1.25rem', minHeight: '520px', alignItems: 'stretch', justifyContent: 'stretch', backgroundColor: 'var(--ctp-crust)', borderRadius: '12px' }}>
+                    <DragDropProvider apiKey="dev">
+                      <Kanban
+                        columns={kanbanColumns}
+                        items={kanbanItems}
+                        onItemsChange={(newItems) => setKanbanItems(newItems)}
+                        color={kanbanThemeColor}
+                        onItemClick={(item) => showToast(`Tarefa selecionada: "${item.title}"`)}
+                      />
+                    </DragDropProvider>
+                  </div>
+
+                  <div style={{ padding: '1rem' }}>
+                    <div className="tabs-header" style={{ marginBottom: '1rem' }}>
+                      {(['react', 'vue', 'angular'] as const).map((tab) => (
+                        <button
+                          key={tab}
+                          className={`tab-btn ${activeKanbanTab === tab ? 'active' : ''}`}
+                          onClick={() => setActiveKanbanTab(tab)}
+                        >
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                    <pre className="code-block" style={{ fontSize: '0.8rem' }}>
+                      <code dangerouslySetInnerHTML={{
+                        __html: activeKanbanTab === 'react' ? getReactKanbanCode() : activeKanbanTab === 'vue' ? getVueKanbanCode() : getAngularKanbanCode()
+                      }} />
+                    </pre>
+                  </div>
+                </div>
+              </div>
             </section>
           )}
 
@@ -4240,18 +4580,19 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                   <h3 style={{ margin: '0 0 1.2rem 0', fontSize: '1.2rem' }}>Component Preview</h3>
 
                   <div className="preview-canvas" style={{ padding: '2rem', minHeight: '160px' }}>
-                    <ProgressBar
-                      value={progressVal}
-                      size={progressSize}
-                      color={progressColor}
-                      striped={progressStriped}
-                      animated={progressAnimated}
-                      indeterminate={progressIndeterminate}
-                      showValue={progressShowValue}
-                      valuePosition={progressValPosition}
-                      label={progressLabel || undefined}
-                      style={{ width: '100%' }}
-                    />
+                    <div style={{ width: '100%' }}>
+                      <ProgressBar
+                        value={progressVal}
+                        size={progressSize}
+                        color={progressColor}
+                        striped={progressStriped}
+                        animated={progressAnimated}
+                        indeterminate={progressIndeterminate}
+                        showValue={progressShowValue}
+                        valuePosition={progressValPosition}
+                        label={progressLabel || undefined}
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -5288,14 +5629,44 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
           {activeComponent === 'table' && (
             <>
               <section>
-                <h2 className="section-title">
-                  <span>📊</span> Data Table Dinâmica (Data Grid)
-                </h2>
-                <p style={{ color: 'var(--ctp-subtext0)', margin: '-1.5rem 0 1.5rem 0', fontSize: '0.95rem' }}>
-                  Um componente de Grid altamente dinâmico com modos Client-side e Server-side, paginação e ordenação controladas, edição inline e visualizador de logs de API.
-                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                  <h2 className="section-title" style={{ margin: 0 }}>
+                    {tableSubTab === 'standard' ? (
+                      <><span>📊</span> Data Table Dinâmica (Data Grid)</>
+                    ) : (
+                      <><span>🌲</span> Tabela de Árvore Ordenável (TreeTable)</>
+                    )}
+                  </h2>
 
-                {/* Metrics Bar */}
+                  <ButtonGroup
+                    selectionMode="single"
+                    value={tableSubTab}
+                    onChange={(val) => {
+                      if (val) setTableSubTab(val as 'standard' | 'tree');
+                    }}
+                  >
+                    <ButtonGroupItem value="standard" size="sm" variant={tableSubTab === 'standard' ? 'filled' : 'ghost'} color={tableColor}>
+                      📊 Tabela Padrão
+                    </ButtonGroupItem>
+                    <ButtonGroupItem value="tree" size="sm" variant={tableSubTab === 'tree' ? 'filled' : 'ghost'} color={tableColor}>
+                      🌲 Tabela de Árvore
+                    </ButtonGroupItem>
+                  </ButtonGroup>
+                </div>
+
+                <p style={{ color: 'var(--ctp-subtext0)', margin: '-1rem 0 1.5rem 0', fontSize: '0.95rem' }}>
+                  {tableSubTab === 'standard' ? (
+                    'Um componente de Grid altamente dinâmico com modos Client-side e Server-side, paginação e ordenação controladas, edição inline e visualizador de logs de API.'
+                  ) : (
+                    'Um componente para visualização hierárquica (Tree Table) com ordenação recursiva de irmãos, seleção em cascata bidirecional e conectores visuais de profundidade.'
+                  )}
+                </p>
+              </section>
+
+              {tableSubTab === 'standard' ? (
+                <>
+                  <section>
+                    {/* Metrics Bar */}
                 <div className="metrics-grid" style={{ marginBottom: '1.5rem' }}>
                   <div className="metric-card glass-panel">
                     <div className="metric-info">
@@ -5572,7 +5943,7 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                     <div className="table-wrapper">
                       <Table<Employee>
                         data={tableData}
-                        columns={[
+                        columns={([
                           { key: 'id', header: 'ID', sortable: true },
                           { key: 'name', header: 'Nome', sortable: true },
                           { key: 'email', header: 'E-mail', sortable: true },
@@ -5582,7 +5953,7 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                             key: 'status',
                             header: 'Status',
                             sortable: true,
-                            render: (_, value) => {
+                            render: (_: Employee, value: any) => {
                               const badgeClass = `ctp-table-badge ctp-table-badge--${value.toLowerCase()}`;
                               const label = value === 'Active' ? 'Ativo' : value === 'Inactive' ? 'Inativo' : 'Pendente';
                               return (
@@ -5598,8 +5969,8 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                             header: 'Salário',
                             sortable: true,
                             editable: true,
-                            align: 'right',
-                            render: (_, value) => {
+                            align: 'right' as const,
+                            render: (_: Employee, value: any) => {
                               return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(Number(value));
                             }
                           },
@@ -5607,7 +5978,7 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                             key: 'joinedDate',
                             header: 'Admissão',
                             sortable: true,
-                            render: (_, value) => {
+                            render: (_: Employee, value: any) => {
                               const parts = String(value).split('-');
                               return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : String(value);
                             }
@@ -5615,8 +5986,8 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                           {
                             key: 'actions',
                             header: 'Ações',
-                            align: 'center',
-                            render: (row) => (
+                            align: 'center' as const,
+                            render: (row: Employee) => (
                               <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
                                 <button
                                   type="button"
@@ -5639,7 +6010,7 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                               </div>
                             )
                           }
-                        ].filter(col => col.key === 'actions' || visibleColumns[col.key])}
+                        ] as Column<Employee>[]).filter(col => col.key === 'actions' || visibleColumns[col.key])}
                         rowKey={(row) => row.id}
                         sortField={tableSortField}
                         sortOrder={tableSortOrder}
@@ -5832,7 +6203,218 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                 </form>
               </Modal>
             </>
+          ) : (
+            <>
+              {/* Tree Table Metrics Bar */}
+              <div className="metrics-grid" style={{ marginBottom: '1.5rem' }}>
+                <div className="metric-card glass-panel">
+                  <div className="metric-info">
+                    <span className="metric-title">Total Pastas</span>
+                    <span className="metric-value">{treeStats.foldersCount}</span>
+                    <span className="metric-sub">Diretórios no total</span>
+                  </div>
+                  <div className="metric-icon-box">📁</div>
+                </div>
+                <div className="metric-card glass-panel">
+                  <div className="metric-info">
+                    <span className="metric-title">Total Arquivos</span>
+                    <span className="metric-value">{treeStats.filesCount}</span>
+                    <span className="metric-sub">Arquivos nas subpastas</span>
+                  </div>
+                  <div className="metric-icon-box">📄</div>
+                </div>
+                <div className="metric-card glass-panel">
+                  <div className="metric-info">
+                    <span className="metric-title">Tamanho Total</span>
+                    <span className="metric-value">{treeStats.totalSize}</span>
+                    <span className="metric-sub">Espaço em disco</span>
+                  </div>
+                  <div className="metric-icon-box">💾</div>
+                </div>
+                <div className="metric-card glass-panel">
+                  <div className="metric-info">
+                    <span className="metric-title">Itens Selecionados</span>
+                    <span className="metric-value">{treeSelectedIds.length}</span>
+                    <span className="metric-sub">Seleção em cascata ativa</span>
+                  </div>
+                  <div className="metric-icon-box">✓</div>
+                </div>
+              </div>
+
+              <div className="playground-section" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {/* Controls and Filters Area */}
+                <div className="glass-panel" style={{ padding: '1rem 1.25rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                    {/* Left quick actions */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <Button
+                        type="button"
+                        variant="tonal"
+                        color={treeColor}
+                        size="sm"
+                        onClick={() => {
+                          const allIds: (string | number)[] = [];
+                          const addIds = (nodes: FileNode[]) => {
+                            nodes.forEach(node => {
+                              if (node.children && node.children.length > 0) {
+                                allIds.push(node.id);
+                                addIds(node.children);
+                              }
+                            });
+                          };
+                          addIds(initialFilesData);
+                          setTreeExpandedIds(allIds);
+                        }}
+                      >
+                        📂 Expandir Tudo
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        color={treeColor}
+                        size="sm"
+                        onClick={() => setTreeExpandedIds([])}
+                      >
+                        📁 Colapsar Tudo
+                      </Button>
+                    </div>
+
+                    {/* Design Settings */}
+                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--ctp-text)' }}>
+                        <input
+                          type="checkbox"
+                          className="ctp-table-checkbox"
+                          checked={treeCascade}
+                          onChange={(e) => setTreeCascade(e.target.checked)}
+                        />
+                        Seleção em Cascata
+                      </label>
+
+                      <Select
+                        value={treeColor}
+                        onChange={(e) => setTreeColor(e.target.value as FormControlColor)}
+                        size="sm"
+                        color={treeColor}
+                        style={{ minWidth: '120px' }}
+                      >
+                        <option value="mauve">Mauve</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="pink">Pink</option>
+                        <option value="teal">Teal</option>
+                      </Select>
+
+                      <Select
+                        value={treeSize}
+                        onChange={(e) => setTreeSize(e.target.value as FormControlSize)}
+                        size="sm"
+                        color={treeColor}
+                        style={{ minWidth: '130px' }}
+                      >
+                        <option value="sm">Pequeno (sm)</option>
+                        <option value="md">Médio (md)</option>
+                        <option value="lg">Grande (lg)</option>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* TreeTable Content Container */}
+                <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+                  {/* Search & Filters */}
+                  <div className="filter-bar" style={{ borderBottom: '1px solid var(--ctp-surface0)', padding: '1rem' }}>
+                    <div className="filters-left" style={{ display: 'flex', gap: '8px', alignItems: 'center', width: '100%' }}>
+                      <div className="search-input-wrapper" style={{ width: '100%', maxWidth: '400px' }}>
+                        <span className="search-icon">
+                          <SearchIcon size={14} />
+                        </span>
+                        <Input
+                          type="text"
+                          placeholder="Buscar pasta ou arquivo..."
+                          className="search-input"
+                          value={treeSearch}
+                          onChange={(e) => setTreeSearch(e.target.value)}
+                          size={treeSize}
+                          color={treeColor}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tree Table component */}
+                  <div style={{ padding: '1rem' }}>
+                    <TreeTable<FileNode>
+                      data={initialFilesData}
+                      columns={treeColumns}
+                      rowKey={(row) => row.id}
+                      childrenKey="children"
+                      sortField={treeSortField}
+                      sortOrder={treeSortOrder}
+                      onSort={(field, order) => {
+                        setTreeSortField(field);
+                        setTreeSortOrder(order);
+                      }}
+                      expandedRowIds={treeExpandedIds}
+                      onExpandedRowsChange={setTreeExpandedIds}
+                      selectedRowIds={treeSelectedIds}
+                      onSelectionChange={setTreeSelectedIds}
+                      cascadeSelection={treeCascade}
+                      size={treeSize}
+                      color={treeColor}
+                      globalFilter={treeSearch}
+                      globalFilterFields={['name', 'type', 'size']}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Developer Code Documentation */}
+              <div style={{ marginTop: '2rem' }}>
+                <h3 className="section-subtitle" style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--ctp-text)' }}>
+                  📖 Exemplo de Uso do Componente
+                </h3>
+
+                <pre className="code-block" style={{ fontSize: '0.85rem' }}>
+                  <code>{`import { TreeTable, TreeColumn } from '@catppuccin-ds/react';
+
+const columns: TreeColumn<FileNode>[] = [
+  {
+    key: 'name',
+    header: 'Nome',
+    sortable: true,
+    render: (row, value, depth, isExpanded, hasChildren) => (
+      <span>{row.type === 'Diretório' ? '📁' : '📄'} {value}</span>
+    )
+  },
+  {
+    key: 'size',
+    header: 'Tamanho',
+    sortable: true,
+    align: 'right',
+    sortValue: (row) => row.sizeBytes // Ordenação numérica por bytes!
+  }
+];
+
+<TreeTable
+  data={data}
+  columns={columns}
+  rowKey={(row) => row.id}
+  childrenKey="children"
+  cascadeSelection={true}
+  size="md"
+  color="mauve"
+  globalFilter={searchQuery}
+  globalFilterFields={['name', 'type']}
+/>`}</code>
+                </pre>
+              </div>
+            </>
           )}
+        </>
+      )}
 
           {activeComponent === 'card' && (
             <>
@@ -9024,7 +9606,7 @@ import { DragDropProvider, ReorderableTable } from '@catppuccin-ds/react-pro';
                         <button
                           key={c.name}
                           title={c.name}
-                          onClick={() => setToastColor(c.name.toLowerCase())}
+                          onClick={() => setToastColor(c.name.toLowerCase() as ToastColor)}
                           style={{
                             width: 32, height: 32, borderRadius: 8, border: toastColor === c.name.toLowerCase() ? '3px solid var(--ctp-text)' : '2px solid transparent',
                             background: `var(${c.variable})`, cursor: 'pointer', outline: 'none',

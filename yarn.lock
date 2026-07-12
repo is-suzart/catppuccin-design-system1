@@ -286,10 +286,10 @@ __metadata:
 
 "@catppuccin-ds/css@file:../../packages/css::locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase":
   version: 0.1.0
-  resolution: "@catppuccin-ds/css@file:../../packages/css#../../packages/css::hash=3bc0eb&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
+  resolution: "@catppuccin-ds/css@file:../../packages/css#../../packages/css::hash=0d80d5&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
   bin:
     catppuccin-ds-css: ./bin/cli.js
-  checksum: 10c0/541c0ee8375209b010c9354b91ed74118fe17b20a84e7410cb182f9ebaea56da8c3ed66068b6b7d2e4363fe040c1d5f0fdc5492e6dc8174e9824509ee5581c8f
+  checksum: 10c0/a8ac939040bbef37c1c03c6ee668548c1f2049df0b586638a020ba4c0dab7b2a5f29f07f0b94d1cdde7ece8370cd3b5ab17613f15f23c0dfcfc964d0604ded92
   languageName: node
   linkType: hard
 
@@ -308,7 +308,7 @@ __metadata:
 
 "@catppuccin-ds/react-pro@file:../../packages/react-pro::locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase":
   version: 0.1.0
-  resolution: "@catppuccin-ds/react-pro@file:../../packages/react-pro#../../packages/react-pro::hash=8a58ba&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
+  resolution: "@catppuccin-ds/react-pro@file:../../packages/react-pro#../../packages/react-pro::hash=f1bc41&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
   peerDependencies:
     "@catppuccin-ds/react": "*"
     "@dnd-kit/core": ^6.3.0
@@ -316,7 +316,7 @@ __metadata:
     "@dnd-kit/utilities": ^3.2.2
     react: ^18.0.0 || ^19.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/e04cd738e9288e4c72b7f692ce1d326ed70f25358df946f35874f379efdc80f382fb50438ca213aeac8dcf0210f88876d06e403692cc0350f0c3c0a07ea0b672
+  checksum: 10c0/195664d810115fe5b0c7473345016f17a3aaaf6cbc3e3056d7d2d6b63940e88c505e3421d66b47304caa62c5d3b0d9d2d923faef5e4a50da561def2bb9b69708
   languageName: node
   linkType: hard
 
@@ -342,7 +342,7 @@ __metadata:
 
 "@catppuccin-ds/react@file:../../packages/react::locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase":
   version: 0.1.0
-  resolution: "@catppuccin-ds/react@file:../../packages/react#../../packages/react::hash=43c50d&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
+  resolution: "@catppuccin-ds/react@file:../../packages/react#../../packages/react::hash=e5c92f&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
   dependencies:
     "@tiptap/extension-character-count": "npm:^3.26.0"
     "@tiptap/extension-code-block": "npm:^3.26.0"
@@ -367,13 +367,13 @@ __metadata:
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/1b408798ce320efd4fb3d790b6ab04460ea10747c353821e058128bff0eda5a08a10cd6facc8df7b9b845dc5c7fc78d26a1a6c90488ea60703ef7e2b67ac6b1e
+  checksum: 10c0/765b87f392feb28a1255ed31855f589dba0e6e69c4a3dff5eb4a6877df14eb7cd7dba0c7aa919891e8af4750cbed4594f75f234d922ea21633d773945d84bae2
   languageName: node
   linkType: hard
 
 "@catppuccin-ds/react@file:../react::locator=%40catppuccin-ds%2Freact-pro%40workspace%3Apackages%2Freact-pro":
   version: 0.1.0
-  resolution: "@catppuccin-ds/react@file:../react#../react::hash=43c50d&locator=%40catppuccin-ds%2Freact-pro%40workspace%3Apackages%2Freact-pro"
+  resolution: "@catppuccin-ds/react@file:../react#../react::hash=e5c92f&locator=%40catppuccin-ds%2Freact-pro%40workspace%3Apackages%2Freact-pro"
   dependencies:
     "@tiptap/extension-character-count": "npm:^3.26.0"
     "@tiptap/extension-code-block": "npm:^3.26.0"
@@ -398,7 +398,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/1b408798ce320efd4fb3d790b6ab04460ea10747c353821e058128bff0eda5a08a10cd6facc8df7b9b845dc5c7fc78d26a1a6c90488ea60703ef7e2b67ac6b1e
+  checksum: 10c0/765b87f392feb28a1255ed31855f589dba0e6e69c4a3dff5eb4a6877df14eb7cd7dba0c7aa919891e8af4750cbed4594f75f234d922ea21633d773945d84bae2
   languageName: node
   linkType: hard
 
@@ -3900,7 +3900,7 @@ __metadata:
 
 "resolve@patch:resolve@npm%3A^1.1.7#optional!builtin<compat/resolve>":
   version: 1.22.12
-  resolution: "resolve@patch:resolve@npm%3A1.22.12#optional!builtin<compat/resolve>::version=1.22.12&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.12#optional!builtin<compat/resolve>::version=1.22.12&hash=9bd1a5"
   dependencies:
     es-errors: "npm:^1.3.0"
     is-core-module: "npm:^2.16.1"
@@ -3908,7 +3908,7 @@ __metadata:
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 10c0/fc6519984ae1f894d877c0060ba8b1f5ba3bc0e85a02f74e141929c118c23d74d9735619a9cc2965397387e514884245c65d72a40731dcb6cfc84c7bcdc8321e
+  checksum: 10c0/e12af106e16e652bd83060e8afacece4ee3dcbd0f4cf028e3d9ad178e6ced9ecb1c87ee60158b239582313902a717f8adc57a9b76ea54b1994141ba15f420c65
   languageName: node
   linkType: hard
 
