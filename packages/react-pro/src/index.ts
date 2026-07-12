@@ -17,3 +17,6 @@ export type {
 
 export { validateLicenseKey, isProFeatureAllowed } from './licensing';
 export type { LicenseStatus } from './licensing';
+
+export { Kanban } from './Kanban';
+export type { KanbanColumn, KanbanItem, KanbanProps } from './Kanban';

@@ -49,4 +49,7 @@ export * from './command.component';
 export * from './carousel.component';
 export * from './scroll-area.component';
 export * from './animate.component';
+export * from './tree-table.component';
+export * from './kanban.component';
+export * from './drag-drop-provider.component';
 

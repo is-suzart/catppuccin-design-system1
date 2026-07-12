@@ -59,6 +59,9 @@ import Command from './Command.vue';
 import Carousel from './Carousel.vue';
 import ScrollArea from './ScrollArea.vue';
 import Animate from './Animate.vue';
+import TreeTable from './TreeTable.vue';
+import Kanban from './Kanban.vue';
+import DragDropProvider from './DragDropProvider.vue';
 
 export {
   Button, Overlay, Modal, Steps, StepsSlider, Stepper,
@@ -76,11 +79,13 @@ export {
   Toast, Skeleton, Alert,
   Avatar, AvatarGroup, Breadcrumb,
   Popover, HoverCard,
-  Command, Carousel, ScrollArea, Animate,
+  Command, Carousel, ScrollArea, Animate, TreeTable, Kanban, DragDropProvider,
 };
 
 export { toast } from './toast';
 export type { ToastVariant, ToastPosition, ToastOptions, ToastItem } from './toast';
 export type { Column, TableSize, TableColor } from './Table.vue';
 export type { ButtonGroupVariant } from './ButtonGroup.vue';
+export type { TreeColumn } from './TreeTable.vue';
+export type { KanbanColumn, KanbanItem } from './Kanban.vue';
 
