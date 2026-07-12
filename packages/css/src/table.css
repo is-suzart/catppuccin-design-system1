@@ -475,3 +475,30 @@
   color: var(--ctp-subtext0);
   font-size: 0.85rem;
 }
+
+/* Tree Table Specific Styles */
+.ctp-tree-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ctp-subtext0);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: var(--ctp-transition);
+  flex-shrink: 0;
+}
+
+.ctp-tree-toggle-btn:hover {
+  background-color: var(--ctp-surface0);
+  color: var(--ctp-text);
+}
+
+.ctp-tree-indent-guide {
+  flex-shrink: 0;
+}
+

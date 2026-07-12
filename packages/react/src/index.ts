@@ -41,4 +41,4 @@ export * from './Command';
 export * from './Carousel';
 export * from './ScrollArea';
 export * from './Animate';
-
+export * from './TreeTable';
