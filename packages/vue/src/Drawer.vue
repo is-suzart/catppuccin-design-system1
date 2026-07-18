@@ -3,11 +3,14 @@
     :is-open="isOpen"
     :close-on-overlay-click="closeOnOverlayClick"
     :close-on-esc="closeOnEsc"
-    :class="`ctp-overlay--drawer-${position}`"
+    :data-placement="`drawer-${position}`"
     @close="emit('close')"
   >
     <div
-      :class="drawerClass"
+      class="ctp-drawer"
+      :data-placement="position"
+      :data-size="size"
+      :data-color="color"
       role="dialog"
       aria-modal="true"
     >
@@ -36,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import Overlay from './Overlay.vue';
 
 type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
@@ -70,13 +72,4 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   (e: 'close'): void;
 }>();
-
-const drawerClass = computed(() => {
-  return [
-    'ctp-drawer',
-    `ctp-drawer--${props.position}`,
-    `ctp-drawer--${props.size}`,
-    `ctp-drawer--${props.color}`,
-  ];
-});
 </script>

@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="classes"
+    class="ctp-progressbar"
+    :data-size="size"
+    :data-color="color"
+    :data-state="indeterminate ? 'indeterminate' : (animated ? 'animated' : (striped ? 'striped' : undefined))"
     role="progressbar"
     :aria-valuenow="indeterminate ? undefined : normalizedValue"
     :aria-valuemin="indeterminate ? undefined : 0"
@@ -87,15 +90,4 @@ const percent = computed(() => {
 });
 
 const progressPercent = computed(() => Math.round(percent.value));
-
-const classes = computed(() => {
-  return [
-    'ctp-progressbar',
-    `ctp-progressbar--${props.size}`,
-    `ctp-progressbar--${props.color}`,
-    props.striped ? 'ctp-progressbar--striped' : '',
-    props.animated ? 'ctp-progressbar--animated' : '',
-    props.indeterminate ? 'ctp-progressbar--indeterminate' : '',
-  ];
-});
 </script>

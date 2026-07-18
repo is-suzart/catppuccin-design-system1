@@ -42,7 +42,7 @@ export const Stepper: React.FC<StepperProps> = ({
 
   const wrapperClassNames = [
     cn(prefix, 'stepper-wrapper'),
-    cn(prefix, 'stepper', [orientation, variant, color]),
+    cn(prefix, 'stepper'),
     className,
   ]
     .filter(Boolean)
@@ -54,7 +54,13 @@ export const Stepper: React.FC<StepperProps> = ({
   } as React.CSSProperties;
 
   return (
-    <div className={wrapperClassNames} style={cssStyle}>
+    <div
+      className={wrapperClassNames}
+      style={cssStyle}
+      data-orientation={orientation}
+      data-state={variant}
+      data-color={color}
+    >
       {/* Background line track */}
       <div className={cnEl(prefix, 'stepper', 'track')}>
         <div className={cnEl(prefix, 'stepper', 'track-active')} />
@@ -68,7 +74,6 @@ export const Stepper: React.FC<StepperProps> = ({
 
         const stepClassNames = [
           cnEl(prefix, 'stepper', 'step'),
-          `${prefix}-stepper__step--${status}`,
         ].join(' ');
 
         // Compute what to render inside the node circle
@@ -84,7 +89,7 @@ export const Stepper: React.FC<StepperProps> = ({
         }
 
         return (
-          <div key={index} className={stepClassNames}>
+          <div key={index} className={stepClassNames} data-state={status}>
             {/* Step node icon / dot / number */}
             <div className={cnEl(prefix, 'stepper', 'node')}>
               {nodeContent}

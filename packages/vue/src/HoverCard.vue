@@ -14,7 +14,7 @@
       <div
         v-if="isVisible"
         ref="floatingEl"
-        :class="['ctp-hover-card', `ctp-hover-card--placement-${actualPlacement}`]"
+        class="ctp-hover-card" :data-placement="actualPlacement"
         :style="{ position: 'fixed', top: top + 'px', left: left + 'px', zIndex: 1100 }"
         @mouseenter="onCardEnter"
         @mouseleave="onCardLeave"

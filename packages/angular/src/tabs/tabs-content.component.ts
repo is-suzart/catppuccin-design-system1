@@ -10,7 +10,8 @@ import { TabsComponent } from './tabs.component';
       [id]="'ctp-tabpanel-' + value()"
       [attr.aria-labelledby]="'ctp-tabtrigger-' + value()"
       tabindex="0"
-      [class]="contentClass()"
+      class="ctp-tabs-content"
+      [attr.data-state]="isActive() ? 'active' : null"
       [style.display]="isActive() ? '' : 'none'"
     >
       @if (isActive()) {
@@ -25,11 +26,4 @@ export class TabsContentComponent {
   parent = inject(TabsComponent);
 
   isActive = computed(() => this.parent.isSelected(this.value()));
-
-  contentClass = computed(() => {
-    return [
-      'ctp-tabs-content',
-      this.isActive() ? 'ctp-tabs-content--active' : '',
-    ].filter(Boolean).join(' ');
-  });
 }

@@ -6,7 +6,7 @@
     @close="emit('close')"
   >
     <div
-      :class="['ctp-modal', `ctp-modal--${size}`]"
+      class="ctp-modal" :data-size="size"
       role="dialog"
       aria-modal="true"
     >

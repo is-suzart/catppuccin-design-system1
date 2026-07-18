@@ -7,7 +7,7 @@ describe('Alert', () => {
     render(<Alert>Message</Alert>);
     const alert = screen.getByRole('alert');
     expect(alert).toHaveClass('ctp-alert');
-    expect(alert).toHaveClass('ctp-alert--info');
+    expect(alert).toHaveAttribute('data-variant', 'info');
     expect(screen.getByText('Message')).toBeInTheDocument();
   });
 
@@ -15,14 +15,14 @@ describe('Alert', () => {
     render(<Alert variant="success" title="Done">Operation completed</Alert>);
     expect(screen.getByText('Done')).toBeInTheDocument();
     expect(screen.getByText('Operation completed')).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveClass('ctp-alert--success');
+    expect(screen.getByRole('alert')).toHaveAttribute('data-variant', 'success');
   });
 
   it('renders all variants', () => {
     const variants = ['info', 'success', 'warning', 'error'] as const;
     variants.forEach(v => {
       const { unmount } = render(<Alert variant={v}>{v}</Alert>);
-      expect(screen.getByRole('alert')).toHaveClass(`ctp-alert--${v}`);
+      expect(screen.getByRole('alert')).toHaveAttribute('data-variant', v);
       unmount();
     });
   });

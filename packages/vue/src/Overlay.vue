@@ -2,10 +2,11 @@
   <Teleport to="body">
     <div
       v-if="shouldRender"
-      :class="['ctp-overlay', { 'ctp-overlay--open': isAnimatedIn }]"
+      class="ctp-overlay" :data-state="isAnimatedIn ? 'open' : undefined"
       :style="{ zIndex: zIndex }"
       @click="handleOverlayClick"
       role="presentation"
+      v-bind="$attrs"
     >
       <slot />
     </div>

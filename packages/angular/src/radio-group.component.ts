@@ -8,7 +8,7 @@ import { FormControlColor, getFormThemeClass } from './form-types';
   template: `
     <div [class]="'ctp-radio-group'" role="radiogroup">
       @for (opt of options(); track opt.value) {
-        <label [class]="getItemClass()">
+        <label class="ctp-radio-item" [attr.data-state]="disabled() ? 'disabled' : null" [attr.data-color]="color()">
           <input
             type="radio"
             [name]="name()"
@@ -41,13 +41,7 @@ export class RadioGroupComponent implements ControlValueAccessor {
   private _onChange: (val: any) => void = () => {};
   private _onTouched: () => void = () => {};
 
-  getItemClass(): string {
-    return [
-      'ctp-radio-item',
-      this.disabled() ? 'ctp-radio-item--disabled' : '',
-      getFormThemeClass(this.color()),
-    ].filter(Boolean).join(' ');
-  }
+
 
   writeValue(val: any): void { this.value.set(val); }
   registerOnChange(fn: any): void { this._onChange = fn; }

@@ -1,5 +1,12 @@
 <template>
-  <span :class="badgeClass" v-bind="$attrs">
+  <span
+    :class="badgeClass"
+    :data-variant="variant"
+    :data-size="size"
+    :data-shape="shape"
+    :data-color="color"
+    v-bind="$attrs"
+  >
     <span v-if="$slots.icon || icon" class="ctp-badge__icon" style="display: inline-flex; align-items: center">
       <slot name="icon">{{ icon }}</slot>
     </span>
@@ -74,12 +81,6 @@ const emit = defineEmits<{
 }>();
 
 const badgeClass = computed(() => {
-  return [
-    'ctp-badge',
-    `ctp-badge--${props.variant}`,
-    `ctp-badge--${props.size}`,
-    `ctp-badge--${props.shape}`,
-    `ctp-badge--${props.color}`,
-  ];
+  return 'ctp-badge';
 });
 </script>

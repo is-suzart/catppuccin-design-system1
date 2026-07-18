@@ -39,12 +39,9 @@ export const Drawer: React.FC<DrawerProps> = ({
   const prefix = usePrefix();
   const hasHeader = title || showCloseButton;
 
-  // Alignments on parent portal wrapper
-  const overlayClass = `${prefix}-overlay--drawer-${position}`;
-
   // Classes on the drawer box itself
   const drawerClasses = [
-    cn(prefix, 'drawer', [position, size, color]),
+    cn(prefix, 'drawer'),
     className,
   ]
     .filter(Boolean)
@@ -56,13 +53,16 @@ export const Drawer: React.FC<DrawerProps> = ({
       onClose={onClose}
       closeOnOverlayClick={closeOnOverlayClick}
       closeOnEsc={closeOnEsc}
-      className={overlayClass}
+      data-placement={`drawer-${position}`}
     >
       <div
         className={drawerClasses}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title && typeof title === 'string' ? `${prefix}-drawer-title` : undefined}
+        data-placement={position}
+        data-size={size}
+        data-color={color}
       >
         {hasHeader && (
           <div className={cnEl(prefix, 'drawer', 'header')}>

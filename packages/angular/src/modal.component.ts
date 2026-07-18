@@ -15,7 +15,7 @@ type ModalSize = 'sm' | 'md' | 'lg';
       (close)="onCloseModal()"
     >
       <div
-        [class]="'ctp-modal ctp-modal--' + size()"
+        class="ctp-modal" [attr.data-size]="size()"
         role="dialog"
         aria-modal="true"
       >

@@ -95,14 +95,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ size = 'md', shape = 'rounded', color = 'mauve', error = false, className = '', ...props }, ref) => {
     const prefix = usePrefix();
     const classNames = [
-      cn(prefix, 'form-control', [size, shape, error ? 'error' : undefined]),
-      getFormThemeClass(prefix, color),
+      cn(prefix, 'form-control'),
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
-    return <input ref={ref} className={classNames} {...props} />;
+    return <input ref={ref} className={classNames} data-size={size} data-shape={shape} data-state={error ? 'error' : undefined} data-color={color} {...props} />;
   }
 );
 Input.displayName = 'Input';
@@ -119,14 +118,13 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ size = 'md', shape = 'rounded', color = 'mauve', error = false, className = '', ...props }, ref) => {
     const prefix = usePrefix();
     const classNames = [
-      cn(prefix, 'form-control', [size, shape, error ? 'error' : undefined]),
-      getFormThemeClass(prefix, color),
+      cn(prefix, 'form-control'),
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
-    return <textarea ref={ref} className={classNames} {...props} />;
+    return <textarea ref={ref} className={classNames} data-size={size} data-shape={shape} data-state={error ? 'error' : undefined} data-color={color} {...props} />;
   }
 );
 TextArea.displayName = 'TextArea';
@@ -144,15 +142,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ size = 'md', shape = 'rounded', color = 'mauve', error = false, options = [], children, className = '', ...props }, ref) => {
     const prefix = usePrefix();
     const classNames = [
-      cn(prefix, 'form-control', [size, shape, error ? 'error' : undefined]),
-      getFormThemeClass(prefix, color),
+      cn(prefix, 'form-control'),
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <select ref={ref} className={classNames} {...props}>
+      <select ref={ref} className={classNames} data-size={size} data-shape={shape} data-state={error ? 'error' : undefined} data-color={color} {...props}>
         {children}
         {options.map((opt, idx) => (
           <option key={idx} value={opt.value}>
@@ -175,15 +172,14 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, color = 'mauve', disabled, className = '', ...props }, ref) => {
     const prefix = usePrefix();
     const rowClass = [
-      cn(prefix, 'checkbox-row', [disabled ? 'disabled' : undefined]),
-      getFormThemeClass(prefix, color),
+      cn(prefix, 'checkbox-row'),
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <label className={rowClass}>
+      <label className={rowClass} data-state={disabled ? 'disabled' : undefined} data-color={color}>
         <input ref={ref} type="checkbox" disabled={disabled} {...props} />
         <span className={`${prefix}-checkbox-box`}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -207,15 +203,14 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   ({ label, color = 'mauve', disabled, className = '', ...props }, ref) => {
     const prefix = usePrefix();
     const rowClass = [
-      cn(prefix, 'switch-row', [disabled ? 'disabled' : undefined]),
-      getFormThemeClass(prefix, color),
+      cn(prefix, 'switch-row'),
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <label className={rowClass}>
+      <label className={rowClass} data-state={disabled ? 'disabled' : undefined} data-color={color}>
         <input ref={ref} type="checkbox" disabled={disabled} {...props} />
         <span className={`${prefix}-switch-track`}>
           <span className={`${prefix}-switch-thumb`}></span>
@@ -243,18 +238,17 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   ({ name, options, value, onChange, color = 'mauve', vertical = false, disabled = false, className = '' }, ref) => {
     const prefix = usePrefix();
     const groupClass = [
-      cn(prefix, 'radio-group', [vertical ? 'vertical' : undefined]),
+      cn(prefix, 'radio-group'),
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div ref={ref} className={groupClass}>
+      <div ref={ref} className={groupClass} data-orientation={vertical ? 'vertical' : undefined}>
         {options.map((opt, idx) => {
           const itemClass = [
-            cn(prefix, 'radio-item', [disabled ? 'disabled' : undefined]),
-            getFormThemeClass(prefix, color),
+            cn(prefix, 'radio-item'),
           ]
             .filter(Boolean)
             .join(' ');
@@ -262,7 +256,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
           const isChecked = value !== undefined && String(value) === String(opt.value);
 
           return (
-            <label key={idx} className={itemClass}>
+            <label key={idx} className={itemClass} data-state={disabled ? 'disabled' : undefined} data-color={color}>
               <input
                 type="radio"
                 name={name}
@@ -299,7 +293,6 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
     const prefix = usePrefix();
     const containerClass = [
       cn(prefix, 'slider-container'),
-      getFormThemeClass(prefix, color),
       className,
     ]
       .filter(Boolean)
@@ -312,7 +305,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
     };
 
     return (
-      <div className={containerClass}>
+      <div className={containerClass} data-color={color}>
         <input
           ref={ref}
           type="range"

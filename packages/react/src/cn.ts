@@ -7,11 +7,11 @@ export function cn(
   const mainClass = `${cleanPrefix}${baseClass}`;
   const formattedModifiers = modifiers
     .filter((mod): mod is string => typeof mod === 'string' && !!mod)
-    .map(mod => `${mainClass}--${mod}`);
+    .map(mod => `${mainClass}-${mod}`);
   return [mainClass, ...formattedModifiers].join(' ');
 }
 
 export function cnEl(prefix: string, baseClass: string, element: string): string {
   const cleanPrefix = prefix ? `${prefix}-` : '';
-  return `${cleanPrefix}${baseClass}__${element}`;
+  return `${cleanPrefix}${baseClass}-${element}`;
 }

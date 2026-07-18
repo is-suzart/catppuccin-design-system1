@@ -15,7 +15,7 @@ type HoverCardPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-s
     @if (isVisible) {
       <div
         #cardRef
-        [class]="'ctp-hover-card ctp-hover-card--placement-' + actualPlacement"
+        class="ctp-hover-card" [attr.data-placement]="actualPlacement"
         [style.position]="'fixed'"
         [style.zIndex]="'1100'"
         [style.top.px]="top"

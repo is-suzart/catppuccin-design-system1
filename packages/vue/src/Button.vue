@@ -6,6 +6,11 @@
     :role="groupSelectionMode === 'single' ? 'radio' : undefined"
     :aria-checked="groupSelectionMode === 'single' ? isActive : undefined"
     :tabindex="groupSelectionMode === 'single' ? (isActive ? 0 : -1) : 0"
+    :data-variant="variant"
+    :data-color="color"
+    :data-size="size"
+    :data-shape="shape"
+    :data-state="isLoading ? 'loading' : (isActive ? 'active' : undefined)"
     @click="handleClick"
     v-bind="$attrs"
   >
@@ -112,15 +117,7 @@ onUnmounted(() => {
 });
 
 const buttonClass = computed(() => {
-  return [
-    'ctp-btn',
-    `ctp-btn--${props.variant}`,
-    `ctp-btn--${props.color}`,
-    `ctp-btn--${props.size}`,
-    `ctp-btn--${props.shape}`,
-    props.isLoading ? 'ctp-btn--loading' : '',
-    isActive.value ? 'ctp-btn--active' : '',
-  ];
+  return 'ctp-btn';
 });
 
 function handleClick(event: MouseEvent) {

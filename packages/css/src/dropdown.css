@@ -63,90 +63,90 @@
 }
 
 /* Accent colors styling for hover states */
-.ctp-dropdown-item--rosewater:hover:not(:disabled),
-.ctp-dropdown-item--rosewater:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="rosewater"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="rosewater"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-rosewater) 12%, transparent);
   color: var(--ctp-rosewater);
 }
-.ctp-dropdown-item--flamingo:hover:not(:disabled),
-.ctp-dropdown-item--flamingo:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="flamingo"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="flamingo"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-flamingo) 12%, transparent);
   color: var(--ctp-flamingo);
 }
-.ctp-dropdown-item--pink:hover:not(:disabled),
-.ctp-dropdown-item--pink:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="pink"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="pink"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-pink) 12%, transparent);
   color: var(--ctp-pink);
 }
-.ctp-dropdown-item--mauve:hover:not(:disabled),
-.ctp-dropdown-item--mauve:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="mauve"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="mauve"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-mauve) 12%, transparent);
   color: var(--ctp-mauve);
 }
-.ctp-dropdown-item--red:hover:not(:disabled),
-.ctp-dropdown-item--red:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="red"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="red"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-red) 12%, transparent);
   color: var(--ctp-red);
 }
-.ctp-dropdown-item--maroon:hover:not(:disabled),
-.ctp-dropdown-item--maroon:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="maroon"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="maroon"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-maroon) 12%, transparent);
   color: var(--ctp-maroon);
 }
-.ctp-dropdown-item--peach:hover:not(:disabled),
-.ctp-dropdown-item--peach:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="peach"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="peach"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-peach) 12%, transparent);
   color: var(--ctp-peach);
 }
-.ctp-dropdown-item--yellow:hover:not(:disabled),
-.ctp-dropdown-item--yellow:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="yellow"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="yellow"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-yellow) 12%, transparent);
   color: var(--ctp-yellow);
 }
-.ctp-dropdown-item--green:hover:not(:disabled),
-.ctp-dropdown-item--green:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="green"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="green"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-green) 12%, transparent);
   color: var(--ctp-green);
 }
-.ctp-dropdown-item--teal:hover:not(:disabled),
-.ctp-dropdown-item--teal:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="teal"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="teal"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-teal) 12%, transparent);
   color: var(--ctp-teal);
 }
-.ctp-dropdown-item--sky:hover:not(:disabled),
-.ctp-dropdown-item--sky:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="sky"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="sky"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-sky) 12%, transparent);
   color: var(--ctp-sky);
 }
-.ctp-dropdown-item--sapphire:hover:not(:disabled),
-.ctp-dropdown-item--sapphire:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="sapphire"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="sapphire"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-sapphire) 12%, transparent);
   color: var(--ctp-sapphire);
 }
-.ctp-dropdown-item--blue:hover:not(:disabled),
-.ctp-dropdown-item--blue:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="blue"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="blue"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-blue) 12%, transparent);
   color: var(--ctp-blue);
 }
-.ctp-dropdown-item--lavender:hover:not(:disabled),
-.ctp-dropdown-item--lavender:focus:not(:disabled) {
+.ctp-dropdown-item[data-color="lavender"]:hover:not(:disabled),
+.ctp-dropdown-item[data-color="lavender"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-lavender) 12%, transparent);
   color: var(--ctp-lavender);
 }
 
 /* Danger Preset (Forces red/rose accents) */
-.ctp-dropdown-item--danger:hover:not(:disabled),
-.ctp-dropdown-item--danger:focus:not(:disabled) {
+.ctp-dropdown-item[data-state="danger"]:hover:not(:disabled),
+.ctp-dropdown-item[data-state="danger"]:focus:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-red) 12%, transparent);
   color: var(--ctp-red);
 }
 
-.ctp-dropdown-item--disabled {
+.ctp-dropdown-item[data-state="disabled"] {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-.ctp-dropdown-item__icon {
+.ctp-dropdown-item-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -155,6 +155,6 @@
   opacity: 0.85;
 }
 
-.ctp-dropdown-item__content {
+.ctp-dropdown-item-content {
   flex: 1;
 }

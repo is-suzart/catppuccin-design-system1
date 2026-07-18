@@ -1,9 +1,11 @@
 <template>
-  <div :class="groupClass" role="radiogroup">
+  <div class="ctp-radio-group" role="radiogroup">
     <label
       v-for="opt in options"
       :key="opt.value"
-      :class="itemClass"
+      class="ctp-radio-item"
+      :data-state="disabled ? 'disabled' : undefined"
+      :data-color="color"
     >
       <input
         type="radio"
@@ -22,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+
 
 type FormControlColor =
   | 'rosewater' | 'flamingo' | 'pink' | 'mauve' | 'red' | 'maroon'
@@ -53,15 +55,7 @@ const emit = defineEmits<{
 
 const getFormThemeClass = (color: FormControlColor) => `ctp-form--${color}`;
 
-const groupClass = computed(() => ['ctp-radio-group']);
 
-const itemClass = computed(() => {
-  return [
-    'ctp-radio-item',
-    props.disabled ? 'ctp-radio-item--disabled' : '',
-    getFormThemeClass(props.color),
-  ];
-});
 
 function onSelect(val: any) {
   emit('update:modelValue', val);

@@ -45,7 +45,9 @@ export class DropdownComponent {
   template: `
     <button
       type="button"
-      [class]="itemClass()"
+      class="ctp-dropdown-item"
+      [attr.data-color]="danger() ? 'danger' : color()"
+      [attr.data-state]="disabled() ? 'disabled' : null"
       [disabled]="disabled()"
       role="menuitem"
       (click)="handleClick()"
@@ -60,14 +62,6 @@ export class DropdownItemComponent {
   color = input<DropdownColor>('mauve');
 
   parent = inject(DropdownComponent, { optional: true });
-
-  protected itemClass = computed(() => {
-    return [
-      'ctp-dropdown-item',
-      this.danger() ? 'ctp-dropdown-item--danger' : `ctp-dropdown-item--${this.color()}`,
-      this.disabled() ? 'ctp-dropdown-item--disabled' : '',
-    ].filter(Boolean).join(' ');
-  });
 
   handleClick() {
     if (this.disabled()) return;

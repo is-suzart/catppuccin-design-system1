@@ -1,7 +1,14 @@
 <template>
   <div
     ref="containerRef"
-    :class="wrapperClass"
+    class="ctp-btn-group"
+    :data-orientation="orientation"
+    :data-variant="variant"
+    :data-shape="shape"
+    :data-state="[
+      props.selectionMode === 'single' && pillReady ? 'pill-active' : '',
+      props.selectionMode !== 'none' ? props.selectionMode : ''
+    ].filter(Boolean).join(' ') || undefined"
     :role="selectionMode === 'single' ? 'radiogroup' : undefined"
     @keydown="handleKeyDown"
   >
@@ -171,14 +178,4 @@ const handleKeyDown = (e: KeyboardEvent) => {
   }
 };
 
-const wrapperClass = computed(() => {
-  return [
-    'ctp-btn-group',
-    `ctp-btn-group--${props.orientation}`,
-    `ctp-btn-group--${props.variant}`,
-    `ctp-btn-group--${props.shape}`,
-    props.selectionMode === 'single' && pillReady.value ? 'ctp-btn-group--pill-active' : '',
-    props.selectionMode !== 'none' ? `ctp-btn-group--${props.selectionMode}` : '',
-  ];
-});
 </script>

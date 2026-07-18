@@ -4,7 +4,8 @@
     :id="`ctp-tabpanel-${value}`"
     :aria-labelledby="`ctp-tabtrigger-${value}`"
     tabindex="0"
-    :class="contentClass"
+    class="ctp-tabs-content"
+    :data-state="isActive ? 'active' : undefined"
     :style="{ display: isActive ? '' : 'none' }"
   >
     <template v-if="isActive">
@@ -29,12 +30,5 @@ const isActive = computed(() => {
     return route.path === props.value || route.path.startsWith(props.value);
   }
   return tabs.activeValue.value === props.value;
-});
-
-const contentClass = computed(() => {
-  return [
-    'ctp-tabs-content',
-    isActive.value ? 'ctp-tabs-content--active' : '',
-  ];
 });
 </script>

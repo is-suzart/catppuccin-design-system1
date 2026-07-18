@@ -6,7 +6,7 @@ import { FormControlColor, getFormThemeClass } from './form-types';
   selector: 'ctp-switch',
   standalone: true,
   template: `
-    <label [class]="rowClass()">
+    <label class="ctp-switch-row" [attr.data-state]="disabled() ? 'disabled' : null" [attr.data-color]="color()">
       <input
         type="checkbox"
         [disabled]="disabled()"
@@ -34,13 +34,7 @@ export class SwitchComponent implements ControlValueAccessor {
   private _onChange: (val: any) => void = () => {};
   private _onTouched: () => void = () => {};
 
-  rowClass = computed(() => {
-    return [
-      'ctp-switch-row',
-      this.disabled() ? 'ctp-switch-row--disabled' : '',
-      getFormThemeClass(this.color()),
-    ].filter(Boolean).join(' ');
-  });
+
 
   writeValue(val: any): void { this.checked.set(!!val); }
   registerOnChange(fn: any): void { this._onChange = fn; }

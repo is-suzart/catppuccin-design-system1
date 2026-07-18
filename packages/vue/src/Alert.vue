@@ -1,7 +1,9 @@
 <template>
   <div
     v-if="!dismissed"
-    :class="['ctp-alert', `ctp-alert--${variant}`, { 'ctp-alert--dismissible': dismissible }]"
+    class="ctp-alert"
+    :data-variant="variant"
+    :data-dismissible="dismissible ? 'true' : undefined"
     role="alert"
   >
     <div class="ctp-alert__icon">

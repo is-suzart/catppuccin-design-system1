@@ -7,7 +7,7 @@
       <div
         v-if="isOpen"
         ref="floatingEl"
-        :class="['ctp-popover', `ctp-popover--placement-${actualPlacement}`]"
+        class="ctp-popover" :data-placement="actualPlacement"
         :style="{ position: 'fixed', top: top + 'px', left: left + 'px', zIndex: 1100 }"
       >
         <div class="ctp-popover__arrow" />

@@ -39,7 +39,7 @@ export const Modal: React.FC<ModalProps> = ({
       closeOnEsc={closeOnEsc}
     >
       <div
-        className={cn(prefix, 'modal', [size])}
+        className={cn(prefix, 'modal')} data-size={size}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title && typeof title === 'string' ? `${prefix}-modal-title` : undefined}

@@ -165,10 +165,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
     }
   };
 
-  const itemClass = cn(prefix, 'dropdown-item', [
-    danger ? 'danger' : color,
-    disabled ? 'disabled' : undefined,
-  ]) + (className ? ` ${className}` : '');
+  const itemClass = cn(prefix, 'dropdown-item') + (className ? ` ${className}` : '');
 
   return (
     <button
@@ -177,6 +174,8 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
       onClick={handleClick}
       disabled={disabled}
       role="menuitem"
+      data-color={danger ? 'danger' : color}
+      data-state={disabled ? 'disabled' : undefined}
     >
       {icon && <span className={cnEl(prefix, 'dropdown-item', 'icon')}>{icon}</span>}
       <span className={cnEl(prefix, 'dropdown-item', 'content')}>{children}</span>

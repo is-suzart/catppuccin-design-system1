@@ -22,26 +22,26 @@
 }
 
 /* Activate transition when parent overlay is open */
-.ctp-overlay--open .ctp-modal {
+.ctp-overlay[data-state="open"] .ctp-modal {
   transform: scale(1) translateY(0);
   opacity: 1;
 }
 
 /* Modal Sizes */
-.ctp-modal--sm {
+.ctp-modal[data-size="sm"] {
   max-width: 420px;
 }
 
-.ctp-modal--md {
+.ctp-modal[data-size="md"] {
   max-width: 620px;
 }
 
-.ctp-modal--lg {
+.ctp-modal[data-size="lg"] {
   max-width: 840px;
 }
 
 /* Modal Header */
-.ctp-modal__header {
+.ctp-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,7 +50,7 @@
   background-color: var(--ctp-mantle);
 }
 
-.ctp-modal__title {
+.ctp-modal-title {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
@@ -61,7 +61,7 @@
   display: inline-block;
 }
 
-.ctp-modal__close-btn {
+.ctp-modal-close-btn {
   background: none;
   border: none;
   color: var(--ctp-subtext0);
@@ -75,18 +75,18 @@
   outline: none;
 }
 
-.ctp-modal__close-btn:hover {
+.ctp-modal-close-btn:hover {
   color: var(--ctp-red);
   background-color: color-mix(in srgb, var(--ctp-red) 12%, transparent);
 }
 
-.ctp-modal__close-btn:focus-visible {
+.ctp-modal-close-btn:focus-visible {
   outline: 2px solid var(--ctp-red);
   outline-offset: -1px;
 }
 
 /* Modal Body */
-.ctp-modal__body {
+.ctp-modal-body {
   padding: 1.5rem;
   overflow-y: auto;
   font-size: 0.95rem;
@@ -96,25 +96,25 @@
 }
 
 /* Customize scrollbar in modal body for premium feel */
-.ctp-modal__body::-webkit-scrollbar {
+.ctp-modal-body::-webkit-scrollbar {
   width: 8px;
 }
 
-.ctp-modal__body::-webkit-scrollbar-track {
+.ctp-modal-body::-webkit-scrollbar-track {
   background: var(--ctp-base);
 }
 
-.ctp-modal__body::-webkit-scrollbar-thumb {
+.ctp-modal-body::-webkit-scrollbar-thumb {
   background: var(--ctp-surface0);
   border-radius: 4px;
 }
 
-.ctp-modal__body::-webkit-scrollbar-thumb:hover {
+.ctp-modal-body::-webkit-scrollbar-thumb:hover {
   background: var(--ctp-surface1);
 }
 
 /* Modal Footer */
-.ctp-modal__footer {
+.ctp-modal-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;

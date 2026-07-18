@@ -97,7 +97,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     }, [children]);
 
     const containerClass = [
-      cn(prefix, 'tabs', [orientation]),
+      cn(prefix, 'tabs'),
       getFormThemeClass(prefix, color),
       className,
     ]
@@ -116,7 +116,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
           mode,
         }}
       >
-        <div ref={ref} className={containerClass} {...props}>
+        <div ref={ref} className={containerClass} data-orientation={orientation} data-color={color} {...props}>
           {children}
         </div>
       </TabsContext.Provider>
@@ -134,7 +134,7 @@ export const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
     const prefix = usePrefix();
 
     const listClass = [
-      cn(prefix, 'tabs-list', [variant]),
+      cn(prefix, 'tabs-list'),
       className,
     ]
       .filter(Boolean)
@@ -183,7 +183,7 @@ export const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
         ref={ref}
         role="tablist"
         aria-orientation={orientation}
-        className={listClass}
+        className={listClass} data-variant={variant}
         onKeyDown={handleKeyDown}
         {...props}
       >
@@ -212,7 +212,7 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
       : activeValue === value;
 
     const triggerClass = [
-      cn(prefix, 'tabs-trigger', [variant, size, isSelected ? 'active' : undefined]),
+      cn(prefix, 'tabs-trigger'),
       className,
     ]
       .filter(Boolean)
@@ -243,7 +243,7 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
         data-value={value}
         tabIndex={isSelected ? 0 : -1}
         disabled={disabled}
-        className={triggerClass}
+        className={triggerClass} data-variant={variant} data-size={size} data-state={isSelected ? 'active' : undefined}
         onClick={handleClick}
         {...props}
       >
@@ -270,7 +270,7 @@ export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
       : activeValue === value;
 
     const contentClass = [
-      cn(prefix, 'tabs-content', [isActive ? 'active' : undefined]),
+      cn(prefix, 'tabs-content'),
       className,
     ]
       .filter(Boolean)
@@ -283,7 +283,7 @@ export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
         id={`${prefix}-tabpanel-${value}`}
         aria-labelledby={`${prefix}-tabtrigger-${value}`}
         tabIndex={0}
-        className={contentClass}
+        className={contentClass} data-state={isActive ? 'active' : undefined}
         style={!isActive ? { display: 'none' } : undefined}
         {...props}
       >

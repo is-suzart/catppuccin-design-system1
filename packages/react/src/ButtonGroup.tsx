@@ -155,7 +155,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     };
 
     const classNames = [
-      cn(prefix, 'btn-group', [orientation, variant, shape, (selectionMode === 'single' && pillReady) ? 'pill-active' : undefined, selectionMode !== 'none' ? selectionMode : undefined]),
+      cn(prefix, 'btn-group'),
       className,
     ]
       .filter(Boolean)
@@ -185,6 +185,13 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           className={classNames}
           role={selectionMode === 'single' ? 'radiogroup' : undefined}
           onKeyDown={handleKeyDown}
+          data-orientation={orientation}
+          data-variant={variant}
+          data-shape={shape}
+          data-state={[ 
+            (selectionMode === 'single' && pillReady) ? 'pill-active' : '',
+            selectionMode !== 'none' ? selectionMode : ''
+          ].filter(Boolean).join(' ') || undefined}
           {...props}
         >
           {selectionMode === 'single' && (
@@ -246,7 +253,7 @@ export const ButtonGroupItem = React.forwardRef<HTMLButtonElement, ButtonGroupIt
     const finalDisabled = disabled || isGroupDisabled;
 
     const classNames = [
-      isActive ? cn(prefix, 'btn', ['active']) : '',
+      isActive ? cn(prefix, 'btn') : '',
       className,
     ]
       .filter(Boolean)
@@ -261,6 +268,7 @@ export const ButtonGroupItem = React.forwardRef<HTMLButtonElement, ButtonGroupIt
         aria-checked={selectionMode === 'single' ? isActive : undefined}
         tabIndex={selectionMode === 'single' ? (isActive ? 0 : -1) : 0}
         onClick={handleClick}
+        data-state={isActive ? 'active' : undefined}
         {...props}
       >
         {children}

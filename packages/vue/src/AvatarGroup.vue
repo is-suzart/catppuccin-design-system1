@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ctp-avatar-group', `ctp-avatar-group--${size}`]">
+  <div class="ctp-avatar-group" :data-size="size">
     <slot />
     <span v-if="remaining > 0" class="ctp-avatar-group__more" :style="moreStyle">
       +{{ remaining }}

@@ -7,7 +7,9 @@ type AlertVariant = 'info' | 'success' | 'warning' | 'error';
   standalone: true,
   template: `
     @if (!dismissed) {
-      <div [class]="'ctp-alert ctp-alert--' + variant() + (dismissible() ? ' ctp-alert--dismissible' : '')"
+      <div class="ctp-alert"
+        [attr.data-variant]="variant()"
+        [attr.data-dismissible]="dismissible() ? 'true' : null"
         role="alert"
       >
         <div class="ctp-alert__icon">

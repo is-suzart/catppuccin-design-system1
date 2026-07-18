@@ -6,20 +6,20 @@
 }
 
 /* Color mappings */
-.ctp-tabs--rosewater { --ctp-tabs-accent: var(--ctp-rosewater); }
-.ctp-tabs--flamingo  { --ctp-tabs-accent: var(--ctp-flamingo); }
-.ctp-tabs--pink      { --ctp-tabs-accent: var(--ctp-pink); }
-.ctp-tabs--mauve     { --ctp-tabs-accent: var(--ctp-mauve); }
-.ctp-tabs--red       { --ctp-tabs-accent: var(--ctp-red); }
-.ctp-tabs--maroon    { --ctp-tabs-accent: var(--ctp-maroon); }
-.ctp-tabs--peach     { --ctp-tabs-accent: var(--ctp-peach); }
-.ctp-tabs--yellow    { --ctp-tabs-accent: var(--ctp-yellow); }
-.ctp-tabs--green     { --ctp-tabs-accent: var(--ctp-green); }
-.ctp-tabs--teal      { --ctp-tabs-accent: var(--ctp-teal); }
-.ctp-tabs--sky       { --ctp-tabs-accent: var(--ctp-sky); }
-.ctp-tabs--sapphire  { --ctp-tabs-accent: var(--ctp-sapphire); }
-.ctp-tabs--blue      { --ctp-tabs-accent: var(--ctp-blue); }
-.ctp-tabs--lavender  { --ctp-tabs-accent: var(--ctp-lavender); }
+.ctp-tabs[data-color="rosewater"] { --ctp-tabs-accent: var(--ctp-rosewater); }
+.ctp-tabs[data-color="flamingo"]  { --ctp-tabs-accent: var(--ctp-flamingo); }
+.ctp-tabs[data-color="pink"]      { --ctp-tabs-accent: var(--ctp-pink); }
+.ctp-tabs[data-color="mauve"]     { --ctp-tabs-accent: var(--ctp-mauve); }
+.ctp-tabs[data-color="red"]       { --ctp-tabs-accent: var(--ctp-red); }
+.ctp-tabs[data-color="maroon"]    { --ctp-tabs-accent: var(--ctp-maroon); }
+.ctp-tabs[data-color="peach"]     { --ctp-tabs-accent: var(--ctp-peach); }
+.ctp-tabs[data-color="yellow"]    { --ctp-tabs-accent: var(--ctp-yellow); }
+.ctp-tabs[data-color="green"]     { --ctp-tabs-accent: var(--ctp-green); }
+.ctp-tabs[data-color="teal"]      { --ctp-tabs-accent: var(--ctp-teal); }
+.ctp-tabs[data-color="sky"]       { --ctp-tabs-accent: var(--ctp-sky); }
+.ctp-tabs[data-color="sapphire"]  { --ctp-tabs-accent: var(--ctp-sapphire); }
+.ctp-tabs[data-color="blue"]      { --ctp-tabs-accent: var(--ctp-blue); }
+.ctp-tabs[data-color="lavender"]  { --ctp-tabs-accent: var(--ctp-lavender); }
 
 /* Core Layout styles */
 .ctp-tabs {
@@ -29,7 +29,7 @@
   width: 100%;
 }
 
-.ctp-tabs--vertical {
+.ctp-tabs[data-orientation="vertical"] {
   flex-direction: row;
   gap: 24px;
 }
@@ -42,7 +42,7 @@
   flex-wrap: wrap;
 }
 
-.ctp-tabs--vertical .ctp-tabs-list {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-list {
   flex-direction: column;
   align-items: stretch;
   flex-wrap: nowrap;
@@ -81,40 +81,40 @@
 }
 
 /* Sizing configurations */
-.ctp-tabs-trigger--sm {
+.ctp-tabs-trigger[data-size="sm"] {
   font-size: 0.85rem;
   padding: 8px 14px;
   gap: 6px;
 }
-.ctp-tabs-trigger--md {
+.ctp-tabs-trigger[data-size="md"] {
   font-size: 0.95rem;
   padding: 10px 20px;
   gap: 8px;
 }
-.ctp-tabs-trigger--lg {
+.ctp-tabs-trigger[data-size="lg"] {
   font-size: 1.05rem;
   padding: 12px 26px;
   gap: 10px;
 }
 
 /* 1. Default (Rounded Card Tabs) */
-.ctp-tabs-list--default {
+.ctp-tabs-list[data-variant="default"] {
   border-bottom: 2px solid var(--ctp-surface0);
 }
 
-.ctp-tabs--vertical .ctp-tabs-list--default {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-list[data-variant="default"] {
   border-bottom: none;
   border-right: 2px solid var(--ctp-surface0);
 }
 
-.ctp-tabs-trigger--default {
+.ctp-tabs-trigger[data-variant="default"] {
   border-radius: var(--ctp-radius-rounded) var(--ctp-radius-rounded) 0 0;
   border: 1.5px solid transparent;
   border-bottom: none;
   margin-bottom: -2px;
 }
 
-.ctp-tabs--vertical .ctp-tabs-trigger--default {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-trigger[data-variant="default"] {
   border-radius: var(--ctp-radius-rounded) 0 0 var(--ctp-radius-rounded);
   border-bottom: 1.5px solid transparent;
   border-right: none;
@@ -122,85 +122,85 @@
   margin-right: -2px;
 }
 
-.ctp-tabs-trigger--default:hover:not(:disabled):not([aria-selected="true"]) {
+.ctp-tabs-trigger[data-variant="default"]:hover:not(:disabled):not([aria-selected="true"]) {
   background-color: color-mix(in srgb, var(--ctp-tabs-accent) 8%, transparent);
 }
 
-.ctp-tabs-trigger--default[aria-selected="true"] {
+.ctp-tabs-trigger[data-variant="default"][aria-selected="true"] {
   background-color: var(--ctp-surface0);
   border-color: var(--ctp-surface0);
   color: var(--ctp-tabs-accent);
 }
 
-.ctp-tabs-trigger--default {
+.ctp-tabs-trigger[data-variant="default"] {
   transition: var(--ctp-transition), border-color 0.15s ease, background-color 0.15s ease;
 }
 
 /* 2. Underline tabs variant */
-.ctp-tabs-list--underline {
+.ctp-tabs-list[data-variant="underline"] {
   border-bottom: 1.5px solid var(--ctp-surface1);
 }
 
-.ctp-tabs--vertical .ctp-tabs-list--underline {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-list[data-variant="underline"] {
   border-bottom: none;
   border-right: 1.5px solid var(--ctp-surface1);
 }
 
-.ctp-tabs-trigger--underline {
+.ctp-tabs-trigger[data-variant="underline"] {
   border-bottom: 2.5px solid transparent;
   margin-bottom: -1.5px;
 }
 
-.ctp-tabs--vertical .ctp-tabs-trigger--underline {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-trigger[data-variant="underline"] {
   border-bottom: none;
   border-right: 2.5px solid transparent;
   margin-bottom: 0;
   margin-right: -1.5px;
 }
 
-.ctp-tabs-trigger--underline[aria-selected="true"] {
+.ctp-tabs-trigger[data-variant="underline"][aria-selected="true"] {
   color: var(--ctp-tabs-accent);
   border-bottom-color: var(--ctp-tabs-accent);
 }
 
-.ctp-tabs--vertical .ctp-tabs-trigger--underline[aria-selected="true"] {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-trigger[data-variant="underline"][aria-selected="true"] {
   border-right-color: var(--ctp-tabs-accent);
 }
 
-.ctp-tabs-trigger--underline {
+.ctp-tabs-trigger[data-variant="underline"] {
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.25s ease;
 }
 
 /* 3. Pills tabs variant */
-.ctp-tabs-list--pills {
+.ctp-tabs-list[data-variant="pills"] {
   gap: 8px;
 }
 
-.ctp-tabs-trigger--pills {
+.ctp-tabs-trigger[data-variant="pills"] {
   border-radius: var(--ctp-radius-pill);
 }
 
-.ctp-tabs-trigger--pills:hover:not(:disabled):not([aria-selected="true"]) {
+.ctp-tabs-trigger[data-variant="pills"]:hover:not(:disabled):not([aria-selected="true"]) {
   background-color: color-mix(in srgb, var(--ctp-tabs-accent) 8%, transparent);
 }
 
-.ctp-tabs-trigger--pills[aria-selected="true"] {
+.ctp-tabs-trigger[data-variant="pills"][aria-selected="true"] {
   background-color: var(--ctp-tabs-accent);
   color: var(--ctp-base);
   box-shadow: var(--ctp-shadow-sm);
 }
 
-.ctp-tabs-trigger--pills {
+.ctp-tabs-trigger[data-variant="pills"] {
   transition: color 0.2s ease, background-color 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
 /* High contrast text adjustment for latte (light mode) pills active state */
-[data-theme="latte"] .ctp-tabs-trigger--pills[aria-selected="true"] {
+[data-theme="latte"] .ctp-tabs-trigger[data-variant="pills"][aria-selected="true"] {
   color: var(--ctp-contrast-light);
 }
 
 /* 4. Segmented Block tabs variant */
-.ctp-tabs-list--segmented {
+.ctp-tabs-list[data-variant="segmented"] {
   background-color: var(--ctp-crust);
   border-radius: var(--ctp-radius-rounded);
   padding: 4px;
@@ -208,22 +208,22 @@
   display: inline-flex;
 }
 
-.ctp-tabs--vertical .ctp-tabs-list--segmented {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-list[data-variant="segmented"] {
   display: flex;
 }
 
-.ctp-tabs-trigger--segmented {
+.ctp-tabs-trigger[data-variant="segmented"] {
   border-radius: calc(var(--ctp-radius-rounded) - 2px);
   flex: 1;
 }
 
-.ctp-tabs-trigger--segmented[aria-selected="true"] {
+.ctp-tabs-trigger[data-variant="segmented"][aria-selected="true"] {
   background-color: var(--ctp-surface0);
   color: var(--ctp-tabs-accent);
   box-shadow: var(--ctp-shadow-sm);
 }
 
-.ctp-tabs-trigger--segmented {
+.ctp-tabs-trigger[data-variant="segmented"] {
   transition: color 0.2s ease, background-color 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
@@ -236,12 +236,12 @@
   line-height: 1.5;
 }
 
-.ctp-tabs-content--active {
+.ctp-tabs-content[data-state="active"] {
   display: block;
   animation: ctp-tab-fade-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ctp-tabs--vertical .ctp-tabs-content {
+.ctp-tabs[data-orientation="vertical"] .ctp-tabs-content {
   flex: 1;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div :class="containerClass">
+  <div class="ctp-slider-container" :data-color="color">
     <input
       type="range"
       :min="min"
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+
 
 type FormControlColor =
   | 'rosewater' | 'flamingo' | 'pink' | 'mauve' | 'red' | 'maroon'
@@ -45,12 +45,7 @@ const emit = defineEmits<{
 
 const getFormThemeClass = (color: FormControlColor) => `ctp-form--${color}`;
 
-const containerClass = computed(() => {
-  return [
-    'ctp-slider-container',
-    getFormThemeClass(props.color),
-  ];
-});
+
 
 function onInput(event: Event) {
   const target = event.target as HTMLInputElement;

@@ -1,5 +1,5 @@
 <template>
-  <label :class="rowClass">
+  <label class="ctp-switch-row" :data-state="disabled ? 'disabled' : undefined" :data-color="color">
     <input
       type="checkbox"
       :disabled="disabled"
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+
 
 type FormControlColor =
   | 'rosewater' | 'flamingo' | 'pink' | 'mauve' | 'red' | 'maroon'
@@ -40,13 +40,7 @@ const emit = defineEmits<{
 
 const getFormThemeClass = (color: FormControlColor) => `ctp-form--${color}`;
 
-const rowClass = computed(() => {
-  return [
-    'ctp-switch-row',
-    props.disabled ? 'ctp-switch-row--disabled' : '',
-    getFormThemeClass(props.color),
-  ];
-});
+
 
 function onToggle() {
   emit('update:modelValue', !props.modelValue);

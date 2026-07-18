@@ -24,7 +24,15 @@ export type CardAccentPosition = 'top' | 'left' | 'none';
   selector: 'ctp-card',
   standalone: true,
   template: `
-    <div [class]="cardClass()">
+    <div
+      [class]="cardClass()"
+      [attr.data-variant]="variant()"
+      [attr.data-shape]="shape()"
+      [attr.data-padding]="padding()"
+      [attr.data-color]="accentColor() || null"
+      [attr.data-accent]="accentColor() && accentPosition() !== 'none' ? accentPosition() : null"
+      [attr.data-interactive]="isInteractive() ? 'true' : null"
+    >
       <ng-content></ng-content>
     </div>
   `
@@ -38,15 +46,7 @@ export class CardComponent {
   isInteractive = input<boolean>(false);
 
   cardClass = computed(() => {
-    return [
-      'ctp-card',
-      `ctp-card--${this.variant()}`,
-      `ctp-card--${this.shape()}`,
-      `ctp-card--padding-${this.padding()}`,
-      this.accentColor() ? `ctp-card--${this.accentColor()}` : '',
-      this.accentColor() && this.accentPosition() !== 'none' ? `ctp-card--accent-${this.accentPosition()}` : '',
-      this.isInteractive() ? 'ctp-card--interactive' : ''
-    ].filter(Boolean).join(' ');
+    return 'ctp-card';
   });
 }
 

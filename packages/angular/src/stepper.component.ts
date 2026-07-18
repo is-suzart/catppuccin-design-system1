@@ -26,7 +26,13 @@ export interface StepItem {
   selector: 'ctp-stepper',
   standalone: true,
   template: `
-    <div [class]="wrapperClass()" [style]="cssStyle()">
+    <div
+      class="ctp-stepper-wrapper ctp-stepper"
+      [attr.data-orientation]="orientation()"
+      [attr.data-state]="variant()"
+      [attr.data-color]="color()"
+      [style]="cssStyle()"
+    >
       <!-- Background line track -->
       <div class="ctp-stepper__track">
         <div class="ctp-stepper__track-active"></div>
@@ -34,7 +40,7 @@ export interface StepItem {
 
       <!-- Steps -->
       @for (step of steps(); track $index) {
-        <div [class]="getStepClass($index)">
+        <div class="ctp-stepper__step" [attr.data-state]="getStepStatus($index)">
           <!-- Step node icon / dot / number -->
           <div class="ctp-stepper__node">
             @if (variant() !== 'dots') {
@@ -88,15 +94,6 @@ export class StepperComponent {
     return Math.min(100, Math.max(0, (this.currentStep() / this.segments()) * 100));
   });
 
-  wrapperClass = computed(() => {
-    return [
-      'ctp-stepper-wrapper',
-      `ctp-stepper--${this.orientation()}`,
-      `ctp-stepper--${this.variant()}`,
-      `ctp-stepper--${this.color()}`,
-    ].join(' ');
-  });
-
   cssStyle = computed(() => {
     return {
       '--ctp-total-steps': String(this.steps().length),
@@ -104,13 +101,13 @@ export class StepperComponent {
     };
   });
 
-  getStepClass(index: number): string {
+  getStepStatus(index: number): string {
     let status = 'upcoming';
     if (index < this.currentStep()) {
       status = 'completed';
     } else if (index === this.currentStep()) {
       status = 'active';
     }
-    return `ctp-stepper__step ctp-stepper__step--${status}`;
+    return status;
   }
 }

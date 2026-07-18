@@ -14,27 +14,27 @@
 /* ── Layout Variants ── */
 
 /* Default (merged items in a card-like container) */
-.ctp-accordion--default {
+.ctp-accordion[data-state="default"] {
   border: 1px solid var(--ctp-accordion-border-color);
   border-radius: var(--ctp-radius-rounded);
   background-color: var(--ctp-surface0);
   overflow: hidden;
 }
 
-.ctp-accordion--default .ctp-accordion__item {
+.ctp-accordion[data-state="default"] .ctp-accordion-item {
   border-bottom: 1px solid var(--ctp-accordion-border-color);
 }
 
-.ctp-accordion--default .ctp-accordion__item:last-child {
+.ctp-accordion[data-state="default"] .ctp-accordion-item:last-child {
   border-bottom: none;
 }
 
 /* Split (separated items with gaps) */
-.ctp-accordion--split {
+.ctp-accordion[data-state="split"] {
   gap: 12px;
 }
 
-.ctp-accordion--split .ctp-accordion__item {
+.ctp-accordion[data-state="split"] .ctp-accordion-item {
   border: 1px solid var(--ctp-accordion-border-color);
   border-radius: var(--ctp-radius-rounded);
   background-color: var(--ctp-surface0);
@@ -43,7 +43,7 @@
               box-shadow var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion--split .ctp-accordion__item--open {
+.ctp-accordion[data-state="split"] .ctp-accordion-item[data-state="open"] {
   border-color: var(--ctp-accordion-accent-color);
   box-shadow: var(--ctp-shadow-md);
 }
@@ -51,104 +51,104 @@
 /* ── Color Modes ── */
 
 /* Colored: solid accent background on all items (closed & open) */
-.ctp-accordion--colored .ctp-accordion__item {
+.ctp-accordion[data-state="colored"] .ctp-accordion-item {
   background-color: var(--ctp-accordion-accent-color);
   border-color: color-mix(in srgb, var(--ctp-base) 15%, transparent);
   transition: background-color var(--ctp-transition-duration) var(--ctp-transition-timing),
               border-color var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion--colored .ctp-accordion__header {
+.ctp-accordion[data-state="colored"] .ctp-accordion-header {
   color: var(--ctp-base);
 }
 
-.ctp-accordion--colored .ctp-accordion__chevron {
+.ctp-accordion[data-state="colored"] .ctp-accordion-chevron {
   color: var(--ctp-base);
 }
 
-.ctp-accordion--colored .ctp-accordion__header:hover:not(:disabled) {
+.ctp-accordion[data-state="colored"] .ctp-accordion-header:hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-base) 8%, transparent);
 }
 
-.ctp-accordion--colored .ctp-accordion__item--open > .ctp-accordion__header {
+.ctp-accordion[data-state="colored"] .ctp-accordion-item[data-state="open"] > .ctp-accordion-header {
   color: var(--ctp-base);
 }
 
-.ctp-accordion--colored .ctp-accordion__item--open > .ctp-accordion__header .ctp-accordion__chevron {
+.ctp-accordion[data-state="colored"] .ctp-accordion-item[data-state="open"] > .ctp-accordion-header .ctp-accordion-chevron {
   color: var(--ctp-base);
 }
 
-.ctp-accordion--colored .ctp-accordion__item--open > .ctp-accordion__collapse .ctp-accordion__body {
+.ctp-accordion[data-state="colored"] .ctp-accordion-item[data-state="open"] > .ctp-accordion-collapse .ctp-accordion-body {
   color: color-mix(in srgb, var(--ctp-base) 85%, transparent);
 }
 
-.ctp-accordion--colored .ctp-accordion__item--open {
+.ctp-accordion[data-state="colored"] .ctp-accordion-item[data-state="open"] {
   box-shadow: var(--ctp-shadow-md);
 }
 
 /* Tonal: tinted accent background on all items (closed & open) */
-.ctp-accordion--tonal .ctp-accordion__item {
+.ctp-accordion[data-variant="tonal"] .ctp-accordion-item {
   background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 8%, var(--ctp-surface0));
   border-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 15%, transparent);
   transition: background-color var(--ctp-transition-duration) var(--ctp-transition-timing),
               border-color var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion--tonal .ctp-accordion__header {
+.ctp-accordion[data-variant="tonal"] .ctp-accordion-header {
   color: var(--ctp-accordion-accent-color);
 }
 
-.ctp-accordion--tonal .ctp-accordion__chevron {
+.ctp-accordion[data-variant="tonal"] .ctp-accordion-chevron {
   color: var(--ctp-accordion-accent-color);
 }
 
-.ctp-accordion--tonal .ctp-accordion__header:hover:not(:disabled) {
+.ctp-accordion[data-variant="tonal"] .ctp-accordion-header:hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 12%, var(--ctp-surface0));
 }
 
 /* Tonal: tinted accent background on open items (intensified to 14%) */
-.ctp-accordion--tonal .ctp-accordion__item--open {
+.ctp-accordion[data-variant="tonal"] .ctp-accordion-item[data-state="open"] {
   background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 14%, var(--ctp-surface0));
   border-color: var(--ctp-accordion-accent-color);
   box-shadow: var(--ctp-shadow-md);
 }
 
-.ctp-accordion--tonal .ctp-accordion__item--open > .ctp-accordion__header:hover:not(:disabled) {
+.ctp-accordion[data-variant="tonal"] .ctp-accordion-item[data-state="open"] > .ctp-accordion-header:hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 18%, var(--ctp-surface0));
 }
 
 /* Themed default container borders and backgrounds */
-.ctp-accordion--default.ctp-accordion--colored {
+.ctp-accordion[data-state="default"].ctp-accordion[data-state="colored"] {
   border-color: var(--ctp-accordion-accent-color);
 }
 
-.ctp-accordion--default.ctp-accordion--tonal {
+.ctp-accordion[data-state="default"].ctp-accordion[data-variant="tonal"] {
   border-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 25%, var(--ctp-accordion-border-color));
   background-color: color-mix(in srgb, var(--ctp-accordion-accent-color) 8%, var(--ctp-surface0));
 }
 
 /* ── Accent Color Mappings ── */
-.ctp-accordion--rosewater { --ctp-accordion-accent-color: var(--ctp-rosewater); }
-.ctp-accordion--flamingo  { --ctp-accordion-accent-color: var(--ctp-flamingo); }
-.ctp-accordion--pink      { --ctp-accordion-accent-color: var(--ctp-pink); }
-.ctp-accordion--mauve     { --ctp-accordion-accent-color: var(--ctp-mauve); }
-.ctp-accordion--red       { --ctp-accordion-accent-color: var(--ctp-red); }
-.ctp-accordion--maroon    { --ctp-accordion-accent-color: var(--ctp-maroon); }
-.ctp-accordion--peach     { --ctp-accordion-accent-color: var(--ctp-peach); }
-.ctp-accordion--yellow    { --ctp-accordion-accent-color: var(--ctp-yellow); }
-.ctp-accordion--green     { --ctp-accordion-accent-color: var(--ctp-green); }
-.ctp-accordion--teal      { --ctp-accordion-accent-color: var(--ctp-teal); }
-.ctp-accordion--sky       { --ctp-accordion-accent-color: var(--ctp-sky); }
-.ctp-accordion--sapphire  { --ctp-accordion-accent-color: var(--ctp-sapphire); }
-.ctp-accordion--blue      { --ctp-accordion-accent-color: var(--ctp-blue); }
-.ctp-accordion--lavender  { --ctp-accordion-accent-color: var(--ctp-lavender); }
+.ctp-accordion[data-color="rosewater"] { --ctp-accordion-accent-color: var(--ctp-rosewater); }
+.ctp-accordion[data-color="flamingo"]  { --ctp-accordion-accent-color: var(--ctp-flamingo); }
+.ctp-accordion[data-color="pink"]      { --ctp-accordion-accent-color: var(--ctp-pink); }
+.ctp-accordion[data-color="mauve"]     { --ctp-accordion-accent-color: var(--ctp-mauve); }
+.ctp-accordion[data-color="red"]       { --ctp-accordion-accent-color: var(--ctp-red); }
+.ctp-accordion[data-color="maroon"]    { --ctp-accordion-accent-color: var(--ctp-maroon); }
+.ctp-accordion[data-color="peach"]     { --ctp-accordion-accent-color: var(--ctp-peach); }
+.ctp-accordion[data-color="yellow"]    { --ctp-accordion-accent-color: var(--ctp-yellow); }
+.ctp-accordion[data-color="green"]     { --ctp-accordion-accent-color: var(--ctp-green); }
+.ctp-accordion[data-color="teal"]      { --ctp-accordion-accent-color: var(--ctp-teal); }
+.ctp-accordion[data-color="sky"]       { --ctp-accordion-accent-color: var(--ctp-sky); }
+.ctp-accordion[data-color="sapphire"]  { --ctp-accordion-accent-color: var(--ctp-sapphire); }
+.ctp-accordion[data-color="blue"]      { --ctp-accordion-accent-color: var(--ctp-blue); }
+.ctp-accordion[data-color="lavender"]  { --ctp-accordion-accent-color: var(--ctp-lavender); }
 
 /* ── Item ── */
-.ctp-accordion__item {
+.ctp-accordion-item {
   box-sizing: border-box;
 }
 
-.ctp-accordion__header {
+.ctp-accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -168,33 +168,33 @@
               color var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion__header:hover:not(:disabled) {
+.ctp-accordion-header:hover:not(:disabled) {
   background-color: color-mix(in srgb, var(--ctp-text) 4%, transparent);
 }
 
-.ctp-accordion__header:focus-visible {
+.ctp-accordion-header:focus-visible {
   outline: 2px solid var(--ctp-accordion-accent-color);
   outline-offset: -2px;
 }
 
-.ctp-accordion__header:disabled {
+.ctp-accordion-header:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.ctp-accordion__title {
+.ctp-accordion-title {
   flex: 1;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.ctp-accordion__item--open > .ctp-accordion__header {
+.ctp-accordion-item[data-state="open"] > .ctp-accordion-header {
   color: var(--ctp-accordion-accent-color);
 }
 
 /* Chevron */
-.ctp-accordion__chevron {
+.ctp-accordion-chevron {
   width: 18px;
   height: 18px;
   fill: none;
@@ -208,27 +208,27 @@
   flex-shrink: 0;
 }
 
-.ctp-accordion__item--open > .ctp-accordion__header .ctp-accordion__chevron {
+.ctp-accordion-item[data-state="open"] > .ctp-accordion-header .ctp-accordion-chevron {
   transform: rotate(180deg);
   color: var(--ctp-accordion-accent-color);
 }
 
 /* Collapse animation */
-.ctp-accordion__collapse {
+.ctp-accordion-collapse {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-accordion__item--open > .ctp-accordion__collapse {
+.ctp-accordion-item[data-state="open"] > .ctp-accordion-collapse {
   grid-template-rows: 1fr;
 }
 
-.ctp-accordion__content {
+.ctp-accordion-content {
   overflow: hidden;
 }
 
-.ctp-accordion__body {
+.ctp-accordion-body {
   padding: 0 20px 20px 20px;
   font-size: 0.95rem;
   line-height: 1.6;

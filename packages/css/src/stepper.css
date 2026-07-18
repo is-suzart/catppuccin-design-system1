@@ -13,23 +13,23 @@
 }
 
 /* Color mappings for Stepper active states */
-.ctp-stepper--rosewater { --ctp-btn-color-token: var(--ctp-rosewater); }
-.ctp-stepper--flamingo  { --ctp-btn-color-token: var(--ctp-flamingo); }
-.ctp-stepper--pink      { --ctp-btn-color-token: var(--ctp-pink); }
-.ctp-stepper--mauve     { --ctp-btn-color-token: var(--ctp-mauve); }
-.ctp-stepper--red       { --ctp-btn-color-token: var(--ctp-red); }
-.ctp-stepper--maroon    { --ctp-btn-color-token: var(--ctp-maroon); }
-.ctp-stepper--peach     { --ctp-btn-color-token: var(--ctp-peach); }
-.ctp-stepper--yellow    { --ctp-btn-color-token: var(--ctp-yellow); }
-.ctp-stepper--green     { --ctp-btn-color-token: var(--ctp-green); }
-.ctp-stepper--teal      { --ctp-btn-color-token: var(--ctp-teal); }
-.ctp-stepper--sky       { --ctp-btn-color-token: var(--ctp-sky); }
-.ctp-stepper--sapphire  { --ctp-btn-color-token: var(--ctp-sapphire); }
-.ctp-stepper--blue      { --ctp-btn-color-token: var(--ctp-blue); }
-.ctp-stepper--lavender  { --ctp-btn-color-token: var(--ctp-lavender); }
+.ctp-stepper[data-color="rosewater"] { --ctp-btn-color-token: var(--ctp-rosewater); }
+.ctp-stepper[data-color="flamingo"]  { --ctp-btn-color-token: var(--ctp-flamingo); }
+.ctp-stepper[data-color="pink"]      { --ctp-btn-color-token: var(--ctp-pink); }
+.ctp-stepper[data-color="mauve"]     { --ctp-btn-color-token: var(--ctp-mauve); }
+.ctp-stepper[data-color="red"]       { --ctp-btn-color-token: var(--ctp-red); }
+.ctp-stepper[data-color="maroon"]    { --ctp-btn-color-token: var(--ctp-maroon); }
+.ctp-stepper[data-color="peach"]     { --ctp-btn-color-token: var(--ctp-peach); }
+.ctp-stepper[data-color="yellow"]    { --ctp-btn-color-token: var(--ctp-yellow); }
+.ctp-stepper[data-color="green"]     { --ctp-btn-color-token: var(--ctp-green); }
+.ctp-stepper[data-color="teal"]      { --ctp-btn-color-token: var(--ctp-teal); }
+.ctp-stepper[data-color="sky"]       { --ctp-btn-color-token: var(--ctp-sky); }
+.ctp-stepper[data-color="sapphire"]  { --ctp-btn-color-token: var(--ctp-sapphire); }
+.ctp-stepper[data-color="blue"]      { --ctp-btn-color-token: var(--ctp-blue); }
+.ctp-stepper[data-color="lavender"]  { --ctp-btn-color-token: var(--ctp-lavender); }
 
 /* --- 1. Horizontal Layout --- */
-.ctp-stepper--horizontal {
+.ctp-stepper[data-orientation="horizontal"] {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -39,7 +39,7 @@
 }
 
 /* Background Track Line */
-.ctp-stepper--horizontal .ctp-stepper__track {
+.ctp-stepper[data-orientation="horizontal"] .ctp-stepper-track {
   position: absolute;
   top: calc(var(--ctp-node-size) / 2 - 2px);
   left: calc(100% / (var(--ctp-total-steps) * 2));
@@ -51,7 +51,7 @@
 }
 
 /* Active Fill Line */
-.ctp-stepper--horizontal .ctp-stepper__track-active {
+.ctp-stepper[data-orientation="horizontal"] .ctp-stepper-track-active {
   height: 100%;
   width: var(--ctp-stepper-progress, 0%);
   background-color: var(--ctp-btn-color-token);
@@ -59,7 +59,7 @@
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ctp-stepper--horizontal .ctp-stepper__step {
+.ctp-stepper[data-orientation="horizontal"] .ctp-stepper-step {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,13 +69,13 @@
   z-index: 2;
 }
 
-.ctp-stepper--horizontal .ctp-stepper__label-group {
+.ctp-stepper[data-orientation="horizontal"] .ctp-stepper-label-group {
   margin-top: 10px;
   padding: 0 8px;
 }
 
 /* --- 2. Vertical Layout --- */
-.ctp-stepper--vertical {
+.ctp-stepper[data-orientation="vertical"] {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -84,7 +84,7 @@
   gap: var(--ctp-stepper-vertical-gap);
 }
 
-.ctp-stepper--vertical .ctp-stepper__step {
+.ctp-stepper[data-orientation="vertical"] .ctp-stepper-step {
   display: flex;
   position: relative;
   align-items: center;
@@ -92,7 +92,7 @@
 }
 
 /* Vertical Track Line */
-.ctp-stepper--vertical .ctp-stepper__track {
+.ctp-stepper[data-orientation="vertical"] .ctp-stepper-track {
   position: absolute;
   top: calc(var(--ctp-node-size) / 2);
   bottom: calc(-1 * var(--ctp-stepper-vertical-gap));
@@ -104,11 +104,11 @@
 }
 
 /* Hide track for the last step in vertical layout */
-.ctp-stepper--vertical .ctp-stepper__step:last-child .ctp-stepper__track {
+.ctp-stepper[data-orientation="vertical"] .ctp-stepper-step:last-child .ctp-stepper-track {
   display: none;
 }
 
-.ctp-stepper--vertical .ctp-stepper__track-active {
+.ctp-stepper[data-orientation="vertical"] .ctp-stepper-track-active {
   width: 100%;
   height: var(--ctp-stepper-progress, 0%);
   background-color: var(--ctp-btn-color-token);
@@ -116,7 +116,7 @@
   transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ctp-stepper--vertical .ctp-stepper__label-group {
+.ctp-stepper[data-orientation="vertical"] .ctp-stepper-label-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,16 +124,16 @@
 }
 
 /* --- 3. Dots Variant --- */
-.ctp-stepper--dots {
+.ctp-stepper[data-state="dots"] {
   --ctp-node-size: 14px;
 }
 
-.ctp-stepper--dots.ctp-stepper--horizontal .ctp-stepper__track {
+.ctp-stepper[data-state="dots"].ctp-stepper[data-orientation="horizontal"] .ctp-stepper-track {
   top: calc(var(--ctp-node-size) / 2 - 1px);
   height: 2px;
 }
 
-.ctp-stepper--dots.ctp-stepper--vertical .ctp-stepper__track {
+.ctp-stepper[data-state="dots"].ctp-stepper[data-orientation="vertical"] .ctp-stepper-track {
   left: calc(var(--ctp-node-size) / 2 - 1px);
   width: 2px;
   top: calc(var(--ctp-node-size) / 2);
@@ -141,7 +141,7 @@
 }
 
 /* --- 4. Node Indicators --- */
-.ctp-stepper__node {
+.ctp-stepper-node {
   width: var(--ctp-node-size);
   height: var(--ctp-node-size);
   border-radius: 50%;
@@ -160,14 +160,14 @@
 }
 
 /* Inactive/upcoming status */
-.ctp-stepper__step--upcoming .ctp-stepper__node {
+.ctp-stepper-step[data-state="upcoming"] .ctp-stepper-node {
   background-color: var(--ctp-mantle);
   border-color: var(--ctp-surface0);
   color: var(--ctp-overlay1);
 }
 
 /* Active Status style */
-.ctp-stepper__step--active .ctp-stepper__node {
+.ctp-stepper-step[data-state="active"] .ctp-stepper-node {
   background-color: var(--ctp-btn-color-token);
   border-color: var(--ctp-btn-color-token);
   color: var(--ctp-base);
@@ -176,35 +176,35 @@
 }
 
 /* Completed Status style */
-.ctp-stepper__step--completed .ctp-stepper__node {
+.ctp-stepper-step[data-state="completed"] .ctp-stepper-node {
   background-color: var(--ctp-green);
   border-color: var(--ctp-green);
   color: var(--ctp-base);
 }
 
-.ctp-stepper__step--completed .ctp-stepper__node svg {
+.ctp-stepper-step[data-state="completed"] .ctp-stepper-node svg {
   width: 1.1em;
   height: 1.1em;
   fill: currentColor;
 }
 
 /* Dot Variant specifics */
-.ctp-stepper--dots .ctp-stepper__node {
+.ctp-stepper[data-state="dots"] .ctp-stepper-node {
   border: none;
 }
-.ctp-stepper--dots .ctp-stepper__step--upcoming .ctp-stepper__node {
+.ctp-stepper[data-state="dots"] .ctp-stepper-step[data-state="upcoming"] .ctp-stepper-node {
   background-color: var(--ctp-surface1);
 }
-.ctp-stepper--dots .ctp-stepper__step--active .ctp-stepper__node {
+.ctp-stepper[data-state="dots"] .ctp-stepper-step[data-state="active"] .ctp-stepper-node {
   background-color: var(--ctp-btn-color-token);
   transform: scale(1.3);
 }
-.ctp-stepper--dots .ctp-stepper__step--completed .ctp-stepper__node {
+.ctp-stepper[data-state="dots"] .ctp-stepper-step[data-state="completed"] .ctp-stepper-node {
   background-color: var(--ctp-green);
 }
 
 /* --- 5. Labels & Descriptions --- */
-.ctp-stepper__title {
+.ctp-stepper-title {
   font-family: var(--ctp-font-family);
   font-size: 0.95rem;
   font-weight: 600;
@@ -213,15 +213,15 @@
   margin: 0;
 }
 
-.ctp-stepper__step--active .ctp-stepper__title {
+.ctp-stepper-step[data-state="active"] .ctp-stepper-title {
   color: var(--ctp-btn-color-token);
 }
 
-.ctp-stepper__step--completed .ctp-stepper__title {
+.ctp-stepper-step[data-state="completed"] .ctp-stepper-title {
   color: var(--ctp-text);
 }
 
-.ctp-stepper__description {
+.ctp-stepper-description {
   font-family: var(--ctp-font-family);
   font-size: 0.78rem;
   color: var(--ctp-subtext0);
@@ -242,18 +242,18 @@
   width: 100%;
 }
 
-.ctp-stepper-panel--active {
+.ctp-stepper-panel[data-state="active"] {
   display: block;
 }
 
 /* Slide in from right (next step) */
-.ctp-stepper-panel--slide-in-right {
+.ctp-stepper-panel[data-state="slide-in-right"] {
   display: block;
   animation: ctp-stepper-slide-right 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Slide in from left (previous step) */
-.ctp-stepper-panel--slide-in-left {
+.ctp-stepper-panel[data-state="slide-in-left"] {
   display: block;
   animation: ctp-stepper-slide-left 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

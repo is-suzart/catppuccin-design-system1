@@ -8,7 +8,8 @@ import { TabsComponent } from './tabs.component';
     <div
       role="tablist"
       [attr.aria-orientation]="parent.orientation()"
-      [class]="listClass()"
+      class="ctp-tabs-list"
+      [attr.data-variant]="parent.variant()"
       (keydown)="handleKeyDown($event)"
     >
       <ng-content></ng-content>
@@ -17,13 +18,6 @@ import { TabsComponent } from './tabs.component';
 })
 export class TabsListComponent {
   parent = inject(TabsComponent);
-
-  listClass = computed(() => {
-    return [
-      'ctp-tabs-list',
-      `ctp-tabs-list--${this.parent.variant()}`,
-    ].filter(Boolean).join(' ');
-  });
 
   handleKeyDown(event: KeyboardEvent) {
     const list = event.currentTarget as HTMLElement;

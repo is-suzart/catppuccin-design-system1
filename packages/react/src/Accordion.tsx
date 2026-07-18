@@ -82,8 +82,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 
   const classNames = [
     cnEl(prefix, 'accordion', 'item'),
-    isOpen ? `${prefix}-accordion__item--open` : '',
-    disabled ? `${prefix}-accordion__item--disabled` : '',
     className,
   ]
     .filter(Boolean)
@@ -91,7 +89,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 
   return (
     <AccordionItemContext.Provider value={{ value, disabled, isOpen }}>
-      <div className={classNames} {...props}>
+      <div className={classNames} data-state={isOpen ? 'open' : (disabled ? 'disabled' : undefined)} {...props}>
         {children}
       </div>
     </AccordionItemContext.Provider>
@@ -215,11 +213,8 @@ export const Accordion: React.FC<AccordionProps> & {
 
   const prefix = usePrefix();
 
-  const modifiers = [variant, colorMode !== 'none' ? colorMode : null, accentColor]
-    .filter((m): m is string => !!m);
-
   const classNames = [
-    cn(prefix, 'accordion', modifiers),
+    cn(prefix, 'accordion'),
     className,
   ]
     .filter(Boolean)
@@ -235,7 +230,13 @@ export const Accordion: React.FC<AccordionProps> & {
         accentColor,
       }}
     >
-      <div className={classNames} {...props}>
+      <div
+        className={classNames}
+        data-variant={variant}
+        data-color={colorMode !== 'none' ? colorMode : undefined}
+        data-accent={accentColor}
+        {...props}
+      >
         {children}
       </div>
     </AccordionContext.Provider>

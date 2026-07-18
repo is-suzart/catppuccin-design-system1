@@ -1,5 +1,11 @@
 <template>
-  <div :class="wrapperClass" :style="cssStyle">
+  <div
+    class="ctp-stepper-wrapper ctp-stepper"
+    :data-orientation="orientation"
+    :data-state="variant"
+    :data-color="color"
+    :style="cssStyle"
+  >
     <!-- Background line track -->
     <div class="ctp-stepper__track">
       <div class="ctp-stepper__track-active"></div>
@@ -9,7 +15,8 @@
     <div
       v-for="(step, index) in steps"
       :key="index"
-      :class="getStepClass(index)"
+      class="ctp-stepper__step"
+      :data-state="getStepStatus(index)"
     >
       <!-- Step node icon / dot / number -->
       <div class="ctp-stepper__node">
@@ -99,15 +106,6 @@ const progressPercent = computed(() => {
   return Math.min(100, Math.max(0, (props.currentStep / segments.value) * 100));
 });
 
-const wrapperClass = computed(() => {
-  return [
-    'ctp-stepper-wrapper',
-    `ctp-stepper--${props.orientation}`,
-    `ctp-stepper--${props.variant}`,
-    `ctp-stepper--${props.color}`,
-  ];
-});
-
 const cssStyle = computed(() => {
   return {
     '--ctp-total-steps': props.steps.length,
@@ -115,13 +113,13 @@ const cssStyle = computed(() => {
   };
 });
 
-function getStepClass(index: number) {
+function getStepStatus(index: number) {
   let status = 'upcoming';
   if (index < props.currentStep) {
     status = 'completed';
   } else if (index === props.currentStep) {
     status = 'active';
   }
-  return ['ctp-stepper__step', `ctp-stepper__step--${status}`];
+  return status;
 }
 </script>

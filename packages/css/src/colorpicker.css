@@ -42,7 +42,7 @@
 }
 
 /* Active Selected Swatch border highlight */
-.ctp-colorpicker-chip--active {
+.ctp-colorpicker-chip[data-state="active"] {
   transform: scale(1.12);
   border-color: var(--ctp-text) !important;
   box-shadow: var(--ctp-shadow-md), 0 0 8px rgba(0, 0, 0, 0.15);
@@ -50,17 +50,17 @@
 }
 
 /* Size modifiers for swatches */
-.ctp-colorpicker--sm .ctp-colorpicker-chip {
+.ctp-colorpicker[data-size="sm"] .ctp-colorpicker-chip {
   width: 22px;
   height: 22px;
 }
 
-.ctp-colorpicker--md .ctp-colorpicker-chip {
+.ctp-colorpicker[data-size="md"] .ctp-colorpicker-chip {
   width: 28px;
   height: 28px;
 }
 
-.ctp-colorpicker--lg .ctp-colorpicker-chip {
+.ctp-colorpicker[data-size="lg"] .ctp-colorpicker-chip {
   width: 34px;
   height: 34px;
 }
@@ -95,17 +95,17 @@
 }
 
 /* Size modifiers for custom trigger */
-.ctp-colorpicker--sm .ctp-colorpicker-custom-trigger {
+.ctp-colorpicker[data-size="sm"] .ctp-colorpicker-custom-trigger {
   width: 22px;
   height: 22px;
 }
 
-.ctp-colorpicker--md .ctp-colorpicker-custom-trigger {
+.ctp-colorpicker[data-size="md"] .ctp-colorpicker-custom-trigger {
   width: 28px;
   height: 28px;
 }
 
-.ctp-colorpicker--lg .ctp-colorpicker-custom-trigger {
+.ctp-colorpicker[data-size="lg"] .ctp-colorpicker-custom-trigger {
   width: 34px;
   height: 34px;
 }
@@ -148,17 +148,17 @@
 }
 
 /* Hex input sizes */
-.ctp-colorpicker--sm .ctp-colorpicker-input {
+.ctp-colorpicker[data-size="sm"] .ctp-colorpicker-input {
   padding: 4px 8px;
   width: 72px;
 }
 
-.ctp-colorpicker--md .ctp-colorpicker-input {
+.ctp-colorpicker[data-size="md"] .ctp-colorpicker-input {
   padding: 6px 10px;
   width: 80px;
 }
 
-.ctp-colorpicker--lg .ctp-colorpicker-input {
+.ctp-colorpicker[data-size="lg"] .ctp-colorpicker-input {
   padding: 8px 12px;
   width: 88px;
 }

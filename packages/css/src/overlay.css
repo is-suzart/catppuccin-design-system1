@@ -23,7 +23,7 @@
               visibility var(--ctp-transition-duration) var(--ctp-transition-timing);
 }
 
-.ctp-overlay--open {
+.ctp-overlay[data-state="open"] {
   opacity: 1;
   visibility: visible;
 }

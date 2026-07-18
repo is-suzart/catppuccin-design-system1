@@ -4,22 +4,22 @@
   font-family: var(--ctp-font-family);
 }
 
-.ctp-carousel__viewport {
+.ctp-carousel-viewport {
   overflow: hidden;
   border-radius: 12px;
 }
 
-.ctp-carousel__track {
+.ctp-carousel-track {
   display: flex;
   transition: all 0.8s cubic-bezier(0.77, -1.1, 0.22, 2);
 }
 
-.ctp-carousel__slide {
+.ctp-carousel-slide {
   flex: 0 0 100%;
   min-width: 0;
 }
 
-.ctp-carousel__btn {
+.ctp-carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -39,32 +39,32 @@
   opacity: 0.8;
 }
 
-.ctp-carousel__btn:hover {
+.ctp-carousel-btn:hover {
   opacity: 1;
   background: var(--ctp-mantle);
 }
 
-.ctp-carousel__btn:focus-visible {
+.ctp-carousel-btn:focus-visible {
   outline: 2px solid var(--ctp-mauve);
   outline-offset: 2px;
 }
 
-.ctp-carousel__btn--prev {
+.ctp-carousel-btn[data-state="prev"] {
   left: 12px;
 }
 
-.ctp-carousel__btn--next {
+.ctp-carousel-btn[data-state="next"] {
   right: 12px;
 }
 
-.ctp-carousel__dots {
+.ctp-carousel-dots {
   display: flex;
   justify-content: center;
   gap: 8px;
   padding: 12px 0 0;
 }
 
-.ctp-carousel__dot {
+.ctp-carousel-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -75,11 +75,11 @@
   padding: 0;
 }
 
-.ctp-carousel__dot:hover {
+.ctp-carousel-dot:hover {
   background: var(--ctp-surface2);
 }
 
-.ctp-carousel__dot--active {
+.ctp-carousel-dot[data-state="active"] {
   background: var(--ctp-mauve);
   width: 24px;
   border-radius: 4px;

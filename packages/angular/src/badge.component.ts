@@ -23,7 +23,13 @@ export type BadgeColor =
   selector: 'ctp-badge',
   standalone: true,
   template: `
-    <span [class]="badgeClass()">
+    <span
+      [class]="badgeClass()"
+      [attr.data-variant]="variant()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-color]="color()"
+    >
       @if (hasIcon()) {
         <span class="ctp-badge__icon" style="display: inline-flex; align-items: center">
           <ng-content select="[icon]"></ng-content>
@@ -72,12 +78,6 @@ export class BadgeComponent {
   }
 
   badgeClass = computed(() => {
-    return [
-      'ctp-badge',
-      `ctp-badge--${this.variant()}`,
-      `ctp-badge--${this.size()}`,
-      `ctp-badge--${this.shape()}`,
-      `ctp-badge--${this.color()}`
-    ].filter(Boolean).join(' ');
+    return 'ctp-badge';
   });
 }

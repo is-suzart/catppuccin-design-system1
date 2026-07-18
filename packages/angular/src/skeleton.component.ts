@@ -10,11 +10,25 @@ type SkeletonSize = 'sm' | 'md' | 'lg' | 'xl';
     @if (count() > 1) {
       <div class="ctp-skeleton-group" [style.gap]="gap()">
         @for (item of items; track item) {
-          <div [class]="classes" [style]="customStyle"></div>
+          <div
+            class="ctp-skeleton"
+            [attr.data-variant]="variant()"
+            [attr.data-size]="size()"
+            [attr.data-full]="width() ? null : 'true'"
+            [attr.data-animated]="animated() ? null : 'false'"
+            [style]="customStyle"
+          ></div>
         }
       </div>
     } @else {
-      <div [class]="classes" [style]="customStyle"></div>
+      <div
+        class="ctp-skeleton"
+        [attr.data-variant]="variant()"
+        [attr.data-size]="size()"
+        [attr.data-full]="width() ? null : 'true'"
+        [attr.data-animated]="animated() ? null : 'false'"
+        [style]="customStyle"
+      ></div>
     }
     <ng-content />
   `,
@@ -39,14 +53,7 @@ export class SkeletonComponent {
   }
 
   get classes(): string {
-    const c = [
-      'ctp-skeleton',
-      `ctp-skeleton--${this.variant()}`,
-      `ctp-skeleton--${this.size()}`,
-      !this.animated() ? 'ctp-skeleton--no-animation' : '',
-      this.width() ? '' : 'ctp-skeleton--full',
-    ];
-    return c.filter(Boolean).join(' ');
+    return 'ctp-skeleton';
   }
 
   get customStyle(): Record<string, string> {

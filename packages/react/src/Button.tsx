@@ -50,7 +50,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const prefix = usePrefix();
     const classNames = [
-      cn(prefix, 'btn', [variant, color, size, shape, isLoading ? 'loading' : undefined]),
+      cn(prefix, 'btn'),
       className,
     ]
       .filter(Boolean)
@@ -61,6 +61,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={classNames}
         disabled={disabled || isLoading}
+        data-variant={variant}
+        data-color={color}
+        data-size={size}
+        data-shape={shape}
+        data-state={isLoading ? 'loading' : undefined}
         {...props}
       >
         <span className={cnEl(prefix, 'btn', 'content')}>

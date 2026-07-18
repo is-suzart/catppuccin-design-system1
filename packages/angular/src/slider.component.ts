@@ -6,7 +6,7 @@ import { FormControlColor, getFormThemeClass } from './form-types';
   selector: 'ctp-slider',
   standalone: true,
   template: `
-    <div [class]="containerClass()">
+    <div class="ctp-slider-container" [attr.data-color]="color()">
       <input
         type="range"
         [min]="min()"
@@ -39,12 +39,7 @@ export class SliderComponent implements ControlValueAccessor {
   private _onChange: (val: any) => void = () => {};
   private _onTouched: () => void = () => {};
 
-  containerClass = computed(() => {
-    return [
-      'ctp-slider-container',
-      getFormThemeClass(this.color()),
-    ].filter(Boolean).join(' ');
-  });
+
 
   writeValue(val: any): void { this.value.set(Number(val) || 0); }
   registerOnChange(fn: any): void { this._onChange = fn; }

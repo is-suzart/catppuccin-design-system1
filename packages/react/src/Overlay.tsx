@@ -10,6 +10,7 @@ export interface OverlayProps {
   closeOnEsc?: boolean;
   children: React.ReactNode;
   className?: string;
+  'data-placement'?: string;
 }
 
 // Module-level count of open overlays for z-index stacking
@@ -22,6 +23,7 @@ export const Overlay: React.FC<OverlayProps> = ({
   closeOnEsc = true,
   children,
   className = '',
+  'data-placement': dataPlacement,
 }) => {
   const prefix = usePrefix();
   const [shouldRender, setShouldRender] = useState(isOpen);
@@ -119,7 +121,9 @@ export const Overlay: React.FC<OverlayProps> = ({
 
   const overlayElement = (
     <div
-      className={`${cn(prefix, 'overlay', [isAnimatedIn ? 'open' : undefined])} ${className}`}
+      className={`${cn(prefix, 'overlay')} ${className}`}
+      data-state={isAnimatedIn ? 'open' : undefined}
+      data-placement={dataPlacement}
       onClick={handleOverlayClick}
       style={{ zIndex }}
       role="presentation"

@@ -17,11 +17,14 @@ export type DrawerColor =
       [isOpen]="isOpen()"
       [closeOnOverlayClick]="closeOnOverlayClick()"
       [closeOnEsc]="closeOnEsc()"
-      [class]="'ctp-overlay--drawer-' + position()"
+      [placement]="'drawer-' + position()"
       (close)="onClose()"
     >
       <div
-        [class]="drawerClass()"
+        class="ctp-drawer"
+        [attr.data-placement]="position()"
+        [attr.data-size]="size()"
+        [attr.data-color]="color()"
         role="dialog"
         aria-modal="true"
       >
@@ -62,15 +65,6 @@ export class DrawerComponent {
   showCloseButton = input<boolean>(true);
 
   close = output<void>();
-
-  protected drawerClass = computed(() => {
-    return [
-      'ctp-drawer',
-      `ctp-drawer--${this.position()}`,
-      `ctp-drawer--${this.size()}`,
-      `ctp-drawer--${this.color()}`,
-    ].filter(Boolean).join(' ');
-  });
 
   onClose() {
     this.close.emit();

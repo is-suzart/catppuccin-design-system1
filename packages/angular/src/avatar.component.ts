@@ -6,7 +6,7 @@ type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
   selector: 'ctp-avatar',
   standalone: true,
   template: `
-    <div [class]="'ctp-avatar ctp-avatar--' + size()" [attr.aria-label]="alt() || fallback() || 'Avatar'">
+    <div class="ctp-avatar" [attr.data-size]="size()" [attr.aria-label]="alt() || fallback() || 'Avatar'">
       @if (src() && !imgError()) {
         <img [src]="src()" [alt]="alt()" (error)="onError()" />
       } @else {
@@ -46,7 +46,7 @@ export class AvatarComponent {
   selector: 'ctp-avatar-group',
   standalone: true,
   template: `
-    <div [class]="'ctp-avatar-group ctp-avatar-group--' + size()">
+    <div class="ctp-avatar-group" [attr.data-size]="size()">
       @for (item of visibleItems; track item) {
         <ng-content select="ctp-avatar" />
       }

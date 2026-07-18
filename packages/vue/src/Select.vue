@@ -1,6 +1,10 @@
 <template>
   <select
-    :class="selectClass"
+    class="ctp-form-control"
+    :data-size="size"
+    :data-shape="shape"
+    :data-state="error ? 'error' : undefined"
+    :data-color="color"
     :disabled="disabled"
     :value="modelValue"
     @change="onChange"
@@ -18,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+
 
 type FormControlSize = 'sm' | 'md' | 'lg';
 type FormControlShape = 'square' | 'rounded' | 'pill';
@@ -57,15 +61,7 @@ const emit = defineEmits<{
 
 const getFormThemeClass = (color: FormControlColor) => `ctp-form--${color}`;
 
-const selectClass = computed(() => {
-  return [
-    'ctp-form-control',
-    `ctp-form-control--${props.size}`,
-    `ctp-form-control--${props.shape}`,
-    props.error ? 'ctp-form-control--error' : '',
-    getFormThemeClass(props.color),
-  ];
-});
+
 
 function onChange(event: Event) {
   const target = event.target as HTMLSelectElement;

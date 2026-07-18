@@ -69,12 +69,12 @@ export const Alert: React.FC<AlertProps> = ({
     onDismiss?.();
   };
 
-  const alertModifiers = dismissible ? [variant, 'dismissible'] : [variant];
-
   return (
     <div
-      className={`${cn(prefix, 'alert', alertModifiers)} ${className}`}
+      className={`${cn(prefix, 'alert')} ${className}`}
       role="alert"
+      data-variant={variant}
+      data-dismissible={dismissible ? "true" : undefined}
     >
       <div className={cnEl(prefix, 'alert', 'icon')}>{icon ?? getDefaultIcon(variant)}</div>
       <div className={cnEl(prefix, 'alert', 'content')}>

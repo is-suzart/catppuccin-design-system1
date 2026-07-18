@@ -37,7 +37,7 @@ export const Avatar: React.FC<AvatarProps> = ({
     : null;
 
   return (
-    <div className={`${cn(prefix, 'avatar', [size])} ${className}`} aria-label={alt || fallback || 'Avatar'}>
+    <div className={`${cn(prefix, 'avatar')} ${className}`} data-size={size} aria-label={alt || fallback || 'Avatar'}>
       {showImage ? (
         <img src={src} alt={alt} onError={() => setImgError(true)} />
       ) : (
@@ -68,7 +68,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   const remaining = max ? Math.max(0, items.length - max) : 0;
 
   return (
-    <div className={`${cn(prefix, 'avatar-group', [size])} ${className}`}>
+    <div className={`${cn(prefix, 'avatar-group')} ${className}`} data-size={size}>
       {React.Children.map(visible, (child, i) =>
         React.cloneElement(child as React.ReactElement<{ size?: AvatarSize }>, { size, key: i })
       )}

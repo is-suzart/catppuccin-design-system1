@@ -82,7 +82,7 @@ export const HoverCard: React.FC<HoverCardProps> = ({
       {isOpen && ReactDOM.createPortal(
         <div
           ref={floatingRef}
-          className={`${cn(prefix, 'hover-card', [`placement-${actualPlacement}`])} ${className}`}
+          className={`${cn(prefix, 'hover-card')} ${className}`} data-placement={actualPlacement}
           style={{
             position: 'fixed',
             top: `${top}px`,

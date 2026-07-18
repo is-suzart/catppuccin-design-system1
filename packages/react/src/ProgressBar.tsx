@@ -55,13 +55,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   // Wrapper CSS classes
   const classes = [
-    cn(prefix, 'progressbar', [
-      size,
-      color,
-      striped ? 'striped' : undefined,
-      animated ? 'animated' : undefined,
-      indeterminate ? 'indeterminate' : undefined,
-    ]),
+    cn(prefix, 'progressbar'),
     className,
   ]
     .filter(Boolean)
@@ -89,6 +83,9 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       aria-valuemin={indeterminate ? undefined : 0}
       aria-valuemax={indeterminate ? undefined : max}
       aria-label={label}
+      data-size={size}
+      data-color={color}
+      data-state={indeterminate ? 'indeterminate' : (animated ? 'animated' : (striped ? 'striped' : undefined))}
     >
       {renderLabelGroup()}
       <div className={`${prefix}-progressbar-track`}>

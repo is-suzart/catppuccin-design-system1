@@ -1,5 +1,5 @@
 <template>
-  <div :class="itemClass" v-bind="$attrs">
+  <div class="ctp-accordion__item" :data-state="isOpen ? 'open' : (disabled ? 'disabled' : undefined)" v-bind="$attrs">
     <button
       type="button"
       class="ctp-accordion__header"
@@ -66,12 +66,4 @@ const handleHeaderClick = () => {
   if (props.disabled) return;
   accordion.toggleValue(props.value);
 };
-
-const itemClass = computed(() => {
-  return [
-    'ctp-accordion__item',
-    isOpen.value ? 'ctp-accordion__item--open' : '',
-    props.disabled ? 'ctp-accordion__item--disabled' : '',
-  ];
-});
 </script>

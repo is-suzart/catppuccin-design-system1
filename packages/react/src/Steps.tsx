@@ -45,11 +45,11 @@ export const Steps: React.FC<StepsProps> = ({
     }
   };
 
-  const stepsClass = `${prefix}-steps--${color}`;
+  const stepsClass = '';
 
   if (variant === 'carousel') {
     return (
-      <div className={`${cn(prefix, 'steps-carousel')} ${stepsClass}`}>
+      <div className={cn(prefix, 'steps-carousel')} data-color={color}>
         {Array.from({ length: stepsCount }).map((_, index) => (
           <button
             key={index}
@@ -69,13 +69,10 @@ export const Steps: React.FC<StepsProps> = ({
     ? { height: `${progressWidth}%` }
     : { width: `${progressWidth}%` };
 
-  const timelineClasses = [
-    cn(prefix, 'steps-timeline', [isVertical ? 'vertical' : 'horizontal']),
-    stepsClass,
-  ].join(' ');
+  const timelineClasses = cn(prefix, 'steps-timeline');
 
   return (
-    <div className={timelineClasses}>
+    <div className={timelineClasses} data-orientation={orientation} data-color={color}>
       <div className={`${prefix}-steps-track`}>
         <div
           className={`${prefix}-steps-progress`}
@@ -86,16 +83,12 @@ export const Steps: React.FC<StepsProps> = ({
       {Array.from({ length: stepsCount }).map((_, index) => {
         const isActive = index === currentStep;
         const isCompleted = index < currentStep;
-        const itemModifiers = [
-          isActive ? 'active' : '',
-          isCompleted ? 'completed' : '',
-        ].filter(Boolean);
-        const itemClass = `${prefix}-steps-item` + (itemModifiers.length ? ' ' + itemModifiers.map(m => `${prefix}-steps-item--${m}`).join(' ') : '');
+        const itemClass = `${prefix}-steps-item`;
 
         return (
           <button
             key={index}
-            className={itemClass}
+            className={itemClass} data-state={isActive ? 'active' : (isCompleted ? 'completed' : undefined)}
             onClick={() => handleStepClick(index)}
             aria-label={`Step ${index + 1}`}
           >

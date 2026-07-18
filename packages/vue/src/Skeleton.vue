@@ -3,12 +3,24 @@
     <div
       v-for="i in count"
       :key="i"
-      :class="classes"
+      class="ctp-skeleton"
+      :data-variant="variant"
+      :data-size="size"
+      :data-full="width ? undefined : 'true'"
+      :data-animated="animated ? undefined : 'false'"
       :style="customStyle"
       aria-hidden="true"
     />
   </div>
-  <div v-else :class="classes" :style="customStyle" aria-hidden="true">
+  <div v-else
+    class="ctp-skeleton"
+    :data-variant="variant"
+    :data-size="size"
+    :data-full="width ? undefined : 'true'"
+    :data-animated="animated ? undefined : 'false'"
+    :style="customStyle"
+    aria-hidden="true"
+  >
     <slot />
   </div>
 </template>
@@ -38,14 +50,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const classes = computed(() => {
-  const c = [
-    'ctp-skeleton',
-    `ctp-skeleton--${props.variant}`,
-    `ctp-skeleton--${props.size}`,
-    !props.animated ? 'ctp-skeleton--no-animation' : '',
-    props.width ? '' : 'ctp-skeleton--full',
-  ];
-  return c.filter(Boolean).join(' ');
+  return 'ctp-skeleton';
 });
 
 const customStyle = computed(() => {

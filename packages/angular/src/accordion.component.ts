@@ -22,7 +22,11 @@ export type AccordionAccentColor =
   selector: 'ctp-accordion',
   standalone: true,
   template: `
-    <div [class]="accordionClass()">
+    <div class="ctp-accordion"
+      [attr.data-variant]="variant()"
+      [attr.data-color]="colorMode() !== 'none' ? colorMode() : null"
+      [attr.data-accent]="accentColor() || null"
+    >
       <ng-content></ng-content>
     </div>
   `
@@ -51,18 +55,6 @@ export class CptAccordionComponent {
     }, { allowSignalWrites: true });
   }
 
-  accordionClass = computed(() => {
-    const variantClass = `ctp-accordion--${this.variant()}`;
-    const colorModeClass = this.colorMode() !== 'none' ? `ctp-accordion--${this.colorMode()}` : '';
-    const accentColorClass = this.accentColor() ? `ctp-accordion--${this.accentColor()}` : '';
-    return [
-      'ctp-accordion',
-      variantClass,
-      colorModeClass,
-      accentColorClass
-    ].filter(Boolean).join(' ');
-  });
-
   toggleValue(value: string) {
     const current = this.openValuesSignal();
     let next: string[];
@@ -82,7 +74,7 @@ export class CptAccordionComponent {
   selector: 'ctp-accordion-item',
   standalone: true,
   template: `
-    <div [class]="itemClass()">
+    <div class="ctp-accordion__item" [attr.data-state]="isOpen() ? 'open' : (disabled() ? 'disabled' : null)">
       <button
         type="button"
         class="ctp-accordion__header"
@@ -130,14 +122,6 @@ export class CptAccordionItemComponent {
   isOpen = computed(() => {
     if (!this.accordion) return false;
     return this.accordion.openValues().includes(this.value());
-  });
-
-  itemClass = computed(() => {
-    return [
-      'ctp-accordion__item',
-      this.isOpen() ? 'ctp-accordion__item--open' : '',
-      this.disabled() ? 'ctp-accordion__item--disabled' : ''
-    ].filter(Boolean).join(' ');
   });
 
   handleHeaderClick() {

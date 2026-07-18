@@ -29,75 +29,75 @@
 }
 
 /* Shapes */
-.ctp-badge--square {
+.ctp-badge[data-shape="square"] {
   border-radius: var(--ctp-radius-square);
 }
-.ctp-badge--rounded {
+.ctp-badge[data-shape="rounded"] {
   border-radius: 4px;
 }
-.ctp-badge--pill {
+.ctp-badge[data-shape="pill"] {
   border-radius: var(--ctp-radius-pill);
 }
 
 /* Sizes */
-.ctp-badge--sm {
+.ctp-badge[data-size="sm"] {
   padding: 3px 6px;
   font-size: 0.75rem;
   gap: 4px;
 }
-.ctp-badge--md {
+.ctp-badge[data-size="md"] {
   padding: 5px 10px;
   font-size: 0.85rem;
   gap: 6px;
 }
-.ctp-badge--lg {
+.ctp-badge[data-size="lg"] {
   padding: 7px 14px;
   font-size: 0.95rem;
   gap: 8px;
 }
 
 /* Colors Mapping */
-.ctp-badge--rosewater { --ctp-badge-color-token: var(--ctp-rosewater); }
-.ctp-badge--flamingo  { --ctp-badge-color-token: var(--ctp-flamingo); }
-.ctp-badge--pink      { --ctp-badge-color-token: var(--ctp-pink); }
-.ctp-badge--mauve     { --ctp-badge-color-token: var(--ctp-mauve); }
-.ctp-badge--red       { --ctp-badge-color-token: var(--ctp-red); }
-.ctp-badge--maroon    { --ctp-badge-color-token: var(--ctp-maroon); }
-.ctp-badge--peach     { --ctp-badge-color-token: var(--ctp-peach); }
-.ctp-badge--yellow    { --ctp-badge-color-token: var(--ctp-yellow); }
-.ctp-badge--green     { --ctp-badge-color-token: var(--ctp-green); }
-.ctp-badge--teal      { --ctp-badge-color-token: var(--ctp-teal); }
-.ctp-badge--sky       { --ctp-badge-color-token: var(--ctp-sky); }
-.ctp-badge--sapphire  { --ctp-badge-color-token: var(--ctp-sapphire); }
-.ctp-badge--blue      { --ctp-badge-color-token: var(--ctp-blue); }
-.ctp-badge--lavender  { --ctp-badge-color-token: var(--ctp-lavender); }
+.ctp-badge[data-color="rosewater"] { --ctp-badge-color-token: var(--ctp-rosewater); }
+.ctp-badge[data-color="flamingo"]  { --ctp-badge-color-token: var(--ctp-flamingo); }
+.ctp-badge[data-color="pink"]      { --ctp-badge-color-token: var(--ctp-pink); }
+.ctp-badge[data-color="mauve"]     { --ctp-badge-color-token: var(--ctp-mauve); }
+.ctp-badge[data-color="red"]       { --ctp-badge-color-token: var(--ctp-red); }
+.ctp-badge[data-color="maroon"]    { --ctp-badge-color-token: var(--ctp-maroon); }
+.ctp-badge[data-color="peach"]     { --ctp-badge-color-token: var(--ctp-peach); }
+.ctp-badge[data-color="yellow"]    { --ctp-badge-color-token: var(--ctp-yellow); }
+.ctp-badge[data-color="green"]     { --ctp-badge-color-token: var(--ctp-green); }
+.ctp-badge[data-color="teal"]      { --ctp-badge-color-token: var(--ctp-teal); }
+.ctp-badge[data-color="sky"]       { --ctp-badge-color-token: var(--ctp-sky); }
+.ctp-badge[data-color="sapphire"]  { --ctp-badge-color-token: var(--ctp-sapphire); }
+.ctp-badge[data-color="blue"]      { --ctp-badge-color-token: var(--ctp-blue); }
+.ctp-badge[data-color="lavender"]  { --ctp-badge-color-token: var(--ctp-lavender); }
 
 /* Variants */
-.ctp-badge--filled {
+.ctp-badge[data-variant="filled"] {
   background-color: var(--ctp-badge-color-token);
   color: var(--ctp-base);
   border: 1px solid transparent;
 }
 
-.ctp-badge--tonal {
+.ctp-badge[data-variant="tonal"] {
   background-color: color-mix(in srgb, var(--ctp-badge-color-token) 12%, transparent);
   color: var(--ctp-badge-color-token);
   border: 1px solid transparent;
 }
 
-.ctp-badge--outline {
+.ctp-badge[data-variant="outline"] {
   background-color: transparent;
   border: 1.5px solid var(--ctp-badge-color-token);
   color: var(--ctp-badge-color-token);
 }
 
-.ctp-badge--flat {
+.ctp-badge[data-variant="flat"] {
   background-color: var(--ctp-surface0);
   border: 1px solid transparent;
   color: var(--ctp-text);
 }
 
-.ctp-badge__close-btn {
+.ctp-badge-close-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -111,13 +111,13 @@
   transition: opacity 0.15s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: 50%;
 }
-.ctp-badge__close-btn:hover {
+.ctp-badge-close-btn:hover {
   opacity: 1;
   transform: scale(1.2) rotate(90deg);
 }
-.ctp-badge--filled .ctp-badge__close-btn:hover {
+.ctp-badge[data-variant="filled"] .ctp-badge-close-btn:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.ctp-badge:not(.ctp-badge--filled) .ctp-badge__close-btn:hover {
+.ctp-badge:not([data-variant="filled"]) .ctp-badge-close-btn:hover {
   background-color: color-mix(in srgb, var(--ctp-badge-color-token) 15%, transparent);
 }

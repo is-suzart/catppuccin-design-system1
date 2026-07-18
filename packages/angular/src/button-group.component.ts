@@ -23,7 +23,11 @@ export type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
   template: `
     <div
       #container
-      [class]="wrapperClass()"
+      class="ctp-btn-group"
+      [attr.data-orientation]="orientation()"
+      [attr.data-variant]="variant()"
+      [attr.data-shape]="shape()"
+      [attr.data-state]="(selectionMode() === 'single' && isPillReady() ? 'pill-active ' : '') + (selectionMode() !== 'none' ? selectionMode() : '') || null"
       [attr.role]="selectionMode() === 'single' ? 'radiogroup' : null"
       (keydown)="handleKeyDown($event)"
     >
@@ -65,17 +69,6 @@ export class ButtonGroupComponent implements ControlValueAccessor, AfterViewInit
   private isPillReady = computed(() => {
     const style = this.pillStyle();
     return !('opacity' in style);
-  });
-
-  wrapperClass = computed(() => {
-    return [
-      'ctp-btn-group',
-      `ctp-btn-group--${this.orientation()}`,
-      `ctp-btn-group--${this.variant()}`,
-      `ctp-btn-group--${this.shape()}`,
-      this.selectionMode() === 'single' && this.isPillReady() ? 'ctp-btn-group--pill-active' : '',
-      this.selectionMode() !== 'none' ? `ctp-btn-group--${this.selectionMode()}` : ''
-    ].join(' ').trim();
   });
 
   pillStyle = computed(() => {

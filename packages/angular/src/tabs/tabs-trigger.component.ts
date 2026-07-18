@@ -14,7 +14,10 @@ import { TabsComponent } from './tabs.component';
       [attr.data-value]="value()"
       [attr.tabindex]="isSelected() ? 0 : -1"
       [disabled]="disabled()"
-      [class]="triggerClass()"
+      class="ctp-tabs-trigger"
+      [attr.data-variant]="parent.variant()"
+      [attr.data-size]="parent.size()"
+      [attr.data-state]="isSelected() ? 'active' : null"
       (click)="handleClick()"
     >
       <ng-content></ng-content>
@@ -29,15 +32,6 @@ export class TabsTriggerComponent {
   parent = inject(TabsComponent);
 
   isSelected = computed(() => this.parent.isSelected(this.value()));
-
-  triggerClass = computed(() => {
-    return [
-      'ctp-tabs-trigger',
-      `ctp-tabs-trigger--${this.parent.variant()}`,
-      `ctp-tabs-trigger--${this.parent.size()}`,
-      this.isSelected() ? 'ctp-tabs-trigger--active' : '',
-    ].filter(Boolean).join(' ');
-  });
 
   handleClick() {
     if (this.disabled()) return;

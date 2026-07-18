@@ -13,7 +13,7 @@
   animation: ctp-command-fade-in 0.15s ease;
 }
 
-.ctp-command-overlay--closing {
+.ctp-command-overlay[data-state="closing"] {
   animation: ctp-command-fade-out 0.1s ease forwards;
 }
 
@@ -33,7 +33,7 @@
   align-self: flex-start;
 }
 
-.ctp-command__input-wrapper {
+.ctp-command-input-wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -41,14 +41,14 @@
   border-bottom: 1.5px solid var(--ctp-surface0);
 }
 
-.ctp-command__search-icon {
+.ctp-command-search-icon {
   width: 20px;
   height: 20px;
   color: var(--ctp-subtext0);
   flex-shrink: 0;
 }
 
-.ctp-command__input {
+.ctp-command-input {
   flex: 1;
   background: none;
   border: none;
@@ -58,24 +58,24 @@
   font-family: var(--ctp-font-family);
 }
 
-.ctp-command__input::placeholder {
+.ctp-command-input::placeholder {
   color: var(--ctp-overlay0);
 }
 
-.ctp-command__list {
+.ctp-command-list {
   overflow-y: auto;
   padding: 6px;
   max-height: 50vh;
 }
 
-.ctp-command__empty {
+.ctp-command-empty {
   padding: 24px 16px;
   text-align: center;
   color: var(--ctp-subtext0);
   font-size: 0.875rem;
 }
 
-.ctp-command__group-label {
+.ctp-command-group-label {
   padding: 6px 10px 4px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -84,7 +84,7 @@
   color: var(--ctp-overlay1);
 }
 
-.ctp-command__item {
+.ctp-command-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -97,32 +97,32 @@
   user-select: none;
 }
 
-.ctp-command__item:hover,
-.ctp-command__item--selected {
+.ctp-command-item:hover,
+.ctp-command-item[data-state="selected"] {
   background: color-mix(in srgb, var(--ctp-mauve) 14%, transparent);
   color: var(--ctp-text);
 }
 
-.ctp-command__item--selected {
+.ctp-command-item[data-state="selected"] {
   background: color-mix(in srgb, var(--ctp-mauve) 20%, transparent);
 }
 
-.ctp-command__item-icon {
+.ctp-command-item-icon {
   width: 18px;
   height: 18px;
   color: var(--ctp-subtext0);
   flex-shrink: 0;
 }
 
-.ctp-command__item--selected .ctp-command__item-icon {
+.ctp-command-item[data-state="selected"] .ctp-command-item-icon {
   color: var(--ctp-mauve);
 }
 
-.ctp-command__item-label {
+.ctp-command-item-label {
   flex: 1;
 }
 
-.ctp-command__item-shortcut {
+.ctp-command-item-shortcut {
   font-size: 0.7rem;
   color: var(--ctp-overlay0);
   background: var(--ctp-surface0);

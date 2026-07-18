@@ -12,7 +12,7 @@ type PopoverPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-sta
     @if (isOpen()) {
       <div
         #popoverRef
-        [class]="'ctp-popover ctp-popover--placement-' + actualPlacement"
+        class="ctp-popover" [attr.data-placement]="actualPlacement"
         [style.position]="'fixed'"
         [style.zIndex]="'1100'"
         [style.top.px]="top"

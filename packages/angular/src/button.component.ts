@@ -41,6 +41,11 @@ type ButtonShape = 'square' | 'rounded' | 'pill';
       [attr.role]="isGroupSingle() ? 'radio' : null"
       [attr.aria-checked]="isGroupSingle() ? isActive() : null"
       [attr.tabindex]="isGroupSingle() ? (isActive() ? 0 : -1) : 0"
+      [attr.data-variant]="variant()"
+      [attr.data-color]="color()"
+      [attr.data-size]="size()"
+      [attr.data-shape]="shape()"
+      [attr.data-state]="isLoading() ? 'loading' : (isActive() ? 'active' : null)"
     >
       <span class="ctp-btn__content">
         @if (isLoading()) {
@@ -94,17 +99,7 @@ export class ButtonComponent implements AfterViewInit, OnDestroy, OnChanges {
   });
 
   buttonClass = computed(() => {
-    return [
-      'ctp-btn',
-      `ctp-btn--${this.variant()}`,
-      `ctp-btn--${this.color()}`,
-      `ctp-btn--${this.size()}`,
-      `ctp-btn--${this.shape()}`,
-      this.isLoading() ? 'ctp-btn--loading' : '',
-      this.isActive() ? 'ctp-btn--active' : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
+    return 'ctp-btn';
   });
 
   ngAfterViewInit() {

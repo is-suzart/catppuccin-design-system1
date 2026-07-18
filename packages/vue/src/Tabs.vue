@@ -1,5 +1,5 @@
 <template>
-  <div :class="containerClass">
+  <div class="ctp-tabs" :data-orientation="orientation" :data-color="color">
     <slot />
   </div>
 </template>
@@ -61,13 +61,5 @@ provide('tabs', {
   color: computed(() => props.color),
   orientation: computed(() => props.orientation),
   mode: computed(() => props.mode),
-});
-
-const containerClass = computed(() => {
-  return [
-    'ctp-tabs',
-    `ctp-tabs--${props.orientation}`,
-    `ctp-form--${props.color}`,
-  ];
 });
 </script>

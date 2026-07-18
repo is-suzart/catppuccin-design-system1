@@ -22,7 +22,10 @@ type ProgressBarColor =
   standalone: true,
   template: `
     <div
-      [class]="wrapperClass()"
+      class="ctp-progressbar"
+      [attr.data-size]="size()"
+      [attr.data-color]="color()"
+      [attr.data-state]="indeterminate() ? 'indeterminate' : (animated() ? 'animated' : (striped() ? 'striped' : null))"
       role="progressbar"
       [attr.aria-valuenow]="indeterminate() ? null : normalizedValue()"
       [attr.aria-valuemin]="indeterminate() ? null : 0"
@@ -84,18 +87,5 @@ export class ProgressBarComponent {
 
   progressPercent = computed(() => {
     return Math.round(this.percent());
-  });
-
-  wrapperClass = computed(() => {
-    return [
-      'ctp-progressbar',
-      `ctp-progressbar--${this.size()}`,
-      `ctp-progressbar--${this.color()}`,
-      this.striped() ? 'ctp-progressbar--striped' : '',
-      this.animated() ? 'ctp-progressbar--animated' : '',
-      this.indeterminate() ? 'ctp-progressbar--indeterminate' : ''
-    ]
-      .filter(Boolean)
-      .join(' ');
   });
 }

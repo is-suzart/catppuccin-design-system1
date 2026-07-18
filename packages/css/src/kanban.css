@@ -68,20 +68,20 @@
   border-top-right-radius: inherit;
 }
 
-.ctp-pro-kanban-column--rosewater .ctp-pro-kanban-column-header::after { background: var(--ctp-rosewater); }
-.ctp-pro-kanban-column--flamingo .ctp-pro-kanban-column-header::after { background: var(--ctp-flamingo); }
-.ctp-pro-kanban-column--pink .ctp-pro-kanban-column-header::after { background: var(--ctp-pink); }
-.ctp-pro-kanban-column--mauve .ctp-pro-kanban-column-header::after { background: var(--ctp-mauve); }
-.ctp-pro-kanban-column--red .ctp-pro-kanban-column-header::after { background: var(--ctp-red); }
-.ctp-pro-kanban-column--maroon .ctp-pro-kanban-column-header::after { background: var(--ctp-maroon); }
-.ctp-pro-kanban-column--peach .ctp-pro-kanban-column-header::after { background: var(--ctp-peach); }
-.ctp-pro-kanban-column--yellow .ctp-pro-kanban-column-header::after { background: var(--ctp-yellow); }
-.ctp-pro-kanban-column--green .ctp-pro-kanban-column-header::after { background: var(--ctp-green); }
-.ctp-pro-kanban-column--teal .ctp-pro-kanban-column-header::after { background: var(--ctp-teal); }
-.ctp-pro-kanban-column--sky .ctp-pro-kanban-column-header::after { background: var(--ctp-sky); }
-.ctp-pro-kanban-column--sapphire .ctp-pro-kanban-column-header::after { background: var(--ctp-sapphire); }
-.ctp-pro-kanban-column--blue .ctp-pro-kanban-column-header::after { background: var(--ctp-blue); }
-.ctp-pro-kanban-column--lavender .ctp-pro-kanban-column-header::after { background: var(--ctp-lavender); }
+.ctp-pro-kanban-column[data-color="rosewater"] .ctp-pro-kanban-column-header::after { background: var(--ctp-rosewater); }
+.ctp-pro-kanban-column[data-color="flamingo"] .ctp-pro-kanban-column-header::after { background: var(--ctp-flamingo); }
+.ctp-pro-kanban-column[data-color="pink"] .ctp-pro-kanban-column-header::after { background: var(--ctp-pink); }
+.ctp-pro-kanban-column[data-color="mauve"] .ctp-pro-kanban-column-header::after { background: var(--ctp-mauve); }
+.ctp-pro-kanban-column[data-color="red"] .ctp-pro-kanban-column-header::after { background: var(--ctp-red); }
+.ctp-pro-kanban-column[data-color="maroon"] .ctp-pro-kanban-column-header::after { background: var(--ctp-maroon); }
+.ctp-pro-kanban-column[data-color="peach"] .ctp-pro-kanban-column-header::after { background: var(--ctp-peach); }
+.ctp-pro-kanban-column[data-color="yellow"] .ctp-pro-kanban-column-header::after { background: var(--ctp-yellow); }
+.ctp-pro-kanban-column[data-color="green"] .ctp-pro-kanban-column-header::after { background: var(--ctp-green); }
+.ctp-pro-kanban-column[data-color="teal"] .ctp-pro-kanban-column-header::after { background: var(--ctp-teal); }
+.ctp-pro-kanban-column[data-color="sky"] .ctp-pro-kanban-column-header::after { background: var(--ctp-sky); }
+.ctp-pro-kanban-column[data-color="sapphire"] .ctp-pro-kanban-column-header::after { background: var(--ctp-sapphire); }
+.ctp-pro-kanban-column[data-color="blue"] .ctp-pro-kanban-column-header::after { background: var(--ctp-blue); }
+.ctp-pro-kanban-column[data-color="lavender"] .ctp-pro-kanban-column-header::after { background: var(--ctp-lavender); }
 
 .ctp-pro-kanban-column-title-container {
   display: flex;
@@ -95,20 +95,20 @@
   border-radius: 50%;
 }
 
-.ctp-pro-kanban-column--rosewater .ctp-pro-kanban-column-dot { background: var(--ctp-rosewater); }
-.ctp-pro-kanban-column--flamingo .ctp-pro-kanban-column-dot { background: var(--ctp-flamingo); }
-.ctp-pro-kanban-column--pink .ctp-pro-kanban-column-dot { background: var(--ctp-pink); }
-.ctp-pro-kanban-column--mauve .ctp-pro-kanban-column-dot { background: var(--ctp-mauve); }
-.ctp-pro-kanban-column--red .ctp-pro-kanban-column-dot { background: var(--ctp-red); }
-.ctp-pro-kanban-column--maroon .ctp-pro-kanban-column-dot { background: var(--ctp-maroon); }
-.ctp-pro-kanban-column--peach .ctp-pro-kanban-column-dot { background: var(--ctp-peach); }
-.ctp-pro-kanban-column--yellow .ctp-pro-kanban-column-dot { background: var(--ctp-yellow); }
-.ctp-pro-kanban-column--green .ctp-pro-kanban-column-dot { background: var(--ctp-green); }
-.ctp-pro-kanban-column--teal .ctp-pro-kanban-column-dot { background: var(--ctp-teal); }
-.ctp-pro-kanban-column--sky .ctp-pro-kanban-column-dot { background: var(--ctp-sky); }
-.ctp-pro-kanban-column--sapphire .ctp-pro-kanban-column-dot { background: var(--ctp-sapphire); }
-.ctp-pro-kanban-column--blue .ctp-pro-kanban-column-dot { background: var(--ctp-blue); }
-.ctp-pro-kanban-column--lavender .ctp-pro-kanban-column-dot { background: var(--ctp-lavender); }
+.ctp-pro-kanban-column[data-color="rosewater"] .ctp-pro-kanban-column-dot { background: var(--ctp-rosewater); }
+.ctp-pro-kanban-column[data-color="flamingo"] .ctp-pro-kanban-column-dot { background: var(--ctp-flamingo); }
+.ctp-pro-kanban-column[data-color="pink"] .ctp-pro-kanban-column-dot { background: var(--ctp-pink); }
+.ctp-pro-kanban-column[data-color="mauve"] .ctp-pro-kanban-column-dot { background: var(--ctp-mauve); }
+.ctp-pro-kanban-column[data-color="red"] .ctp-pro-kanban-column-dot { background: var(--ctp-red); }
+.ctp-pro-kanban-column[data-color="maroon"] .ctp-pro-kanban-column-dot { background: var(--ctp-maroon); }
+.ctp-pro-kanban-column[data-color="peach"] .ctp-pro-kanban-column-dot { background: var(--ctp-peach); }
+.ctp-pro-kanban-column[data-color="yellow"] .ctp-pro-kanban-column-dot { background: var(--ctp-yellow); }
+.ctp-pro-kanban-column[data-color="green"] .ctp-pro-kanban-column-dot { background: var(--ctp-green); }
+.ctp-pro-kanban-column[data-color="teal"] .ctp-pro-kanban-column-dot { background: var(--ctp-teal); }
+.ctp-pro-kanban-column[data-color="sky"] .ctp-pro-kanban-column-dot { background: var(--ctp-sky); }
+.ctp-pro-kanban-column[data-color="sapphire"] .ctp-pro-kanban-column-dot { background: var(--ctp-sapphire); }
+.ctp-pro-kanban-column[data-color="blue"] .ctp-pro-kanban-column-dot { background: var(--ctp-blue); }
+.ctp-pro-kanban-column[data-color="lavender"] .ctp-pro-kanban-column-dot { background: var(--ctp-lavender); }
 
 .ctp-pro-kanban-column-title {
   margin: 0;
@@ -205,14 +205,14 @@
   border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.ctp-pro-kanban-card--dragging {
+.ctp-pro-kanban-card[data-state="dragging"] {
   opacity: 0.25 !important;
   border: 1px dashed var(--ctp-overlay0);
   background: transparent;
   box-shadow: none;
 }
 
-.ctp-pro-kanban-card--dragging-overlay {
+.ctp-pro-kanban-card[data-state="dragging-overlay"] {
   background: var(--ctp-base);
   border: 1px solid var(--ctp-mauve);
   border-radius: 0.5rem;

@@ -103,11 +103,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 
   const triggerClass = [
     cn(prefix, 'select-trigger'),
-    `${prefix}-select-trigger--${size}`,
-    `${prefix}-select-trigger--${shape}`,
-    isOpen ? `${prefix}-select-trigger--active` : '',
-    disabled ? `${prefix}-select-trigger--disabled` : '',
-    error ? `${prefix}-select-trigger--error` : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -115,7 +110,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`${cn(prefix, 'advanced-select')} ${getFormThemeClass(prefix, color)} ${className}`}
+      className={`${cn(prefix, 'advanced-select')} ${className}`} data-color={color}
     >
       <button
         type="button"
@@ -124,6 +119,10 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        data-size={size}
+        data-shape={shape}
+        data-state={isOpen ? 'active' : (disabled ? 'disabled' : undefined)}
+        data-error={error ? 'true' : undefined}
       >
         {selectedOptions.length === 0 ? (
           <span className={`${prefix}-select-placeholder`}>{placeholder}</span>
@@ -356,11 +355,6 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
 
   const triggerClass = [
     cn(prefix, 'select-trigger'),
-    `${prefix}-select-trigger--${size}`,
-    `${prefix}-select-trigger--${shape}`,
-    isOpen ? `${prefix}-select-trigger--active` : '',
-    disabled ? `${prefix}-select-trigger--disabled` : '',
-    error ? `${prefix}-select-trigger--error` : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -368,7 +362,7 @@ export const TreeSelect: React.FC<TreeSelectProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`${cn(prefix, 'advanced-select')} ${getFormThemeClass(prefix, color)} ${className}`}
+      className={`${cn(prefix, 'advanced-select')} ${className}`} data-color={color}
     >
       <button
         type="button"

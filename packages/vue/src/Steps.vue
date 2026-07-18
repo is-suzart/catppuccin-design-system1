@@ -1,5 +1,5 @@
 <template>
-  <div v-if="variant === 'carousel'" :class="['ctp-steps-carousel', `ctp-steps--${color}`]">
+  <div v-if="variant === 'carousel'" class="ctp-steps-carousel" :data-color="color">
     <button
       v-for="(_, index) in stepsCount"
       :key="index"

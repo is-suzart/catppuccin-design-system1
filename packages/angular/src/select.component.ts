@@ -8,6 +8,10 @@ import { FormControlSize, FormControlShape, FormControlColor, getFormThemeClass 
   template: '<ng-content></ng-content>',
   host: {
     '[class]': 'hostClass()',
+    '[attr.data-size]': 'size()',
+    '[attr.data-shape]': 'shape()',
+    '[attr.data-state]': "error() ? 'error' : null",
+    '[attr.data-color]': 'color()',
     '(change)': 'onSelectChange($event)',
     '(blur)': 'onTouchedCallback()',
   },
@@ -27,15 +31,7 @@ export class SelectComponent implements ControlValueAccessor {
   private _onChange: (val: any) => void = () => {};
   private _onTouched: () => void = () => {};
 
-  hostClass = computed(() => {
-    return [
-      'ctp-form-control',
-      `ctp-form-control--${this.size()}`,
-      `ctp-form-control--${this.shape()}`,
-      this.error() ? 'ctp-form-control--error' : '',
-      getFormThemeClass(this.color()),
-    ].filter(Boolean).join(' ');
-  });
+  hostClass = computed(() => 'ctp-form-control');
 
   writeValue(val: any): void { this.value.set(val ?? ''); }
   registerOnChange(fn: any): void { this._onChange = fn; }

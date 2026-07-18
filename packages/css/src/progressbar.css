@@ -51,15 +51,15 @@
 }
 
 /* Height Size modifiers */
-.ctp-progressbar--sm .ctp-progressbar-track {
+.ctp-progressbar[data-size="sm"] .ctp-progressbar-track {
   height: 6px;
 }
 
-.ctp-progressbar--md .ctp-progressbar-track {
+.ctp-progressbar[data-size="md"] .ctp-progressbar-track {
   height: 10px;
 }
 
-.ctp-progressbar--lg .ctp-progressbar-track {
+.ctp-progressbar[data-size="lg"] .ctp-progressbar-track {
   height: 16px;
 }
 
@@ -74,7 +74,7 @@
 }
 
 /* Striped variation */
-.ctp-progressbar--striped .ctp-progressbar-fill {
+.ctp-progressbar[data-state="striped"] .ctp-progressbar-fill {
   background-image: linear-gradient(
     45deg,
     rgba(255, 255, 255, 0.15) 25%,
@@ -89,7 +89,7 @@
 }
 
 /* Animated stripes variation */
-.ctp-progressbar--animated .ctp-progressbar-fill {
+.ctp-progressbar[data-state="animated"] .ctp-progressbar-fill {
   animation: ctp-progressbar-stripes-anim 1s linear infinite;
 }
 
@@ -103,7 +103,7 @@
 }
 
 /* Indeterminate state animation */
-.ctp-progressbar--indeterminate .ctp-progressbar-fill {
+.ctp-progressbar[data-state="indeterminate"] .ctp-progressbar-fill {
   width: 30% !important;
   position: absolute;
   left: -30%;
@@ -122,20 +122,20 @@
 }
 
 /* Progress Bar Color Modifiers */
-.ctp-progressbar--rosewater .ctp-progressbar-fill { background-color: var(--ctp-rosewater); }
-.ctp-progressbar--flamingo .ctp-progressbar-fill { background-color: var(--ctp-flamingo); }
-.ctp-progressbar--pink .ctp-progressbar-fill { background-color: var(--ctp-pink); }
-.ctp-progressbar--mauve .ctp-progressbar-fill { background-color: var(--ctp-mauve); }
-.ctp-progressbar--red .ctp-progressbar-fill { background-color: var(--ctp-red); }
-.ctp-progressbar--maroon .ctp-progressbar-fill { background-color: var(--ctp-maroon); }
-.ctp-progressbar--peach .ctp-progressbar-fill { background-color: var(--ctp-peach); }
-.ctp-progressbar--yellow .ctp-progressbar-fill { background-color: var(--ctp-yellow); }
-.ctp-progressbar--green .ctp-progressbar-fill { background-color: var(--ctp-green); }
-.ctp-progressbar--teal .ctp-progressbar-fill { background-color: var(--ctp-teal); }
-.ctp-progressbar--sky .ctp-progressbar-fill { background-color: var(--ctp-sky); }
-.ctp-progressbar--sapphire .ctp-progressbar-fill { background-color: var(--ctp-sapphire); }
-.ctp-progressbar--blue .ctp-progressbar-fill { background-color: var(--ctp-blue); }
-.ctp-progressbar--lavender .ctp-progressbar-fill { background-color: var(--ctp-lavender); }
+.ctp-progressbar[data-color="rosewater"] .ctp-progressbar-fill { background-color: var(--ctp-rosewater); }
+.ctp-progressbar[data-color="flamingo"] .ctp-progressbar-fill { background-color: var(--ctp-flamingo); }
+.ctp-progressbar[data-color="pink"] .ctp-progressbar-fill { background-color: var(--ctp-pink); }
+.ctp-progressbar[data-color="mauve"] .ctp-progressbar-fill { background-color: var(--ctp-mauve); }
+.ctp-progressbar[data-color="red"] .ctp-progressbar-fill { background-color: var(--ctp-red); }
+.ctp-progressbar[data-color="maroon"] .ctp-progressbar-fill { background-color: var(--ctp-maroon); }
+.ctp-progressbar[data-color="peach"] .ctp-progressbar-fill { background-color: var(--ctp-peach); }
+.ctp-progressbar[data-color="yellow"] .ctp-progressbar-fill { background-color: var(--ctp-yellow); }
+.ctp-progressbar[data-color="green"] .ctp-progressbar-fill { background-color: var(--ctp-green); }
+.ctp-progressbar[data-color="teal"] .ctp-progressbar-fill { background-color: var(--ctp-teal); }
+.ctp-progressbar[data-color="sky"] .ctp-progressbar-fill { background-color: var(--ctp-sky); }
+.ctp-progressbar[data-color="sapphire"] .ctp-progressbar-fill { background-color: var(--ctp-sapphire); }
+.ctp-progressbar[data-color="blue"] .ctp-progressbar-fill { background-color: var(--ctp-blue); }
+.ctp-progressbar[data-color="lavender"] .ctp-progressbar-fill { background-color: var(--ctp-lavender); }
 
 
 /* --- 2. Custom Scrollbar Styling Utility --- */
@@ -164,17 +164,17 @@
 }
 
 /* Hover Accent Colors for scroll thumbs */
-.ctp-scrollbar--rosewater::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-rosewater); }
-.ctp-scrollbar--flamingo::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-flamingo); }
-.ctp-scrollbar--pink::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-pink); }
-.ctp-scrollbar--mauve::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-mauve); }
-.ctp-scrollbar--red::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-red); }
-.ctp-scrollbar--maroon::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-maroon); }
-.ctp-scrollbar--peach::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-peach); }
-.ctp-scrollbar--yellow::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-yellow); }
-.ctp-scrollbar--green::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-green); }
-.ctp-scrollbar--teal::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-teal); }
-.ctp-scrollbar--sky::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-sky); }
-.ctp-scrollbar--sapphire::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-sapphire); }
-.ctp-scrollbar--blue::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-blue); }
-.ctp-scrollbar--lavender::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-lavender); }
+.ctp-scrollbar[data-color="rosewater"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-rosewater); }
+.ctp-scrollbar[data-color="flamingo"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-flamingo); }
+.ctp-scrollbar[data-color="pink"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-pink); }
+.ctp-scrollbar[data-color="mauve"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-mauve); }
+.ctp-scrollbar[data-color="red"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-red); }
+.ctp-scrollbar[data-color="maroon"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-maroon); }
+.ctp-scrollbar[data-color="peach"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-peach); }
+.ctp-scrollbar[data-color="yellow"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-yellow); }
+.ctp-scrollbar[data-color="green"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-green); }
+.ctp-scrollbar[data-color="teal"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-teal); }
+.ctp-scrollbar[data-color="sky"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-sky); }
+.ctp-scrollbar[data-color="sapphire"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-sapphire); }
+.ctp-scrollbar[data-color="blue"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-blue); }
+.ctp-scrollbar[data-color="lavender"]::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-lavender); }

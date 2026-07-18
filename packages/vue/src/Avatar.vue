@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ctp-avatar', `ctp-avatar--${size}`]" :aria-label="alt || fallback || 'Avatar'">
+  <div class="ctp-avatar" :data-size="size" :aria-label="alt || fallback || 'Avatar'">
     <img v-if="src && !imgError" :src="src" :alt="alt" @error="imgError = true" />
     <span v-else class="ctp-avatar__fallback">{{ initials }}</span>
   </div>

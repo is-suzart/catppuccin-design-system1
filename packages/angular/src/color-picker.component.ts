@@ -177,7 +177,7 @@ function hsvToHex(h: number, s: number, v: number): string {
   selector: 'ctp-color-picker',
   standalone: true,
   template: `
-    <div [class]="wrapperClass()">
+    <div class="ctp-colorpicker" [attr.data-size]="size()">
       <div class="ctp-colorpicker-row">
         <!-- Render Swatches if selected -->
         @if (variant() === 'swatches' || variant() === 'both') {
@@ -185,7 +185,8 @@ function hsvToHex(h: number, s: number, v: number): string {
             @for (swatch of swatches(); track swatch.hex) {
               <button
                 type="button"
-                [class]="'ctp-colorpicker-chip ' + (value().toLowerCase() === swatch.hex.toLowerCase() ? 'ctp-colorpicker-chip--active' : '')"
+                class="ctp-colorpicker-chip"
+                [attr.data-state]="value().toLowerCase() === swatch.hex.toLowerCase() ? 'active' : null"
                 [style.backgroundColor]="swatch.hex"
                 (click)="handleSwatchClick(swatch.hex)"
                 [attr.title]="swatch.name + ' (' + swatch.hex + ')'"
@@ -318,12 +319,7 @@ export class ColorPickerComponent {
     return Object.entries(list).map(([name, hex]) => ({ name, hex }));
   });
 
-  wrapperClass = computed(() => {
-    return [
-      'ctp-colorpicker',
-      `ctp-colorpicker--${this.size()}`
-    ].join(' ');
-  });
+
 
   hueColor = computed(() => {
     return hsvToHex(this.h(), 100, 100);

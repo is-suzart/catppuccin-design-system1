@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes">
+  <div class="ctp-colorpicker" :data-size="size">
     <div class="ctp-colorpicker-row">
       <!-- Render Swatches if selected -->
       <div v-if="variant === 'swatches' || variant === 'both'" class="ctp-colorpicker-swatches">
@@ -7,7 +7,8 @@
           v-for="(hexVal, colorName) in activeFlavorColors"
           :key="colorName"
           type="button"
-          :class="['ctp-colorpicker-chip', { 'ctp-colorpicker-chip--active': value.toLowerCase() === hexVal.toLowerCase() }]"
+          class="ctp-colorpicker-chip"
+          :data-state="value.toLowerCase() === hexVal.toLowerCase() ? 'active' : undefined"
           :style="{ backgroundColor: hexVal }"
           @click="handleSwatchClick(hexVal)"
           :title="`${colorName.charAt(0).toUpperCase() + colorName.slice(1)} (${hexVal})`"
@@ -308,12 +309,6 @@ watch(() => props.value, (newVal) => {
 
 const activeFlavorColors = computed(() => flavorColors[props.flavor]);
 
-const classes = computed(() => {
-  return [
-    'ctp-colorpicker',
-    `ctp-colorpicker--${props.size}`,
-  ];
-});
 
 const hueColor = computed(() => {
   return hsvToHex(hsv.value.h, 100, 100);

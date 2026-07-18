@@ -1,5 +1,5 @@
 <template>
-  <div :class="accordionClass" v-bind="$attrs">
+  <div class="ctp-accordion" :data-variant="variant" :data-color="colorMode !== 'none' ? colorMode : undefined" :data-accent="accentColor" v-bind="$attrs">
     <slot />
   </div>
 </template>
@@ -73,14 +73,5 @@ provide('accordion', {
   toggleValue,
   colorMode: computed(() => props.colorMode),
   accentColor: computed(() => props.accentColor),
-});
-
-const accordionClass = computed(() => {
-  const modifiers = [
-    `ctp-accordion--${props.variant}`,
-    props.colorMode !== 'none' ? `ctp-accordion--${props.colorMode}` : '',
-    props.accentColor ? `ctp-accordion--${props.accentColor}` : '',
-  ];
-  return ['ctp-accordion', ...modifiers.filter(Boolean)];
 });
 </script>

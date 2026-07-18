@@ -1,5 +1,14 @@
 <template>
-  <div :class="cardClass" v-bind="$attrs">
+  <div
+    :class="cardClass"
+    :data-variant="variant"
+    :data-shape="shape"
+    :data-padding="padding"
+    :data-color="accentColor"
+    :data-accent="accentColor && accentPosition !== 'none' ? accentPosition : undefined"
+    :data-interactive="isInteractive ? 'true' : undefined"
+    v-bind="$attrs"
+  >
     <!-- Header Slot / Element -->
     <div v-if="$slots.header || title || subtitle || $slots.avatar || $slots.actions" class="ctp-card__header">
       <div v-if="$slots.avatar" class="ctp-card__avatar">
@@ -81,14 +90,6 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const cardClass = computed(() => {
-  return [
-    'ctp-card',
-    `ctp-card--${props.variant}`,
-    `ctp-card--${props.shape}`,
-    `ctp-card--padding-${props.padding}`,
-    props.accentColor ? `ctp-card--${props.accentColor}` : '',
-    props.accentColor && props.accentPosition !== 'none' ? `ctp-card--accent-${props.accentPosition}` : '',
-    props.isInteractive ? 'ctp-card--interactive' : '',
-  ];
+  return 'ctp-card';
 });
 </script>

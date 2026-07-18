@@ -2,7 +2,8 @@
   <div
     role="tablist"
     :aria-orientation="tabs.orientation.value"
-    :class="listClass"
+    class="ctp-tabs-list"
+    :data-variant="tabs.variant.value"
     @keydown="handleKeyDown"
   >
     <slot />
@@ -10,16 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { inject } from 'vue';
 
 const tabs = inject<any>('tabs');
-
-const listClass = computed(() => {
-  return [
-    'ctp-tabs-list',
-    `ctp-tabs-list--${tabs.variant.value}`,
-  ];
-});
 
 function handleKeyDown(event: KeyboardEvent) {
   const list = event.currentTarget as HTMLElement;

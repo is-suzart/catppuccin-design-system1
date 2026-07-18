@@ -12,7 +12,7 @@
 }
 
 /* Fullscreen mode (takes over window view and disables body scroll) */
-.ctp-shell--full-screen {
+.ctp-shell[data-state="full-screen"] {
   position: fixed;
   top: 0;
   left: 0;
@@ -28,7 +28,7 @@
    ────────────────────────────────────────────── */
 
 /* Header on top, Sidebar and Content below */
-.ctp-shell--header-first {
+.ctp-shell[data-state="header-first"] {
   grid-template-rows: var(--ctp-shell-header-height) 1fr;
   grid-template-columns: var(--ctp-shell-sidebar-width) 1fr;
   grid-template-areas:
@@ -37,7 +37,7 @@
 }
 
 /* Sidebar full height on left, Header and Content on right */
-.ctp-shell--sidebar-first {
+.ctp-shell[data-state="sidebar-first"] {
   grid-template-rows: var(--ctp-shell-header-height) 1fr;
   grid-template-columns: var(--ctp-shell-sidebar-width) 1fr;
   grid-template-areas:
@@ -46,7 +46,7 @@
 }
 
 /* Only Header and Content, no Sidebar */
-.ctp-shell--simple {
+.ctp-shell[data-variant="simple"] {
   grid-template-rows: var(--ctp-shell-header-height) 1fr;
   grid-template-columns: 1fr;
   grid-template-areas:
@@ -55,7 +55,7 @@
 }
 
 /* Custom Grid: developer specifies layouts using custom CSS classes/inline styles */
-.ctp-shell--custom {
+.ctp-shell[data-variant="custom"] {
   display: block;
 }
 
@@ -64,12 +64,12 @@
    ────────────────────────────────────────────── */
 
 /* Collapse sidebar completely (0px width) */
-.ctp-shell--sidebar-collapsed {
+.ctp-shell[data-state="sidebar-collapsed"] {
   --ctp-shell-sidebar-width: 0px;
 }
 
 /* Mini sidebar layout (icons-only) */
-.ctp-shell--sidebar-mini {
+.ctp-shell[data-state="sidebar-mini"] {
   --ctp-shell-sidebar-width: 64px;
 }
 
@@ -78,7 +78,7 @@
    ────────────────────────────────────────────── */
 
 /* Top bar navigation */
-.ctp-shell__header {
+.ctp-shell-header {
   grid-area: header;
   display: flex;
   align-items: center;
@@ -91,7 +91,7 @@
 }
 
 /* Left/Right side drawer navigation */
-.ctp-shell__sidebar {
+.ctp-shell-sidebar {
   grid-area: sidebar;
   background-color: var(--ctp-crust);
   border-right: 1px solid var(--ctp-surface0);
@@ -103,7 +103,7 @@
 }
 
 /* Main wrapper of the body */
-.ctp-shell__main {
+.ctp-shell-main {
   grid-area: main;
   display: flex;
   flex-direction: column;
@@ -114,19 +114,19 @@
 }
 
 /* Main content view within main wrapper */
-.ctp-shell__content {
+.ctp-shell-content {
   flex: 1;
   min-height: 0;
   min-width: 0;
   box-sizing: border-box;
 }
 
-.ctp-shell__content--scrollable {
+.ctp-shell-content[data-state="scrollable"] {
   overflow-y: auto;
 }
 
 /* Sidebar Backdrop (dim overlay on mobile viewports) */
-.ctp-shell__backdrop {
+.ctp-shell-backdrop {
   display: none;
 }
 
@@ -136,8 +136,8 @@
 
 @media screen and (max-width: 768px) {
   /* Enforce single-column layout on mobile, overlaying sidebar */
-  .ctp-shell--header-first,
-  .ctp-shell--sidebar-first {
+  .ctp-shell[data-state="header-first"],
+  .ctp-shell[data-state="sidebar-first"] {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
@@ -145,7 +145,7 @@
   }
 
   /* Translate sidebar off-screen */
-  .ctp-shell__sidebar {
+  .ctp-shell-sidebar {
     position: fixed;
     top: var(--ctp-shell-header-height);
     left: 0;
@@ -159,13 +159,13 @@
   }
 
   /* When mobile sidebar is actively toggled open */
-  .ctp-shell--sidebar-mobile-open .ctp-shell__sidebar {
+  .ctp-shell[data-state="sidebar-mobile-open"] .ctp-shell-sidebar {
     transform: translateX(0);
     --ctp-shell-sidebar-width: 260px; /* Force default mobile sidebar width */
   }
 
   /* Show backdrop to capture clicks outside the drawer */
-  .ctp-shell--sidebar-mobile-open .ctp-shell__backdrop {
+  .ctp-shell[data-state="sidebar-mobile-open"] .ctp-shell-backdrop {
     display: block;
     position: fixed;
     top: var(--ctp-shell-header-height);
@@ -187,12 +187,12 @@
 }
 
 /* Mobile toggle button helper */
-.ctp-shell__mobile-toggle {
+.ctp-shell-mobile-toggle {
   display: none !important;
 }
 
 @media screen and (max-width: 768px) {
-  .ctp-shell__mobile-toggle {
+  .ctp-shell-mobile-toggle {
     display: inline-flex !important;
   }
 }

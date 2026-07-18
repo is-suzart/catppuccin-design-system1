@@ -22,7 +22,7 @@ type StepsColor =
   standalone: true,
   template: `
     @if (variant() === 'carousel') {
-      <div [class]="'ctp-steps-carousel ctp-steps--' + color()">
+      <div class="ctp-steps-carousel" [attr.data-color]="color()">
         @for (i of stepIndexes(); track i) {
           <button
             [class]="'ctp-steps-carousel-dot ' + (i === currentStep() ? 'ctp-steps-carousel-dot--active' : '')"

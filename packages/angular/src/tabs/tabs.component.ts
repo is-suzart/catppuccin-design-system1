@@ -13,7 +13,7 @@ export type TabColor =
   selector: 'ctp-tabs',
   standalone: true,
   template: `
-    <div [class]="containerClass()">
+    <div class="ctp-tabs" [attr.data-orientation]="orientation()" [attr.data-color]="color()">
       <ng-content></ng-content>
     </div>
   `
@@ -32,14 +32,6 @@ export class TabsComponent {
   private route = inject<ActivatedRoute | null>(ActivatedRoute as any, { optional: true });
 
   activeValue = signal<string>('');
-
-  containerClass = computed(() => {
-    return [
-      'ctp-tabs',
-      `ctp-tabs--${this.orientation()}`,
-      `ctp-form--${this.color()}`,
-    ].filter(Boolean).join(' ');
-  });
 
   selectTab(val: string) {
     this.activeValue.set(val);

@@ -331,7 +331,8 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
             <button
               key={colorName}
               type="button"
-              className={`${`${prefix}-colorpicker-chip`} ${isActive ? `${prefix}-colorpicker-chip--active` : ''}`}
+              className={`${prefix}-colorpicker-chip`}
+              data-state={isActive ? 'active' : undefined}
               style={{ backgroundColor: hexVal }}
               onClick={() => handleSwatchClick(hexVal)}
               title={`${colorName.charAt(0).toUpperCase() + colorName.slice(1)} (${hexVal})`}
@@ -411,11 +412,11 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   const containerClasses = cn(
     prefix,
     'colorpicker',
-    [size, className],
+    [className],
   );
 
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} data-size={size}>
       <div className={`${prefix}-colorpicker-row`}>
         {(variant === 'swatches' || variant === 'both') && renderSwatches()}
         {variant === 'both' && <div className={`${prefix}-colorpicker-divider`} />}

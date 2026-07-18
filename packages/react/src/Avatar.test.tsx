@@ -37,7 +37,7 @@ describe('Avatar', () => {
 
   it('renders with custom size', () => {
     const { container } = render(<Avatar size="xl" fallback="XL" />);
-    expect(container.firstChild).toHaveClass('ctp-avatar--xl');
+    expect(container.firstChild).toHaveAttribute('data-size', 'xl');
   });
 });
 

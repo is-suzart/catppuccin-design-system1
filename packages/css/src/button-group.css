@@ -16,44 +16,44 @@
   box-sizing: border-box;
 }
 
-.ctp-btn-group--horizontal {
+.ctp-btn-group[data-orientation="horizontal"] {
   flex-direction: row;
 }
 
-.ctp-btn-group--vertical {
+.ctp-btn-group[data-orientation="vertical"] {
   flex-direction: column;
 }
 
 /* ── Shape modifiers ── */
 
-.ctp-btn-group--square {
+.ctp-btn-group[data-shape="square"] {
   --ctp-btn-group-radius: var(--ctp-radius-square);
 }
 
-.ctp-btn-group--rounded {
+.ctp-btn-group[data-shape="rounded"] {
   --ctp-btn-group-radius: var(--ctp-radius-rounded);
 }
 
-.ctp-btn-group--pill {
+.ctp-btn-group[data-shape="pill"] {
   --ctp-btn-group-radius: var(--ctp-radius-pill);
 }
 
 /* ── Variants ── */
 
 /* Filled: solid surface container (default) */
-.ctp-btn-group--filled {
+.ctp-btn-group[data-variant="filled"] {
   background-color: var(--ctp-surface0);
   border: none;
 }
 
 /* Outline: border-only container */
-.ctp-btn-group--outline {
+.ctp-btn-group[data-variant="outline"] {
   background-color: transparent;
   border: 1.5px solid var(--ctp-surface0);
 }
 
 /* Ghost: no container chrome, just items flowing */
-.ctp-btn-group--ghost {
+.ctp-btn-group[data-variant="ghost"] {
   background-color: transparent;
   border: none;
   padding: 0;
@@ -62,8 +62,8 @@
 
 /* ── Shared container shape ── */
 
-.ctp-btn-group--filled,
-.ctp-btn-group--outline {
+.ctp-btn-group[data-variant="filled"],
+.ctp-btn-group[data-variant="outline"] {
   border-radius: var(--ctp-btn-group-radius, var(--ctp-radius-pill));
 }
 
@@ -81,13 +81,13 @@
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ctp-btn-group .ctp-btn:hover:not(:disabled):not(.ctp-btn--active) {
+.ctp-btn-group .ctp-btn:hover:not(:disabled):not(.ctp-btn[data-state="active"]) {
   color: var(--ctp-text);
   background-color: color-mix(in srgb, var(--ctp-text) 8%, transparent);
 }
 
 /* Active item — solid background, always visible */
-.ctp-btn-group .ctp-btn.ctp-btn--active {
+.ctp-btn-group .ctp-btn.ctp-btn[data-state="active"] {
   background-color: var(--ctp-btn-color-token, var(--ctp-mauve));
   color: var(--ctp-base);
   font-weight: 600;
@@ -95,7 +95,7 @@
   border-radius: var(--ctp-btn-group-radius, var(--ctp-radius-pill));
 }
 
-.ctp-btn-group .ctp-btn.ctp-btn--active:hover {
+.ctp-btn-group .ctp-btn.ctp-btn[data-state="active"]:hover {
   background-color: var(--ctp-btn-color-token, var(--ctp-mauve));
 }
 
@@ -106,7 +106,7 @@
 
 /* ── Dividers between items ── */
 
-.ctp-btn-group--horizontal .ctp-btn:not(:first-child)::before {
+.ctp-btn-group[data-orientation="horizontal"] .ctp-btn:not(:first-child)::before {
   content: '';
   position: absolute;
   left: -2px;
@@ -117,7 +117,7 @@
   pointer-events: none;
 }
 
-.ctp-btn-group--vertical .ctp-btn:not(:first-child)::before {
+.ctp-btn-group[data-orientation="vertical"] .ctp-btn:not(:first-child)::before {
   content: '';
   position: absolute;
   top: -2px;
@@ -129,18 +129,18 @@
 }
 
 /* Hide divider next to active item */
-.ctp-btn-group .ctp-btn.ctp-btn--active + .ctp-btn::before,
-.ctp-btn-group .ctp-btn.ctp-btn--active::before {
+.ctp-btn-group .ctp-btn.ctp-btn[data-state="active"] + .ctp-btn::before,
+.ctp-btn-group .ctp-btn.ctp-btn[data-state="active"]::before {
   display: none;
 }
 
 /* Ghost: no dividers */
-.ctp-btn-group--ghost .ctp-btn:not(:first-child)::before {
+.ctp-btn-group[data-variant="ghost"] .ctp-btn:not(:first-child)::before {
   display: none;
 }
 
 /* Ghost: buttons keep their own shape */
-.ctp-btn-group--ghost .ctp-btn {
+.ctp-btn-group[data-variant="ghost"] .ctp-btn {
   border-radius: inherit;
 }
 
@@ -149,7 +149,7 @@
    It is only used in single-select mode. The active button becomes transparent
    so the pill color shows through. */
 
-.ctp-btn-group__pill {
+.ctp-btn-group-pill {
   position: absolute;
   left: 0;
   top: 0;
@@ -165,7 +165,7 @@
 
 /* When pill-active is set AND the pill is visible (via inline style from JS),
    the active button gives up its own background to let the pill show through. */
-.ctp-btn-group--pill-active .ctp-btn.ctp-btn--active {
+.ctp-btn-group[data-state="pill-active"] .ctp-btn.ctp-btn[data-state="active"] {
   background-color: transparent;
   box-shadow: none;
 }

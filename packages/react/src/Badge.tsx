@@ -45,14 +45,21 @@ export const Badge: React.FC<BadgeProps> = ({
 }) => {
   const prefix = usePrefix();
   const classNames = [
-    cn(prefix, 'badge', [variant, size, shape, color]),
+    cn(prefix, 'badge'),
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <span className={classNames} {...props}>
+    <span
+      className={classNames}
+      data-variant={variant}
+      data-size={size}
+      data-shape={shape}
+      data-color={color}
+      {...props}
+    >
       {icon && <span className={cnEl(prefix, 'badge', 'icon')} style={{ display: 'inline-flex', alignItems: 'center' }}>{icon}</span>}
       <span className={cnEl(prefix, 'badge', 'content')}>{children}</span>
       {isDismissible && (

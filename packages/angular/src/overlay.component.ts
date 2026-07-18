@@ -9,7 +9,9 @@ let activeOverlayCount = 0;
     @if (shouldRender) {
       <div
         #overlayElement
-        [class]="'ctp-overlay ' + (isAnimatedIn ? 'ctp-overlay--open' : '')"
+        class="ctp-overlay"
+        [attr.data-state]="isAnimatedIn ? 'open' : null"
+        [attr.data-placement]="placement()"
         [style.zIndex]="zIndex"
         (click)="handleOverlayClick($event)"
         role="presentation"
@@ -23,6 +25,7 @@ export class OverlayComponent implements OnDestroy {
   isOpen = input<boolean>(false);
   closeOnOverlayClick = input<boolean>(true);
   closeOnEsc = input<boolean>(true);
+  placement = input<string>('');
 
   close = output<void>();
 

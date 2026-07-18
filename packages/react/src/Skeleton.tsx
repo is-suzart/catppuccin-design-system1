@@ -30,7 +30,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 }) => {
   const prefix = usePrefix();
   const classes = [
-    cn(prefix, 'skeleton', [variant, size, animated ? '' : 'no-animation', width ? '' : 'full']),
+    cn(prefix, 'skeleton'),
     className,
   ]
     .filter(Boolean)
@@ -40,9 +40,16 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   if (width) style.width = width;
   if (height) style.height = height;
 
+  const dataProps = {
+    'data-variant': variant,
+    'data-size': size,
+    'data-full': width ? undefined : 'true',
+    'data-animated': animated ? undefined : 'false',
+  };
+
   if (children) {
     return (
-      <span className={classes} style={style} aria-hidden="true">
+      <span className={classes} style={style} {...dataProps} aria-hidden="true">
         {children}
       </span>
     );
@@ -52,13 +59,13 @@ export const Skeleton: React.FC<SkeletonProps> = ({
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap }}>
         {Array.from({ length: count }).map((_, i) => (
-          <div key={i} className={classes} style={style} aria-hidden="true" />
+          <div key={i} className={classes} style={style} {...dataProps} aria-hidden="true" />
         ))}
       </div>
     );
   }
 
-  return <div className={classes} style={style} aria-hidden="true" />;
+  return <div className={classes} style={style} {...dataProps} aria-hidden="true" />;
 };
 
 Skeleton.displayName = 'Skeleton';

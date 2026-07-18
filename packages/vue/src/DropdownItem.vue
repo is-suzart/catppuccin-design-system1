@@ -1,9 +1,11 @@
 <template>
   <button
     type="button"
-    :class="itemClass"
+    class="ctp-dropdown-item"
     :disabled="disabled"
     role="menuitem"
+    :data-color="danger ? 'danger' : color"
+    :data-state="disabled ? 'disabled' : undefined"
     @click="handleClick"
   >
     <slot />
@@ -11,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { inject } from 'vue';
 
 interface Props {
   disabled?: boolean;
@@ -25,14 +27,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const color = inject<string>('dropdownColor', 'mauve');
 const dropdownClose = inject<() => void>('dropdownClose', () => {});
-
-const itemClass = computed(() => {
-  return [
-    'ctp-dropdown-item',
-    props.danger ? 'ctp-dropdown-item--danger' : `ctp-dropdown-item--${color}`,
-    props.disabled ? 'ctp-dropdown-item--disabled' : '',
-  ];
-});
 
 function handleClick() {
   if (props.disabled) return;

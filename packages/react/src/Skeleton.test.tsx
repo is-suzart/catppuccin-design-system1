@@ -7,25 +7,25 @@ describe('Skeleton', () => {
     const { container } = render(<Skeleton />);
     const el = container.firstChild as HTMLElement;
     expect(el).toHaveClass('ctp-skeleton');
-    expect(el).toHaveClass('ctp-skeleton--text');
-    expect(el).toHaveClass('ctp-skeleton--md');
-    expect(el).toHaveClass('ctp-skeleton--full');
+    expect(el).toHaveAttribute('data-variant', 'text');
+    expect(el).toHaveAttribute('data-size', 'md');
+    expect(el).toHaveAttribute('data-full', 'true');
     expect(el).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('renders with custom variant', () => {
     const { container } = render(<Skeleton variant="circle" />);
-    expect(container.firstChild).toHaveClass('ctp-skeleton--circle');
+    expect(container.firstChild).toHaveAttribute('data-variant', 'circle');
   });
 
   it('renders with custom size', () => {
     const { container } = render(<Skeleton size="lg" />);
-    expect(container.firstChild).toHaveClass('ctp-skeleton--lg');
+    expect(container.firstChild).toHaveAttribute('data-size', 'lg');
   });
 
   it('renders without animation', () => {
     const { container } = render(<Skeleton animated={false} />);
-    expect(container.firstChild).toHaveClass('ctp-skeleton--no-animation');
+    expect(container.firstChild).toHaveAttribute('data-animated', 'false');
   });
 
   it('renders with custom width and height', () => {

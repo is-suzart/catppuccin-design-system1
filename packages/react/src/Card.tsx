@@ -49,21 +49,23 @@ export const Card: React.FC<CardProps> & {
 }) => {
   const prefix = usePrefix();
   const classNames = [
-    cn(prefix, 'card', [
-      variant,
-      shape,
-      `padding-${padding}`,
-      accentColor,
-      accentColor && accentPosition !== 'none' ? `accent-${accentPosition}` : undefined,
-      isInteractive ? 'interactive' : undefined,
-    ]),
+    cn(prefix, 'card'),
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div className={classNames} {...props}>
+    <div
+      className={classNames}
+      data-variant={variant}
+      data-shape={shape}
+      data-padding={padding}
+      data-color={accentColor}
+      data-accent={accentColor && accentPosition !== 'none' ? accentPosition : undefined}
+      data-interactive={isInteractive ? "true" : undefined}
+      {...props}
+    >
       {children}
     </div>
   );

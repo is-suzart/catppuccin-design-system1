@@ -8,7 +8,10 @@
     :data-value="value"
     :tabindex="isSelected ? 0 : -1"
     :disabled="disabled"
-    :class="triggerClass"
+    class="ctp-tabs-trigger"
+    :data-variant="tabs.variant.value"
+    :data-size="tabs.size.value"
+    :data-state="isSelected ? 'active' : undefined"
     @click="handleClick"
   >
     <slot />
@@ -36,15 +39,6 @@ const isSelected = computed(() => {
     return route.path === props.to || route.path.startsWith(props.to);
   }
   return tabs.activeValue.value === props.value;
-});
-
-const triggerClass = computed(() => {
-  return [
-    'ctp-tabs-trigger',
-    `ctp-tabs-trigger--${tabs.variant.value}`,
-    `ctp-tabs-trigger--${tabs.size.value}`,
-    isSelected.value ? 'ctp-tabs-trigger--active' : '',
-  ];
 });
 
 function handleClick() {

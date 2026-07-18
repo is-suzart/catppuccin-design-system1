@@ -100,7 +100,7 @@ export const Popover: React.FC<PopoverProps> = ({
       {isOpen && ReactDOM.createPortal(
         <div
           ref={floatingRef}
-          className={`${cn(prefix, 'popover', [`placement-${actualPlacement}`])} ${className}`}
+          className={`${cn(prefix, 'popover')} ${className}`} data-placement={actualPlacement}
           style={{
             position: 'fixed',
             top: `${top}px`,
