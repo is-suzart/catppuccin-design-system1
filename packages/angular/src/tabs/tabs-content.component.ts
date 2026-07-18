@@ -7,8 +7,8 @@ import { TabsComponent } from './tabs.component';
   template: `
     <div
       role="tabpanel"
-      [id]="'ctp-tabpanel-' + value()"
-      [attr.aria-labelledby]="'ctp-tabtrigger-' + value()"
+      [id]="'ds-tabpanel-' + value()"
+      [attr.aria-labelledby]="'ds-tabtrigger-' + value()"
       tabindex="0"
       [class]="contentClass()"
       [style.display]="isActive() ? '' : 'none'"

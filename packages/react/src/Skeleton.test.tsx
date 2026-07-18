@@ -6,26 +6,26 @@ describe('Skeleton', () => {
   it('renders with default props', () => {
     const { container } = render(<Skeleton />);
     const el = container.firstChild as HTMLElement;
-    expect(el).toHaveClass('ctp-skeleton');
-    expect(el).toHaveClass('ctp-skeleton--text');
-    expect(el).toHaveClass('ctp-skeleton--md');
-    expect(el).toHaveClass('ctp-skeleton--full');
+    expect(el).toHaveClass('skeleton');
+    expect(el).toHaveClass('skeleton--text');
+    expect(el).toHaveClass('skeleton--md');
+    expect(el).toHaveClass('skeleton--full');
     expect(el).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('renders with custom variant', () => {
     const { container } = render(<Skeleton variant="circle" />);
-    expect(container.firstChild).toHaveClass('ctp-skeleton--circle');
+    expect(container.firstChild).toHaveClass('skeleton--circle');
   });
 
   it('renders with custom size', () => {
     const { container } = render(<Skeleton size="lg" />);
-    expect(container.firstChild).toHaveClass('ctp-skeleton--lg');
+    expect(container.firstChild).toHaveClass('skeleton--lg');
   });
 
   it('renders without animation', () => {
     const { container } = render(<Skeleton animated={false} />);
-    expect(container.firstChild).toHaveClass('ctp-skeleton--no-animation');
+    expect(container.firstChild).toHaveClass('skeleton--no-animation');
   });
 
   it('renders with custom width and height', () => {

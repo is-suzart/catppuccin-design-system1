@@ -1,24 +1,24 @@
 /* Core Modal Stylesheet */
 
 .ctp-modal {
-  background-color: var(--ctp-base);
-  border: 1.5px solid color-mix(in srgb, var(--ctp-text) 8%, transparent);
+  background-color: var(--ds-base);
+  border: 1.5px solid color-mix(in srgb, var(--ds-text) 8%, transparent);
   border-radius: 16px;
-  box-shadow: var(--ctp-shadow-lg), 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--ds-shadow-lg), 0 20px 25px -5px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   max-height: 85vh;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   overflow: hidden;
   position: relative;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   width: 90%;
   
   /* Slide down and scale animation */
   transform: scale(0.94) translateY(12px);
   opacity: 0;
-  transition: transform var(--ctp-transition-duration) var(--ctp-transition-timing),
-              opacity var(--ctp-transition-duration) var(--ctp-transition-timing);
+  transition: transform var(--ds-transition-duration) var(--ds-transition-timing),
+              opacity var(--ds-transition-duration) var(--ds-transition-timing);
 }
 
 /* Activate transition when parent overlay is open */
@@ -46,16 +46,16 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--ctp-text) 8%, transparent);
-  background-color: var(--ctp-mantle);
+  border-bottom: 1px solid color-mix(in srgb, var(--ds-text) 8%, transparent);
+  background-color: var(--ds-mantle);
 }
 
 .ctp-modal__title {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--ctp-rosewater);
-  background: linear-gradient(135deg, var(--ctp-rosewater), var(--ctp-mauve));
+  color: var(--ds-rosewater);
+  background: linear-gradient(135deg, var(--ds-rosewater), var(--ds-mauve));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -64,24 +64,24 @@
 .ctp-modal__close-btn {
   background: none;
   border: none;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   cursor: pointer;
   padding: 6px;
   border-radius: 9999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   outline: none;
 }
 
 .ctp-modal__close-btn:hover {
-  color: var(--ctp-red);
-  background-color: color-mix(in srgb, var(--ctp-red) 12%, transparent);
+  color: var(--ds-red);
+  background-color: color-mix(in srgb, var(--ds-red) 12%, transparent);
 }
 
 .ctp-modal__close-btn:focus-visible {
-  outline: 2px solid var(--ctp-red);
+  outline: 2px solid var(--ds-red);
   outline-offset: -1px;
 }
 
@@ -91,8 +91,8 @@
   overflow-y: auto;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--ctp-text);
-  background-color: var(--ctp-base);
+  color: var(--ds-text);
+  background-color: var(--ds-base);
 }
 
 /* Customize scrollbar in modal body for premium feel */
@@ -101,16 +101,16 @@
 }
 
 .ctp-modal__body::-webkit-scrollbar-track {
-  background: var(--ctp-base);
+  background: var(--ds-base);
 }
 
 .ctp-modal__body::-webkit-scrollbar-thumb {
-  background: var(--ctp-surface0);
+  background: var(--ds-surface0);
   border-radius: 4px;
 }
 
 .ctp-modal__body::-webkit-scrollbar-thumb:hover {
-  background: var(--ctp-surface1);
+  background: var(--ds-surface1);
 }
 
 /* Modal Footer */
@@ -120,6 +120,6 @@
   justify-content: flex-end;
   gap: 12px;
   padding: 1.25rem 1.5rem;
-  border-top: 1px solid color-mix(in srgb, var(--ctp-text) 8%, transparent);
-  background-color: var(--ctp-mantle);
+  border-top: 1px solid color-mix(in srgb, var(--ds-text) 8%, transparent);
+  background-color: var(--ds-mantle);
 }

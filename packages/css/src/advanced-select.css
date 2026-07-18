@@ -2,24 +2,24 @@
 
 /* Default Accent is Mauve */
 :root {
-  --ctp-select-accent: var(--ctp-mauve);
+  --ds-select-accent: var(--ds-mauve);
 }
 
 /* Color mappings */
-.ctp-select--rosewater { --ctp-select-accent: var(--ctp-rosewater); }
-.ctp-select--flamingo  { --ctp-select-accent: var(--ctp-flamingo); }
-.ctp-select--pink      { --ctp-select-accent: var(--ctp-pink); }
-.ctp-select--mauve     { --ctp-select-accent: var(--ctp-mauve); }
-.ctp-select--red       { --ctp-select-accent: var(--ctp-red); }
-.ctp-select--maroon    { --ctp-select-accent: var(--ctp-maroon); }
-.ctp-select--peach     { --ctp-select-accent: var(--ctp-peach); }
-.ctp-select--yellow    { --ctp-select-accent: var(--ctp-yellow); }
-.ctp-select--green     { --ctp-select-accent: var(--ctp-green); }
-.ctp-select--teal      { --ctp-select-accent: var(--ctp-teal); }
-.ctp-select--sky       { --ctp-select-accent: var(--ctp-sky); }
-.ctp-select--sapphire  { --ctp-select-accent: var(--ctp-sapphire); }
-.ctp-select--blue      { --ctp-select-accent: var(--ctp-blue); }
-.ctp-select--lavender  { --ctp-select-accent: var(--ctp-lavender); }
+.ctp-select--rosewater { --ds-select-accent: var(--ds-rosewater); }
+.ctp-select--flamingo  { --ds-select-accent: var(--ds-flamingo); }
+.ctp-select--pink      { --ds-select-accent: var(--ds-pink); }
+.ctp-select--mauve     { --ds-select-accent: var(--ds-mauve); }
+.ctp-select--red       { --ds-select-accent: var(--ds-red); }
+.ctp-select--maroon    { --ds-select-accent: var(--ds-maroon); }
+.ctp-select--peach     { --ds-select-accent: var(--ds-peach); }
+.ctp-select--yellow    { --ds-select-accent: var(--ds-yellow); }
+.ctp-select--green     { --ds-select-accent: var(--ds-green); }
+.ctp-select--teal      { --ds-select-accent: var(--ds-teal); }
+.ctp-select--sky       { --ds-select-accent: var(--ds-sky); }
+.ctp-select--sapphire  { --ds-select-accent: var(--ds-sapphire); }
+.ctp-select--blue      { --ds-select-accent: var(--ds-blue); }
+.ctp-select--lavender  { --ds-select-accent: var(--ds-lavender); }
 
 /* Main Select Frame Anchor */
 .ctp-advanced-select {
@@ -27,17 +27,17 @@
   width: 100%;
   display: inline-flex;
   flex-direction: column;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   box-sizing: border-box;
 }
 
 /* Trigger Button representing select status input field */
 .ctp-select-trigger {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.95rem;
-  color: var(--ctp-text);
-  background-color: var(--ctp-surface0);
-  border: 1.5px solid var(--ctp-surface2);
+  color: var(--ds-text);
+  background-color: var(--ds-surface0);
+  border: 1.5px solid var(--ds-surface2);
   min-height: 42px;
   padding: 6px 36px 6px 12px;
   display: flex;
@@ -47,7 +47,7 @@
   cursor: pointer;
   position: relative;
   text-align: left;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   box-sizing: border-box;
   width: 100%;
   user-select: none;
@@ -55,26 +55,26 @@
 }
 
 .ctp-select-trigger:hover:not(.ctp-select-trigger--disabled) {
-  border-color: var(--ctp-lavender);
+  border-color: var(--ds-lavender);
 }
 
 .ctp-select-trigger--active {
-  border-color: var(--ctp-lavender);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-lavender) 20%, transparent);
-  background-color: var(--ctp-surface0);
+  border-color: var(--ds-lavender);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-lavender) 20%, transparent);
+  background-color: var(--ds-surface0);
 }
 
 .ctp-select-trigger--disabled {
   opacity: 0.65;
   cursor: not-allowed;
-  background-color: var(--ctp-crust);
+  background-color: var(--ds-crust);
 }
 
 .ctp-select-trigger--error {
-  border-color: var(--ctp-red) !important;
+  border-color: var(--ds-red) !important;
 }
 .ctp-select-trigger--error.ctp-select-trigger--active {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-red) 20%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-red) 20%, transparent) !important;
 }
 
 /* Shapes config on Select Trigger */
@@ -105,7 +105,7 @@
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   transition: transform 0.2s ease-in-out;
   pointer-events: none;
   display: flex;
@@ -114,7 +114,7 @@
 
 .ctp-select-trigger--active .ctp-select-trigger__chevron {
   transform: translateY(-50%) rotate(180deg);
-  color: var(--ctp-lavender);
+  color: var(--ds-lavender);
 }
 
 /* Selected Chip item styled for MultiSelect options */
@@ -126,9 +126,9 @@
   font-size: 0.8rem;
   font-weight: 600;
   border-radius: 8px;
-  background-color: var(--ctp-surface1);
-  color: var(--ctp-text);
-  border: 1px solid var(--ctp-surface2);
+  background-color: var(--ds-surface1);
+  color: var(--ds-text);
+  border: 1px solid var(--ds-surface2);
   animation: ctp-tag-pop 0.15s cubic-bezier(0.12, 0.4, 0.29, 1.46);
   user-select: none;
   max-width: 140px;
@@ -163,11 +163,11 @@
 }
 
 .ctp-tag-chip__remove:hover {
-  color: var(--ctp-lavender);
+  color: var(--ds-lavender);
 }
 
 .ctp-select-placeholder {
-  color: var(--ctp-overlay1);
+  color: var(--ds-overlay1);
 }
 
 /* Floating Dropdown Options Panel */
@@ -176,8 +176,8 @@
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background-color: var(--ctp-mantle);
-  border: 1px solid var(--ctp-surface1);
+  background-color: var(--ds-mantle);
+  border: 1px solid var(--ds-surface1);
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(30, 32, 48, 0.15);
   z-index: 100;
@@ -203,34 +203,34 @@
 /* Search input container sticky at top */
 .ctp-dropdown-search {
   padding: 8px 10px;
-  border-bottom: 1px solid var(--ctp-surface0);
+  border-bottom: 1px solid var(--ds-surface0);
   position: sticky;
   top: 0;
-  background-color: var(--ctp-mantle);
+  background-color: var(--ds-mantle);
   z-index: 2;
   display: flex;
 }
 
 .ctp-dropdown-search__input {
   width: 100%;
-  border: 1.5px solid var(--ctp-surface2);
-  background-color: var(--ctp-surface0);
+  border: 1.5px solid var(--ds-surface2);
+  background-color: var(--ds-surface0);
   border-radius: 8px;
   padding: 6px 10px;
   font-size: 0.85rem;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   outline: none;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   transition: border-color 0.15s ease;
   box-sizing: border-box;
 }
 
 .ctp-dropdown-search__input:hover {
-  border-color: var(--ctp-lavender);
+  border-color: var(--ds-lavender);
 }
 
 .ctp-dropdown-search__input:focus {
-  border-color: var(--ctp-lavender);
+  border-color: var(--ds-lavender);
 }
 
 /* Options Scroll list area */
@@ -243,7 +243,7 @@
   padding: 16px;
   text-align: center;
   font-size: 0.88rem;
-  color: var(--ctp-overlay1);
+  color: var(--ds-overlay1);
   font-style: italic;
 }
 
@@ -253,7 +253,7 @@
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -265,21 +265,21 @@
 }
 
 .ctp-dropdown-item:hover:not(.ctp-dropdown-item--disabled) {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-lavender);
+  background-color: var(--ds-surface0);
+  color: var(--ds-lavender);
 }
 
 .ctp-dropdown-item:hover:not(.ctp-dropdown-item--disabled) .ctp-dropdown-item__checkbox {
-  border-color: var(--ctp-lavender);
+  border-color: var(--ds-lavender);
 }
 
 .ctp-dropdown-item:hover:not(.ctp-dropdown-item--disabled) .ctp-dropdown-item__check {
-  color: var(--ctp-lavender);
+  color: var(--ds-lavender);
 }
 
 .ctp-dropdown-item--selected {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-lavender);
+  background-color: var(--ds-surface0);
+  color: var(--ds-lavender);
   font-weight: 500;
 }
 
@@ -287,36 +287,36 @@
   opacity: 0.45;
   cursor: not-allowed;
   background-color: transparent !important;
-  color: var(--ctp-subtext0) !important;
+  color: var(--ds-subtext0) !important;
 }
 
 .ctp-dropdown-item__check {
   display: inline-flex;
   align-items: center;
-  color: var(--ctp-select-accent);
+  color: var(--ds-select-accent);
 }
 
 /* MultiSelect custom Checkboxes in Option list */
 .ctp-dropdown-item__checkbox {
   width: 16px;
   height: 16px;
-  border: 1.5px solid var(--ctp-surface2);
+  border: 1.5px solid var(--ds-surface2);
   border-radius: 4px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--ctp-surface0);
-  transition: var(--ctp-transition);
+  background-color: var(--ds-surface0);
+  transition: var(--ds-transition);
   flex-shrink: 0;
 }
 
 .ctp-dropdown-item--selected .ctp-dropdown-item__checkbox {
-  background-color: var(--ctp-lavender);
-  border-color: var(--ctp-lavender);
-  color: var(--ctp-base);
+  background-color: var(--ds-lavender);
+  border-color: var(--ds-lavender);
+  color: var(--ds-base);
 }
 [data-theme="latte"] .ctp-dropdown-item--selected .ctp-dropdown-item__checkbox {
-  color: var(--ctp-contrast-light);
+  color: var(--ds-contrast-light);
 }
 
 .ctp-dropdown-item__checkbox svg {
@@ -333,15 +333,15 @@
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
   flex-shrink: 0;
 }
 
 .ctp-tree-node-arrow:hover {
-  background-color: var(--ctp-surface1);
-  color: var(--ctp-lavender);
+  background-color: var(--ds-surface1);
+  color: var(--ds-lavender);
 }
 
 .ctp-tree-node-arrow--expanded {

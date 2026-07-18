@@ -29,12 +29,12 @@ const moduleListeners = new Set<(opts: ToastOptions & { id: string }) => void>()
 
 export function toast(options: ToastOptions | string): string {
   const opts: ToastOptions = typeof options === 'string' ? { title: options } : options;
-  const id = `ctp-toast-${++toastCount}`;
+  const id = `ds-toast-${++toastCount}`;
   moduleListeners.forEach(fn => fn({ ...opts, id }));
   return id;
 }
 
-export const TOAST_STATE_KEY = Symbol('ctp-toast-state');
+export const TOAST_STATE_KEY = Symbol('ds-toast-state');
 
 export interface ToastState {
   toasts: Ref<ToastItem[]>;

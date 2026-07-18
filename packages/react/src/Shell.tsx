@@ -75,8 +75,8 @@ export const Shell: React.FC<ShellProps> & {
     .join(' ');
 
   const cssVariables = {
-    ...(headerHeight ? { '--ctp-shell-header-height': headerHeight } : {}),
-    ...(sidebarWidth ? { '--ctp-shell-sidebar-width': sidebarWidth } : {}),
+    ...(headerHeight ? { '--ds-shell-header-height': headerHeight } : {}),
+    ...(sidebarWidth ? { '--ds-shell-sidebar-width': sidebarWidth } : {}),
   } as React.CSSProperties;
 
   const combinedStyle = {

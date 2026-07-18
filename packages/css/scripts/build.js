@@ -12,8 +12,9 @@ const distDir = path.resolve(__dirname, '../dist');
 const css = fs.readFileSync(srcPath, 'utf8');
 
 const builds = [
-  { prefix: 'ctp', output: 'catppuccin.css', minify: true },
+  { prefix: '',    output: 'index.css',        minify: true },
   { prefix: '',    output: 'neutral.css',      minify: true },
+  { prefix: 'ctp', output: 'catppuccin.css',   minify: true },
 ];
 
 async function runBuilds() {

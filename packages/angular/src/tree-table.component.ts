@@ -166,7 +166,7 @@ interface FlattenedTreeRow {
                             style="width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative;"
                           >
                             <div
-                              style="width: 1px; height: 100%; border-left: 1px dashed var(--ctp-surface2); position: absolute; left: 11px; top: 0; bottom: 0;"
+                              style="width: 1px; height: 100%; border-left: 1px dashed var(--ds-surface2); position: absolute; left: 11px; top: 0; bottom: 0;"
                             />
                           </div>
                         }

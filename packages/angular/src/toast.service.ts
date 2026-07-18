@@ -32,7 +32,7 @@ export class ToastService {
 
   show(options: ToastOptions | string): string {
     const opts: ToastOptions = typeof options === 'string' ? { title: options } : options;
-    const id = `ctp-toast-${++toastIdCounter}`;
+    const id = `ds-toast-${++toastIdCounter}`;
     const item: ToastItem = {
       title: '',
       description: '',

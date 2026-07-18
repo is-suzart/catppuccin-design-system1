@@ -27,7 +27,7 @@ export type DrawerColor =
       >
         @if (title() || showCloseButton()) {
           <div class="ctp-drawer__header">
-            <div class="ctp-drawer__title" id="ctp-drawer-title">
+            <div class="ctp-drawer__title" id="ds-drawer-title">
               {{ title() }}
             </div>
             @if (showCloseButton()) {

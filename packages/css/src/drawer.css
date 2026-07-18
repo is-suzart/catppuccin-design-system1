@@ -2,24 +2,24 @@
 
 /* Default Accent is Mauve */
 :root {
-  --ctp-drawer-accent: var(--ctp-mauve);
+  --ds-drawer-accent: var(--ds-mauve);
 }
 
 /* Color Mappings */
-.ctp-drawer--rosewater { --ctp-drawer-accent: var(--ctp-rosewater); }
-.ctp-drawer--flamingo  { --ctp-drawer-accent: var(--ctp-flamingo); }
-.ctp-drawer--pink      { --ctp-drawer-accent: var(--ctp-pink); }
-.ctp-drawer--mauve     { --ctp-drawer-accent: var(--ctp-mauve); }
-.ctp-drawer--red       { --ctp-drawer-accent: var(--ctp-red); }
-.ctp-drawer--maroon    { --ctp-drawer-accent: var(--ctp-maroon); }
-.ctp-drawer--peach     { --ctp-drawer-accent: var(--ctp-peach); }
-.ctp-drawer--yellow    { --ctp-drawer-accent: var(--ctp-yellow); }
-.ctp-drawer--green     { --ctp-drawer-accent: var(--ctp-green); }
-.ctp-drawer--teal      { --ctp-drawer-accent: var(--ctp-teal); }
-.ctp-drawer--sky       { --ctp-drawer-accent: var(--ctp-sky); }
-.ctp-drawer--sapphire  { --ctp-drawer-accent: var(--ctp-sapphire); }
-.ctp-drawer--blue      { --ctp-drawer-accent: var(--ctp-blue); }
-.ctp-drawer--lavender  { --ctp-drawer-accent: var(--ctp-lavender); }
+.ctp-drawer--rosewater { --ds-drawer-accent: var(--ds-rosewater); }
+.ctp-drawer--flamingo  { --ds-drawer-accent: var(--ds-flamingo); }
+.ctp-drawer--pink      { --ds-drawer-accent: var(--ds-pink); }
+.ctp-drawer--mauve     { --ds-drawer-accent: var(--ds-mauve); }
+.ctp-drawer--red       { --ds-drawer-accent: var(--ds-red); }
+.ctp-drawer--maroon    { --ds-drawer-accent: var(--ds-maroon); }
+.ctp-drawer--peach     { --ds-drawer-accent: var(--ds-peach); }
+.ctp-drawer--yellow    { --ds-drawer-accent: var(--ds-yellow); }
+.ctp-drawer--green     { --ds-drawer-accent: var(--ds-green); }
+.ctp-drawer--teal      { --ds-drawer-accent: var(--ds-teal); }
+.ctp-drawer--sky       { --ds-drawer-accent: var(--ds-sky); }
+.ctp-drawer--sapphire  { --ds-drawer-accent: var(--ds-sapphire); }
+.ctp-drawer--blue      { --ds-drawer-accent: var(--ds-blue); }
+.ctp-drawer--lavender  { --ds-drawer-accent: var(--ds-lavender); }
 
 /* Overlay Position Helpers for Drawer Alignment */
 .ctp-overlay--drawer-right {
@@ -44,27 +44,27 @@
 
 /* Main Drawer Container */
 .ctp-drawer {
-  background-color: var(--ctp-mantle);
-  box-shadow: var(--ctp-shadow-lg);
+  background-color: var(--ds-mantle);
+  box-shadow: var(--ds-shadow-lg);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  transition: transform var(--ctp-transition-duration) var(--ctp-transition-timing);
+  transition: transform var(--ds-transition-duration) var(--ds-transition-timing);
   position: relative;
   outline: none;
-  border: 1px solid color-mix(in srgb, var(--ctp-text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ds-text) 5%, transparent);
 }
 
 /* 1. Horizontal Drawer Positions (Left / Right) */
 .ctp-drawer--right {
   height: 100vh;
-  border-left: 3px solid var(--ctp-drawer-accent);
+  border-left: 3px solid var(--ds-drawer-accent);
   transform: translateX(100%);
 }
 
 .ctp-drawer--left {
   height: 100vh;
-  border-right: 3px solid var(--ctp-drawer-accent);
+  border-right: 3px solid var(--ds-drawer-accent);
   transform: translateX(-100%);
 }
 
@@ -95,13 +95,13 @@
 /* 2. Vertical Drawer Positions (Top / Bottom) */
 .ctp-drawer--top {
   width: 100vw;
-  border-bottom: 3px solid var(--ctp-drawer-accent);
+  border-bottom: 3px solid var(--ds-drawer-accent);
   transform: translateY(-100%);
 }
 
 .ctp-drawer--bottom {
   width: 100vw;
-  border-top: 3px solid var(--ctp-drawer-accent);
+  border-top: 3px solid var(--ds-drawer-accent);
   transform: translateY(100%);
 }
 
@@ -140,15 +140,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1.5px solid var(--ctp-surface0);
-  background-color: color-mix(in srgb, var(--ctp-crust) 30%, transparent);
+  border-bottom: 1.5px solid var(--ds-surface0);
+  background-color: color-mix(in srgb, var(--ds-crust) 30%, transparent);
 }
 
 .ctp-drawer__title {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -158,39 +158,39 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   padding: 6px;
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   outline: none;
 }
 
 .ctp-drawer__close-btn:hover {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-red);
+  background-color: var(--ds-surface0);
+  color: var(--ds-red);
 }
 
 .ctp-drawer__close-btn:focus-visible {
-  outline: 2px solid var(--ctp-drawer-accent);
+  outline: 2px solid var(--ds-drawer-accent);
 }
 
 .ctp-drawer__body {
   padding: 1.6rem;
   flex: 1;
   overflow-y: auto;
-  font-family: var(--ctp-font-family);
-  color: var(--ctp-subtext1);
+  font-family: var(--ds-font-family);
+  color: var(--ds-subtext1);
   line-height: 1.6;
 }
 
 .ctp-drawer__footer {
   padding: 1.2rem 1.6rem;
-  border-top: 1.5px solid var(--ctp-surface0);
+  border-top: 1.5px solid var(--ds-surface0);
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  background-color: var(--ctp-crust);
+  background-color: var(--ds-crust);
 }

@@ -5,13 +5,13 @@
   height: 100%;
   flex-shrink: 0;
   transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --ctp-sidebar-expanded-width: 260px;
-  --ctp-sidebar-collapsed-width: 68px;
-  width: var(--ctp-sidebar-expanded-width);
+  --ds-sidebar-expanded-width: 260px;
+  --ds-sidebar-collapsed-width: 68px;
+  width: var(--ds-sidebar-expanded-width);
 }
 
 .ctp-sidebar-wrapper--collapsed {
-  width: var(--ctp-sidebar-collapsed-width);
+  width: var(--ds-sidebar-collapsed-width);
 }
 
 /* ──────────────────────────────────────────────
@@ -26,8 +26,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--ctp-crust);
-  border-right: 1px solid var(--ctp-surface0);
+  background-color: var(--ds-crust);
+  border-right: 1px solid var(--ds-surface0);
   box-sizing: border-box;
   transition:
     width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
@@ -45,10 +45,10 @@
   bottom: 12px;
   height: calc(100% - 24px);
   width: calc(100% - 24px);
-  border-radius: var(--ctp-radius-lg);
-  border: 1px solid var(--ctp-surface0);
-  box-shadow: var(--ctp-shadow-md);
-  background-color: var(--ctp-mantle);
+  border-radius: var(--ds-radius-lg);
+  border: 1px solid var(--ds-surface0);
+  box-shadow: var(--ds-shadow-md);
+  background-color: var(--ds-mantle);
 }
 
 /* ──────────────────────────────────────────────
@@ -56,13 +56,13 @@
    ────────────────────────────────────────────── */
 
 .ctp-sidebar-wrapper--collapsed .ctp-sidebar--expand-on-hover:hover {
-  width: var(--ctp-sidebar-expanded-width);
-  box-shadow: var(--ctp-shadow-xl);
-  border-right: 1px solid var(--ctp-surface0);
+  width: var(--ds-sidebar-expanded-width);
+  box-shadow: var(--ds-shadow-xl);
+  border-right: 1px solid var(--ds-surface0);
 }
 
 .ctp-sidebar-wrapper--collapsed .ctp-sidebar--expand-on-hover.ctp-sidebar--floated:hover {
-  width: calc(var(--ctp-sidebar-expanded-width) - 24px);
+  width: calc(var(--ds-sidebar-expanded-width) - 24px);
 }
 
 /* ──────────────────────────────────────────────
@@ -75,7 +75,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1rem;
-  border-bottom: 1px solid var(--ctp-surface0);
+  border-bottom: 1px solid var(--ds-surface0);
   gap: 8px;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -103,7 +103,7 @@
   width: 4px;
 }
 .ctp-sidebar__section::-webkit-scrollbar-thumb {
-  background-color: var(--ctp-surface1);
+  background-color: var(--ds-surface1);
   border-radius: 4px;
 }
 
@@ -119,31 +119,31 @@
   gap: 0.75rem;
   padding: 0.7rem 0.9rem;
   border-radius: 8px;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   text-decoration: none;
   cursor: pointer;
   background: transparent;
   border: none;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.9rem;
   font-weight: 500;
   width: 100%;
   text-align: left;
   box-sizing: border-box;
   transition:
-    background-color var(--ctp-transition-duration) var(--ctp-transition-timing),
-    color var(--ctp-transition-duration) var(--ctp-transition-timing);
+    background-color var(--ds-transition-duration) var(--ds-transition-timing),
+    color var(--ds-transition-duration) var(--ds-transition-timing);
   outline: none;
 }
 
 .ctp-sidebar__item:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--ctp-surface0) 50%, transparent);
-  color: var(--ctp-text);
+  background-color: color-mix(in srgb, var(--ds-surface0) 50%, transparent);
+  color: var(--ds-text);
 }
 
 .ctp-sidebar__item--active {
-  background-color: var(--ctp-surface0) !important;
-  color: var(--ctp-mauve) !important;
+  background-color: var(--ds-surface0) !important;
+  color: var(--ds-mauve) !important;
   font-weight: 600;
 }
 
@@ -162,12 +162,12 @@
   height: 20px;
   flex-shrink: 0;
   font-size: 1.1rem;
-  color: var(--ctp-subtext0);
-  transition: color var(--ctp-transition-duration) var(--ctp-transition-timing);
+  color: var(--ds-subtext0);
+  transition: color var(--ds-transition-duration) var(--ds-transition-timing);
 }
 
 .ctp-sidebar__item--active .ctp-sidebar__item-icon {
-  color: var(--ctp-mauve);
+  color: var(--ds-mauve);
 }
 
 .ctp-sidebar__label {
@@ -188,7 +188,7 @@
 /* Footer Area */
 .ctp-sidebar__footer {
   padding: 1rem;
-  border-top: 1px solid var(--ctp-surface0);
+  border-top: 1px solid var(--ds-surface0);
   display: flex;
   flex-direction: column;
   gap: 8px;

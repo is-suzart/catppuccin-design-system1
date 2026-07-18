@@ -2,20 +2,20 @@
 
 .ctp-chart {
   width: 100%;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
 }
 
 .ctp-chart__title {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
   margin-bottom: 12px;
   letter-spacing: 0.02em;
 }
 
 /* Recharts legend overrides */
 .recharts-legend-wrapper {
-  font-family: var(--ctp-font-family) !important;
+  font-family: var(--ds-font-family) !important;
 }
 
 .recharts-surface {
@@ -24,16 +24,16 @@
 
 /* Chart card container */
 .ctp-chart-card {
-  background: var(--ctp-surface0);
-  border: 1px solid color-mix(in srgb, var(--ctp-text) 8%, transparent);
+  background: var(--ds-surface0);
+  border: 1px solid color-mix(in srgb, var(--ds-text) 8%, transparent);
   border-radius: 16px;
   padding: 24px;
-  transition: border-color var(--ctp-transition-duration) var(--ctp-transition-timing),
-              box-shadow var(--ctp-transition-duration) var(--ctp-transition-timing);
+  transition: border-color var(--ds-transition-duration) var(--ds-transition-timing),
+              box-shadow var(--ds-transition-duration) var(--ds-transition-timing);
 }
 
 .ctp-chart-card:hover {
-  border-color: color-mix(in srgb, var(--ctp-mauve) 30%, transparent);
+  border-color: color-mix(in srgb, var(--ds-mauve) 30%, transparent);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -48,13 +48,13 @@
 .ctp-chart-card__name {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   margin: 0;
 }
 
 .ctp-chart-card__subtitle {
   font-size: 0.8rem;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   margin: 2px 0 0;
 }
 
@@ -62,9 +62,9 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: color-mix(in srgb, var(--ctp-mauve) 12%, transparent);
-  color: var(--ctp-mauve);
-  border: 1px solid color-mix(in srgb, var(--ctp-mauve) 25%, transparent);
+  background: color-mix(in srgb, var(--ds-mauve) 12%, transparent);
+  color: var(--ds-mauve);
+  border: 1px solid color-mix(in srgb, var(--ds-mauve) 25%, transparent);
   border-radius: 999px;
   padding: 3px 10px;
   font-size: 0.75rem;
@@ -98,24 +98,24 @@
 }
 
 .ctp-chart-stat {
-  background: var(--ctp-surface0);
-  border: 1px solid color-mix(in srgb, var(--ctp-text) 8%, transparent);
+  background: var(--ds-surface0);
+  border: 1px solid color-mix(in srgb, var(--ds-text) 8%, transparent);
   border-radius: 12px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  transition: border-color var(--ctp-transition-duration) var(--ctp-transition-timing);
+  transition: border-color var(--ds-transition-duration) var(--ds-transition-timing);
 }
 
 .ctp-chart-stat:hover {
-  border-color: color-mix(in srgb, var(--ctp-mauve) 30%, transparent);
+  border-color: color-mix(in srgb, var(--ds-mauve) 30%, transparent);
 }
 
 .ctp-chart-stat__label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -123,7 +123,7 @@
 .ctp-chart-stat__value {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -137,11 +137,11 @@
 }
 
 .ctp-chart-stat__trend--up {
-  color: var(--ctp-green);
+  color: var(--ds-green);
 }
 
 .ctp-chart-stat__trend--down {
-  color: var(--ctp-red);
+  color: var(--ds-red);
 }
 
 @media (max-width: 700px) {

@@ -6,7 +6,7 @@ describe('Avatar', () => {
   it('renders with fallback initials', () => {
     render(<Avatar fallback="John Doe" />);
     const el = screen.getByLabelText('John Doe');
-    expect(el).toHaveClass('ctp-avatar');
+    expect(el).toHaveClass('avatar');
     expect(screen.getByText('JD')).toBeInTheDocument();
   });
 
@@ -37,7 +37,7 @@ describe('Avatar', () => {
 
   it('renders with custom size', () => {
     const { container } = render(<Avatar size="xl" fallback="XL" />);
-    expect(container.firstChild).toHaveClass('ctp-avatar--xl');
+    expect(container.firstChild).toHaveClass('avatar--xl');
   });
 });
 

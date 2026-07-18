@@ -49,8 +49,8 @@ export const Stepper: React.FC<StepperProps> = ({
     .join(' ');
 
   const cssStyle = {
-    '--ctp-total-steps': totalSteps,
-    '--ctp-stepper-progress': `${progressPercent}%`,
+    '--ds-total-steps': totalSteps,
+    '--ds-stepper-progress': `${progressPercent}%`,
   } as React.CSSProperties;
 
   return (

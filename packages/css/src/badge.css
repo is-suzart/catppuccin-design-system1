@@ -1,12 +1,12 @@
 /* Core Badge Stylesheet */
 
 .ctp-badge {
-  --ctp-badge-color-token: var(--ctp-mauve); /* default color */
+  --ds-badge-color-token: var(--ds-mauve); /* default color */
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
@@ -25,18 +25,18 @@
 
 .ctp-badge:hover {
   transform: translateY(-1px) scale(1.03);
-  box-shadow: 0 4px 8px color-mix(in srgb, var(--ctp-badge-color-token) 15%, transparent);
+  box-shadow: 0 4px 8px color-mix(in srgb, var(--ds-badge-color-token) 15%, transparent);
 }
 
 /* Shapes */
 .ctp-badge--square {
-  border-radius: var(--ctp-radius-square);
+  border-radius: var(--ds-radius-square);
 }
 .ctp-badge--rounded {
   border-radius: 4px;
 }
 .ctp-badge--pill {
-  border-radius: var(--ctp-radius-pill);
+  border-radius: var(--ds-radius-pill);
 }
 
 /* Sizes */
@@ -57,44 +57,44 @@
 }
 
 /* Colors Mapping */
-.ctp-badge--rosewater { --ctp-badge-color-token: var(--ctp-rosewater); }
-.ctp-badge--flamingo  { --ctp-badge-color-token: var(--ctp-flamingo); }
-.ctp-badge--pink      { --ctp-badge-color-token: var(--ctp-pink); }
-.ctp-badge--mauve     { --ctp-badge-color-token: var(--ctp-mauve); }
-.ctp-badge--red       { --ctp-badge-color-token: var(--ctp-red); }
-.ctp-badge--maroon    { --ctp-badge-color-token: var(--ctp-maroon); }
-.ctp-badge--peach     { --ctp-badge-color-token: var(--ctp-peach); }
-.ctp-badge--yellow    { --ctp-badge-color-token: var(--ctp-yellow); }
-.ctp-badge--green     { --ctp-badge-color-token: var(--ctp-green); }
-.ctp-badge--teal      { --ctp-badge-color-token: var(--ctp-teal); }
-.ctp-badge--sky       { --ctp-badge-color-token: var(--ctp-sky); }
-.ctp-badge--sapphire  { --ctp-badge-color-token: var(--ctp-sapphire); }
-.ctp-badge--blue      { --ctp-badge-color-token: var(--ctp-blue); }
-.ctp-badge--lavender  { --ctp-badge-color-token: var(--ctp-lavender); }
+.ctp-badge--rosewater { --ds-badge-color-token: var(--ds-rosewater); }
+.ctp-badge--flamingo  { --ds-badge-color-token: var(--ds-flamingo); }
+.ctp-badge--pink      { --ds-badge-color-token: var(--ds-pink); }
+.ctp-badge--mauve     { --ds-badge-color-token: var(--ds-mauve); }
+.ctp-badge--red       { --ds-badge-color-token: var(--ds-red); }
+.ctp-badge--maroon    { --ds-badge-color-token: var(--ds-maroon); }
+.ctp-badge--peach     { --ds-badge-color-token: var(--ds-peach); }
+.ctp-badge--yellow    { --ds-badge-color-token: var(--ds-yellow); }
+.ctp-badge--green     { --ds-badge-color-token: var(--ds-green); }
+.ctp-badge--teal      { --ds-badge-color-token: var(--ds-teal); }
+.ctp-badge--sky       { --ds-badge-color-token: var(--ds-sky); }
+.ctp-badge--sapphire  { --ds-badge-color-token: var(--ds-sapphire); }
+.ctp-badge--blue      { --ds-badge-color-token: var(--ds-blue); }
+.ctp-badge--lavender  { --ds-badge-color-token: var(--ds-lavender); }
 
 /* Variants */
 .ctp-badge--filled {
-  background-color: var(--ctp-badge-color-token);
-  color: var(--ctp-base);
+  background-color: var(--ds-badge-color-token);
+  color: var(--ds-base);
   border: 1px solid transparent;
 }
 
 .ctp-badge--tonal {
-  background-color: color-mix(in srgb, var(--ctp-badge-color-token) 12%, transparent);
-  color: var(--ctp-badge-color-token);
+  background-color: color-mix(in srgb, var(--ds-badge-color-token) 12%, transparent);
+  color: var(--ds-badge-color-token);
   border: 1px solid transparent;
 }
 
 .ctp-badge--outline {
   background-color: transparent;
-  border: 1.5px solid var(--ctp-badge-color-token);
-  color: var(--ctp-badge-color-token);
+  border: 1.5px solid var(--ds-badge-color-token);
+  color: var(--ds-badge-color-token);
 }
 
 .ctp-badge--flat {
-  background-color: var(--ctp-surface0);
+  background-color: var(--ds-surface0);
   border: 1px solid transparent;
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 .ctp-badge__close-btn {
@@ -119,5 +119,5 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 .ctp-badge:not(.ctp-badge--filled) .ctp-badge__close-btn:hover {
-  background-color: color-mix(in srgb, var(--ctp-badge-color-token) 15%, transparent);
+  background-color: color-mix(in srgb, var(--ds-badge-color-token) 15%, transparent);
 }

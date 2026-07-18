@@ -80,7 +80,7 @@ const AnimateInner = <T extends React.ElementType = 'div'>(
     .join(' ');
 
   const animStyle: React.CSSProperties = {
-    ...(delay ? ({ '--ctp-anim-delay': `${delay}ms` } as React.CSSProperties) : {}),
+    ...(delay ? ({ '--ds-anim-delay': `${delay}ms` } as React.CSSProperties) : {}),
     ...(visible ? {} : { animationPlayState: 'paused' }),
     ...style,
   };

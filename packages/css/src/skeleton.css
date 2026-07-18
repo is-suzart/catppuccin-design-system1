@@ -1,9 +1,9 @@
 .ctp-skeleton {
   background: linear-gradient(
     90deg,
-    var(--ctp-surface0) 25%,
-    var(--ctp-surface1) 50%,
-    var(--ctp-surface0) 75%
+    var(--ds-surface0) 25%,
+    var(--ds-surface1) 50%,
+    var(--ds-surface0) 75%
   );
   background-size: 200% 100%;
   animation: ctp-skeleton-shimmer 1.5s ease-in-out infinite;

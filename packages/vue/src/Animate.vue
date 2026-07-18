@@ -49,7 +49,7 @@ const animClass = computed(() => {
 
 const animStyle = computed(() => {
   const style: Record<string, string> = {};
-  if (props.delay > 0) style['--ctp-anim-delay'] = `${props.delay}ms`;
+  if (props.delay > 0) style['--ds-anim-delay'] = `${props.delay}ms`;
   if (!visible.value) style['animationPlayState'] = 'paused';
   return style;
 });

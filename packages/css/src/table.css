@@ -1,7 +1,7 @@
 /* Catppuccin Design System - Table Component CSS */
 
 .ctp-table-container {
-  --ctp-table-accent: var(--ctp-mauve);
+  --ds-table-accent: var(--ds-mauve);
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -9,41 +9,41 @@
   border: none;
   border-radius: 0;
   box-shadow: none;
-  font-family: var(--ctp-font-family);
-  color: var(--ctp-text);
+  font-family: var(--ds-font-family);
+  color: var(--ds-text);
   box-sizing: border-box;
   padding: 2px 4px 6px 4px;
 }
 
 /* Sizing Modifiers */
 .ctp-table--sm {
-  --ctp-cell-padding: 8px 12px;
+  --ds-cell-padding: 8px 12px;
   font-size: 0.85rem;
 }
 .ctp-table--md {
-  --ctp-cell-padding: 12px 16px;
+  --ds-cell-padding: 12px 16px;
   font-size: 0.95rem;
 }
 .ctp-table--lg {
-  --ctp-cell-padding: 16px 20px;
+  --ds-cell-padding: 16px 20px;
   font-size: 1.05rem;
 }
 
 /* Color Modifier mappings */
-.ctp-table--rosewater { --ctp-table-accent: var(--ctp-rosewater); }
-.ctp-table--flamingo  { --ctp-table-accent: var(--ctp-flamingo); }
-.ctp-table--pink      { --ctp-table-accent: var(--ctp-pink); }
-.ctp-table--mauve     { --ctp-table-accent: var(--ctp-mauve); }
-.ctp-table--red       { --ctp-table-accent: var(--ctp-red); }
-.ctp-table--maroon    { --ctp-table-accent: var(--ctp-maroon); }
-.ctp-table--peach     { --ctp-table-accent: var(--ctp-peach); }
-.ctp-table--yellow    { --ctp-table-accent: var(--ctp-yellow); }
-.ctp-table--green     { --ctp-table-accent: var(--ctp-green); }
-.ctp-table--teal      { --ctp-table-accent: var(--ctp-teal); }
-.ctp-table--sky       { --ctp-table-accent: var(--ctp-sky); }
-.ctp-table--sapphire  { --ctp-table-accent: var(--ctp-sapphire); }
-.ctp-table--blue      { --ctp-table-accent: var(--ctp-blue); }
-.ctp-table--lavender  { --ctp-table-accent: var(--ctp-lavender); }
+.ctp-table--rosewater { --ds-table-accent: var(--ds-rosewater); }
+.ctp-table--flamingo  { --ds-table-accent: var(--ds-flamingo); }
+.ctp-table--pink      { --ds-table-accent: var(--ds-pink); }
+.ctp-table--mauve     { --ds-table-accent: var(--ds-mauve); }
+.ctp-table--red       { --ds-table-accent: var(--ds-red); }
+.ctp-table--maroon    { --ds-table-accent: var(--ds-maroon); }
+.ctp-table--peach     { --ds-table-accent: var(--ds-peach); }
+.ctp-table--yellow    { --ds-table-accent: var(--ds-yellow); }
+.ctp-table--green     { --ds-table-accent: var(--ds-green); }
+.ctp-table--teal      { --ds-table-accent: var(--ds-teal); }
+.ctp-table--sky       { --ds-table-accent: var(--ds-sky); }
+.ctp-table--sapphire  { --ds-table-accent: var(--ds-sapphire); }
+.ctp-table--blue      { --ds-table-accent: var(--ds-blue); }
+.ctp-table--lavender  { --ds-table-accent: var(--ds-lavender); }
 
 /* The Table Element */
 .ctp-table {
@@ -77,32 +77,32 @@
 }
 
 .ctp-table thead tr th {
-  padding: var(--ctp-cell-padding, 12px 16px);
-  background-color: var(--ctp-mantle);
-  color: var(--ctp-subtext0);
+  padding: var(--ds-cell-padding, 12px 16px);
+  background-color: var(--ds-mantle);
+  color: var(--ds-subtext0);
   font-weight: 700;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  border-top: 1px solid var(--ctp-surface1);
-  border-bottom: 1px solid var(--ctp-surface1);
+  border-top: 1px solid var(--ds-surface1);
+  border-bottom: 1px solid var(--ds-surface1);
   user-select: none;
   white-space: nowrap;
   box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 2;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
 }
 
 .ctp-table thead tr th:first-child {
-  border-left: 1px solid var(--ctp-surface1);
+  border-left: 1px solid var(--ds-surface1);
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
 .ctp-table thead tr th:last-child {
-  border-right: 1px solid var(--ctp-surface1);
+  border-right: 1px solid var(--ds-surface1);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -113,13 +113,13 @@
 }
 
 .ctp-table thead tr th.ctp-table-th--sortable:hover {
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 /* Active Sorted Header (Tab-style indicator inside card) */
 .ctp-table thead tr th.ctp-table-th--active {
-  color: var(--ctp-table-accent);
-  box-shadow: inset 0 -2px 0 var(--ctp-table-accent);
+  color: var(--ds-table-accent);
+  box-shadow: inset 0 -2px 0 var(--ds-table-accent);
 }
 
 /* aria-sort indicator for accessibility */
@@ -137,40 +137,40 @@
 
 .ctp-table-sort-icon {
   display: inline-flex;
-  color: var(--ctp-overlay1);
-  transition: var(--ctp-transition);
+  color: var(--ds-overlay1);
+  transition: var(--ds-transition);
 }
 
 .ctp-table-sort-icon--active {
-  color: var(--ctp-table-accent);
+  color: var(--ds-table-accent);
 }
 
 /* Table Cells and Rows */
 .ctp-table tbody tr td {
-  padding: var(--ctp-cell-padding, 14px 18px);
-  background-color: var(--ctp-base);
-  border-bottom: 1px solid var(--ctp-surface0);
-  color: var(--ctp-text);
+  padding: var(--ds-cell-padding, 14px 18px);
+  background-color: var(--ds-base);
+  border-bottom: 1px solid var(--ds-surface0);
+  color: var(--ds-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: middle;
   box-sizing: border-box;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
 }
 
 /* Borders and rounded corners to form unified body panel */
 .ctp-table tbody tr td:first-child {
-  border-left: 1px solid var(--ctp-surface1);
+  border-left: 1px solid var(--ds-surface1);
 }
 
 .ctp-table tbody tr td:last-child {
-  border-right: 1px solid var(--ctp-surface1);
+  border-right: 1px solid var(--ds-surface1);
 }
 
 /* First actual row of the body panel */
 .ctp-table tbody tr.ctp-table-tr--first td {
-  border-top: 1px solid var(--ctp-surface1);
+  border-top: 1px solid var(--ds-surface1);
 }
 
 .ctp-table tbody tr.ctp-table-tr--first td:first-child {
@@ -183,7 +183,7 @@
 
 /* Last row of the body panel */
 .ctp-table tbody tr.ctp-table-tr--last td {
-  border-bottom: 1px solid var(--ctp-surface1);
+  border-bottom: 1px solid var(--ds-surface1);
 }
 
 .ctp-table tbody tr.ctp-table-tr--last td:first-child {
@@ -196,17 +196,17 @@
 
 /* Row Hover */
 .ctp-table tbody tr:hover td {
-  background-color: var(--ctp-surface0);
+  background-color: var(--ds-surface0);
 }
 
 /* Selected row highlight styling */
 .ctp-table tbody tr.ctp-table-tr--selected td {
-  background-color: color-mix(in srgb, var(--ctp-table-accent) 8%, var(--ctp-base));
-  border-bottom-color: color-mix(in srgb, var(--ctp-table-accent) 20%, var(--ctp-surface1));
+  background-color: color-mix(in srgb, var(--ds-table-accent) 8%, var(--ds-base));
+  border-bottom-color: color-mix(in srgb, var(--ds-table-accent) 20%, var(--ds-surface1));
 }
 
 .ctp-table tbody tr.ctp-table-tr--selected:hover td {
-  background-color: color-mix(in srgb, var(--ctp-table-accent) 12%, var(--ctp-base));
+  background-color: color-mix(in srgb, var(--ds-table-accent) 12%, var(--ds-base));
 }
 
 /* Alignments */
@@ -222,7 +222,7 @@
   padding: 4px 10px;
   font-size: 0.72rem;
   font-weight: 600;
-  border-radius: var(--ctp-radius-pill);
+  border-radius: var(--ds-radius-pill);
 }
 
 .ctp-badge-dot {
@@ -234,21 +234,21 @@
 }
 
 .ctp-table-badge--active {
-  background-color: color-mix(in srgb, var(--ctp-green) 10%, transparent);
-  color: var(--ctp-green);
-  border: 1px solid color-mix(in srgb, var(--ctp-green) 20%, transparent);
+  background-color: color-mix(in srgb, var(--ds-green) 10%, transparent);
+  color: var(--ds-green);
+  border: 1px solid color-mix(in srgb, var(--ds-green) 20%, transparent);
 }
 
 .ctp-table-badge--inactive {
-  background-color: color-mix(in srgb, var(--ctp-red) 10%, transparent);
-  color: var(--ctp-red);
-  border: 1px solid color-mix(in srgb, var(--ctp-red) 20%, transparent);
+  background-color: color-mix(in srgb, var(--ds-red) 10%, transparent);
+  color: var(--ds-red);
+  border: 1px solid color-mix(in srgb, var(--ds-red) 20%, transparent);
 }
 
 .ctp-table-badge--pending {
-  background-color: color-mix(in srgb, var(--ctp-yellow) 10%, transparent);
-  color: var(--ctp-yellow);
-  border: 1px solid color-mix(in srgb, var(--ctp-yellow) 20%, transparent);
+  background-color: color-mix(in srgb, var(--ds-yellow) 10%, transparent);
+  color: var(--ds-yellow);
+  border: 1px solid color-mix(in srgb, var(--ds-yellow) 20%, transparent);
 }
 
 /* Custom Premium Checkbox (Dribbble-inspired) */
@@ -257,11 +257,11 @@
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  border: 1.5px solid var(--ctp-surface2);
+  border: 1.5px solid var(--ds-surface2);
   border-radius: 5px;
-  background-color: var(--ctp-crust);
+  background-color: var(--ds-crust);
   cursor: pointer;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -271,13 +271,13 @@
 }
 
 .ctp-table-checkbox:hover {
-  border-color: var(--ctp-table-accent);
-  background-color: var(--ctp-surface0);
+  border-color: var(--ds-table-accent);
+  background-color: var(--ds-surface0);
 }
 
 .ctp-table-checkbox:checked {
-  background-color: var(--ctp-table-accent);
-  border-color: var(--ctp-table-accent);
+  background-color: var(--ds-table-accent);
+  border-color: var(--ds-table-accent);
 }
 
 .ctp-table-checkbox:checked::after {
@@ -285,7 +285,7 @@
   position: absolute;
   width: 4px;
   height: 8px;
-  border: solid var(--ctp-base);
+  border: solid var(--ds-base);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   top: 2px;
@@ -293,8 +293,8 @@
 }
 
 .ctp-table-checkbox:indeterminate {
-  background-color: var(--ctp-table-accent);
-  border-color: var(--ctp-table-accent);
+  background-color: var(--ds-table-accent);
+  border-color: var(--ds-table-accent);
 }
 
 .ctp-table-checkbox:indeterminate::after {
@@ -302,7 +302,7 @@
   position: absolute;
   width: 8px;
   height: 2px;
-  background-color: var(--ctp-base);
+  background-color: var(--ds-base);
   top: 7px;
   left: 4px;
 }
@@ -317,53 +317,53 @@
   border-radius: 50%;
   background: transparent;
   border: none;
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
   cursor: pointer;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
 }
 
 .ctp-table-action-btn:hover {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-text);
+  background-color: var(--ds-surface0);
+  color: var(--ds-text);
 }
 
 .ctp-table-action-btn--danger:hover {
-  background-color: color-mix(in srgb, var(--ctp-red) 12%, transparent);
-  color: var(--ctp-red);
+  background-color: color-mix(in srgb, var(--ds-red) 12%, transparent);
+  color: var(--ds-red);
 }
 
 /* Inline Cell Editing Input */
 .ctp-table-inline-edit {
   width: 100%;
   padding: 4px 8px;
-  border: 1.5px solid var(--ctp-table-accent);
-  background-color: var(--ctp-crust);
-  color: var(--ctp-text);
-  border-radius: var(--ctp-radius-rounded);
+  border: 1.5px solid var(--ds-table-accent);
+  background-color: var(--ds-crust);
+  color: var(--ds-text);
+  border-radius: var(--ds-radius-rounded);
   outline: none;
   font-family: inherit;
   font-size: inherit;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-table-accent) 20%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-table-accent) 20%, transparent);
   box-sizing: border-box;
 }
 
 /* Skeleton animation for loading states */
 .ctp-table-skeleton-row td {
-  padding: var(--ctp-cell-padding, 14px 18px);
-  background-color: var(--ctp-base);
-  border-bottom: 1px solid var(--ctp-surface0);
+  padding: var(--ds-cell-padding, 14px 18px);
+  background-color: var(--ds-base);
+  border-bottom: 1px solid var(--ds-surface0);
 }
 
 .ctp-table-skeleton-row td:first-child {
-  border-left: 1px solid var(--ctp-surface1);
+  border-left: 1px solid var(--ds-surface1);
 }
 
 .ctp-table-skeleton-row td:last-child {
-  border-right: 1px solid var(--ctp-surface1);
+  border-right: 1px solid var(--ds-surface1);
 }
 
 .ctp-table-skeleton-row.ctp-table-tr--first td {
-  border-top: 1px solid var(--ctp-surface1);
+  border-top: 1px solid var(--ds-surface1);
 }
 
 .ctp-table-skeleton-row.ctp-table-tr--first td:first-child {
@@ -375,7 +375,7 @@
 }
 
 .ctp-table-skeleton-row.ctp-table-tr--last td {
-  border-bottom: 1px solid var(--ctp-surface1);
+  border-bottom: 1px solid var(--ds-surface1);
 }
 
 .ctp-table-skeleton-row.ctp-table-tr--last td:first-child {
@@ -389,7 +389,7 @@
 .ctp-table-skeleton-bar {
   display: block;
   height: 16px;
-  background-color: var(--ctp-surface1);
+  background-color: var(--ds-surface1);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -434,7 +434,7 @@
 .ctp-table-empty {
   text-align: center;
   padding: 2.5rem 1.5rem;
-  color: var(--ctp-overlay1);
+  color: var(--ds-overlay1);
   font-size: 0.95rem;
 }
 
@@ -443,36 +443,36 @@
   font-family: monospace;
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--ctp-mauve);
+  color: var(--ds-mauve);
 }
 
 .ctp-table-cell--key-name {
   font-weight: 600;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   font-size: 0.95rem;
 }
 
 .ctp-table-cell--key-email {
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   font-size: 0.85rem;
 }
 
 .ctp-table-cell--key-role {
   font-weight: 500;
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 .ctp-table-cell--key-department {
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
 }
 
 .ctp-table-cell--key-salary {
   font-weight: 600;
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 .ctp-table-cell--key-joinedDate {
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   font-size: 0.85rem;
 }
 
@@ -486,16 +486,16 @@
   padding: 0;
   border: none;
   background: transparent;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   cursor: pointer;
   border-radius: 4px;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   flex-shrink: 0;
 }
 
 .ctp-tree-toggle-btn:hover {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-text);
+  background-color: var(--ds-surface0);
+  color: var(--ds-text);
 }
 
 .ctp-tree-indent-guide {

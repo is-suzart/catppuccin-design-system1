@@ -713,7 +713,7 @@ export function TreeTable<T>({
                                     style={{
                                       width: '1px',
                                       height: '100%',
-                                      borderLeft: '1px dashed var(--ctp-surface2)',
+                                      borderLeft: '1px dashed var(--ds-surface2)',
                                       position: 'absolute',
                                       left: '11px',
                                       top: 0,

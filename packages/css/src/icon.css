@@ -2,9 +2,9 @@
 .ctp-icon {
   display: inline-block;
   vertical-align: middle;
-  transition: stroke var(--ctp-transition-duration) var(--ctp-transition-timing),
-              transform var(--ctp-transition-duration) var(--ctp-transition-timing),
-              filter var(--ctp-transition-duration) var(--ctp-transition-timing);
+  transition: stroke var(--ds-transition-duration) var(--ds-transition-timing),
+              transform var(--ds-transition-duration) var(--ds-transition-timing),
+              filter var(--ds-transition-duration) var(--ds-transition-timing);
   flex-shrink: 0;
 }
 
@@ -52,20 +52,20 @@
 }
 
 /* Color Modifier Utilities for raw SVGs */
-.ctp-icon--rosewater { stroke: var(--ctp-rosewater); }
-.ctp-icon--flamingo  { stroke: var(--ctp-flamingo); }
-.ctp-icon--pink      { stroke: var(--ctp-pink); }
-.ctp-icon--mauve     { stroke: var(--ctp-mauve); }
-.ctp-icon--red       { stroke: var(--ctp-red); }
-.ctp-icon--maroon    { stroke: var(--ctp-maroon); }
-.ctp-icon--peach     { stroke: var(--ctp-peach); }
-.ctp-icon--yellow    { stroke: var(--ctp-yellow); }
-.ctp-icon--green     { stroke: var(--ctp-green); }
-.ctp-icon--teal      { stroke: var(--ctp-teal); }
-.ctp-icon--sky       { stroke: var(--ctp-sky); }
-.ctp-icon--sapphire  { stroke: var(--ctp-sapphire); }
-.ctp-icon--blue      { stroke: var(--ctp-blue); }
-.ctp-icon--lavender  { stroke: var(--ctp-lavender); }
-.ctp-icon--text      { stroke: var(--ctp-text); }
-.ctp-icon--subtext1  { stroke: var(--ctp-subtext1); }
-.ctp-icon--subtext0  { stroke: var(--ctp-subtext0); }
+.ctp-icon--rosewater { stroke: var(--ds-rosewater); }
+.ctp-icon--flamingo  { stroke: var(--ds-flamingo); }
+.ctp-icon--pink      { stroke: var(--ds-pink); }
+.ctp-icon--mauve     { stroke: var(--ds-mauve); }
+.ctp-icon--red       { stroke: var(--ds-red); }
+.ctp-icon--maroon    { stroke: var(--ds-maroon); }
+.ctp-icon--peach     { stroke: var(--ds-peach); }
+.ctp-icon--yellow    { stroke: var(--ds-yellow); }
+.ctp-icon--green     { stroke: var(--ds-green); }
+.ctp-icon--teal      { stroke: var(--ds-teal); }
+.ctp-icon--sky       { stroke: var(--ds-sky); }
+.ctp-icon--sapphire  { stroke: var(--ds-sapphire); }
+.ctp-icon--blue      { stroke: var(--ds-blue); }
+.ctp-icon--lavender  { stroke: var(--ds-lavender); }
+.ctp-icon--text      { stroke: var(--ds-text); }
+.ctp-icon--subtext1  { stroke: var(--ds-subtext1); }
+.ctp-icon--subtext0  { stroke: var(--ds-subtext0); }

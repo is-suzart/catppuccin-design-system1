@@ -1,8 +1,8 @@
 /* Stepper Component Core Stylesheet */
 
 .ctp-stepper-wrapper {
-  --ctp-btn-color-token: var(--ctp-mauve); /* default color */
-  --ctp-node-size: 36px;
+  --ds-btn-color-token: var(--ds-mauve); /* default color */
+  --ds-node-size: 36px;
   position: relative;
   width: 100%;
 }
@@ -13,20 +13,20 @@
 }
 
 /* Color mappings for Stepper active states */
-.ctp-stepper--rosewater { --ctp-btn-color-token: var(--ctp-rosewater); }
-.ctp-stepper--flamingo  { --ctp-btn-color-token: var(--ctp-flamingo); }
-.ctp-stepper--pink      { --ctp-btn-color-token: var(--ctp-pink); }
-.ctp-stepper--mauve     { --ctp-btn-color-token: var(--ctp-mauve); }
-.ctp-stepper--red       { --ctp-btn-color-token: var(--ctp-red); }
-.ctp-stepper--maroon    { --ctp-btn-color-token: var(--ctp-maroon); }
-.ctp-stepper--peach     { --ctp-btn-color-token: var(--ctp-peach); }
-.ctp-stepper--yellow    { --ctp-btn-color-token: var(--ctp-yellow); }
-.ctp-stepper--green     { --ctp-btn-color-token: var(--ctp-green); }
-.ctp-stepper--teal      { --ctp-btn-color-token: var(--ctp-teal); }
-.ctp-stepper--sky       { --ctp-btn-color-token: var(--ctp-sky); }
-.ctp-stepper--sapphire  { --ctp-btn-color-token: var(--ctp-sapphire); }
-.ctp-stepper--blue      { --ctp-btn-color-token: var(--ctp-blue); }
-.ctp-stepper--lavender  { --ctp-btn-color-token: var(--ctp-lavender); }
+.ctp-stepper--rosewater { --ds-btn-color-token: var(--ds-rosewater); }
+.ctp-stepper--flamingo  { --ds-btn-color-token: var(--ds-flamingo); }
+.ctp-stepper--pink      { --ds-btn-color-token: var(--ds-pink); }
+.ctp-stepper--mauve     { --ds-btn-color-token: var(--ds-mauve); }
+.ctp-stepper--red       { --ds-btn-color-token: var(--ds-red); }
+.ctp-stepper--maroon    { --ds-btn-color-token: var(--ds-maroon); }
+.ctp-stepper--peach     { --ds-btn-color-token: var(--ds-peach); }
+.ctp-stepper--yellow    { --ds-btn-color-token: var(--ds-yellow); }
+.ctp-stepper--green     { --ds-btn-color-token: var(--ds-green); }
+.ctp-stepper--teal      { --ds-btn-color-token: var(--ds-teal); }
+.ctp-stepper--sky       { --ds-btn-color-token: var(--ds-sky); }
+.ctp-stepper--sapphire  { --ds-btn-color-token: var(--ds-sapphire); }
+.ctp-stepper--blue      { --ds-btn-color-token: var(--ds-blue); }
+.ctp-stepper--lavender  { --ds-btn-color-token: var(--ds-lavender); }
 
 /* --- 1. Horizontal Layout --- */
 .ctp-stepper--horizontal {
@@ -41,11 +41,11 @@
 /* Background Track Line */
 .ctp-stepper--horizontal .ctp-stepper__track {
   position: absolute;
-  top: calc(var(--ctp-node-size) / 2 - 2px);
-  left: calc(100% / (var(--ctp-total-steps) * 2));
-  right: calc(100% / (var(--ctp-total-steps) * 2));
+  top: calc(var(--ds-node-size) / 2 - 2px);
+  left: calc(100% / (var(--ds-total-steps) * 2));
+  right: calc(100% / (var(--ds-total-steps) * 2));
   height: 4px;
-  background-color: var(--ctp-surface0);
+  background-color: var(--ds-surface0);
   border-radius: 2px;
   z-index: 1;
 }
@@ -53,8 +53,8 @@
 /* Active Fill Line */
 .ctp-stepper--horizontal .ctp-stepper__track-active {
   height: 100%;
-  width: var(--ctp-stepper-progress, 0%);
-  background-color: var(--ctp-btn-color-token);
+  width: var(--ds-stepper-progress, 0%);
+  background-color: var(--ds-btn-color-token);
   border-radius: 2px;
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -80,8 +80,8 @@
   flex-direction: column;
   position: relative;
   width: 100%;
-  --ctp-stepper-vertical-gap: 2.6rem;
-  gap: var(--ctp-stepper-vertical-gap);
+  --ds-stepper-vertical-gap: 2.6rem;
+  gap: var(--ds-stepper-vertical-gap);
 }
 
 .ctp-stepper--vertical .ctp-stepper__step {
@@ -94,11 +94,11 @@
 /* Vertical Track Line */
 .ctp-stepper--vertical .ctp-stepper__track {
   position: absolute;
-  top: calc(var(--ctp-node-size) / 2);
-  bottom: calc(-1 * var(--ctp-stepper-vertical-gap));
-  left: calc(var(--ctp-node-size) / 2 - 2px);
+  top: calc(var(--ds-node-size) / 2);
+  bottom: calc(-1 * var(--ds-stepper-vertical-gap));
+  left: calc(var(--ds-node-size) / 2 - 2px);
   width: 4px;
-  background-color: var(--ctp-surface0);
+  background-color: var(--ds-surface0);
   border-radius: 2px;
   z-index: 1;
 }
@@ -110,8 +110,8 @@
 
 .ctp-stepper--vertical .ctp-stepper__track-active {
   width: 100%;
-  height: var(--ctp-stepper-progress, 0%);
-  background-color: var(--ctp-btn-color-token);
+  height: var(--ds-stepper-progress, 0%);
+  background-color: var(--ds-btn-color-token);
   border-radius: 2px;
   transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -120,66 +120,66 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: var(--ctp-node-size);
+  min-height: var(--ds-node-size);
 }
 
 /* --- 3. Dots Variant --- */
 .ctp-stepper--dots {
-  --ctp-node-size: 14px;
+  --ds-node-size: 14px;
 }
 
 .ctp-stepper--dots.ctp-stepper--horizontal .ctp-stepper__track {
-  top: calc(var(--ctp-node-size) / 2 - 1px);
+  top: calc(var(--ds-node-size) / 2 - 1px);
   height: 2px;
 }
 
 .ctp-stepper--dots.ctp-stepper--vertical .ctp-stepper__track {
-  left: calc(var(--ctp-node-size) / 2 - 1px);
+  left: calc(var(--ds-node-size) / 2 - 1px);
   width: 2px;
-  top: calc(var(--ctp-node-size) / 2);
-  bottom: calc(-1 * var(--ctp-stepper-vertical-gap, 2.6rem));
+  top: calc(var(--ds-node-size) / 2);
+  bottom: calc(-1 * var(--ds-stepper-vertical-gap, 2.6rem));
 }
 
 /* --- 4. Node Indicators --- */
 .ctp-stepper__node {
-  width: var(--ctp-node-size);
-  height: var(--ctp-node-size);
+  width: var(--ds-node-size);
+  height: var(--ds-node-size);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-weight: 700;
   font-size: 0.9rem;
-  background-color: var(--ctp-surface0);
-  border: 2px solid var(--ctp-surface1);
-  color: var(--ctp-subtext0);
-  transition: var(--ctp-transition);
+  background-color: var(--ds-surface0);
+  border: 2px solid var(--ds-surface1);
+  color: var(--ds-subtext0);
+  transition: var(--ds-transition);
   user-select: none;
   flex-shrink: 0;
 }
 
 /* Inactive/upcoming status */
 .ctp-stepper__step--upcoming .ctp-stepper__node {
-  background-color: var(--ctp-mantle);
-  border-color: var(--ctp-surface0);
-  color: var(--ctp-overlay1);
+  background-color: var(--ds-mantle);
+  border-color: var(--ds-surface0);
+  color: var(--ds-overlay1);
 }
 
 /* Active Status style */
 .ctp-stepper__step--active .ctp-stepper__node {
-  background-color: var(--ctp-btn-color-token);
-  border-color: var(--ctp-btn-color-token);
-  color: var(--ctp-base);
+  background-color: var(--ds-btn-color-token);
+  border-color: var(--ds-btn-color-token);
+  color: var(--ds-base);
   transform: scale(1.08);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--ctp-btn-color-token) 45%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ds-btn-color-token) 45%, transparent);
 }
 
 /* Completed Status style */
 .ctp-stepper__step--completed .ctp-stepper__node {
-  background-color: var(--ctp-green);
-  border-color: var(--ctp-green);
-  color: var(--ctp-base);
+  background-color: var(--ds-green);
+  border-color: var(--ds-green);
+  color: var(--ds-base);
 }
 
 .ctp-stepper__step--completed .ctp-stepper__node svg {
@@ -193,40 +193,40 @@
   border: none;
 }
 .ctp-stepper--dots .ctp-stepper__step--upcoming .ctp-stepper__node {
-  background-color: var(--ctp-surface1);
+  background-color: var(--ds-surface1);
 }
 .ctp-stepper--dots .ctp-stepper__step--active .ctp-stepper__node {
-  background-color: var(--ctp-btn-color-token);
+  background-color: var(--ds-btn-color-token);
   transform: scale(1.3);
 }
 .ctp-stepper--dots .ctp-stepper__step--completed .ctp-stepper__node {
-  background-color: var(--ctp-green);
+  background-color: var(--ds-green);
 }
 
 /* --- 5. Labels & Descriptions --- */
 .ctp-stepper__title {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--ctp-subtext1);
-  transition: var(--ctp-transition);
+  color: var(--ds-subtext1);
+  transition: var(--ds-transition);
   margin: 0;
 }
 
 .ctp-stepper__step--active .ctp-stepper__title {
-  color: var(--ctp-btn-color-token);
+  color: var(--ds-btn-color-token);
 }
 
 .ctp-stepper__step--completed .ctp-stepper__title {
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 .ctp-stepper__description {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.78rem;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
   margin: 3px 0 0 0;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
 }
 
 /* --- 6. Content Panels Slide Animations --- */

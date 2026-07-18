@@ -10,11 +10,11 @@
   <style>
     /* Custom Demo-specific Page Layout */
     body {
-      background-color: var(--ctp-crust);
-      color: var(--ctp-text);
+      background-color: var(--ds-crust);
+      color: var(--ds-text);
       margin: 0;
       padding: 0;
-      font-family: var(--ctp-font-family);
+      font-family: var(--ds-font-family);
       min-height: 100vh;
     }
 
@@ -30,7 +30,7 @@
     }
 
     .demo-subtitle {
-      color: var(--ctp-subtext1);
+      color: var(--ds-subtext1);
       font-size: 1.15rem;
       margin-top: -0.5rem;
       margin-bottom: 2rem;
@@ -38,11 +38,11 @@
 
     .demo-section {
       margin-bottom: 4.5rem;
-      background-color: var(--ctp-base);
-      border: 1.5px solid var(--ctp-surface0);
+      background-color: var(--ds-base);
+      border: 1.5px solid var(--ds-surface0);
       border-radius: 16px;
       padding: 2.5rem;
-      box-shadow: var(--ctp-shadow-md);
+      box-shadow: var(--ds-shadow-md);
     }
 
     .demo-section-title {
@@ -50,7 +50,7 @@
       font-weight: 700;
       margin-top: 0;
       margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--ctp-surface1);
+      border-bottom: 1px solid var(--ds-surface1);
       padding-bottom: 0.8rem;
     }
 
@@ -69,8 +69,8 @@
     }
 
     .code-tag {
-      background-color: var(--ctp-mantle);
-      color: var(--ctp-rosewater);
+      background-color: var(--ds-mantle);
+      color: var(--ds-rosewater);
       font-family: monospace;
       padding: 0.2rem 0.5rem;
       border-radius: 6px;
@@ -115,7 +115,7 @@
     <!-- SECTION 1: BUTTONS -->
     <section class="demo-section anim--fade-up anim--delay-100">
       <h2 class="demo-section-title text--mauve">🔘 Botões & Cores</h2>
-      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+      <p style="color: var(--ds-subtext0); margin-bottom: 1.5rem;">
         Utilizando classes limpas como <code class="code-tag">.btn</code>, variantes de estilo e mapeamento de tokens de cor do Catppuccin.
       </p>
       
@@ -153,7 +153,7 @@
     <!-- SECTION 2: CARDS & BADGES -->
     <section class="demo-section anim--fade-up anim--delay-200">
       <h2 class="demo-section-title text--pink">📇 Cards & Badges</h2>
-      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+      <p style="color: var(--ds-subtext0); margin-bottom: 1.5rem;">
         Exemplo de containers estruturados com <code class="code-tag">.card</code> e pequenas tags indicadoras com <code class="code-tag">.badge</code>.
       </p>
 
@@ -198,7 +198,7 @@
     <!-- SECTION 3: ALERTS -->
     <section class="demo-section anim--fade-up anim--delay-300">
       <h2 class="demo-section-title text--green">⚠️ Alertas Reativos</h2>
-      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+      <p style="color: var(--ds-subtext0); margin-bottom: 1.5rem;">
         Estruturas CSS de notificação baseadas em classes BEM como <code class="code-tag">.alert</code> e manipuladas por JS nativo no cliente.
       </p>
 
@@ -228,7 +228,7 @@
     <!-- SECTION 4: ANIMATIONS (STAGGER & SCROLL) -->
     <section class="demo-section anim--fade-up anim--delay-500">
       <h2 class="demo-section-title text--teal">⚡ Sistema de Animação & Stagger</h2>
-      <p style="color: var(--ctp-subtext0); margin-bottom: 1.5rem;">
+      <p style="color: var(--ds-subtext0); margin-bottom: 1.5rem;">
         Utilize a classe <code class="code-tag">.anim-stagger</code> e as classes utilitárias de revelação para animar filhos em cascata de forma automatizada no CSS.
       </p>
 
@@ -239,35 +239,35 @@
       <!-- Stagger grid -->
       <div id="staggerGroup" class="demo-grid anim-stagger">
         <!-- Element 1 -->
-        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ds-mantle);">
           <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📁</div>
             <strong>Elemento 1</strong>
-            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+            <div style="font-size: 0.85rem; color: var(--ds-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
           </div>
         </div>
         <!-- Element 2 -->
-        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ds-mantle);">
           <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚙️</div>
             <strong>Elemento 2</strong>
-            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+            <div style="font-size: 0.85rem; color: var(--ds-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
           </div>
         </div>
         <!-- Element 3 -->
-        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ds-mantle);">
           <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
             <strong>Elemento 3</strong>
-            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+            <div style="font-size: 0.85rem; color: var(--ds-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
           </div>
         </div>
         <!-- Element 4 -->
-        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ctp-mantle);">
+        <div class="card card--filled card--rounded anim--scale-in" style="background-color: var(--ds-mantle);">
           <div class="card__body" style="text-align: center; padding: 2rem 1rem;">
             <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
             <strong>Elemento 4</strong>
-            <div style="font-size: 0.85rem; color: var(--ctp-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
+            <div style="font-size: 0.85rem; color: var(--ds-subtext0); margin-top: 0.3rem;">Animado com .anim--scale-in</div>
           </div>
         </div>
       </div>

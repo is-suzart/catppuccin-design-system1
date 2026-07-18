@@ -1,8 +1,8 @@
 <template>
   <div
     role="tabpanel"
-    :id="`ctp-tabpanel-${value}`"
-    :aria-labelledby="`ctp-tabtrigger-${value}`"
+    :id="`ds-tabpanel-${value}`"
+    :aria-labelledby="`ds-tabtrigger-${value}`"
     tabindex="0"
     :class="contentClass"
     :style="{ display: isActive ? '' : 'none' }"

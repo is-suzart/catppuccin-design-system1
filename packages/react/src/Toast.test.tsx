@@ -12,7 +12,7 @@ describe('Toast', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Hello', variant: 'success' }); });
     expect(screen.getByText('Hello')).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveClass('ctp-toast--success');
+    expect(screen.getByRole('alert')).toHaveClass('toast--success');
   });
 
   it('shows toast description', () => {
@@ -38,28 +38,28 @@ describe('Toast', () => {
   it('accepts custom className', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Styled', className: 'my-custom-toast' }); });
-    expect(screen.getByText('Styled').closest('.ctp-toast')).toHaveClass('my-custom-toast');
+    expect(screen.getByText('Styled').closest('.toast')).toHaveClass('my-custom-toast');
   });
 
   it('accepts filled mode with variant color', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Filled', variant: 'success', filled: true }); });
-    const toastEl = screen.getByText('Filled').closest('.ctp-toast');
-    expect(toastEl).toHaveClass('ctp-toast--filled');
-    expect(toastEl).toHaveClass('ctp-toast--success');
+    const toastEl = screen.getByText('Filled').closest('.toast');
+    expect(toastEl).toHaveClass('toast--filled');
+    expect(toastEl).toHaveClass('toast--success');
   });
 
   it('accepts color override from catppuccin palette', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Colored', color: 'mauve' }); });
-    const toastEl = screen.getByText('Colored').closest('.ctp-toast');
-    expect(toastEl).toHaveClass('ctp-toast--color-mauve');
+    const toastEl = screen.getByText('Colored').closest('.toast');
+    expect(toastEl).toHaveClass('toast--color-mauve');
   });
 
   it('renders in correct position container', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Top Right', position: 'top-right' }); });
     expect(screen.getByText('Top Right')).toBeInTheDocument();
-    expect(document.querySelector('.ctp-toast-container--top-right')).toBeTruthy();
+    expect(document.querySelector('.toast-container--top-right')).toBeTruthy();
   });
 });

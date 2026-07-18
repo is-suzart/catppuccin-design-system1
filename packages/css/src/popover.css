@@ -1,18 +1,18 @@
 .ctp-popover {
   position: fixed;
   z-index: 1100;
-  background: var(--ctp-base);
-  border: 1.5px solid var(--ctp-surface0);
+  background: var(--ds-base);
+  border: 1.5px solid var(--ds-surface0);
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -6px rgba(0, 0, 0, 0.2);
-  color: var(--ctp-text);
-  font-family: var(--ctp-font-family);
+  color: var(--ds-text);
+  font-family: var(--ds-font-family);
   font-size: 0.875rem;
   min-width: 200px;
   max-width: 360px;
   padding: 8px;
   animation: ctp-popover-in 0.15s ease;
-  transform-origin: var(--ctp-popover-transform-origin, top center);
+  transform-origin: var(--ds-popover-transform-origin, top center);
 }
 
 .ctp-popover--closing {
@@ -27,8 +27,8 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  background: var(--ctp-base);
-  border: 1.5px solid var(--ctp-surface0);
+  background: var(--ds-base);
+  border: 1.5px solid var(--ds-surface0);
   transform: rotate(45deg);
   z-index: -1;
 }

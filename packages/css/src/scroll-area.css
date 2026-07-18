@@ -48,17 +48,17 @@
   position: relative;
   flex: 1;
   border-radius: 9999px;
-  background: var(--ctp-surface0);
+  background: var(--ds-surface0);
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .ctp-scroll-area__thumb:hover {
-  background: var(--ctp-surface2);
+  background: var(--ds-surface2);
 }
 
 .ctp-scroll-area__thumb:active {
-  background: var(--ctp-overlay0);
+  background: var(--ds-overlay0);
 }
 
 .ctp-scroll-area__corner {
@@ -67,5 +67,5 @@
   right: 0;
   width: 10px;
   height: 10px;
-  background: var(--ctp-surface0);
+  background: var(--ds-surface0);
 }

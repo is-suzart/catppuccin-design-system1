@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   user-select: none;
 }
 
@@ -19,29 +19,29 @@
 .ctp-progressbar-label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
 }
 
 .ctp-progressbar-value-text {
   font-size: 0.82rem;
   font-weight: 700;
   font-family: monospace;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
 }
 
 .ctp-progressbar-track {
   width: 100%;
-  background-color: var(--ctp-surface0);
+  background-color: var(--ds-surface0);
   border-radius: 9999px;
   overflow: hidden;
   position: relative;
-  box-shadow: var(--ctp-shadow-inner);
+  box-shadow: var(--ds-shadow-inner);
 }
 
 .ctp-progressbar-fill {
   height: 100%;
   border-radius: 9999px;
-  background-color: var(--ctp-mauve);
+  background-color: var(--ds-mauve);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
@@ -67,8 +67,8 @@
 .ctp-progressbar-value-inside {
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--ctp-base);
-  font-family: var(--ctp-font-family);
+  color: var(--ds-base);
+  font-family: var(--ds-font-family);
   padding: 0 6px;
   user-select: none;
 }
@@ -122,27 +122,27 @@
 }
 
 /* Progress Bar Color Modifiers */
-.ctp-progressbar--rosewater .ctp-progressbar-fill { background-color: var(--ctp-rosewater); }
-.ctp-progressbar--flamingo .ctp-progressbar-fill { background-color: var(--ctp-flamingo); }
-.ctp-progressbar--pink .ctp-progressbar-fill { background-color: var(--ctp-pink); }
-.ctp-progressbar--mauve .ctp-progressbar-fill { background-color: var(--ctp-mauve); }
-.ctp-progressbar--red .ctp-progressbar-fill { background-color: var(--ctp-red); }
-.ctp-progressbar--maroon .ctp-progressbar-fill { background-color: var(--ctp-maroon); }
-.ctp-progressbar--peach .ctp-progressbar-fill { background-color: var(--ctp-peach); }
-.ctp-progressbar--yellow .ctp-progressbar-fill { background-color: var(--ctp-yellow); }
-.ctp-progressbar--green .ctp-progressbar-fill { background-color: var(--ctp-green); }
-.ctp-progressbar--teal .ctp-progressbar-fill { background-color: var(--ctp-teal); }
-.ctp-progressbar--sky .ctp-progressbar-fill { background-color: var(--ctp-sky); }
-.ctp-progressbar--sapphire .ctp-progressbar-fill { background-color: var(--ctp-sapphire); }
-.ctp-progressbar--blue .ctp-progressbar-fill { background-color: var(--ctp-blue); }
-.ctp-progressbar--lavender .ctp-progressbar-fill { background-color: var(--ctp-lavender); }
+.ctp-progressbar--rosewater .ctp-progressbar-fill { background-color: var(--ds-rosewater); }
+.ctp-progressbar--flamingo .ctp-progressbar-fill { background-color: var(--ds-flamingo); }
+.ctp-progressbar--pink .ctp-progressbar-fill { background-color: var(--ds-pink); }
+.ctp-progressbar--mauve .ctp-progressbar-fill { background-color: var(--ds-mauve); }
+.ctp-progressbar--red .ctp-progressbar-fill { background-color: var(--ds-red); }
+.ctp-progressbar--maroon .ctp-progressbar-fill { background-color: var(--ds-maroon); }
+.ctp-progressbar--peach .ctp-progressbar-fill { background-color: var(--ds-peach); }
+.ctp-progressbar--yellow .ctp-progressbar-fill { background-color: var(--ds-yellow); }
+.ctp-progressbar--green .ctp-progressbar-fill { background-color: var(--ds-green); }
+.ctp-progressbar--teal .ctp-progressbar-fill { background-color: var(--ds-teal); }
+.ctp-progressbar--sky .ctp-progressbar-fill { background-color: var(--ds-sky); }
+.ctp-progressbar--sapphire .ctp-progressbar-fill { background-color: var(--ds-sapphire); }
+.ctp-progressbar--blue .ctp-progressbar-fill { background-color: var(--ds-blue); }
+.ctp-progressbar--lavender .ctp-progressbar-fill { background-color: var(--ds-lavender); }
 
 
 /* --- 2. Custom Scrollbar Styling Utility --- */
 
 .ctp-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: var(--ctp-surface1) var(--ctp-mantle);
+  scrollbar-color: var(--ds-surface1) var(--ds-mantle);
 }
 
 /* WebKit Scrollbar adjustments */
@@ -152,29 +152,29 @@
 }
 
 .ctp-scrollbar::-webkit-scrollbar-track {
-  background: var(--ctp-mantle);
+  background: var(--ds-mantle);
   border-radius: 9999px;
 }
 
 .ctp-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--ctp-surface1);
+  background: var(--ds-surface1);
   border-radius: 9999px;
-  border: 2px solid var(--ctp-mantle);
+  border: 2px solid var(--ds-mantle);
   transition: background-color 0.2s ease;
 }
 
 /* Hover Accent Colors for scroll thumbs */
-.ctp-scrollbar--rosewater::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-rosewater); }
-.ctp-scrollbar--flamingo::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-flamingo); }
-.ctp-scrollbar--pink::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-pink); }
-.ctp-scrollbar--mauve::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-mauve); }
-.ctp-scrollbar--red::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-red); }
-.ctp-scrollbar--maroon::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-maroon); }
-.ctp-scrollbar--peach::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-peach); }
-.ctp-scrollbar--yellow::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-yellow); }
-.ctp-scrollbar--green::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-green); }
-.ctp-scrollbar--teal::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-teal); }
-.ctp-scrollbar--sky::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-sky); }
-.ctp-scrollbar--sapphire::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-sapphire); }
-.ctp-scrollbar--blue::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-blue); }
-.ctp-scrollbar--lavender::-webkit-scrollbar-thumb:hover { background-color: var(--ctp-lavender); }
+.ctp-scrollbar--rosewater::-webkit-scrollbar-thumb:hover { background-color: var(--ds-rosewater); }
+.ctp-scrollbar--flamingo::-webkit-scrollbar-thumb:hover { background-color: var(--ds-flamingo); }
+.ctp-scrollbar--pink::-webkit-scrollbar-thumb:hover { background-color: var(--ds-pink); }
+.ctp-scrollbar--mauve::-webkit-scrollbar-thumb:hover { background-color: var(--ds-mauve); }
+.ctp-scrollbar--red::-webkit-scrollbar-thumb:hover { background-color: var(--ds-red); }
+.ctp-scrollbar--maroon::-webkit-scrollbar-thumb:hover { background-color: var(--ds-maroon); }
+.ctp-scrollbar--peach::-webkit-scrollbar-thumb:hover { background-color: var(--ds-peach); }
+.ctp-scrollbar--yellow::-webkit-scrollbar-thumb:hover { background-color: var(--ds-yellow); }
+.ctp-scrollbar--green::-webkit-scrollbar-thumb:hover { background-color: var(--ds-green); }
+.ctp-scrollbar--teal::-webkit-scrollbar-thumb:hover { background-color: var(--ds-teal); }
+.ctp-scrollbar--sky::-webkit-scrollbar-thumb:hover { background-color: var(--ds-sky); }
+.ctp-scrollbar--sapphire::-webkit-scrollbar-thumb:hover { background-color: var(--ds-sapphire); }
+.ctp-scrollbar--blue::-webkit-scrollbar-thumb:hover { background-color: var(--ds-blue); }
+.ctp-scrollbar--lavender::-webkit-scrollbar-thumb:hover { background-color: var(--ds-lavender); }

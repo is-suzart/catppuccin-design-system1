@@ -40,7 +40,7 @@ const listeners = new Set<(toast: ToastOptions) => void>();
 
 function toast(options: ToastOptions | string): string {
   const opts: ToastOptions = typeof options === 'string' ? { title: options } : options;
-  const id = `ctp-toast-${++toastCount}`;
+  const id = `ds-toast-${++toastCount}`;
   listeners.forEach(fn => fn({ ...opts, id }));
   return id;
 }
@@ -215,7 +215,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode; position?: Toa
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const addToast = useCallback((options: ToastOptions): string => {
-    const id = `ctp-toast-${++toastCount}`;
+    const id = `ds-toast-${++toastCount}`;
     const item: ToastItem = {
       ...defaultToast,
       ...options,

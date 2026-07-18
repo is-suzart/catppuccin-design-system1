@@ -94,8 +94,8 @@ export const Sidebar: React.FC<SidebarProps> & {
     .join(' ');
 
   const cssVariables = {
-    ...(width ? { '--ctp-sidebar-expanded-width': width } : {}),
-    ...(collapsedWidth ? { '--ctp-sidebar-collapsed-width': collapsedWidth } : {}),
+    ...(width ? { '--ds-sidebar-expanded-width': width } : {}),
+    ...(collapsedWidth ? { '--ds-sidebar-collapsed-width': collapsedWidth } : {}),
   } as React.CSSProperties;
 
   const combinedStyle = {

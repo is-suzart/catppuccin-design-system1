@@ -110,8 +110,8 @@ const wrapperClass = computed(() => {
 
 const cssStyle = computed(() => {
   return {
-    '--ctp-total-steps': props.steps.length,
-    '--ctp-stepper-progress': `${progressPercent.value}%`,
+    '--ds-total-steps': props.steps.length,
+    '--ds-stepper-progress': `${progressPercent.value}%`,
   };
 });
 

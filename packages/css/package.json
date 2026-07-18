@@ -2,8 +2,13 @@
   "name": "@catppuccin-ds/css",
   "version": "0.1.0",
   "private": true,
-  "main": "src/index.css",
-  "style": "src/index.css",
+  "main": "dist/index.css",
+  "style": "dist/index.css",
+  "exports": {
+    ".": "./dist/index.css",
+    "./neutral.css": "./dist/neutral.css",
+    "./catppuccin.css": "./dist/catppuccin.css"
+  },
   "bin": {
     "catppuccin-ds-css": "./bin/cli.js"
   },

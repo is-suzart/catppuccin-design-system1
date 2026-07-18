@@ -2,28 +2,28 @@
 
 /* Default Focus Accent is Mauve */
 :root {
-  --ctp-tabs-accent: var(--ctp-mauve);
+  --ds-tabs-accent: var(--ds-mauve);
 }
 
 /* Color mappings */
-.ctp-tabs--rosewater { --ctp-tabs-accent: var(--ctp-rosewater); }
-.ctp-tabs--flamingo  { --ctp-tabs-accent: var(--ctp-flamingo); }
-.ctp-tabs--pink      { --ctp-tabs-accent: var(--ctp-pink); }
-.ctp-tabs--mauve     { --ctp-tabs-accent: var(--ctp-mauve); }
-.ctp-tabs--red       { --ctp-tabs-accent: var(--ctp-red); }
-.ctp-tabs--maroon    { --ctp-tabs-accent: var(--ctp-maroon); }
-.ctp-tabs--peach     { --ctp-tabs-accent: var(--ctp-peach); }
-.ctp-tabs--yellow    { --ctp-tabs-accent: var(--ctp-yellow); }
-.ctp-tabs--green     { --ctp-tabs-accent: var(--ctp-green); }
-.ctp-tabs--teal      { --ctp-tabs-accent: var(--ctp-teal); }
-.ctp-tabs--sky       { --ctp-tabs-accent: var(--ctp-sky); }
-.ctp-tabs--sapphire  { --ctp-tabs-accent: var(--ctp-sapphire); }
-.ctp-tabs--blue      { --ctp-tabs-accent: var(--ctp-blue); }
-.ctp-tabs--lavender  { --ctp-tabs-accent: var(--ctp-lavender); }
+.ctp-tabs--rosewater { --ds-tabs-accent: var(--ds-rosewater); }
+.ctp-tabs--flamingo  { --ds-tabs-accent: var(--ds-flamingo); }
+.ctp-tabs--pink      { --ds-tabs-accent: var(--ds-pink); }
+.ctp-tabs--mauve     { --ds-tabs-accent: var(--ds-mauve); }
+.ctp-tabs--red       { --ds-tabs-accent: var(--ds-red); }
+.ctp-tabs--maroon    { --ds-tabs-accent: var(--ds-maroon); }
+.ctp-tabs--peach     { --ds-tabs-accent: var(--ds-peach); }
+.ctp-tabs--yellow    { --ds-tabs-accent: var(--ds-yellow); }
+.ctp-tabs--green     { --ds-tabs-accent: var(--ds-green); }
+.ctp-tabs--teal      { --ds-tabs-accent: var(--ds-teal); }
+.ctp-tabs--sky       { --ds-tabs-accent: var(--ds-sky); }
+.ctp-tabs--sapphire  { --ds-tabs-accent: var(--ds-sapphire); }
+.ctp-tabs--blue      { --ds-tabs-accent: var(--ds-blue); }
+.ctp-tabs--lavender  { --ds-tabs-accent: var(--ds-lavender); }
 
 /* Core Layout styles */
 .ctp-tabs {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -50,13 +50,13 @@
 
 /* Base trigger button styles */
 .ctp-tabs-trigger {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-weight: 600;
   cursor: pointer;
   border: none;
   background: none;
-  color: var(--ctp-subtext0);
-  transition: var(--ctp-transition);
+  color: var(--ds-subtext0);
+  transition: var(--ds-transition);
   outline: none;
   position: relative;
   display: inline-flex;
@@ -66,7 +66,7 @@
 }
 
 .ctp-tabs-trigger:hover:not(:disabled) {
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 .ctp-tabs-trigger:disabled {
@@ -75,7 +75,7 @@
 }
 
 .ctp-tabs-trigger:focus-visible {
-  outline: 2px solid var(--ctp-tabs-accent);
+  outline: 2px solid var(--ds-tabs-accent);
   outline-offset: 2px;
   z-index: 2;
 }
@@ -99,23 +99,23 @@
 
 /* 1. Default (Rounded Card Tabs) */
 .ctp-tabs-list--default {
-  border-bottom: 2px solid var(--ctp-surface0);
+  border-bottom: 2px solid var(--ds-surface0);
 }
 
 .ctp-tabs--vertical .ctp-tabs-list--default {
   border-bottom: none;
-  border-right: 2px solid var(--ctp-surface0);
+  border-right: 2px solid var(--ds-surface0);
 }
 
 .ctp-tabs-trigger--default {
-  border-radius: var(--ctp-radius-rounded) var(--ctp-radius-rounded) 0 0;
+  border-radius: var(--ds-radius-rounded) var(--ds-radius-rounded) 0 0;
   border: 1.5px solid transparent;
   border-bottom: none;
   margin-bottom: -2px;
 }
 
 .ctp-tabs--vertical .ctp-tabs-trigger--default {
-  border-radius: var(--ctp-radius-rounded) 0 0 var(--ctp-radius-rounded);
+  border-radius: var(--ds-radius-rounded) 0 0 var(--ds-radius-rounded);
   border-bottom: 1.5px solid transparent;
   border-right: none;
   margin-bottom: 0;
@@ -123,27 +123,27 @@
 }
 
 .ctp-tabs-trigger--default:hover:not(:disabled):not([aria-selected="true"]) {
-  background-color: color-mix(in srgb, var(--ctp-tabs-accent) 8%, transparent);
+  background-color: color-mix(in srgb, var(--ds-tabs-accent) 8%, transparent);
 }
 
 .ctp-tabs-trigger--default[aria-selected="true"] {
-  background-color: var(--ctp-surface0);
-  border-color: var(--ctp-surface0);
-  color: var(--ctp-tabs-accent);
+  background-color: var(--ds-surface0);
+  border-color: var(--ds-surface0);
+  color: var(--ds-tabs-accent);
 }
 
 .ctp-tabs-trigger--default {
-  transition: var(--ctp-transition), border-color 0.15s ease, background-color 0.15s ease;
+  transition: var(--ds-transition), border-color 0.15s ease, background-color 0.15s ease;
 }
 
 /* 2. Underline tabs variant */
 .ctp-tabs-list--underline {
-  border-bottom: 1.5px solid var(--ctp-surface1);
+  border-bottom: 1.5px solid var(--ds-surface1);
 }
 
 .ctp-tabs--vertical .ctp-tabs-list--underline {
   border-bottom: none;
-  border-right: 1.5px solid var(--ctp-surface1);
+  border-right: 1.5px solid var(--ds-surface1);
 }
 
 .ctp-tabs-trigger--underline {
@@ -159,12 +159,12 @@
 }
 
 .ctp-tabs-trigger--underline[aria-selected="true"] {
-  color: var(--ctp-tabs-accent);
-  border-bottom-color: var(--ctp-tabs-accent);
+  color: var(--ds-tabs-accent);
+  border-bottom-color: var(--ds-tabs-accent);
 }
 
 .ctp-tabs--vertical .ctp-tabs-trigger--underline[aria-selected="true"] {
-  border-right-color: var(--ctp-tabs-accent);
+  border-right-color: var(--ds-tabs-accent);
 }
 
 .ctp-tabs-trigger--underline {
@@ -177,17 +177,17 @@
 }
 
 .ctp-tabs-trigger--pills {
-  border-radius: var(--ctp-radius-pill);
+  border-radius: var(--ds-radius-pill);
 }
 
 .ctp-tabs-trigger--pills:hover:not(:disabled):not([aria-selected="true"]) {
-  background-color: color-mix(in srgb, var(--ctp-tabs-accent) 8%, transparent);
+  background-color: color-mix(in srgb, var(--ds-tabs-accent) 8%, transparent);
 }
 
 .ctp-tabs-trigger--pills[aria-selected="true"] {
-  background-color: var(--ctp-tabs-accent);
-  color: var(--ctp-base);
-  box-shadow: var(--ctp-shadow-sm);
+  background-color: var(--ds-tabs-accent);
+  color: var(--ds-base);
+  box-shadow: var(--ds-shadow-sm);
 }
 
 .ctp-tabs-trigger--pills {
@@ -196,15 +196,15 @@
 
 /* High contrast text adjustment for latte (light mode) pills active state */
 [data-theme="latte"] .ctp-tabs-trigger--pills[aria-selected="true"] {
-  color: var(--ctp-contrast-light);
+  color: var(--ds-contrast-light);
 }
 
 /* 4. Segmented Block tabs variant */
 .ctp-tabs-list--segmented {
-  background-color: var(--ctp-crust);
-  border-radius: var(--ctp-radius-rounded);
+  background-color: var(--ds-crust);
+  border-radius: var(--ds-radius-rounded);
   padding: 4px;
-  border: 1px solid color-mix(in srgb, var(--ctp-text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ds-text) 5%, transparent);
   display: inline-flex;
 }
 
@@ -213,14 +213,14 @@
 }
 
 .ctp-tabs-trigger--segmented {
-  border-radius: calc(var(--ctp-radius-rounded) - 2px);
+  border-radius: calc(var(--ds-radius-rounded) - 2px);
   flex: 1;
 }
 
 .ctp-tabs-trigger--segmented[aria-selected="true"] {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-tabs-accent);
-  box-shadow: var(--ctp-shadow-sm);
+  background-color: var(--ds-surface0);
+  color: var(--ds-tabs-accent);
+  box-shadow: var(--ds-shadow-sm);
 }
 
 .ctp-tabs-trigger--segmented {
@@ -232,7 +232,7 @@
   display: none;
   outline: none;
   font-size: 0.95rem;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   line-height: 1.5;
 }
 

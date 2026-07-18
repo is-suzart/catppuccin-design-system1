@@ -99,8 +99,8 @@ export class StepperComponent {
 
   cssStyle = computed(() => {
     return {
-      '--ctp-total-steps': String(this.steps().length),
-      '--ctp-stepper-progress': `${this.progressPercent()}%`,
+      '--ds-total-steps': String(this.steps().length),
+      '--ds-stepper-progress': `${this.progressPercent()}%`,
     };
   });
 

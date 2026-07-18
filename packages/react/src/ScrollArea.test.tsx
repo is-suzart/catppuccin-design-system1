@@ -11,6 +11,6 @@ describe('ScrollArea', () => {
 
   it('has correct class', () => {
     const { container } = render(<ScrollArea>Content</ScrollArea>);
-    expect(container.firstChild).toHaveClass('ctp-scroll-area');
+    expect(container.firstChild).toHaveClass('scroll-area');
   });
 });

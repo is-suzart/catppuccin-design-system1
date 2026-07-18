@@ -55,7 +55,7 @@ export class AnimateComponent implements AfterViewInit, OnDestroy {
 
   animStyle = computed(() => {
     const style: Record<string, string | null> = {};
-    if (this.delay() > 0) style['--ctp-anim-delay'] = `${this.delay()}ms`;
+    if (this.delay() > 0) style['--ds-anim-delay'] = `${this.delay()}ms`;
     if (!this.visible()) style['animationPlayState'] = 'paused';
     return style;
   });

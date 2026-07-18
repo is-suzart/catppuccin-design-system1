@@ -2,24 +2,24 @@
 
 /* Default Focus Accent is Mauve */
 :root {
-  --ctp-form-accent: var(--ctp-mauve);
+  --ds-form-accent: var(--ds-mauve);
 }
 
 /* Colors mappings */
-.ctp-form--rosewater { --ctp-form-accent: var(--ctp-rosewater); }
-.ctp-form--flamingo  { --ctp-form-accent: var(--ctp-flamingo); }
-.ctp-form--pink      { --ctp-form-accent: var(--ctp-pink); }
-.ctp-form--mauve     { --ctp-form-accent: var(--ctp-mauve); }
-.ctp-form--red       { --ctp-form-accent: var(--ctp-red); }
-.ctp-form--maroon    { --ctp-form-accent: var(--ctp-maroon); }
-.ctp-form--peach     { --ctp-form-accent: var(--ctp-peach); }
-.ctp-form--yellow    { --ctp-form-accent: var(--ctp-yellow); }
-.ctp-form--green     { --ctp-form-accent: var(--ctp-green); }
-.ctp-form--teal      { --ctp-form-accent: var(--ctp-teal); }
-.ctp-form--sky       { --ctp-form-accent: var(--ctp-sky); }
-.ctp-form--sapphire  { --ctp-form-accent: var(--ctp-sapphire); }
-.ctp-form--blue      { --ctp-form-accent: var(--ctp-blue); }
-.ctp-form--lavender  { --ctp-form-accent: var(--ctp-lavender); }
+.ctp-form--rosewater { --ds-form-accent: var(--ds-rosewater); }
+.ctp-form--flamingo  { --ds-form-accent: var(--ds-flamingo); }
+.ctp-form--pink      { --ds-form-accent: var(--ds-pink); }
+.ctp-form--mauve     { --ds-form-accent: var(--ds-mauve); }
+.ctp-form--red       { --ds-form-accent: var(--ds-red); }
+.ctp-form--maroon    { --ds-form-accent: var(--ds-maroon); }
+.ctp-form--peach     { --ds-form-accent: var(--ds-peach); }
+.ctp-form--yellow    { --ds-form-accent: var(--ds-yellow); }
+.ctp-form--green     { --ds-form-accent: var(--ds-green); }
+.ctp-form--teal      { --ds-form-accent: var(--ds-teal); }
+.ctp-form--sky       { --ds-form-accent: var(--ds-sky); }
+.ctp-form--sapphire  { --ds-form-accent: var(--ds-sapphire); }
+.ctp-form--blue      { --ds-form-accent: var(--ds-blue); }
+.ctp-form--lavender  { --ds-form-accent: var(--ds-lavender); }
 
 /* Form Layout & Grid */
 .ctp-form-grid {
@@ -47,14 +47,14 @@
   flex-direction: column;
   gap: 6px;
   position: relative;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   width: 100%;
 }
 
 .ctp-form-group__label {
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -62,52 +62,52 @@
 }
 
 .ctp-form-group__required-indicator {
-  color: var(--ctp-red);
+  color: var(--ds-red);
 }
 
 .ctp-form-group__description {
   font-size: 0.78rem;
-  color: var(--ctp-overlay1);
+  color: var(--ds-overlay1);
   line-height: 1.3;
 }
 
 .ctp-form-group__error {
   font-size: 0.78rem;
-  color: var(--ctp-red);
+  color: var(--ds-red);
   display: inline-flex;
   align-items: center;
   gap: 4px;
   margin-top: 2px;
-  animation: ctp-shake 0.3s var(--ctp-transition-timing);
+  animation: ctp-shake 0.3s var(--ds-transition-timing);
 }
 
 /* Base Controls: Input, Textarea, Select */
 .ctp-form-control {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.95rem;
-  color: var(--ctp-text);
-  background-color: var(--ctp-surface0);
-  border: 1.5px solid var(--ctp-surface2);
+  color: var(--ds-text);
+  background-color: var(--ds-surface0);
+  border: 1.5px solid var(--ds-surface2);
   outline: none;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   width: 100%;
   box-sizing: border-box;
 }
 
 .ctp-form-control:hover:not(:disabled):not(.ctp-form-control--error) {
-  border-color: var(--ctp-overlay1);
+  border-color: var(--ds-overlay1);
 }
 
 .ctp-form-control:focus:not(:disabled):not(.ctp-form-control--error) {
-  border-color: var(--ctp-form-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-form-accent) 20%, transparent);
-  background-color: var(--ctp-surface1);
+  border-color: var(--ds-form-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-form-accent) 20%, transparent);
+  background-color: var(--ds-surface1);
 }
 
 .ctp-form-control:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background-color: var(--ctp-crust);
+  background-color: var(--ds-crust);
 }
 
 /* Sizes */
@@ -125,9 +125,9 @@
 }
 
 /* Shapes */
-.ctp-form-control--square { border-radius: var(--ctp-radius-square); }
-.ctp-form-control--rounded { border-radius: var(--ctp-radius-rounded); }
-.ctp-form-control--pill { border-radius: var(--ctp-radius-pill); }
+.ctp-form-control--square { border-radius: var(--ds-radius-square); }
+.ctp-form-control--rounded { border-radius: var(--ds-radius-rounded); }
+.ctp-form-control--pill { border-radius: var(--ds-radius-pill); }
 
 /* Textarea specific */
 textarea.ctp-form-control {
@@ -166,10 +166,10 @@ select.ctp-form-control--lg {
 
 /* Error state styling */
 .ctp-form-control--error {
-  border-color: var(--ctp-red) !important;
+  border-color: var(--ds-red) !important;
 }
 .ctp-form-control--error:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-red) 20%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-red) 20%, transparent) !important;
 }
 
 /* Custom Checkbox & Custom Switch Row Container */
@@ -179,9 +179,9 @@ select.ctp-form-control--lg {
   gap: 10px;
   cursor: pointer;
   user-select: none;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.95rem;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   padding: 4px 0;
 }
 
@@ -205,33 +205,33 @@ select.ctp-form-control--lg {
 .ctp-checkbox-box {
   width: 20px;
   height: 20px;
-  border: 1.5px solid var(--ctp-surface2);
-  background-color: var(--ctp-surface0);
+  border: 1.5px solid var(--ds-surface2);
+  background-color: var(--ds-surface0);
   border-radius: 4px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: var(--ctp-transition);
-  color: var(--ctp-base);
+  transition: var(--ds-transition);
+  color: var(--ds-base);
   flex-shrink: 0;
 }
 
 .ctp-checkbox-row:hover:not(.ctp-checkbox-row--disabled) .ctp-checkbox-box {
-  border-color: var(--ctp-overlay1);
+  border-color: var(--ds-overlay1);
 }
 
 .ctp-checkbox-row input:focus-visible + .ctp-checkbox-box {
-  border-color: var(--ctp-form-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-form-accent) 20%, transparent);
+  border-color: var(--ds-form-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-form-accent) 20%, transparent);
 }
 
 .ctp-checkbox-row input:checked + .ctp-checkbox-box {
-  background-color: var(--ctp-form-accent);
-  border-color: var(--ctp-form-accent);
-  color: var(--ctp-contrast-light);
+  background-color: var(--ds-form-accent);
+  border-color: var(--ds-form-accent);
+  color: var(--ds-contrast-light);
 }
 [data-theme="latte"] .ctp-checkbox-row input:checked + .ctp-checkbox-box {
-  color: var(--ctp-contrast-light); /* keep light text on primary accents */
+  color: var(--ds-contrast-light); /* keep light text on primary accents */
 }
 
 /* Check icon sizing */
@@ -251,29 +251,29 @@ select.ctp-form-control--lg {
 .ctp-switch-track {
   width: 42px;
   height: 24px;
-  background-color: var(--ctp-surface2);
-  border-radius: var(--ctp-radius-pill);
+  background-color: var(--ds-surface2);
+  border-radius: var(--ds-radius-pill);
   position: relative;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   flex-shrink: 0;
 }
 
 .ctp-switch-row:hover:not(.ctp-switch-row--disabled) .ctp-switch-track {
-  background-color: var(--ctp-surface1);
+  background-color: var(--ds-surface1);
 }
 
 .ctp-switch-row input:focus-visible + .ctp-switch-track {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-form-accent) 25%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-form-accent) 25%, transparent);
 }
 
 .ctp-switch-row input:checked + .ctp-switch-track {
-  background-color: var(--ctp-form-accent);
+  background-color: var(--ds-form-accent);
 }
 
 .ctp-switch-thumb {
   width: 18px;
   height: 18px;
-  background-color: var(--ctp-text);
+  background-color: var(--ds-text);
   border-radius: 50%;
   position: absolute;
   top: 3px;
@@ -283,7 +283,7 @@ select.ctp-form-control--lg {
 
 .ctp-switch-row input:checked + .ctp-switch-track .ctp-switch-thumb {
   transform: translateX(18px);
-  background-color: var(--ctp-base);
+  background-color: var(--ds-base);
 }
 
 /* Custom Radio Group Design */
@@ -305,9 +305,9 @@ select.ctp-form-control--lg {
   gap: 10px;
   cursor: pointer;
   user-select: none;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.95rem;
-  color: var(--ctp-text);
+  color: var(--ds-text);
 }
 
 .ctp-radio-item--disabled {
@@ -318,34 +318,34 @@ select.ctp-form-control--lg {
 .ctp-radio-circle {
   width: 20px;
   height: 20px;
-  border: 1.5px solid var(--ctp-surface2);
+  border: 1.5px solid var(--ds-surface2);
   border-radius: 50%;
-  background-color: var(--ctp-surface0);
+  background-color: var(--ds-surface0);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   flex-shrink: 0;
 }
 
 .ctp-radio-item:hover:not(.ctp-radio-item--disabled) .ctp-radio-circle {
-  border-color: var(--ctp-overlay1);
+  border-color: var(--ds-overlay1);
 }
 
 .ctp-radio-item input:focus-visible + .ctp-radio-circle {
-  border-color: var(--ctp-form-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-form-accent) 20%, transparent);
+  border-color: var(--ds-form-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-form-accent) 20%, transparent);
 }
 
 .ctp-radio-item input:checked + .ctp-radio-circle {
-  border-color: var(--ctp-form-accent);
+  border-color: var(--ds-form-accent);
 }
 
 .ctp-radio-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: var(--ctp-form-accent);
+  background-color: var(--ds-form-accent);
   transform: scale(0);
   transition: transform 0.15s cubic-bezier(0.12, 0.4, 0.29, 1.46);
 }
@@ -360,7 +360,7 @@ select.ctp-form-control--lg {
   align-items: center;
   gap: 14px;
   width: 100%;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
 }
 
 .ctp-slider {
@@ -368,8 +368,8 @@ select.ctp-form-control--lg {
   appearance: none;
   flex: 1;
   height: 6px;
-  background-color: var(--ctp-surface2);
-  border-radius: var(--ctp-radius-pill);
+  background-color: var(--ds-surface2);
+  border-radius: var(--ds-radius-pill);
   outline: none;
   transition: background-color 0.2s;
   cursor: pointer;
@@ -382,9 +382,9 @@ select.ctp-form-control--lg {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: var(--ctp-form-accent);
-  border: 2px solid var(--ctp-base);
-  box-shadow: var(--ctp-shadow-sm);
+  background-color: var(--ds-form-accent);
+  border: 2px solid var(--ds-base);
+  box-shadow: var(--ds-shadow-sm);
   cursor: pointer;
   transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -393,9 +393,9 @@ select.ctp-form-control--lg {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: var(--ctp-form-accent);
-  border: 2px solid var(--ctp-base);
-  box-shadow: var(--ctp-shadow-sm);
+  background-color: var(--ds-form-accent);
+  border: 2px solid var(--ds-base);
+  box-shadow: var(--ds-shadow-sm);
   cursor: pointer;
   transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -409,23 +409,23 @@ select.ctp-form-control--lg {
 }
 
 .ctp-slider:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-form-accent) 25%, transparent), var(--ctp-shadow-sm);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-form-accent) 25%, transparent), var(--ds-shadow-sm);
 }
 
 .ctp-slider:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ctp-form-accent) 25%, transparent), var(--ctp-shadow-sm);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-form-accent) 25%, transparent), var(--ds-shadow-sm);
 }
 
 .ctp-slider-value {
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--ctp-text);
+  color: var(--ds-text);
   min-width: 32px;
   text-align: right;
-  background-color: var(--ctp-surface0);
-  border: 1px solid var(--ctp-surface2);
-  border-radius: var(--ctp-radius-rounded);
+  background-color: var(--ds-surface0);
+  border: 1px solid var(--ds-surface2);
+  border-radius: var(--ds-radius-rounded);
   padding: 2px 6px;
 }
 

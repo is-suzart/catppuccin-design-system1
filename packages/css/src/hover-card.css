@@ -1,12 +1,12 @@
 .ctp-hover-card {
   position: fixed;
   z-index: 1100;
-  background: var(--ctp-base);
-  border: 1.5px solid var(--ctp-surface0);
+  background: var(--ds-base);
+  border: 1.5px solid var(--ds-surface0);
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 10px -6px rgba(0, 0, 0, 0.2);
-  color: var(--ctp-text);
-  font-family: var(--ctp-font-family);
+  color: var(--ds-text);
+  font-family: var(--ds-font-family);
   font-size: 0.875rem;
   min-width: 240px;
   max-width: 360px;
@@ -26,8 +26,8 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  background: var(--ctp-base);
-  border: 1.5px solid var(--ctp-surface0);
+  background: var(--ds-base);
+  border: 1.5px solid var(--ds-surface0);
   transform: rotate(45deg);
   z-index: -1;
 }
@@ -55,7 +55,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--ctp-surface0);
+  background: var(--ds-surface0);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -73,13 +73,13 @@
 
 .ctp-hover-card__handle {
   font-size: 0.8rem;
-  color: var(--ctp-subtext0);
+  color: var(--ds-subtext0);
 }
 
 .ctp-hover-card__body {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--ctp-subtext1);
+  color: var(--ds-subtext1);
 }
 
 @keyframes ctp-hover-card-in {

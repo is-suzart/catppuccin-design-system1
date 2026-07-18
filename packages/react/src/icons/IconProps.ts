@@ -40,7 +40,7 @@ export const resolveIconColor = (color?: string): string => {
     'surface2', 'surface1', 'surface0'
   ];
   if (ctpColors.includes(color)) {
-    return `var(--ctp-${color})`;
+    return `var(--ds-${color})`;
   }
   return color;
 };

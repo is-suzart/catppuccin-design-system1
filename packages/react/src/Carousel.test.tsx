@@ -65,6 +65,6 @@ describe('Carousel', () => {
         <div>B</div>
       </Carousel>
     );
-    expect(screen.getByLabelText('Go to slide 1')).toHaveClass('ctp-carousel__dot--active');
+    expect(screen.getByLabelText('Go to slide 1')).toHaveClass('carousel__dot--active');
   });
 });

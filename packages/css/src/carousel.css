@@ -1,7 +1,7 @@
 .ctp-carousel {
   position: relative;
   overflow: hidden;
-  font-family: var(--ctp-font-family);
+  font-family: var(--ds-font-family);
 }
 
 .ctp-carousel__viewport {
@@ -27,25 +27,25 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--ctp-base);
-  border: 1.5px solid var(--ctp-surface0);
-  color: var(--ctp-text);
+  background: var(--ds-base);
+  border: 1.5px solid var(--ds-surface0);
+  color: var(--ds-text);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--ctp-transition);
-  box-shadow: var(--ctp-shadow-md);
+  transition: var(--ds-transition);
+  box-shadow: var(--ds-shadow-md);
   opacity: 0.8;
 }
 
 .ctp-carousel__btn:hover {
   opacity: 1;
-  background: var(--ctp-mantle);
+  background: var(--ds-mantle);
 }
 
 .ctp-carousel__btn:focus-visible {
-  outline: 2px solid var(--ctp-mauve);
+  outline: 2px solid var(--ds-mauve);
   outline-offset: 2px;
 }
 
@@ -68,19 +68,19 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--ctp-surface1);
+  background: var(--ds-surface1);
   border: none;
   cursor: pointer;
-  transition: var(--ctp-transition);
+  transition: var(--ds-transition);
   padding: 0;
 }
 
 .ctp-carousel__dot:hover {
-  background: var(--ctp-surface2);
+  background: var(--ds-surface2);
 }
 
 .ctp-carousel__dot--active {
-  background: var(--ctp-mauve);
+  background: var(--ds-mauve);
   width: 24px;
   border-radius: 4px;
 }

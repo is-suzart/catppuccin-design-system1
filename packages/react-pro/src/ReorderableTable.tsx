@@ -864,7 +864,7 @@ export function ReorderableTable<T>({
                       className="ctp-table-cell--align-center"
                       style={{
                         padding: '2.5rem 1.5rem',
-                        color: 'var(--ctp-overlay1)',
+                        color: 'var(--ds-overlay1)',
                       }}
                     >
                       {emptyState}

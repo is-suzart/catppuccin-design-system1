@@ -4,11 +4,11 @@
   display: grid;
   width: 100%;
   box-sizing: border-box;
-  background-color: var(--ctp-base);
-  color: var(--ctp-text);
-  font-family: var(--ctp-font-family);
-  --ctp-shell-header-height: 60px;
-  --ctp-shell-sidebar-width: 260px;
+  background-color: var(--ds-base);
+  color: var(--ds-text);
+  font-family: var(--ds-font-family);
+  --ds-shell-header-height: 60px;
+  --ds-shell-sidebar-width: 260px;
 }
 
 /* Fullscreen mode (takes over window view and disables body scroll) */
@@ -29,8 +29,8 @@
 
 /* Header on top, Sidebar and Content below */
 .ctp-shell--header-first {
-  grid-template-rows: var(--ctp-shell-header-height) 1fr;
-  grid-template-columns: var(--ctp-shell-sidebar-width) 1fr;
+  grid-template-rows: var(--ds-shell-header-height) 1fr;
+  grid-template-columns: var(--ds-shell-sidebar-width) 1fr;
   grid-template-areas:
     "header header"
     "sidebar main";
@@ -38,8 +38,8 @@
 
 /* Sidebar full height on left, Header and Content on right */
 .ctp-shell--sidebar-first {
-  grid-template-rows: var(--ctp-shell-header-height) 1fr;
-  grid-template-columns: var(--ctp-shell-sidebar-width) 1fr;
+  grid-template-rows: var(--ds-shell-header-height) 1fr;
+  grid-template-columns: var(--ds-shell-sidebar-width) 1fr;
   grid-template-areas:
     "sidebar header"
     "sidebar main";
@@ -47,7 +47,7 @@
 
 /* Only Header and Content, no Sidebar */
 .ctp-shell--simple {
-  grid-template-rows: var(--ctp-shell-header-height) 1fr;
+  grid-template-rows: var(--ds-shell-header-height) 1fr;
   grid-template-columns: 1fr;
   grid-template-areas:
     "header"
@@ -65,12 +65,12 @@
 
 /* Collapse sidebar completely (0px width) */
 .ctp-shell--sidebar-collapsed {
-  --ctp-shell-sidebar-width: 0px;
+  --ds-shell-sidebar-width: 0px;
 }
 
 /* Mini sidebar layout (icons-only) */
 .ctp-shell--sidebar-mini {
-  --ctp-shell-sidebar-width: 64px;
+  --ds-shell-sidebar-width: 64px;
 }
 
 /* ──────────────────────────────────────────────
@@ -83,8 +83,8 @@
   display: flex;
   align-items: center;
   padding: 0 1.5rem;
-  background-color: var(--ctp-mantle);
-  border-bottom: 1px solid var(--ctp-surface0);
+  background-color: var(--ds-mantle);
+  border-bottom: 1px solid var(--ds-surface0);
   box-sizing: border-box;
   z-index: 10;
   overflow: hidden;
@@ -93,12 +93,12 @@
 /* Left/Right side drawer navigation */
 .ctp-shell__sidebar {
   grid-area: sidebar;
-  background-color: var(--ctp-crust);
-  border-right: 1px solid var(--ctp-surface0);
+  background-color: var(--ds-crust);
+  border-right: 1px solid var(--ds-surface0);
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
-  transition: width var(--ctp-transition-duration) var(--ctp-transition-timing);
+  transition: width var(--ds-transition-duration) var(--ds-transition-timing);
   z-index: 9;
 }
 
@@ -110,7 +110,7 @@
   min-height: 0; /* Ensures inner overflow scrolls work correctly */
   min-width: 0;
   box-sizing: border-box;
-  background-color: var(--ctp-base);
+  background-color: var(--ds-base);
 }
 
 /* Main content view within main wrapper */
@@ -147,32 +147,32 @@
   /* Translate sidebar off-screen */
   .ctp-shell__sidebar {
     position: fixed;
-    top: var(--ctp-shell-header-height);
+    top: var(--ds-shell-header-height);
     left: 0;
     bottom: 0;
-    width: var(--ctp-shell-sidebar-width);
+    width: var(--ds-shell-sidebar-width);
     transform: translateX(-100%);
-    transition: transform var(--ctp-transition-duration) var(--ctp-transition-timing);
+    transition: transform var(--ds-transition-duration) var(--ds-transition-timing);
     z-index: 1001;
-    border-right: 1px solid var(--ctp-surface0);
-    box-shadow: var(--ctp-shadow-lg);
+    border-right: 1px solid var(--ds-surface0);
+    box-shadow: var(--ds-shadow-lg);
   }
 
   /* When mobile sidebar is actively toggled open */
   .ctp-shell--sidebar-mobile-open .ctp-shell__sidebar {
     transform: translateX(0);
-    --ctp-shell-sidebar-width: 260px; /* Force default mobile sidebar width */
+    --ds-shell-sidebar-width: 260px; /* Force default mobile sidebar width */
   }
 
   /* Show backdrop to capture clicks outside the drawer */
   .ctp-shell--sidebar-mobile-open .ctp-shell__backdrop {
     display: block;
     position: fixed;
-    top: var(--ctp-shell-header-height);
+    top: var(--ds-shell-header-height);
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: color-mix(in srgb, var(--ctp-crust) 60%, transparent);
+    background-color: color-mix(in srgb, var(--ds-crust) 60%, transparent);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     z-index: 1000;
