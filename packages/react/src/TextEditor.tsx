@@ -187,7 +187,8 @@ const ToolbarBtn: React.FC<ToolbarBtnProps> = ({ onClick, active, disabled, titl
   return (
     <button
       type="button"
-      className={`${cnEl(prefix, 'editor', 'toolbar-btn')}${active ? ` ${prefix}-editor__toolbar-btn--active` : ''}`}
+      className={cnEl(prefix, 'editor', 'toolbar-btn')}
+      data-state={active ? 'active' : undefined}
       onClick={onClick}
       disabled={disabled}
       title={title}
@@ -512,7 +513,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
                   onKeyDown={(e) => { if (e.key === 'Enter') setLink(); if (e.key === 'Escape') setShowLinkInput(false); }}
                   autoFocus
                 />
-                <button type="button" className={`${cnEl(prefix, 'editor', 'toolbar-btn')} ${prefix}-editor__toolbar-btn--active`} onClick={setLink} title="Apply link">
+                <button type="button" className={cnEl(prefix, 'editor', 'toolbar-btn')} data-state="active" onClick={setLink} title="Apply link">
                   <Icon d="M20 6 9 17l-5-5" />
                 </button>
               </div>
@@ -618,7 +619,8 @@ export const TextEditor: React.FC<TextEditorProps> = ({
         <div className={cnEl(prefix, 'editor', 'statusbar-right')}>
           <button
             type="button"
-            className={`${cnEl(prefix, 'editor', 'mode-btn')}${viewMode === 'wysiwyg' ? ` ${prefix}-editor__mode-btn--active` : ''}`}
+            className={cnEl(prefix, 'editor', 'mode-btn')}
+            data-state={viewMode === 'wysiwyg' ? 'active' : undefined}
             onClick={() => handleModeSwitch('wysiwyg')}
             title="Rich text mode"
           >
@@ -626,7 +628,8 @@ export const TextEditor: React.FC<TextEditorProps> = ({
           </button>
           <button
             type="button"
-            className={`${cnEl(prefix, 'editor', 'mode-btn')}${viewMode === 'markdown' ? ` ${prefix}-editor__mode-btn--active` : ''}`}
+            className={cnEl(prefix, 'editor', 'mode-btn')}
+            data-state={viewMode === 'markdown' ? 'active' : undefined}
             onClick={() => handleModeSwitch('markdown')}
             title="Markdown source mode"
           >

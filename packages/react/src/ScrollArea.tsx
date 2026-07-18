@@ -97,7 +97,8 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
       </div>
       {showVertical && (
         <div
-          className={`${cnEl(prefix, 'scroll-area', 'scrollbar')} ${prefix}-scroll-area__scrollbar--vertical`}
+          className={cnEl(prefix, 'scroll-area', 'scrollbar')}
+          data-orientation="vertical"
           style={{ opacity: isDragging === 'vertical' ? 1 : 0.6 }}
         >
           <div
@@ -110,7 +111,8 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
       )}
       {showHorizontal && (
         <div
-          className={`${cnEl(prefix, 'scroll-area', 'scrollbar')} ${prefix}-scroll-area__scrollbar--horizontal`}
+          className={cnEl(prefix, 'scroll-area', 'scrollbar')}
+          data-orientation="horizontal"
           style={{ opacity: isDragging === 'horizontal' ? 1 : 0.6 }}
         >
           <div

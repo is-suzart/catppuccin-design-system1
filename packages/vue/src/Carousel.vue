@@ -1,11 +1,11 @@
 <template>
   <div class="ctp-carousel" role="region" aria-label="Carousel">
-    <div class="ctp-carousel__viewport">
-      <div class="ctp-carousel__track" :style="{ transform: `translateX(-${current * 100}%)` }">
+    <div class="ctp-carousel-viewport">
+      <div class="ctp-carousel-track" :style="{ transform: `translateX(-${current * 100}%)` }">
         <div
           v-for="(_, i) in slides"
           :key="i"
-          class="ctp-carousel__slide"
+          class="ctp-carousel-slide"
           role="group"
           aria-roledescription="slide"
           :aria-label="`Slide ${i + 1} of ${slides.length}`"
@@ -16,7 +16,7 @@
     </div>
     <button
       v-if="showArrows && slides.length > 1"
-      class="ctp-carousel__btn ctp-carousel__btn--prev"
+      class="ctp-carousel-btn ctp-carousel-btn" data-state="prev"
       :disabled="current === 0"
       @click="prev"
       aria-label="Previous slide"
@@ -27,7 +27,7 @@
     </button>
     <button
       v-if="showArrows && slides.length > 1"
-      class="ctp-carousel__btn ctp-carousel__btn--next"
+      class="ctp-carousel-btn ctp-carousel-btn" data-state="next"
       :disabled="current === slides.length - 1"
       @click="next"
       aria-label="Next slide"
@@ -36,11 +36,11 @@
         <polyline points="9 18 15 12 9 6" />
       </svg>
     </button>
-    <div v-if="showDots && slides.length > 1" class="ctp-carousel__dots" role="tablist" aria-label="Slides">
+    <div v-if="showDots && slides.length > 1" class="ctp-carousel-dots" role="tablist" aria-label="Slides">
       <button
         v-for="(_, i) in slides"
         :key="i"
-        :class="['ctp-carousel__dot', { 'ctp-carousel__dot--active': i === current }]"
+        class="ctp-carousel-dot" :data-state="i === current ? 'active' : undefined"
         @click="goTo(i)"
         role="tab"
         :aria-selected="i === current"

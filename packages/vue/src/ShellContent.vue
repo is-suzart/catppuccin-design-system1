@@ -15,8 +15,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const contentClass = computed(() => {
   return [
-    'ctp-shell__content',
-    props.scrollable ? 'ctp-shell__content--scrollable' : '',
+    'ctp-shell-content',
+    ,
   ];
 });
 </script>

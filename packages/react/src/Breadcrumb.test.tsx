@@ -27,7 +27,7 @@ describe('Breadcrumb', () => {
   it('marks last item as active', () => {
     render(<Breadcrumb items={items} />);
     const last = screen.getByText('Profile');
-    expect(last).toHaveClass('ctp-breadcrumb__item--active');
+    expect(last).toHaveAttribute('data-state', 'active');
     expect(last).toHaveAttribute('aria-current', 'page');
   });
 

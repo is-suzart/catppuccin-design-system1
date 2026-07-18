@@ -1,18 +1,18 @@
 <template>
   <div :class="tileClass" v-bind="$attrs">
     <slot>
-      <div v-if="$slots.icon || icon" class="ctp-tile__icon">
+      <div v-if="$slots.icon || icon" class="ctp-tile-icon">
         <slot name="icon">{{ icon }}</slot>
       </div>
 
-      <div v-if="$slots.content || title || subtitle" class="ctp-tile__content">
+      <div v-if="$slots.content || title || subtitle" class="ctp-tile-content">
         <slot name="content">
-          <span v-if="title" class="ctp-tile__title">{{ title }}</span>
-          <span v-if="subtitle" class="ctp-tile__subtitle">{{ subtitle }}</span>
+          <span v-if="title" class="ctp-tile-title">{{ title }}</span>
+          <span v-if="subtitle" class="ctp-tile-subtitle">{{ subtitle }}</span>
         </slot>
       </div>
 
-      <div v-if="$slots.meta || meta" class="ctp-tile__meta">
+      <div v-if="$slots.meta || meta" class="ctp-tile-meta">
         <slot name="meta">{{ meta }}</slot>
       </div>
     </slot>

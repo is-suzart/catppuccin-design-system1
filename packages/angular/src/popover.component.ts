@@ -6,7 +6,7 @@ type PopoverPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-sta
   selector: 'ctp-popover',
   standalone: true,
   template: `
-    <div class="ctp-popover__trigger" #triggerRef>
+    <div class="ctp-popover-trigger" #triggerRef>
       <ng-content select="[ctpPopoverTrigger]" />
     </div>
     @if (isOpen()) {
@@ -18,7 +18,7 @@ type PopoverPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-sta
         [style.top.px]="top"
         [style.left.px]="left"
       >
-        <div class="ctp-popover__arrow"></div>
+        <div class="ctp-popover-arrow"></div>
         <ng-content />
       </div>
     }

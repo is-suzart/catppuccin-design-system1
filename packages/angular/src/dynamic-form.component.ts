@@ -18,10 +18,10 @@ export interface FieldSchema {
       <div class="ctp-form-grid">
         @for (field of schema(); track field.id) {
           <div class="ctp-form-group" [class.ctp-form-col-12]="true">
-            <label class="ctp-form-group__label">
+            <label class="ctp-form-group-label">
               {{ field.label }}
               @if (field.required) {
-                <span class="ctp-form-group__required-indicator">*</span>
+                <span class="ctp-form-group-required-indicator">*</span>
               }
             </label>
 

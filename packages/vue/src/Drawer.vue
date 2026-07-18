@@ -14,11 +14,11 @@
       role="dialog"
       aria-modal="true"
     >
-      <div v-if="title || showCloseButton" class="ctp-drawer__header">
-        <div class="ctp-drawer__title">{{ title }}</div>
+      <div v-if="title || showCloseButton" class="ctp-drawer-header">
+        <div class="ctp-drawer-title">{{ title }}</div>
         <button
           v-if="showCloseButton"
-          class="ctp-drawer__close-btn"
+          class="ctp-drawer-close-btn"
           @click="emit('close')"
           aria-label="Close drawer"
         >
@@ -28,10 +28,10 @@
           </svg>
         </button>
       </div>
-      <div class="ctp-drawer__body">
+      <div class="ctp-drawer-body">
         <slot />
       </div>
-      <div v-if="$slots.footer" class="ctp-drawer__footer">
+      <div v-if="$slots.footer" class="ctp-drawer-footer">
         <slot name="footer" />
       </div>
     </div>

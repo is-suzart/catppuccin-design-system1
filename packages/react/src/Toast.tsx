@@ -10,6 +10,7 @@ export type ToastColor =
   | 'peach' | 'yellow' | 'green' | 'teal' | 'sky' | 'sapphire' | 'blue' | 'lavender';
 
 export interface ToastOptions {
+  id?: string;
   title?: string;
   description?: string;
   variant?: ToastVariant;
@@ -46,6 +47,7 @@ function toast(options: ToastOptions | string): string {
 }
 
 const defaultToast: Required<ToastOptions> = {
+  id: '',
   title: '',
   description: '',
   variant: 'info',
@@ -111,7 +113,7 @@ function ToastItem({ data, onRemove }: { data: ToastItem; onRemove: (id: string)
   }, [data.duration, handleClose]);
 
   const classes = [
-    cn(prefix, 'toast', [data.variant, data.filled ? 'filled' : '', data.color ? `color-${data.color}` : '', exiting ? 'exiting' : '']),
+    cn(prefix, 'toast'),
     data.className,
   ].filter(Boolean).join(' ');
 
@@ -120,6 +122,9 @@ function ToastItem({ data, onRemove }: { data: ToastItem; onRemove: (id: string)
       className={classes}
       role="alert"
       aria-live="assertive"
+      data-state={exiting ? 'exiting' : data.variant}
+      data-color={data.color || undefined}
+      data-variant={data.filled ? 'filled' : undefined}
       style={data.style && Object.keys(data.style).length > 0 ? data.style : undefined}
     >
       <div className={cnEl(prefix, 'toast', 'icon')}>{getIcon(data.variant)}</div>
@@ -153,13 +158,13 @@ export const Toaster: React.FC<{
 
   useEffect(() => {
     setMounted(true);
-    const handler = (opts: ToastOptions & { id: string }) => {
+    const handler = (opts: ToastOptions) => {
       const item: ToastItem = {
         ...defaultToast,
         ...defaultOptions,
         ...opts,
         position: opts.position || defaultPosition,
-        id: opts.id,
+        id: opts.id || `ctp-toast-${Date.now()}`,
         createdAt: Date.now(),
         exiting: false,
       };
@@ -185,7 +190,7 @@ export const Toaster: React.FC<{
   return ReactDOM.createPortal(
     <>
       {Array.from(grouped.entries()).map(([pos, items]) => (
-        <div key={pos} className={cn(prefix, 'toast-container', [pos])}>
+        <div key={pos} className={cn(prefix, 'toast-container')} data-state={pos}>
           {items.map(t => (
             <ToastItem key={t.id} data={t} onRemove={removeToast} />
           ))}

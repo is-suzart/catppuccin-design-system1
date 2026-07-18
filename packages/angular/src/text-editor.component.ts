@@ -10,20 +10,20 @@ export type TextEditorColor =
   standalone: true,
   template: `
     <div [class]="containerClass()">
-      <div class="ctp-text-editor__toolbar">
-        <button type="button" (click)="exec('bold')" [class.ctp-text-editor__btn--active]="activeTags().includes('B')" title="Negrito"><strong>B</strong></button>
-        <button type="button" (click)="exec('italic')" [class.ctp-text-editor__btn--active]="activeTags().includes('I')" title="Itálico"><em>I</em></button>
-        <button type="button" (click)="exec('underline')" [class.ctp-text-editor__btn--active]="activeTags().includes('U')" title="Sublinhado"><u>U</u></button>
+      <div class="ctp-text-editor-toolbar">
+        <button type="button" (click)="exec('bold')" [class.ctp-text-editor-btn--active]="activeTags().includes('B')" title="Negrito"><strong>B</strong></button>
+        <button type="button" (click)="exec('italic')" [class.ctp-text-editor-btn--active]="activeTags().includes('I')" title="Itálico"><em>I</em></button>
+        <button type="button" (click)="exec('underline')" [class.ctp-text-editor-btn--active]="activeTags().includes('U')" title="Sublinhado"><u>U</u></button>
       </div>
       <div
         #editorRef
-        class="ctp-text-editor__content"
+        class="ctp-text-editor-content"
         contenteditable="true"
         (input)="onInput()"
         (keydown)="onKeydown($event)"
       ></div>
       @if (showCount()) {
-        <div class="ctp-text-editor__footer">{{ content().length }} caracteres</div>
+        <div class="ctp-text-editor-footer">{{ content().length }} caracteres</div>
       }
     </div>
   `
@@ -67,7 +67,7 @@ export class TextEditorComponent {
   }
 
   private updateContent() {
-    const editorEl = this.el.nativeElement.querySelector('.ctp-text-editor__content');
+    const editorEl = this.el.nativeElement.querySelector('.ctp-text-editor-content');
     if (editorEl) {
       this.content.set(editorEl.innerHTML);
       this.valueChange.emit(editorEl.innerHTML);

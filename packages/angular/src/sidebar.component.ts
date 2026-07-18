@@ -21,14 +21,14 @@ export class SidebarComponent {
 @Component({
   selector: 'ctp-sidebar-header',
   standalone: true,
-  template: '<div class="ctp-sidebar__header"><ng-content></ng-content></div>'
+  template: '<div class="ctp-sidebar-header"><ng-content></ng-content></div>'
 })
 export class SidebarHeaderComponent {}
 
 @Component({
   selector: 'ctp-sidebar-section',
   standalone: true,
-  template: '<div class="ctp-sidebar__section"><ng-content></ng-content></div>'
+  template: '<div class="ctp-sidebar-section"><ng-content></ng-content></div>'
 })
 export class SidebarSectionComponent {}
 
@@ -36,11 +36,11 @@ export class SidebarSectionComponent {}
   selector: 'ctp-sidebar-item',
   standalone: true,
   template: `
-    <a class="ctp-sidebar__item" [class.ctp-sidebar__item--active]="active()">
+    <a class="ctp-sidebar-item" [attr.data-state]="active() ? 'active' : null">
       @if (icon()) {
-        <span class="ctp-sidebar__item-icon">{{ icon() }}</span>
+        <span class="ctp-sidebar-item-icon">{{ icon() }}</span>
       }
-      <span class="ctp-sidebar__item-label"><ng-content></ng-content></span>
+      <span class="ctp-sidebar-item-label"><ng-content></ng-content></span>
     </a>
   `
 })

@@ -16,17 +16,17 @@ export interface SelectOption {
   template: `
     <div [class]="containerClass()" style="position:relative">
       <div
-        class="ctp-multi-select__trigger"
+        class="ctp-multi-select-trigger"
         (click)="toggleOpen()"
       >
         @if (selectedLabels().length > 0) {
-          <span class="ctp-multi-select__tags">
+          <span class="ctp-multi-select-tags">
             @for (label of selectedLabels(); track label) {
-              <span class="ctp-multi-select__tag">{{ label }}</span>
+              <span class="ctp-multi-select-tag">{{ label }}</span>
             }
           </span>
         } @else {
-          <span class="ctp-multi-select__placeholder">{{ placeholder() }}</span>
+          <span class="ctp-multi-select-placeholder">{{ placeholder() }}</span>
         }
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <polyline points="6 9 12 15 18 9"></polyline>
@@ -34,18 +34,18 @@ export interface SelectOption {
       </div>
 
       @if (isOpen()) {
-        <div class="ctp-multi-select__dropdown" style="position:absolute;top:100%;left:0;right:0;z-index:1050">
+        <div class="ctp-multi-select-dropdown" style="position:absolute;top:100%;left:0;right:0;z-index:1050">
           @if (searchable()) {
             <input
-              class="ctp-multi-select__search"
+              class="ctp-multi-select-search"
               type="text"
               placeholder="Buscar..."
               (input)="onSearch($event)"
             />
           }
-          <div class="ctp-multi-select__options">
+          <div class="ctp-multi-select-options">
             @for (opt of filteredOptions(); track opt.value) {
-              <label class="ctp-multi-select__option">
+              <label class="ctp-multi-select-option">
                 <input
                   type="checkbox"
                   [checked]="isSelected(opt.value)"

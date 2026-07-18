@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
+import '@testing-library/jest-dom';
 import { render, screen, act, cleanup } from '@testing-library/react';
 import { Toaster, toast } from './Toast';
 
@@ -12,7 +13,7 @@ describe('Toast', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Hello', variant: 'success' }); });
     expect(screen.getByText('Hello')).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveClass('ctp-toast--success');
+    expect(screen.getByRole('alert')).toHaveAttribute('data-state', 'success');
   });
 
   it('shows toast description', () => {
@@ -45,21 +46,21 @@ describe('Toast', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Filled', variant: 'success', filled: true }); });
     const toastEl = screen.getByText('Filled').closest('.ctp-toast');
-    expect(toastEl).toHaveClass('ctp-toast--filled');
-    expect(toastEl).toHaveClass('ctp-toast--success');
+    expect(toastEl).toHaveAttribute('data-variant', 'filled');
+    expect(toastEl).toHaveAttribute('data-state', 'success');
   });
 
   it('accepts color override from catppuccin palette', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Colored', color: 'mauve' }); });
     const toastEl = screen.getByText('Colored').closest('.ctp-toast');
-    expect(toastEl).toHaveClass('ctp-toast--color-mauve');
+    expect(toastEl).toHaveAttribute('data-color', 'mauve');
   });
 
   it('renders in correct position container', () => {
     render(<Toaster />);
     act(() => { toast({ title: 'Top Right', position: 'top-right' }); });
     expect(screen.getByText('Top Right')).toBeInTheDocument();
-    expect(document.querySelector('.ctp-toast-container--top-right')).toBeTruthy();
+    expect(document.querySelector('.ctp-toast-container[data-state="top-right"]')).toBeTruthy();
   });
 });

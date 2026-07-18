@@ -143,7 +143,8 @@ export const Command: React.FC<CommandProps> = ({
                       id={`${prefix}-cmd-item-${item.id}`}
                       role="option"
                       aria-selected={flatIndex === selectedIndex}
-                      className={`${cnEl(prefix, 'command', 'item')}${flatIndex === selectedIndex ? ` ${prefix}-command__item--selected` : ''}`}
+                      className={cnEl(prefix, 'command', 'item')}
+                      data-state={flatIndex === selectedIndex ? 'selected' : undefined}
                       onClick={() => { item.onSelect?.(); setOpen(false); }}
                       onMouseEnter={() => setSelectedIndex(flatIndex)}
                     >

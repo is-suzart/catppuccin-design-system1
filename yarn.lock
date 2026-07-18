@@ -286,10 +286,10 @@ __metadata:
 
 "@catppuccin-ds/css@file:../../packages/css::locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase":
   version: 0.1.0
-  resolution: "@catppuccin-ds/css@file:../../packages/css#../../packages/css::hash=bcedcd&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
+  resolution: "@catppuccin-ds/css@file:../../packages/css#../../packages/css::hash=fd301c&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
   bin:
     catppuccin-ds-css: ./bin/cli.js
-  checksum: 10c0/ee89b3fefe8c8c34816f1d686be671103fb3595fd50ebc457e48f9d3bec9c3bc37d6665caf1fdb45b96cd02186f0ab9ebde350e73d134d07c2d945ef2ceb6c2c
+  checksum: 10c0/a8304a060a57b0cc39d3cccdf403fdc77159961e64b2b7ef7e1a3970670bf912455f2fae602b134eafebc38885799c3c3c4fee68cdefdcf48495edc2870f00e0
   languageName: node
   linkType: hard
 
@@ -308,7 +308,7 @@ __metadata:
 
 "@catppuccin-ds/react-pro@file:../../packages/react-pro::locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase":
   version: 0.1.0
-  resolution: "@catppuccin-ds/react-pro@file:../../packages/react-pro#../../packages/react-pro::hash=36b683&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
+  resolution: "@catppuccin-ds/react-pro@file:../../packages/react-pro#../../packages/react-pro::hash=f1bc41&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
   peerDependencies:
     "@catppuccin-ds/react": "*"
     "@dnd-kit/core": ^6.3.0
@@ -316,7 +316,7 @@ __metadata:
     "@dnd-kit/utilities": ^3.2.2
     react: ^18.0.0 || ^19.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/5a39ea029af36d8e96aab495d2362342b52afde7adb70eeb9efe8b9931509dbe23dd9411d2c44489f409feec4bf18e7a29bb606a942d63436cab9e5c29d78f58
+  checksum: 10c0/195664d810115fe5b0c7473345016f17a3aaaf6cbc3e3056d7d2d6b63940e88c505e3421d66b47304caa62c5d3b0d9d2d923faef5e4a50da561def2bb9b69708
   languageName: node
   linkType: hard
 
@@ -342,7 +342,7 @@ __metadata:
 
 "@catppuccin-ds/react@file:../../packages/react::locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase":
   version: 0.1.0
-  resolution: "@catppuccin-ds/react@file:../../packages/react#../../packages/react::hash=d31e80&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
+  resolution: "@catppuccin-ds/react@file:../../packages/react#../../packages/react::hash=8968a4&locator=catppuccin-showcase%40workspace%3Aapps%2Fshowcase"
   dependencies:
     "@tiptap/extension-character-count": "npm:^3.26.0"
     "@tiptap/extension-code-block": "npm:^3.26.0"
@@ -367,13 +367,13 @@ __metadata:
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/e736789c439bd817baff66b09a2360f01485c1a3ae445fafd03a2a60399763643c431544f1c8d75ade4872a00ffd3f5a1fdc4b1c64fd37efc5548177f044aadf
+  checksum: 10c0/2ba001752fd9751316c34764967f01d62b1209d305ee084278f66baeca075dc5c29d60a3641d5abbbd5f465eca2deeef23234869518e145c0222f8193ff0b618
   languageName: node
   linkType: hard
 
 "@catppuccin-ds/react@file:../react::locator=%40catppuccin-ds%2Freact-pro%40workspace%3Apackages%2Freact-pro":
   version: 0.1.0
-  resolution: "@catppuccin-ds/react@file:../react#../react::hash=d31e80&locator=%40catppuccin-ds%2Freact-pro%40workspace%3Apackages%2Freact-pro"
+  resolution: "@catppuccin-ds/react@file:../react#../react::hash=8968a4&locator=%40catppuccin-ds%2Freact-pro%40workspace%3Apackages%2Freact-pro"
   dependencies:
     "@tiptap/extension-character-count": "npm:^3.26.0"
     "@tiptap/extension-code-block": "npm:^3.26.0"
@@ -398,7 +398,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/e736789c439bd817baff66b09a2360f01485c1a3ae445fafd03a2a60399763643c431544f1c8d75ade4872a00ffd3f5a1fdc4b1c64fd37efc5548177f044aadf
+  checksum: 10c0/2ba001752fd9751316c34764967f01d62b1209d305ee084278f66baeca075dc5c29d60a3641d5abbbd5f465eca2deeef23234869518e145c0222f8193ff0b618
   languageName: node
   linkType: hard
 

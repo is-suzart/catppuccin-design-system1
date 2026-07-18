@@ -46,26 +46,26 @@ function getCalendarDays(year: number, month: number): (number | null)[] {
       </button>
 
       @if (isOpen()) {
-        <div class="ctp-datepicker__calendar" style="position:absolute;top:calc(100% + 4px);left:0;z-index:1050">
-          <div class="ctp-datepicker__header">
+        <div class="ctp-datepicker-popover" style="position:absolute;top:calc(100% + 4px);left:0;z-index:1050">
+          <div class="ctp-datepicker-header">
             <button (click)="prevMonth()" type="button">&lsaquo;</button>
             <span>{{ MONTHS[viewMonth()] }} {{ viewYear() }}</span>
             <button (click)="nextMonth()" type="button">&rsaquo;</button>
           </div>
-          <div class="ctp-datepicker__days-row">
+          <div class="ctp-datepicker-grid">
             @for (day of DAYS; track day) {
-              <span class="ctp-datepicker__day-name">{{ day }}</span>
+              <span class="ctp-datepicker-weekday">{{ day }}</span>
             }
           </div>
-          <div class="ctp-datepicker__grid">
+          <div class="ctp-datepicker-grid">
             @for (d of calendarDays(); track $index) {
               @if (d === null) {
-                <span class="ctp-datepicker__day ctp-datepicker__day--empty"></span>
+                <span class="ctp-datepicker-cell"></span>
               } @else {
                 <button
                   type="button"
-                  class="ctp-datepicker__day"
-                  [class.ctp-datepicker__day--selected]="isSelected(d)"
+                  class="ctp-datepicker-cell"
+                  [class.ctp-datepicker-cell--selected]="isSelected(d)"
                   (click)="selectDate(d)"
                 >
                   {{ d }}
@@ -95,9 +95,9 @@ export class DatePickerComponent {
 
   protected triggerClass = computed(() => {
     return [
-      'ctp-datepicker__trigger',
-      this.isOpen() ? 'ctp-datepicker__trigger--open' : '',
-      `ctp-datepicker__trigger--${this.color()}`,
+      'ctp-datepicker-trigger',
+      this.isOpen() ? 'ctp-datepicker-trigger--open' : '',
+      `ctp-datepicker-trigger--${this.color()}`,
     ].filter(Boolean).join(' ');
   });
 

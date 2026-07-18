@@ -74,15 +74,15 @@ export class CptAccordionComponent {
   selector: 'ctp-accordion-item',
   standalone: true,
   template: `
-    <div class="ctp-accordion__item" [attr.data-state]="isOpen() ? 'open' : (disabled() ? 'disabled' : null)">
+    <div class="ctp-accordion-item" [attr.data-state]="isOpen() ? 'open' : (disabled() ? 'disabled' : null)">
       <button
         type="button"
-        class="ctp-accordion__header"
+        class="ctp-accordion-header"
         [disabled]="disabled()"
         [attr.aria-expanded]="isOpen()"
         (click)="handleHeaderClick()"
       >
-        <span class="ctp-accordion__title">
+        <span class="ctp-accordion-title">
           @if (title()) {
             {{ title() }}
           }
@@ -90,7 +90,7 @@ export class CptAccordionComponent {
         </span>
         @if (showChevron()) {
           <svg
-            class="ctp-accordion__chevron"
+            class="ctp-accordion-chevron"
             viewBox="0 0 24 24"
           >
             <polyline points="6 9 12 15 18 9" />
@@ -99,11 +99,11 @@ export class CptAccordionComponent {
       </button>
 
       <div
-        class="ctp-accordion__collapse"
+        class="ctp-accordion-collapse"
         [attr.aria-hidden]="!isOpen()"
       >
-        <div class="ctp-accordion__content">
-          <div class="ctp-accordion__body">
+        <div class="ctp-accordion-content">
+          <div class="ctp-accordion-body">
             <ng-content></ng-content>
           </div>
         </div>

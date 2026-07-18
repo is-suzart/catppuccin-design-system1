@@ -1,31 +1,31 @@
 <template>
   <div class="ctp-scroll-area" :style="{ height }">
-    <div ref="viewport" class="ctp-scroll-area__viewport" @scroll="updateThumbs">
+    <div ref="viewport" class="ctp-scroll-area-viewport" @scroll="updateThumbs">
       <slot />
     </div>
     <div
       v-if="showVertical"
-      class="ctp-scroll-area__scrollbar ctp-scroll-area__scrollbar--vertical"
+      class="ctp-scroll-area-scrollbar" data-orientation="vertical"
       :style="{ opacity: isDraggingV ? 1 : 0.6 }"
     >
       <div
-        class="ctp-scroll-area__thumb"
+        class="ctp-scroll-area-thumb"
         :style="{ height: thumbHeight + 'px', transform: `translateY(${thumbTop}px)` }"
         @mousedown.prevent="startDragV"
       />
     </div>
     <div
       v-if="showHorizontal"
-      class="ctp-scroll-area__scrollbar ctp-scroll-area__scrollbar--horizontal"
+      class="ctp-scroll-area-scrollbar" data-orientation="horizontal"
       :style="{ opacity: isDraggingH ? 1 : 0.6 }"
     >
       <div
-        class="ctp-scroll-area__thumb"
+        class="ctp-scroll-area-thumb"
         :style="{ width: thumbWidth + 'px', transform: `translateX(${thumbLeft}px)` }"
         @mousedown.prevent="startDragH"
       />
     </div>
-    <div v-if="showVertical && showHorizontal" class="ctp-scroll-area__corner" />
+    <div v-if="showVertical && showHorizontal" class="ctp-scroll-area-corner" />
   </div>
 </template>
 

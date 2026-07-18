@@ -7,19 +7,19 @@
     :style="cssStyle"
   >
     <!-- Background line track -->
-    <div class="ctp-stepper__track">
-      <div class="ctp-stepper__track-active"></div>
+    <div class="ctp-stepper-track">
+      <div class="ctp-stepper-track-active"></div>
     </div>
 
     <!-- Steps -->
     <div
       v-for="(step, index) in steps"
       :key="index"
-      class="ctp-stepper__step"
+      class="ctp-stepper-step"
       :data-state="getStepStatus(index)"
     >
       <!-- Step node icon / dot / number -->
-      <div class="ctp-stepper__node">
+      <div class="ctp-stepper-node">
         <template v-if="variant !== 'dots'">
           <!-- Completed checkmark icon -->
           <svg v-if="index < currentStep" viewBox="0 0 24 24" fill="currentColor">
@@ -38,10 +38,10 @@
       <!-- Vertical track segment inside step item for vertical layout styling -->
       <div 
         v-if="orientation === 'vertical' && index < steps.length - 1" 
-        class="ctp-stepper__track"
+        class="ctp-stepper-track"
       >
         <div 
-          class="ctp-stepper__track-active"
+          class="ctp-stepper-track-active"
           :style="{
             height: index < currentStep ? '100%' : index === currentStep ? '50%' : '0%'
           }"
@@ -51,10 +51,10 @@
       <!-- Labels (hidden on dots horizontal) -->
       <div 
         v-if="!(variant === 'dots' && orientation === 'horizontal')" 
-        class="ctp-stepper__label-group"
+        class="ctp-stepper-label-group"
       >
-        <h4 class="ctp-stepper__title">{{ step.label }}</h4>
-        <p v-if="step.description" class="ctp-stepper__description">
+        <h4 class="ctp-stepper-title">{{ step.label }}</h4>
+        <p v-if="step.description" class="ctp-stepper-description">
           {{ step.description }}
         </p>
       </div>

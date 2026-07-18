@@ -20,12 +20,12 @@ export class GridComponent {
 
   protected gridClass = computed(() => {
     return [
-      'grid',
-      this.mobile() ? 'grid--mobile' : '',
-      this.multiline() ? 'grid--multiline' : '',
-      `grid--gap-${this.gap()}`,
-      this.align() ? `grid--align-${this.align()}` : '',
-      this.valign() ? `grid--valign-${this.valign()}` : '',
+      'ctp-grid',
+      this.mobile() ? 'ctp-grid-mobile' : '',
+      this.multiline() ? 'ctp-grid-multiline' : '',
+      `ctp-grid-gap-${this.gap()}`,
+      this.align() ? `ctp-grid-align-${this.align()}` : '',
+      this.valign() ? `ctp-grid-valign-${this.valign()}` : '',
     ].filter(Boolean).join(' ');
   });
 }
@@ -41,9 +41,9 @@ export class GridColComponent {
 
   protected colClass = computed(() => {
     return [
-      'grid__col',
-      `grid__col--${this.span()}`,
-      this.offset() ? `grid__col--offset-${this.offset()}` : '',
+      'ctp-grid-col',
+      `ctp-grid-col-${this.span()}`,
+      this.offset() ? `ctp-grid-col-offset-${this.offset()}` : '',
     ].filter(Boolean).join(' ');
   });
 }

@@ -32,7 +32,7 @@ export type ButtonGroupSelectionMode = 'none' | 'single' | 'multiple';
       (keydown)="handleKeyDown($event)"
     >
       @if (selectionMode() === 'single') {
-        <div class="ctp-btn-group__pill" [style]="pillStyle()"></div>
+        <div class="ctp-btn-group-pill" [style]="pillStyle()"></div>
       }
       <ng-content></ng-content>
     </div>

@@ -10,7 +10,7 @@ type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
       @if (src() && !imgError()) {
         <img [src]="src()" [alt]="alt()" (error)="onError()" />
       } @else {
-        <span class="ctp-avatar__fallback">{{ initials() }}</span>
+        <span class="ctp-avatar-fallback">{{ initials() }}</span>
       }
     </div>
   `
@@ -51,7 +51,7 @@ export class AvatarComponent {
         <ng-content select="ctp-avatar" />
       }
       @if (remaining > 0) {
-        <span class="ctp-avatar-group__more" [style]="moreStyle">
+        <span class="ctp-avatar-group-more" [style]="moreStyle">
           +{{ remaining }}
         </span>
       }

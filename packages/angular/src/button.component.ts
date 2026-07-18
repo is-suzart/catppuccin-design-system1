@@ -47,15 +47,15 @@ type ButtonShape = 'square' | 'rounded' | 'pill';
       [attr.data-shape]="shape()"
       [attr.data-state]="isLoading() ? 'loading' : (isActive() ? 'active' : null)"
     >
-      <span class="ctp-btn__content">
+      <span class="ctp-btn-content">
         @if (isLoading()) {
-          <span class="ctp-btn__spinner" aria-hidden="true"></span>
+          <span class="ctp-btn-spinner" aria-hidden="true"></span>
         }
-        <span class="ctp-btn__icon-left" style="display: inline-flex; align-items: center">
+        <span class="ctp-btn-icon-left" style="display: inline-flex; align-items: center">
           <ng-content select="[leftIcon]"></ng-content>
         </span>
         <ng-content></ng-content>
-        <span class="ctp-btn__icon-right" style="display: inline-flex; align-items: center">
+        <span class="ctp-btn-icon-right" style="display: inline-flex; align-items: center">
           <ng-content select="[rightIcon]"></ng-content>
         </span>
       </span>

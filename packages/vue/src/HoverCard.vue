@@ -1,7 +1,7 @@
 <template>
   <div ref="hcEl" style="display:contents">
     <span
-      class="ctp-hover-card__trigger"
+      class="ctp-hover-card-trigger"
       ref="triggerEl"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
@@ -19,7 +19,7 @@
         @mouseenter="onCardEnter"
         @mouseleave="onCardLeave"
       >
-        <div class="ctp-hover-card__arrow" />
+        <div class="ctp-hover-card-arrow" />
         <slot />
       </div>
     </Teleport>

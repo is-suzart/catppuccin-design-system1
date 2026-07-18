@@ -29,12 +29,12 @@ export type DrawerColor =
         aria-modal="true"
       >
         @if (title() || showCloseButton()) {
-          <div class="ctp-drawer__header">
-            <div class="ctp-drawer__title" id="ctp-drawer-title">
+          <div class="ctp-drawer-header">
+            <div class="ctp-drawer-title" id="ctp-drawer-title">
               {{ title() }}
             </div>
             @if (showCloseButton()) {
-              <button class="ctp-drawer__close-btn" (click)="onClose()" aria-label="Close drawer">
+              <button class="ctp-drawer-close-btn" (click)="onClose()" aria-label="Close drawer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -43,11 +43,11 @@ export type DrawerColor =
             }
           </div>
         }
-        <div class="ctp-drawer__body">
+        <div class="ctp-drawer-body">
           <ng-content></ng-content>
         </div>
         @if (footer()) {
-          <div class="ctp-drawer__footer">{{ footer() }}</div>
+          <div class="ctp-drawer-footer">{{ footer() }}</div>
         }
       </div>
     </ctp-overlay>

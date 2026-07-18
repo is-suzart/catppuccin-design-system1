@@ -1,33 +1,33 @@
 <template>
   <div :class="containerClass">
-    <div class="ctp-text-editor__toolbar">
+    <div class="ctp-text-editor-toolbar">
       <button
         type="button"
         @click="exec('bold')"
-        :class="{ 'ctp-text-editor__btn--active': activeTags.includes('B') }"
+        :class="{ 'ctp-text-editor-btn--active': activeTags.includes('B') }"
         title="Negrito"
       ><strong>B</strong></button>
       <button
         type="button"
         @click="exec('italic')"
-        :class="{ 'ctp-text-editor__btn--active': activeTags.includes('I') }"
+        :class="{ 'ctp-text-editor-btn--active': activeTags.includes('I') }"
         title="Itálico"
       ><em>I</em></button>
       <button
         type="button"
         @click="exec('underline')"
-        :class="{ 'ctp-text-editor__btn--active': activeTags.includes('U') }"
+        :class="{ 'ctp-text-editor-btn--active': activeTags.includes('U') }"
         title="Sublinhado"
       ><u>U</u></button>
     </div>
     <div
       ref="editorRef"
-      class="ctp-text-editor__content"
+      class="ctp-text-editor-content"
       contenteditable="true"
       @input="onInput"
       @keydown="onKeydown"
     ></div>
-    <div v-if="showCount" class="ctp-text-editor__footer">{{ content.length }} caracteres</div>
+    <div v-if="showCount" class="ctp-text-editor-footer">{{ content.length }} caracteres</div>
   </div>
 </template>
 

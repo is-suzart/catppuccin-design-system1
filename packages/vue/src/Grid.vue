@@ -27,12 +27,12 @@ const props = withDefaults(defineProps<Props>(), {
 
 const gridClass = computed(() => {
   return [
-    'grid',
-    props.mobile ? 'grid--mobile' : '',
-    props.multiline ? 'grid--multiline' : '',
-    `grid--gap-${props.gap}`,
-    props.align ? `grid--align-${props.align}` : '',
-    props.valign ? `grid--valign-${props.valign}` : '',
+    'ctp-grid',
+    props.mobile ? 'ctp-grid-mobile' : '',
+    props.multiline ? 'ctp-grid-multiline' : '',
+    `ctp-grid-gap-${props.gap}`,
+    props.align ? `ctp-grid-align-${props.align}` : '',
+    props.valign ? `ctp-grid-valign-${props.valign}` : '',
   ];
 });
 </script>

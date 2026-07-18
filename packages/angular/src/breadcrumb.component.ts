@@ -12,17 +12,17 @@ export interface BreadcrumbItem {
     <nav class="ctp-breadcrumb" aria-label="Breadcrumb">
       @for (item of items(); track $index) {
         @if (!$first) {
-          <span class="ctp-breadcrumb__separator" aria-hidden="true">
+          <span class="ctp-breadcrumb-separator" aria-hidden="true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6"/>
             </svg>
           </span>
         }
         @if (item.href && !$last) {
-          <a [href]="item.href" class="ctp-breadcrumb__item">{{ item.label }}</a>
+          <a [href]="item.href" class="ctp-breadcrumb-item">{{ item.label }}</a>
         } @else {
           <span
-            class="ctp-breadcrumb__item{{ $last ? ' ctp-breadcrumb__item--active' : '' }}"
+            class="ctp-breadcrumb-item{{ $last ? ' ctp-breadcrumb-item--active' : '' }}"
             [attr.aria-current]="$last ? 'page' : undefined"
           >
             {{ item.label }}

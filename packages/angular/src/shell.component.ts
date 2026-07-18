@@ -23,21 +23,21 @@ export class ShellComponent {
 @Component({
   selector: 'ctp-shell-header',
   standalone: true,
-  template: '<div class="ctp-shell__header"><ng-content></ng-content></div>'
+  template: '<div class="ctp-shell-header"><ng-content></ng-content></div>'
 })
 export class ShellHeaderComponent {}
 
 @Component({
   selector: 'ctp-shell-sidebar',
   standalone: true,
-  template: '<div class="ctp-shell__sidebar"><ng-content></ng-content></div>'
+  template: '<div class="ctp-shell-sidebar"><ng-content></ng-content></div>'
 })
 export class ShellSidebarComponent {}
 
 @Component({
   selector: 'ctp-shell-main',
   standalone: true,
-  template: '<div class="ctp-shell__main"><ng-content></ng-content></div>'
+  template: '<div class="ctp-shell-main"><ng-content></ng-content></div>'
 })
 export class ShellMainComponent {}
 
@@ -51,8 +51,8 @@ export class ShellContentComponent {
 
   protected contentClass = computed(() => {
     return [
-      'ctp-shell__content',
-      this.scrollable() ? 'ctp-shell__content--scrollable' : '',
+      'ctp-shell-content',
+      ,
     ].filter(Boolean).join(' ');
   });
 }

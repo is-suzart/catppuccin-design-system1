@@ -1,3 +1,3 @@
 <template>
-  <div class="ctp-shell__main"><slot /></div>
+  <div class="ctp-shell-main"><slot /></div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div ref="popoverEl" style="display:contents">
-    <span class="ctp-popover__trigger" ref="triggerEl" @click="toggle">
+    <span class="ctp-popover-trigger" ref="triggerEl" @click="toggle">
       <slot name="trigger" />
     </span>
     <Teleport to="body">
@@ -10,7 +10,7 @@
         class="ctp-popover" :data-placement="actualPlacement"
         :style="{ position: 'fixed', top: top + 'px', left: left + 'px', zIndex: 1100 }"
       >
-        <div class="ctp-popover__arrow" />
+        <div class="ctp-popover-arrow" />
         <slot />
       </div>
     </Teleport>

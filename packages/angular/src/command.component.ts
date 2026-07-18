@@ -15,34 +15,34 @@ export interface CommandItem {
     @if (isOpen()) {
       <div class="ctp-command-overlay" (click)="onOverlayClick($event)" role="dialog" aria-modal="true" aria-label="Command palette">
         <div class="ctp-command">
-          <div class="ctp-command__input-wrapper">
-            <svg class="ctp-command__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <div class="ctp-command-input-wrapper">
+            <svg class="ctp-command-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input
               #inputEl
-              class="ctp-command__input"
+              class="ctp-command-input"
               [placeholder]="placeholder()"
               (input)="onInput($event)"
               (keydown)="onKeyDown($event)"
             />
           </div>
-          <div class="ctp-command__list">
+          <div class="ctp-command-list">
             @if (flatFiltered().length === 0) {
-              <div class="ctp-command__empty">{{ emptyMessage() }}</div>
+              <div class="ctp-command-empty">{{ emptyMessage() }}</div>
             } @else {
               @for (group of groupKeys(); track group) {
                 <div>
-                  <div class="ctp-command__group-label">{{ group }}</div>
+                  <div class="ctp-command-group-label">{{ group }}</div>
                   @for (item of grouped()[group]; track item.id) {
                     <div
-                      [class]="'ctp-command__item' + (flatFiltered().indexOf(item) === selectedIndex() ? ' ctp-command__item--selected' : '')"
+                      class="ctp-command-item" [attr.data-state]="flatFiltered().indexOf(item) === selectedIndex() ? 'selected' : null"
                       (click)="selectItem(item)"
                       (mouseenter)="selectedIndex.set(flatFiltered().indexOf(item))"
                     >
-                      <span class="ctp-command__item-label">{{ item.label }}</span>
+                      <span class="ctp-command-item-label">{{ item.label }}</span>
                       @if (item.shortcut) {
-                        <span class="ctp-command__item-shortcut">{{ item.shortcut }}</span>
+                        <span class="ctp-command-item-shortcut">{{ item.shortcut }}</span>
                       }
                     </div>
                   }

@@ -17,25 +17,25 @@
 
     <div
       v-if="isOpen"
-      class="ctp-datepicker__calendar"
+      class="ctp-datepicker-popover"
       style="position:absolute;top:calc(100% + 4px);left:0;z-index:1050"
     >
-      <div class="ctp-datepicker__header">
+      <div class="ctp-datepicker-header">
         <button @click="prevMonth" type="button">&lsaquo;</button>
         <span>{{ MONTHS[viewMonth] }} {{ viewYear }}</span>
         <button @click="nextMonth" type="button">&rsaquo;</button>
       </div>
-      <div class="ctp-datepicker__days-row">
-        <span v-for="day in DAYS" :key="day" class="ctp-datepicker__day-name">{{ day }}</span>
+      <div class="ctp-datepicker-grid">
+        <span v-for="day in DAYS" :key="day" class="ctp-datepicker-weekday">{{ day }}</span>
       </div>
-      <div class="ctp-datepicker__grid">
+      <div class="ctp-datepicker-grid">
         <template v-for="(d, idx) in calendarDays" :key="idx">
-          <span v-if="d === null" class="ctp-datepicker__day ctp-datepicker__day--empty"></span>
+          <span v-if="d === null" class="ctp-datepicker-cell"></span>
           <button
             v-else
             type="button"
-            class="ctp-datepicker__day"
-            :class="{ 'ctp-datepicker__day--selected': isSelected(d) }"
+            class="ctp-datepicker-cell"
+            :class="{ 'ctp-datepicker-cell--selected': isSelected(d) }"
             @click="selectDate(d)"
           >
             {{ d }}
@@ -95,9 +95,9 @@ const viewMonth = ref(new Date().getMonth());
 
 const triggerClass = computed(() => {
   return [
-    'ctp-datepicker__trigger',
-    isOpen.value ? 'ctp-datepicker__trigger--open' : '',
-    `ctp-datepicker__trigger--${props.color}`,
+    'ctp-datepicker-trigger',
+    isOpen.value ? 'ctp-datepicker-trigger--open' : '',
+    `ctp-datepicker-trigger--${props.color}`,
   ];
 });
 

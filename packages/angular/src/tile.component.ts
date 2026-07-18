@@ -28,23 +28,23 @@ export type TileColor =
     <div [class]="tileClass()">
       <ng-content>
         @if (hasIcon()) {
-          <div class="ctp-tile__icon">
+          <div class="ctp-tile-icon">
             <ng-content select="[icon]"></ng-content>
           </div>
         }
         @if (title() || subtitle() || hasContent()) {
-          <div class="ctp-tile__content">
+          <div class="ctp-tile-content">
             @if (title()) {
-              <span class="ctp-tile__title">{{ title() }}</span>
+              <span class="ctp-tile-title">{{ title() }}</span>
             }
             @if (subtitle()) {
-              <span class="ctp-tile__subtitle">{{ subtitle() }}</span>
+              <span class="ctp-tile-subtitle">{{ subtitle() }}</span>
             }
             <ng-content select="[content]"></ng-content>
           </div>
         }
         @if (hasMeta()) {
-          <div class="ctp-tile__meta">
+          <div class="ctp-tile-meta">
             <ng-content select="[meta]"></ng-content>
           </div>
         }

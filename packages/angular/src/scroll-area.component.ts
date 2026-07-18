@@ -5,13 +5,13 @@ import { Component, input, ViewChild, ElementRef, HostListener, signal, computed
   standalone: true,
   template: `
     <div class="ctp-scroll-area" [style.height]="height()">
-      <div #viewport class="ctp-scroll-area__viewport" (scroll)="updateThumbs()">
+      <div #viewport class="ctp-scroll-area-viewport" (scroll)="updateThumbs()">
         <ng-content />
       </div>
       @if (showVertical()) {
-        <div class="ctp-scroll-area__scrollbar ctp-scroll-area__scrollbar--vertical" [style.opacity]="isDraggingV ? 1 : 0.6">
+        <div class="ctp-scroll-area-scrollbar" data-orientation="vertical" [style.opacity]="isDraggingV ? 1 : 0.6">
           <div
-            class="ctp-scroll-area__thumb"
+            class="ctp-scroll-area-thumb"
             [style.height.px]="thumbHeight()"
             [style.transform]="'translateY(' + thumbTop() + 'px)'"
             (mousedown)="startDragV($event)"
@@ -19,9 +19,9 @@ import { Component, input, ViewChild, ElementRef, HostListener, signal, computed
         </div>
       }
       @if (showHorizontal()) {
-        <div class="ctp-scroll-area__scrollbar ctp-scroll-area__scrollbar--horizontal" [style.opacity]="isDraggingH ? 1 : 0.6">
+        <div class="ctp-scroll-area-scrollbar" data-orientation="horizontal" [style.opacity]="isDraggingH ? 1 : 0.6">
           <div
-            class="ctp-scroll-area__thumb"
+            class="ctp-scroll-area-thumb"
             [style.width.px]="thumbWidth()"
             [style.transform]="'translateX(' + thumbLeft() + 'px)'"
             (mousedown)="startDragH($event)"
@@ -29,7 +29,7 @@ import { Component, input, ViewChild, ElementRef, HostListener, signal, computed
         </div>
       }
       @if (showVertical() && showHorizontal()) {
-        <div class="ctp-scroll-area__corner" />
+        <div class="ctp-scroll-area-corner" />
       }
     </div>
   `

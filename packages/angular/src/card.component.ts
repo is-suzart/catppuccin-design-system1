@@ -54,22 +54,22 @@ export class CardComponent {
   selector: 'ctp-card-header',
   standalone: true,
   template: `
-    <div class="ctp-card__header">
+    <div class="ctp-card-header">
       @if (hasAvatar()) {
-        <div class="ctp-card__avatar">
+        <div class="ctp-card-avatar">
           <ng-content select="[avatar]"></ng-content>
         </div>
       }
-      <div class="ctp-card__header-content">
+      <div class="ctp-card-header-content">
         @if (title()) {
-          <h3 class="ctp-card__title">{{ title() }}</h3>
+          <h3 class="ctp-card-title">{{ title() }}</h3>
         }
         @if (subtitle()) {
-          <p class="ctp-card__subtitle">{{ subtitle() }}</p>
+          <p class="ctp-card-subtitle">{{ subtitle() }}</p>
         }
         <ng-content select="[header-content]"></ng-content>
       </div>
-      <div class="ctp-card__actions">
+      <div class="ctp-card-actions">
         <ng-content select="[actions]"></ng-content>
       </div>
       <ng-content></ng-content>
@@ -86,7 +86,7 @@ export class CardHeaderComponent {
   selector: 'ctp-card-body',
   standalone: true,
   template: `
-    <div class="ctp-card__body">
+    <div class="ctp-card-body">
       <ng-content></ng-content>
     </div>
   `
@@ -97,7 +97,7 @@ export class CardBodyComponent {}
   selector: 'ctp-card-footer',
   standalone: true,
   template: `
-    <div class="ctp-card__footer">
+    <div class="ctp-card-footer">
       <ng-content></ng-content>
     </div>
   `
@@ -108,7 +108,7 @@ export class CardFooterComponent {}
   selector: 'ctp-card-media',
   standalone: true,
   template: `
-    <div class="ctp-card__media">
+    <div class="ctp-card-media">
       @if (src()) {
         <img [src]="src()" [alt]="alt()" />
       } @else {

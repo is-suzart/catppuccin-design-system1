@@ -1,10 +1,10 @@
 <template>
   <div :class="containerClass" style="position:relative" ref="wrapperRef">
-    <div class="ctp-multi-select__trigger" @click="toggleOpen">
-      <span v-if="selectedLabels.length > 0" class="ctp-multi-select__tags">
-        <span v-for="label in selectedLabels" :key="label" class="ctp-multi-select__tag">{{ label }}</span>
+    <div class="ctp-multi-select-trigger" @click="toggleOpen">
+      <span v-if="selectedLabels.length > 0" class="ctp-multi-select-tags">
+        <span v-for="label in selectedLabels" :key="label" class="ctp-multi-select-tag">{{ label }}</span>
       </span>
-      <span v-else class="ctp-multi-select__placeholder">{{ placeholder }}</span>
+      <span v-else class="ctp-multi-select-placeholder">{{ placeholder }}</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
@@ -12,21 +12,21 @@
 
     <Teleport to="body" v-if="isOpen">
       <div
-        class="ctp-multi-select__dropdown"
+        class="ctp-multi-select-dropdown"
         :style="dropdownStyle"
       >
         <input
           v-if="searchable"
-          class="ctp-multi-select__search"
+          class="ctp-multi-select-search"
           type="text"
           placeholder="Buscar..."
           v-model="searchQuery"
         />
-        <div class="ctp-multi-select__options">
+        <div class="ctp-multi-select-options">
           <label
             v-for="opt in filteredOptions"
             :key="opt.value"
-            class="ctp-multi-select__option"
+            class="ctp-multi-select-option"
           >
             <input
               type="checkbox"

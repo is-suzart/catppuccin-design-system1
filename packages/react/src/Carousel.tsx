@@ -60,12 +60,12 @@ export const Carousel: React.FC<CarouselProps> = ({
       </div>
       {showArrows && total > 1 && (
         <>
-          <button className={`${cnEl(prefix, 'carousel', 'btn')} ${prefix}-carousel__btn--prev`} onClick={prev} aria-label="Previous slide" disabled={current === 0}>
+          <button className={cnEl(prefix, 'carousel', 'btn')} data-state="prev" onClick={prev} aria-label="Previous slide" disabled={current === 0}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
-          <button className={`${cnEl(prefix, 'carousel', 'btn')} ${prefix}-carousel__btn--next`} onClick={next} aria-label="Next slide" disabled={current === total - 1}>
+          <button className={cnEl(prefix, 'carousel', 'btn')} data-state="next" onClick={next} aria-label="Next slide" disabled={current === total - 1}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
@@ -77,7 +77,8 @@ export const Carousel: React.FC<CarouselProps> = ({
           {slides.map((_, i) => (
             <button
               key={i}
-              className={`${cnEl(prefix, 'carousel', 'dot')}${i === current ? ` ${prefix}-carousel__dot--active` : ''}`}
+              className={cnEl(prefix, 'carousel', 'dot')}
+              data-state={i === current ? 'active' : undefined}
               onClick={() => goTo(i)}
               role="tab"
               aria-selected={i === current}

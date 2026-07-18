@@ -1,7 +1,7 @@
 <template>
-  <a class="ctp-sidebar__item" :class="{ 'ctp-sidebar__item--active': active }">
-    <span v-if="icon" class="ctp-sidebar__item-icon">{{ icon }}</span>
-    <span class="ctp-sidebar__item-label"><slot /></span>
+  <a class="ctp-sidebar-item" :class="{ 'ctp-sidebar-item--active': active }">
+    <span v-if="icon" class="ctp-sidebar-item-icon">{{ icon }}</span>
+    <span class="ctp-sidebar-item-label"><slot /></span>
   </a>
 </template>
 

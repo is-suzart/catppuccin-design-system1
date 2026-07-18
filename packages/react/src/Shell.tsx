@@ -140,14 +140,18 @@ const ShellContent: React.FC<ShellContentProps> = ({
 }) => {
   const prefix = usePrefix();
   const classes = [
-    cn(prefix, 'shell__content', [scrollable ? 'scrollable' : '']),
+    cnEl(prefix, 'shell', 'content'),
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div className={classes} {...props}>
+    <div
+      className={classes}
+      data-state={scrollable ? 'scrollable' : undefined}
+      {...props}
+    >
       {children}
     </div>
   );

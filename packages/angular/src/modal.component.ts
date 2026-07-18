@@ -20,15 +20,15 @@ type ModalSize = 'sm' | 'md' | 'lg';
         aria-modal="true"
       >
         @if (showCloseButton() || title() || hasCustomHeader()) {
-          <div class="ctp-modal__header">
+          <div class="ctp-modal-header">
             <ng-content select="[header]">
               @if (title()) {
-                <h2 class="ctp-modal__title">{{ title() }}</h2>
+                <h2 class="ctp-modal-title">{{ title() }}</h2>
               }
             </ng-content>
             @if (showCloseButton()) {
               <button
-                class="ctp-modal__close-btn"
+                class="ctp-modal-close-btn"
                 (click)="onCloseModal()"
                 aria-label="Close modal"
               >
@@ -50,12 +50,12 @@ type ModalSize = 'sm' | 'md' | 'lg';
           </div>
         }
 
-        <div class="ctp-modal__body">
+        <div class="ctp-modal-body">
           <ng-content></ng-content>
         </div>
 
         @if (hasFooter()) {
-          <div class="ctp-modal__footer">
+          <div class="ctp-modal-footer">
             <ng-content select="[footer]"></ng-content>
           </div>
         }

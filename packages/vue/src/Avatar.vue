@@ -1,7 +1,7 @@
 <template>
   <div class="ctp-avatar" :data-size="size" :aria-label="alt || fallback || 'Avatar'">
     <img v-if="src && !imgError" :src="src" :alt="alt" @error="imgError = true" />
-    <span v-else class="ctp-avatar__fallback">{{ initials }}</span>
+    <span v-else class="ctp-avatar-fallback">{{ initials }}</span>
   </div>
 </template>
 

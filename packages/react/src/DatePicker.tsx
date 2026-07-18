@@ -163,26 +163,34 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
           }
         }
 
-        const classes = [
-          cnEl(prefix, 'datepicker', 'cell'),
-          isDisabled ? `${prefix}-datepicker__cell--disabled` : '',
-          isToday ? `${prefix}-datepicker__cell--today` : '',
-          isSelected ? `${prefix}-datepicker__cell--selected ${prefix}-datepicker__cell--${color}` : '',
-          isRangeStart ? `${prefix}-datepicker__cell--range-start ${prefix}-datepicker__cell--${color}` : '',
-          isRangeEnd ? `${prefix}-datepicker__cell--range-end ${prefix}-datepicker__cell--${color}` : '',
-          isInRange ? `${prefix}-datepicker__cell--in-range ${prefix}-datepicker__cell--in-range-${color}` : '',
-          !isDisabled && !isSelected && !isRangeStart && !isRangeEnd
-            ? `${prefix}-datepicker__cell--hover-${color}`
-            : '',
-        ]
-          .filter(Boolean)
-          .join(' ');
+        let dataState: string | undefined = undefined;
+        let dataColor: string | undefined = undefined;
+        if (isDisabled) {
+          dataState = 'disabled';
+        } else if (isSelected) {
+          dataState = 'selected';
+          dataColor = color;
+        } else if (isRangeStart) {
+          dataState = 'range-start';
+          dataColor = color;
+        } else if (isRangeEnd) {
+          dataState = 'range-end';
+          dataColor = color;
+        } else if (isInRange) {
+          dataState = `in-range-${color}`;
+        } else if (isToday) {
+          dataState = 'today';
+        } else {
+          dataState = `hover-${color}`;
+        }
 
         return (
           <button
             key={date.toISOString()}
             type="button"
-            className={classes}
+            className={cnEl(prefix, 'datepicker', 'cell')}
+            data-state={dataState}
+            data-color={dataColor}
             disabled={!!isDisabled}
             onClick={() => !isDisabled && onDayClick(date)}
             onMouseEnter={() => !isDisabled && onDayHover(date)}
@@ -238,7 +246,8 @@ const CalendarPopover: React.FC<CalendarPopoverProps> = ({
   return ReactDOM.createPortal(
     <div
       ref={floatingRef}
-      className={`${cnEl(prefix, 'datepicker', 'popover')} ${prefix}-datepicker__popover--${actualPlacement}`}
+      className={cnEl(prefix, 'datepicker', 'popover')}
+      data-placement={actualPlacement}
       style={{ position: 'fixed', top, left, zIndex: 1200 }}
       onMouseDown={(e) => e.stopPropagation()}
     >
@@ -292,7 +301,8 @@ const CalendarPopover: React.FC<CalendarPopoverProps> = ({
         <div className={cnEl(prefix, 'datepicker', 'footer')}>
           <button
             type="button"
-            className={`${cnEl(prefix, 'datepicker', 'today-btn')} ${prefix}-datepicker__today-btn--${color}`}
+            className={cnEl(prefix, 'datepicker', 'today-btn')}
+            data-color={color}
             onClick={onTodayClick}
           >
             Hoje
@@ -444,12 +454,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <button
         ref={triggerRef as React.RefObject<HTMLButtonElement>}
         type="button"
-        className={[
-          cnEl(prefix, 'datepicker', 'trigger'),
-          `${prefix}-datepicker__trigger--${color}`,
-          disabled ? `${prefix}-datepicker__trigger--disabled` : '',
-          isOpen ? `${prefix}-datepicker__trigger--open` : '',
-        ].filter(Boolean).join(' ')}
+        className={cnEl(prefix, 'datepicker', 'trigger')}
+        data-state={isOpen ? 'open' : (disabled ? 'disabled' : undefined)}
+        data-color={color}
         onClick={() => !disabled && setIsOpen(o => !o)}
         disabled={disabled}
         aria-haspopup="true"
@@ -472,11 +479,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           <line x1="8" y1="2" x2="8" y2="6" />
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
-        <span className={displayValue ? `${prefix}-datepicker__value` : `${prefix}-datepicker__placeholder`}>
+        <span className={displayValue ? cnEl(prefix, 'datepicker', 'value') : cnEl(prefix, 'datepicker', 'placeholder')}>
           {displayValue || (placeholder ?? defaultPlaceholder)}
         </span>
         <svg
-          className={`${cnEl(prefix, 'datepicker', 'chevron')}${isOpen ? ` ${prefix}-datepicker__chevron--open` : ''}`}
+          className={cnEl(prefix, 'datepicker', 'chevron')}
+          data-state={isOpen ? 'open' : undefined}
           width="14"
           height="14"
           viewBox="0 0 24 24"

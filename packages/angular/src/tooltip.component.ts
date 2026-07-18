@@ -14,8 +14,8 @@ export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
         [style.zIndex]="'1100'"
         role="tooltip"
       >
-        <div class="ctp-tooltip__content">{{ content() }}</div>
-        <div class="ctp-tooltip__arrow"></div>
+        <div class="ctp-tooltip-content">{{ content() }}</div>
+        <div class="ctp-tooltip-arrow"></div>
       </div>
     }
   `,

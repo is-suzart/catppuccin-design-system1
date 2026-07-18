@@ -260,7 +260,8 @@
 }
 
 /* In-range cells */
-.ctp-datepicker-cell[data-state="in-range"] {
+.ctp-datepicker-cell[data-state="in-range"],
+.ctp-datepicker-cell[data-state^="in-range-"] {
   border-radius: 0;
 }
 

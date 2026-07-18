@@ -21,9 +21,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const colClass = computed(() => {
   return [
-    'grid__col',
-    `grid__col--${props.span}`,
-    props.offset ? `grid__col--offset-${props.offset}` : '',
+    'ctp-grid-col',
+    `ctp-grid-col-${props.span}`,
+    props.offset ? `ctp-grid-col-offset-${props.offset}` : '',
   ];
 });
 </script>

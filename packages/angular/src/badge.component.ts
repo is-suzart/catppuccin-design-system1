@@ -31,16 +31,16 @@ export type BadgeColor =
       [attr.data-color]="color()"
     >
       @if (hasIcon()) {
-        <span class="ctp-badge__icon" style="display: inline-flex; align-items: center">
+        <span class="ctp-badge-icon" style="display: inline-flex; align-items: center">
           <ng-content select="[icon]"></ng-content>
         </span>
       }
-      <span class="ctp-badge__content">
+      <span class="ctp-badge-content">
         <ng-content></ng-content>
       </span>
       @if (isDismissible()) {
         <button
-          class="ctp-badge__close-btn"
+          class="ctp-badge-close-btn"
           (click)="onDismiss($event)"
           aria-label="Dismiss badge"
           style="display: inline-flex; align-items: center; margin-left: 4px;"

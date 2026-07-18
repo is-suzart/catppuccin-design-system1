@@ -7,15 +7,15 @@
     :data-color="color"
     v-bind="$attrs"
   >
-    <span v-if="$slots.icon || icon" class="ctp-badge__icon" style="display: inline-flex; align-items: center">
+    <span v-if="$slots.icon || icon" class="ctp-badge-icon" style="display: inline-flex; align-items: center">
       <slot name="icon">{{ icon }}</slot>
     </span>
-    <span class="ctp-badge__content">
+    <span class="ctp-badge-content">
       <slot />
     </span>
     <button
       v-if="isDismissible"
-      class="ctp-badge__close-btn"
+      class="ctp-badge-close-btn"
       @click="emit('dismiss', $event)"
       aria-label="Dismiss badge"
       style="display: inline-flex; align-items: center; margin-left: 4px;"

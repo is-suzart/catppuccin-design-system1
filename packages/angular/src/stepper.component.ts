@@ -34,15 +34,15 @@ export interface StepItem {
       [style]="cssStyle()"
     >
       <!-- Background line track -->
-      <div class="ctp-stepper__track">
-        <div class="ctp-stepper__track-active"></div>
+      <div class="ctp-stepper-track">
+        <div class="ctp-stepper-track-active"></div>
       </div>
 
       <!-- Steps -->
       @for (step of steps(); track $index) {
-        <div class="ctp-stepper__step" [attr.data-state]="getStepStatus($index)">
+        <div class="ctp-stepper-step" [attr.data-state]="getStepStatus($index)">
           <!-- Step node icon / dot / number -->
-          <div class="ctp-stepper__node">
+          <div class="ctp-stepper-node">
             @if (variant() !== 'dots') {
               @if ($index < currentStep()) {
                 <!-- Completed check icon -->
@@ -59,9 +59,9 @@ export interface StepItem {
 
           <!-- Vertical track segment inside step item for vertical layout styling -->
           @if (orientation() === 'vertical' && $index < steps().length - 1) {
-            <div class="ctp-stepper__track">
+            <div class="ctp-stepper-track">
               <div 
-                class="ctp-stepper__track-active"
+                class="ctp-stepper-track-active"
                 [style.height]="$index < currentStep() ? '100%' : $index === currentStep() ? '50%' : '0%'"
               ></div>
             </div>
@@ -69,10 +69,10 @@ export interface StepItem {
 
           <!-- Labels -->
           @if (!(variant() === 'dots' && orientation() === 'horizontal')) {
-            <div class="ctp-stepper__label-group">
-              <h4 class="ctp-stepper__title">{{ step.label }}</h4>
+            <div class="ctp-stepper-label-group">
+              <h4 class="ctp-stepper-title">{{ step.label }}</h4>
               @if (step.description) {
-                <p class="ctp-stepper__description">{{ step.description }}</p>
+                <p class="ctp-stepper-description">{{ step.description }}</p>
               }
             </div>
           }

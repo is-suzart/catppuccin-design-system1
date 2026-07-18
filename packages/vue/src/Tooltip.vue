@@ -13,8 +13,8 @@
         style="position:fixed;z-index:1100"
         role="tooltip"
       >
-        <div class="ctp-tooltip__content">{{ content }}</div>
-        <div class="ctp-tooltip__arrow"></div>
+        <div class="ctp-tooltip-content">{{ content }}</div>
+        <div class="ctp-tooltip-arrow"></div>
       </div>
     </Teleport>
   </div>

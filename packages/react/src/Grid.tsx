@@ -72,15 +72,15 @@ const GridCol: React.FC<GridColProps> = ({
 }) => {
   const prefix = usePrefix();
   const classes = [
-    `${prefix}-grid__col`,
-    span ? `${prefix}-grid__col--${span}` : '',
-    sm ? `${prefix}-grid__col--sm-${sm}` : '',
-    md ? `${prefix}-grid__col--md-${md}` : '',
-    lg ? `${prefix}-grid__col--lg-${lg}` : '',
-    offset ? `${prefix}-grid__col--offset-${offset}` : '',
-    smOffset ? `${prefix}-grid__col--sm-offset-${smOffset}` : '',
-    mdOffset ? `${prefix}-grid__col--md-offset-${mdOffset}` : '',
-    lgOffset ? `${prefix}-grid__col--lg-offset-${lgOffset}` : '',
+    `${prefix}-grid-col`,
+    span ? `${prefix}-grid-col-${span}` : '',
+    sm ? `${prefix}-grid-col-sm-${sm}` : '',
+    md ? `${prefix}-grid-col-md-${md}` : '',
+    lg ? `${prefix}-grid-col-lg-${lg}` : '',
+    offset ? `${prefix}-grid-col-offset-${offset}` : '',
+    smOffset ? `${prefix}-grid-col-sm-offset-${smOffset}` : '',
+    mdOffset ? `${prefix}-grid-col-md-offset-${mdOffset}` : '',
+    lgOffset ? `${prefix}-grid-col-lg-offset-${lgOffset}` : '',
     className,
   ].filter(Boolean).join(' ');
 

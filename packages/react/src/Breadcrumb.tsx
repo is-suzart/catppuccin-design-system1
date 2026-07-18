@@ -43,7 +43,8 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               </a>
             ) : (
               <span
-                className={`${cnEl(prefix, 'breadcrumb', 'item')}${isLast ? ` ${prefix}-breadcrumb__item--active` : ''}`}
+                className={cnEl(prefix, 'breadcrumb', 'item')}
+                data-state={isLast ? 'active' : undefined}
                 aria-current={isLast ? 'page' : undefined}
               >
                 {item.label}

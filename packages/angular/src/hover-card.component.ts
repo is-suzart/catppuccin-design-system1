@@ -6,7 +6,7 @@ type HoverCardPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-s
   selector: 'ctp-hover-card',
   standalone: true,
   template: `
-    <span class="ctp-hover-card__trigger" #triggerRef
+    <span class="ctp-hover-card-trigger" #triggerRef
       (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
       (focusin)="onFocus()" (focusout)="onBlur()"
     >
@@ -23,7 +23,7 @@ type HoverCardPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-s
         (mouseenter)="onCardEnter()"
         (mouseleave)="onCardLeave()"
       >
-        <div class="ctp-hover-card__arrow"></div>
+        <div class="ctp-hover-card-arrow"></div>
         <ng-content />
       </div>
     }

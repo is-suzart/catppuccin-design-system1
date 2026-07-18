@@ -6,9 +6,9 @@
         :key="field.id"
         class="ctp-form-group ctp-form-col-12"
       >
-        <label class="ctp-form-group__label">
+        <label class="ctp-form-group-label">
           {{ field.label }}
-          <span v-if="field.required" class="ctp-form-group__required-indicator">*</span>
+          <span v-if="field.required" class="ctp-form-group-required-indicator">*</span>
         </label>
 
         <textarea

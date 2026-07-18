@@ -6,7 +6,7 @@
     :data-dismissible="dismissible ? 'true' : undefined"
     role="alert"
   >
-    <div class="ctp-alert__icon">
+    <div class="ctp-alert-icon">
       <svg v-if="variant === 'success'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
         <polyline points="22 4 12 14.01 9 11.01" />
@@ -27,13 +27,13 @@
         <line x1="12" y1="8" x2="12.01" y2="8" />
       </svg>
     </div>
-    <div class="ctp-alert__content">
-      <div v-if="title" class="ctp-alert__title">{{ title }}</div>
-      <div class="ctp-alert__description">
+    <div class="ctp-alert-content">
+      <div v-if="title" class="ctp-alert-title">{{ title }}</div>
+      <div class="ctp-alert-description">
         <slot />
       </div>
     </div>
-    <button v-if="dismissible" class="ctp-alert__close" @click="handleDismiss" aria-label="Dismiss">
+    <button v-if="dismissible" class="ctp-alert-close" @click="handleDismiss" aria-label="Dismiss">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />

@@ -6,16 +6,16 @@ import { Component, input, computed } from '@angular/core';
   template: `
     <div [class]="'ctp-form-group'">
       @if (label()) {
-        <label [for]="htmlFor()" class="ctp-form-group__label">
+        <label [for]="htmlFor()" class="ctp-form-group-label">
           {{ label() }}
           @if (required()) {
-            <span class="ctp-form-group__required-indicator" aria-hidden="true">*</span>
+            <span class="ctp-form-group-required-indicator" aria-hidden="true">*</span>
           }
         </label>
       }
       <ng-content></ng-content>
       @if (error()) {
-        <span class="ctp-form-group__error" role="alert">
+        <span class="ctp-form-group-error" role="alert">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style="flex-shrink:0">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="8" x2="12" y2="12"></line>
@@ -24,7 +24,7 @@ import { Component, input, computed } from '@angular/core';
           {{ error() }}
         </span>
       } @else if (description()) {
-        <span class="ctp-form-group__description">{{ description() }}</span>
+        <span class="ctp-form-group-description">{{ description() }}</span>
       }
     </div>
   `

@@ -14,7 +14,7 @@
   >
     <div
       v-if="props.selectionMode === 'single'"
-      class="ctp-btn-group__pill"
+      class="ctp-btn-group-pill"
       :style="pillStyle"
     />
     <slot />

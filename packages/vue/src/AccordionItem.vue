@@ -1,18 +1,18 @@
 <template>
-  <div class="ctp-accordion__item" :data-state="isOpen ? 'open' : (disabled ? 'disabled' : undefined)" v-bind="$attrs">
+  <div class="ctp-accordion-item" :data-state="isOpen ? 'open' : (disabled ? 'disabled' : undefined)" v-bind="$attrs">
     <button
       type="button"
-      class="ctp-accordion__header"
+      class="ctp-accordion-header"
       :disabled="disabled"
       :aria-expanded="isOpen"
       @click="handleHeaderClick"
     >
-      <span class="ctp-accordion__title">
+      <span class="ctp-accordion-title">
         <slot name="header">{{ title }}</slot>
       </span>
       <slot v-if="showChevron" name="chevron" :is-open="isOpen">
         <svg
-          class="ctp-accordion__chevron"
+          class="ctp-accordion-chevron"
           viewBox="0 0 24 24"
         >
           <polyline points="6 9 12 15 18 9" />
@@ -21,11 +21,11 @@
     </button>
 
     <div
-      class="ctp-accordion__collapse"
+      class="ctp-accordion-collapse"
       :aria-hidden="!isOpen"
     >
-      <div class="ctp-accordion__content">
-        <div class="ctp-accordion__body">
+      <div class="ctp-accordion-content">
+        <div class="ctp-accordion-body">
           <slot />
         </div>
       </div>

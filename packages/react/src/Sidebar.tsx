@@ -155,7 +155,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   const Tag = as || (href ? 'a' : 'button');
   
   const classes = [
-    cn(prefix, 'sidebar__item', [active ? 'active' : '']),
+    cnEl(prefix, 'sidebar', 'item'),
     className,
   ]
     .filter(Boolean)
@@ -165,6 +165,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   const componentProps: any = {
     className: classes,
     disabled: disabled ? true : undefined,
+    'data-state': active ? 'active' : undefined,
     ...props,
   };
 

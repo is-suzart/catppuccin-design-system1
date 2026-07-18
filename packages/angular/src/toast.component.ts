@@ -15,7 +15,7 @@ import { ToastService, ToastVariant } from './toast.service';
               role="alert"
               aria-live="assertive"
             >
-              <div class="ctp-toast__icon">
+              <div class="ctp-toast-icon">
                 @switch (item.variant) {
                   @case ('success') {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -46,22 +46,22 @@ import { ToastService, ToastVariant } from './toast.service';
                   }
                 }
               </div>
-              <div class="ctp-toast__content">
+              <div class="ctp-toast-content">
                 @if (item.title) {
-                  <div class="ctp-toast__title">{{ item.title }}</div>
+                  <div class="ctp-toast-title">{{ item.title }}</div>
                 }
                 @if (item.description) {
-                  <div class="ctp-toast__description">{{ item.description }}</div>
+                  <div class="ctp-toast-description">{{ item.description }}</div>
                 }
               </div>
-              <button class="ctp-toast__close" (click)="dismiss(item.id)" aria-label="Dismiss">
+              <button class="ctp-toast-close" (click)="dismiss(item.id)" aria-label="Dismiss">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"/>
                   <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
               </button>
               @if (item.duration > 0) {
-                <div class="ctp-toast__progress" [style.animationDuration]="item.duration + 'ms'"></div>
+                <div class="ctp-toast-progress" [style.animationDuration]="item.duration + 'ms'"></div>
               }
             </div>
           }

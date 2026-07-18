@@ -14,13 +14,13 @@
     @click="handleClick"
     v-bind="$attrs"
   >
-    <span class="ctp-btn__content">
-      <span v-if="isLoading" class="ctp-btn__spinner" aria-hidden="true"></span>
-      <span v-else-if="$slots.leftIcon" class="ctp-btn__icon-left" style="display: inline-flex; align-items: center">
+    <span class="ctp-btn-content">
+      <span v-if="isLoading" class="ctp-btn-spinner" aria-hidden="true"></span>
+      <span v-else-if="$slots.leftIcon" class="ctp-btn-icon-left" style="display: inline-flex; align-items: center">
         <slot name="leftIcon" />
       </span>
       <slot />
-      <span v-if="!isLoading && $slots.rightIcon" class="ctp-btn__icon-right" style="display: inline-flex; align-items: center">
+      <span v-if="!isLoading && $slots.rightIcon" class="ctp-btn-icon-right" style="display: inline-flex; align-items: center">
         <slot name="rightIcon" />
       </span>
     </span>

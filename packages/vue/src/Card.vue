@@ -10,35 +10,35 @@
     v-bind="$attrs"
   >
     <!-- Header Slot / Element -->
-    <div v-if="$slots.header || title || subtitle || $slots.avatar || $slots.actions" class="ctp-card__header">
-      <div v-if="$slots.avatar" class="ctp-card__avatar">
+    <div v-if="$slots.header || title || subtitle || $slots.avatar || $slots.actions" class="ctp-card-header">
+      <div v-if="$slots.avatar" class="ctp-card-avatar">
         <slot name="avatar" />
       </div>
-      <div v-if="title || subtitle || $slots.header" class="ctp-card__header-content">
+      <div v-if="title || subtitle || $slots.header" class="ctp-card-header-content">
         <slot name="header">
-          <h3 v-if="title" class="ctp-card__title">{{ title }}</h3>
-          <p v-if="subtitle" class="ctp-card__subtitle">{{ subtitle }}</p>
+          <h3 v-if="title" class="ctp-card-title">{{ title }}</h3>
+          <p v-if="subtitle" class="ctp-card-subtitle">{{ subtitle }}</p>
         </slot>
       </div>
-      <div v-if="$slots.actions" class="ctp-card__actions">
+      <div v-if="$slots.actions" class="ctp-card-actions">
         <slot name="actions" />
       </div>
     </div>
 
     <!-- Media Slot / Element -->
-    <div v-if="$slots.media || mediaSrc" class="ctp-card__media">
+    <div v-if="$slots.media || mediaSrc" class="ctp-card-media">
       <slot name="media">
         <img :src="mediaSrc" :alt="mediaAlt" />
       </slot>
     </div>
 
     <!-- Body Slot / Element -->
-    <div class="ctp-card__body">
+    <div class="ctp-card-body">
       <slot />
     </div>
 
     <!-- Footer Slot / Element -->
-    <div v-if="$slots.footer" class="ctp-card__footer">
+    <div v-if="$slots.footer" class="ctp-card-footer">
       <slot name="footer" />
     </div>
   </div>

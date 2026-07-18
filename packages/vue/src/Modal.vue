@@ -10,13 +10,13 @@
       role="dialog"
       aria-modal="true"
     >
-      <div v-if="title || showCloseButton || $slots.header" class="ctp-modal__header">
+      <div v-if="title || showCloseButton || $slots.header" class="ctp-modal-header">
         <slot name="header">
-          <h2 class="ctp-modal__title">{{ title }}</h2>
+          <h2 class="ctp-modal-title">{{ title }}</h2>
         </slot>
         <button
           v-if="showCloseButton"
-          class="ctp-modal__close-btn"
+          class="ctp-modal-close-btn"
           @click="emit('close')"
           aria-label="Close modal"
         >
@@ -36,11 +36,11 @@
         </button>
       </div>
 
-      <div class="ctp-modal__body">
+      <div class="ctp-modal-body">
         <slot />
       </div>
 
-      <div v-if="$slots.footer" class="ctp-modal__footer">
+      <div v-if="$slots.footer" class="ctp-modal-footer">
         <slot name="footer" />
       </div>
     </div>

@@ -9,33 +9,33 @@
       aria-label="Command palette"
     >
       <div class="ctp-command">
-        <div class="ctp-command__input-wrapper">
-          <svg class="ctp-command__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ctp-command-input-wrapper">
+          <svg class="ctp-command-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
           <input
             ref="inputEl"
             v-model="query"
-            class="ctp-command__input"
+            class="ctp-command-input"
             :placeholder="placeholder"
             @keydown="onKeyDown"
           />
         </div>
-        <div class="ctp-command__list">
-          <div v-if="flatFiltered.length === 0" class="ctp-command__empty">{{ emptyMessage }}</div>
+        <div class="ctp-command-list">
+          <div v-if="flatFiltered.length === 0" class="ctp-command-empty">{{ emptyMessage }}</div>
           <template v-else>
             <div v-for="group in groupKeys" :key="group">
-              <div class="ctp-command__group-label">{{ group }}</div>
+              <div class="ctp-command-group-label">{{ group }}</div>
               <div
                 v-for="(item, i) in grouped[group]"
                 :key="item.id"
-                :class="['ctp-command__item', { 'ctp-command__item--selected': flatFiltered.indexOf(item) === selectedIndex }]"
+                class="ctp-command-item" :data-state="flatFiltered.indexOf(item) === selectedIndex ? 'selected' : undefined"
                 @click="selectItem(item)"
                 @mouseenter="selectedIndex = flatFiltered.indexOf(item)"
               >
-                <span class="ctp-command__item-label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="ctp-command__item-shortcut">{{ item.shortcut }}</span>
+                <span class="ctp-command-item-label">{{ item.label }}</span>
+                <span v-if="item.shortcut" class="ctp-command-item-shortcut">{{ item.shortcut }}</span>
               </div>
             </div>
           </template>
